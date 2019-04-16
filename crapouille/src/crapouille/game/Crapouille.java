@@ -1,31 +1,36 @@
 package crapouille.game;
 
-import java.util.ArrayList;
-
 import crapouille.OutilAction;
 import crapouille.Crapaud;
 import crapouille.Grenouille;
 import crapouille.Plateau;
-import crapouille.Pion;
 
 public class Crapouille {
 	
-	private Plateau plateau;
+	private static Plateau plateau;
 	
-	private ArrayList<Crapaud> crapaud;
+	private static Grenouille[] crapaud;
 	
-	private ArrayList<Grenouille> grenouille;
+	private static Crapaud[] grenouille;
 	
+	public void setPlateau(Plateau plateau) {
+		this.plateau = plateau;
+	}
+
+	public void setCrapaud(Grenouille[] crapaud) {
+		this.crapaud = crapaud;
+	}
+
+	public void setrenouille(Crapaud[] grenouille) {
+		this.grenouille = grenouille;
+	}
+
 	private static boolean victoire() {
 		return true;
 	}
 	
-	private static void initPartie() {
-		// TODO : On initialise le plateau et les ArrayList
-	}
-	
 	public static void main(String[] args) {
-		initPartie();
+		OutilAction.doAction();
 	}
 
 }

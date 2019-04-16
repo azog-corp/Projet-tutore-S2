@@ -1,9 +1,5 @@
 package crapouille;
 
-import crapouille.OutilAction;
-import crapouille.Crapaud;
-import crapouille.Grenouille;
-import crapouille.Plateau;
 import crapouille.Pion;
 
 

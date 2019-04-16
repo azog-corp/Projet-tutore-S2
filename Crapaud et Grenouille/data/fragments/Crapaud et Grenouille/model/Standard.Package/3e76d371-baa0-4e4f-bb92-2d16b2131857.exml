@@ -12,6 +12,13 @@
       <ATT name="Name"><![CDATA[crapaud et grenouille]]></ATT>
       <ATT name="status">1970354901745664</ATT>
     </ATTRIBUTES>
-    <DEPENDENCIES></DEPENDENCIES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="crapouille" mc="Standard.Package" uid="5c3a8d39-f3de-45f8-b022-5086a198c49f"/>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="Diagramme Crapouille" mc="Standard.ClassDiagram" uid="3e171fd7-54fd-4af6-ba8f-9758ab4e3b53"/>
+      </COMP>
+    </DEPENDENCIES>
   </OBJECT>
 </EXT>

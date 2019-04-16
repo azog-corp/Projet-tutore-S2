@@ -9,5 +9,10 @@ public class OutilAction {
 	public static void bougerPion(Pion batracien, int abscisse, int ordonnee) {
 		
 	}
+
+	public static void doAction() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

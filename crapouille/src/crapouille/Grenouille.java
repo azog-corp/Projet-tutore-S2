@@ -1,8 +1,5 @@
 package crapouille;
 
-import crapouille.Crapaud;
-import crapouille.Plateau;
-
 public class Grenouille extends Pion {
 	
 	private int abscisse,

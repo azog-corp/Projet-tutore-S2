@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="crapouille" version="4">
+  <OBJECT>
+    <ID name="crapouille" mc="Standard.Package" uid="5c3a8d39-f3de-45f8-b022-5086a198c49f"/>
+    <PID name="crapaud et grenouille" mc="Standard.Package" uid="3e76d371-baa0-4e4f-bb92-2d16b2131857"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[crapouille]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Plateau" mc="Standard.Class" uid="08230cb8-2074-49a1-be59-4e56a8b654d0"/>
+        <COMPID name="Crapaud" mc="Standard.Class" uid="54a9688c-e7e6-4b83-9ed8-19ebcada907b"/>
+        <COMPID name="game" mc="Standard.Package" uid="60c39f18-344b-403d-9806-2f800eef4fd4"/>
+        <COMPID name="Grenouille" mc="Standard.Class" uid="25c002f9-1760-46af-8f27-14c8985aace6"/>
+        <COMPID name="OutilAction" mc="Standard.Class" uid="344c7ce2-7d8f-4583-9276-496a36d9ab3f"/>
+        <COMPID name="Pion" mc="Standard.Class" uid="e8a55184-b460-4bb5-904e-7d0c0a0e011f"/>
+      </COMP>
+      <LINK relation="Extension">
+        <FOREIGNID name="JavaPackage" mc="Infrastructure.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>
+      </LINK>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>
