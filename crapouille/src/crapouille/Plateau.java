@@ -8,7 +8,7 @@ public class Plateau {
 
 	private int abscisse,
 	ordonnee;
-	private Pion[][] plateau;
+	private static Pion[][] plateau;
 
 	public Plateau(int abscisse, int ordonnee) {
 		this.abscisse = abscisse;
@@ -16,7 +16,8 @@ public class Plateau {
 		this.plateau = new Pion[abscisse][ordonnee];
 	}
 
-	public void setCase(Crapaud[] crapaud, Grenouille[] grenouille) {
-		
+	public static void movePion(Pion pion, int oldAbscisse, int oldOrdonnee) {
+		plateau[oldAbscisse][oldOrdonnee] = null;
+		plateau[pion.getAbscisse()][pion.getOrdonnee()] = pion;
 	}
 }

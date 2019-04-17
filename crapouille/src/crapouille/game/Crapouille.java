@@ -7,22 +7,22 @@ import crapouille.Plateau;
 
 public class Crapouille {
 	
-	private static Plateau plateau;
+	private static Plateau[][] plateau = new Plateau[1][1];
 	
-	private static Grenouille[] crapaud;
+	private static Grenouille[] grenouille;
 	
-	private static Crapaud[] grenouille;
+	private static Crapaud[] crapaud;
 	
-	public void setPlateau(Plateau plateau) {
+	public void setPlateau(Plateau[][] plateau) {
 		this.plateau = plateau;
 	}
 
 	public void setCrapaud(Grenouille[] crapaud) {
-		this.crapaud = crapaud;
+		this.grenouille = grenouille;
 	}
 
 	public void setrenouille(Crapaud[] grenouille) {
-		this.grenouille = grenouille;
+		this.crapaud = crapaud;
 	}
 
 	private static boolean victoire() {

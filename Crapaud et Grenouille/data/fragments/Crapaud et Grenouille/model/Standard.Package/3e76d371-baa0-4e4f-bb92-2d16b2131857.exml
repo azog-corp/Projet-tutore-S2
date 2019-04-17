@@ -14,10 +14,10 @@
     </ATTRIBUTES>
     <DEPENDENCIES>
       <COMP relation="OwnedElement">
-        <COMPID name="crapouille" mc="Standard.Package" uid="5c3a8d39-f3de-45f8-b022-5086a198c49f"/>
+        <COMPID name="crapouille" mc="Standard.Package" uid="d49297d2-7b3a-4d52-af40-9ac2888f079f"/>
       </COMP>
       <COMP relation="Product">
-        <COMPID name="Diagramme Crapouille" mc="Standard.ClassDiagram" uid="3e171fd7-54fd-4af6-ba8f-9758ab4e3b53"/>
+        <COMPID name="crapaud et grenouille Class diagram" mc="Standard.ClassDiagram" uid="343d1e3a-9033-46c6-ba5f-182a5ea33447"/>
       </COMP>
     </DEPENDENCIES>
   </OBJECT>

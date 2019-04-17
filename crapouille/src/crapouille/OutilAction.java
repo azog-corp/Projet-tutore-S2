@@ -2,17 +2,16 @@ package crapouille;
 
 public class OutilAction {
 
-	public static void choixPion(int abscisse, int ordonnee) {
-		
+	private static Pion choixPion(int abscisse, int ordonnee) {
+		return null;
 	}
 	
-	public static void bougerPion(Pion batracien, int abscisse, int ordonnee) {
-		
+	private static void bougerPion(Pion batracien, int abscisse, int ordonnee) {
+		Plateau.movePion(batracien, abscisse, ordonnee);
 	}
 
 	public static void doAction() {
-		// TODO Auto-generated method stub
-		
+		bougerPion(choixPion(0, 0), 0, 0);
 	}
 	
 }

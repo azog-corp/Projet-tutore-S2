@@ -8,7 +8,6 @@ public class Pion {
 
 	private int abscisse,
 	ordonnee;
-	private boolean bloque;
 
 	public Pion(int abscisse, int ordonnee) {
 		this.abscisse = abscisse;
@@ -29,13 +28,5 @@ public class Pion {
 
 	public void setOrdonnee(int ordonnee) {
 		this.ordonnee = ordonnee;
-	}
-
-	public boolean isBloque() {
-		return bloque;
-	}
-
-	public void setBloque(boolean bloque) {
-		this.bloque = bloque;
 	}
 }
