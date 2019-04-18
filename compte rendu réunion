@@ -15,3 +15,12 @@ Résumé de la réunion 11/04/19
 -	Faire des test d'utilitaire
 -	Faire diagramme de classe des cas d'utilisation
 -	Faire un diagramme de classe montrant le nombre de CM necessaire pour programmer une classe
+
+Résumé de la réunion 17/04/19
+
+-	Rajouter une fenetre pour le mode de jeu et la configuration
+-	Le diagramme est "trop" bien
+-	Jouer contre IA / Jouer contre joueur / Joeur casse-tête
+-	La sauvegarde des config doit être systématique
+-	Supprimer la classe outilAction
+-	Faire interface
