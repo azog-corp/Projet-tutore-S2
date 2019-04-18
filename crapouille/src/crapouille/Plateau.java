@@ -1,7 +1,5 @@
 package crapouille;
 
-import crapouille.Crapaud;
-import crapouille.Grenouille;
 import crapouille.Pion;
 
 public class Plateau {
@@ -16,8 +14,9 @@ public class Plateau {
 		this.plateau = new Pion[abscisse][ordonnee];
 	}
 
-	public static void movePion(Pion pion, int oldAbscisse, int oldOrdonnee) {
-		plateau[oldAbscisse][oldOrdonnee] = null;
+	public static void movePion(Pion pion) {
+		plateau[pion.getAbscisse()][pion.getOrdonnee()] = null;
+		pion.setAbscisse(pion.getAbscisse(), plateau);
 		plateau[pion.getAbscisse()][pion.getOrdonnee()] = pion;
 	}
 }
