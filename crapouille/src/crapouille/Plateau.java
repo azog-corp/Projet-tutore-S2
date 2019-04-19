@@ -9,6 +9,19 @@ public class Plateau {
 	public Plateau(int abscisse, int ordonnee) {
 		this.plateau = new Pion[abscisse][ordonnee];
 	}
+	
+
+	public Pion[][] getPlateau() {
+		return plateau;
+	}
+
+
+	public void setPlateau(Plateau[][] plateaus, Pion[] pion) {
+		for (int nbPion = 0 ; nbPion < 20 ; nbPion++) {
+			this.plateau[pion[nbPion].getAbscisse()][pion[nbPion].getOrdonnee()] = pion[nbPion];
+		}
+	}
+
 
 	public void movePion(Pion pion) {
 		// La case ou se trouve le pion devient null
