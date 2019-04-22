@@ -2,12 +2,12 @@ package crapouille;
 
 import crapouille.Pion;
 
-public class Ordinateur {
+public class Action {
 	
 	private int intelligence;
 	private Pion choixPion;
 
-	public Ordinateur(int intelligence) {
+	public Action(int intelligence) {
 		this.intelligence = intelligence;
 	}
 	
