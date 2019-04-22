@@ -1,25 +1,29 @@
 package crapouille;
 
+import java.util.Arrays;
+
 import crapouille.Pion;
 
 public class Plateau {
-	
+
+	private int abscisse,
+	ordonnee;
 	private Pion[][] plateau;
 
 	public Plateau(int abscisse, int ordonnee) {
+		this.abscisse = abscisse;
+		this.ordonnee = ordonnee;
 		this.plateau = new Pion[abscisse][ordonnee];
 	}
-	
+
 
 	public Pion[][] getPlateau() {
 		return plateau;
 	}
 
 
-	public void setPlateau(Plateau[][] plateaus, Pion[] pion) {
-		for (int nbPion = 0 ; nbPion < 20 ; nbPion++) {
-			this.plateau[pion[nbPion].getAbscisse()][pion[nbPion].getOrdonnee()] = pion[nbPion];
-		}
+	public void setCase(Pion pion) {
+		this.plateau[pion.getAbscisse()][pion.getOrdonnee()] = pion;
 	}
 
 
@@ -31,4 +35,15 @@ public class Plateau {
 		// On met le pion dans sa case
 		plateau[pion.getAbscisse()][pion.getOrdonnee()] = pion;
 	}
+
+	public void afficherPlateau() {
+		for (int x = 0 ; x < this.abscisse ; x++) {
+			System.out.print("[");
+			for (int y = 0 ; y < this.ordonnee ; y++) {
+				System.out.print(this.plateau[x][y]);
+			}
+			System.out.print("]\n");
+		}
+	}
+	
 }

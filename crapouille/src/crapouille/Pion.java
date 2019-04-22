@@ -1,6 +1,6 @@
 package crapouille;
 
-import crapouille.Pion;
+import crapouille.Plateau;
 
 
 public class Pion {
