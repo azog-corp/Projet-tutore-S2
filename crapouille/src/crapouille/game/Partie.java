@@ -86,6 +86,21 @@ public class Partie {
 	public static void setPlateau(int ligne, int colonne) {
 		plateau = new Plateau(ligne, colonne);
 	}
+	
+	/**
+	 * Vérifie si tous les pions d'une équipe sont bloqués
+	 * @param pion les pions à vérifier
+	 * @return true si les pions sont bloqué
+	 */
+	public static boolean victoire(Pion[] pion) {
+		for (int x = 0 ; x < pion.length ; x++) {
+			// Si un pion n'est pas bloqué
+			if (!pion[x].isBloque()) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 	/**
 	 * Main principale qui lance le jeu
