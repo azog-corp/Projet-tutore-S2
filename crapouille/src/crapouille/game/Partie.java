@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package crapouille.game;
 
 import java.util.Scanner;
@@ -7,7 +10,7 @@ import crapouille.Pion;
 import crapouille.Plateau;
 
 /**
- * @author Maël
+ * @author Azog-corp
  *
  */
 public class Partie {

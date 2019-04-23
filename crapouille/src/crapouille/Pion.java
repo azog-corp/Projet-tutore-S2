@@ -1,30 +1,61 @@
+/*
+ * 
+ */
 package crapouille;
 
-import crapouille.Plateau;
-
-
+/**
+ * 
+ * @author Azog-corp
+ *
+ */
 public class Pion {
 
-
+	// Création des attributs de l'objet Pion
+	// abscisse du pion
+	// ordonnee du Pion
+	// Le Pion est-il un crapaud ou une grenouille
+	// Le pion est il bloqué
 	private int abscisse,
 	ordonnee;
 	private boolean crapaud,
 	bloque;
 
+	/**
+	 * Création d'un pion
+	 * @param abscisse
+	 * @param ordonnee
+	 * @param crapaud
+	 */
 	public Pion(int abscisse, int ordonnee, boolean crapaud) {
+		if (abscisse < 0 || ordonnee < 0) {
+			throw new RuntimeException ("Les coordonnées doivent être positives");
+		}
 		this.abscisse = abscisse;
 		this.ordonnee = ordonnee;
 		this.crapaud = crapaud;
 	}
 
+	/**
+	 * 
+	 * @return l'abscisse du pion
+	 */
 	public int getAbscisse() {
 		return abscisse;
 	}
 
+	/**
+	 * 
+	 * @return l'ordonnee du pion
+	 */
 	public int getOrdonnee() {
 		return ordonnee;
 	}
 
+	/**
+	 * Change l'absisse d'un pion après déplacement
+	 * @param abscisse
+	 * @param plateau
+	 */
 	public void setAbscisse(int abscisse, Pion[][] plateau) {
 		// Si le pion est un crapaud est que la première case de droite est vide
 		if (crapaud && plateau[this.abscisse+1][this.ordonnee] == null) {
@@ -41,6 +72,11 @@ public class Pion {
 		}
 	}
 
+	/**
+	 * Détermine si le pion est bloqué
+	 * @param bloque
+	 * @param plateau
+	 */
 	public void setBloque(boolean bloque, Pion[][] plateau) {
 		// Si le pion est un crapaud est que la première case de gauche est vide
 		if ((crapaud && plateau[this.abscisse+1][this.ordonnee] == null) || 
@@ -56,10 +92,18 @@ public class Pion {
 		}
 	}
 
+	/**
+	 * 
+	 * @return le type du pion
+	 */
 	public boolean isCrapaud() {
 		return crapaud;
 	}
 
+	/**
+	 * 
+	 * @return true si le pion est bloqué
+	 */
 	public boolean isBloque() {
 		return bloque;
 	}
