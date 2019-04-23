@@ -15,12 +15,35 @@ import crapouille.Plateau;
  */
 public class Partie {
 	
+	/**
+	 * Plateau de jeu
+	 */
 	private static Plateau plateau;
+	
+	/**
+	 * Tableau contenant toutes les grenouilles
+	 */
 	private static Pion[] grenouille;
+	
+	/**
+	 * Tableau contenant tous les crapauds
+	 */
 	private static Pion[] crapaud;
+	
+	/**
+	 * Servira peut être pour faire l'IA
+	 */
 	private static Action action;
+	
+	/**
+	 * Ajout de l'entrée courante
+	 */
 	Scanner entree = new Scanner(System.in);
 
+	/**
+	 * Initialise le tableau de crapauds
+	 * @param nbCrapaud
+	 */
 	public static void setCrapaud(int nbCrapaud) {
 		// Coordonnées temporaires des crapauds
 		int[][] coordonnees = {{0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6},{0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 0, 1}};
@@ -36,6 +59,10 @@ public class Partie {
 		}
 	}
 	
+	/**
+	 * Initialise le tableau de grenouilles
+	 * @param nbGrenouille
+	 */
 	public static void setGrenouille(int nbGrenouille) {
 		// Coordonnées temporaires des grenouille
 		int[][] coordonnees = {{0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6},{9, 8, 7, 6, 9, 8, 7, 6, 9, 8, 7, 6, 9, 8}};
@@ -51,10 +78,19 @@ public class Partie {
 		}
 	}
 	
+	/**
+	 * Initialise le plateau de jeu
+	 * @param ligne
+	 * @param colonne
+	 */
 	public static void setPlateau(int ligne, int colonne) {
 		plateau = new Plateau(ligne, colonne);
 	}
 
+	/**
+	 * Main principale qui lance le jeu
+	 * @param args non utilisé
+	 */
 	public static void main(String[] args) {
 		int abscisse = 7, // Nombre de ligne
 		ordonnee = 10, // Nombre de colonne
