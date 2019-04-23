@@ -19,28 +19,28 @@ public class Partie {
 	Scanner entree = new Scanner(System.in);
 
 	public static void setCrapaud(int nbCrapaud) {
-		int x = 0; // Variable temporaire
-		int y = 0;
+		// Coordonnées temporaires des crapauds
+		int[][] coordonnees = {{0, 1, 2, 3, 4, 0, 1, 2, 3, 4},{0, 0, 0, 0, 0, 1, 1, 1, 1, 1}};
+		// On créé un tableau de crapauds
 		crapaud = new Pion[nbCrapaud];
 		for (int i = 0; i < crapaud.length; i++) {
-			crapaud[i] = new Pion(x, y, true);
-			x = x < 5 ? x++ : 0;
-			y = x == 4 ? y++ : 0;
-			plateau.setCase(grenouille[i]);
-			// TODO : changer les coordonées
+			// On créé les pions
+			crapaud[i] = new Pion(coordonnees[0][i], coordonnees[1][i], true);
+			// On met le pion créé sur le plateau
+			plateau.setCase(crapaud[i]);
 		}
 	}
 	
 	public static void setGrenouille(int nbGrenouille) {
-		int x = 0; // Variable temporaire
-		int y = 0;
+		// Coordonnées temporaires des grenouille
+		int[][] coordonnees = {{0, 1, 2, 3, 4, 0, 1, 2, 3, 4},{4, 4, 4, 4, 4, 3, 3, 3, 3, 3}};
+		// On créé un tableau de grenouilles
 		grenouille = new Pion[nbGrenouille];
 		for (int i = 0; i < grenouille.length; i++) {
-			grenouille[i] = new Pion(0, 0, false);
+			// On créé les pions
+			grenouille[i] = new Pion(coordonnees[0][i], coordonnees[1][i], false);
+			// On met le pion créé sur le plateau
 			plateau.setCase(grenouille[i]);
-			x = x < 5 ? x++ : 0;
-			y = x == 4 ? y++ : 0;
-			// TODO : changer les coordonées
 		}
 	}
 	
@@ -56,7 +56,7 @@ public class Partie {
 		setPlateau(abscisse, ordonnee);
 		setGrenouille(nbPion);
 		setCrapaud(nbPion);
-		plateau.toString();
+		plateau.afficherPlateau();
 		System.out.println("Tout c'est bien passer");
 	}
 }

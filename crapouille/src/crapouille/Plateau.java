@@ -1,7 +1,5 @@
 package crapouille;
 
-import java.util.Arrays;
-
 import crapouille.Pion;
 
 public class Plateau {
@@ -40,10 +38,18 @@ public class Plateau {
 		for (int x = 0 ; x < this.abscisse ; x++) {
 			System.out.print("[");
 			for (int y = 0 ; y < this.ordonnee ; y++) {
-				System.out.print(this.plateau[x][y]);
+				if (this.plateau[x][y] != null) {
+					if (this.plateau[x][y].isCrapaud()) {
+						System.out.print("C|");
+					} else if (!this.plateau[x][y].isCrapaud()) {
+						System.out.print("G|");
+					}
+				} else {
+					System.out.print(" |");
+				}
 			}
 			System.out.print("]\n");
 		}
 	}
-	
+
 }
