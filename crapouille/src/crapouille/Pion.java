@@ -3,6 +3,8 @@
  */
 package crapouille;
 
+import crapouille.Plateau;
+
 /**
  * 
  * @author Azog-corp
@@ -58,34 +60,33 @@ public class Pion {
 	 */
 	public void setAbscisse(int abscisse, Pion[][] plateau) {
 		// Si le pion est un crapaud est que la première case de droite est vide
-		if (crapaud && plateau[this.abscisse+1][this.ordonnee] == null) {
+		if (crapaud && this.abscisse < 4 && plateau[this.abscisse+1][this.ordonnee] == null) {
 			this.abscisse = abscisse+1;
 		// Si le pion est un crapaud est que la deuxième case de droite est vide
-		} else if (crapaud && plateau[this.abscisse+2][this.ordonnee] == null) {
+		} else if (crapaud && this.abscisse < 3 && plateau[this.abscisse+2][this.ordonnee] == null) {
 			this.abscisse = abscisse+2;
 		// Si le pion est une grenouille est que la première case de droite est vide
-		} else if (!crapaud && plateau[this.abscisse-1][this.ordonnee] == null) {
+		} else if (!crapaud && this.abscisse > 0 && plateau[this.abscisse-1][this.ordonnee] == null) {
 			this.abscisse = abscisse-1;
 		// Si le pion est une grenouille est que la deuxième case de droite est vide
-		} else if (!crapaud && plateau[this.abscisse-2][this.ordonnee] == null) {
+		} else if (!crapaud && this.abscisse > 1 && plateau[this.abscisse-2][this.ordonnee] == null) {
 			this.abscisse = abscisse-2;
 		}
 	}
 
 	/**
 	 * Détermine si le pion est bloqué
-	 * @param bloque
-	 * @param plateau
+	 * @param pion
 	 */
-	public void setBloque(boolean bloque, Pion[][] plateau) {
+	public void setBloque(Pion[][] pion) {
 		// Si le pion est un crapaud est que la première case de gauche est vide
-		if ((crapaud && plateau[this.abscisse+1][this.ordonnee] == null) || 
+		if ((crapaud && this.abscisse < 4 && pion[this.abscisse+1][this.ordonnee] == null) || 
 				// Si le pion est un crapaud est que la deuxième case de gauche est vide
-				(crapaud && plateau[this.abscisse+2][this.ordonnee] == null) ||
+				(crapaud && this.abscisse < 3 && pion[this.abscisse+2][this.ordonnee] == null) ||
 				// Si le pion est une grenouille est que la première case de droite est vide
-				((!crapaud && plateau[this.abscisse-1][this.ordonnee] == null) || 
+				((!crapaud && this.abscisse > 0 && pion[this.abscisse-1][this.ordonnee] == null) || 
 						// Si le pion est une grenouille est que la première case de droite est vide
-						(!crapaud && plateau[this.abscisse-2][this.ordonnee] == null))) {
+						(!crapaud && this.abscisse > 1 && pion[this.abscisse-2][this.ordonnee] == null))) {
 			this.bloque = false; // Le pion n'est pas bloqué
 		} else {
 			this.bloque = true; // Le pion est bloqué
