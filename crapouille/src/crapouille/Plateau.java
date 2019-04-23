@@ -58,7 +58,7 @@ public class Plateau {
 		// La case ou se trouve le pion devient null
 		plateau[pion.getAbscisse()][pion.getOrdonnee()] = null;
 		// On change l'abscisse du pion
-		pion.setAbscisse(pion.getAbscisse(), plateau);
+		pion.setOrdonnee(pion.getAbscisse(), plateau);
 		// On met le pion dans sa case
 		plateau[pion.getAbscisse()][pion.getOrdonnee()] = pion;
 	}
