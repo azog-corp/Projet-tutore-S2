@@ -14,31 +14,31 @@ import crapouille.Plateau;
  *
  */
 public class Partie {
-	
+
 	/**
 	 * Plateau de jeu
 	 */
 	private static Plateau plateau;
-	
+
 	/**
 	 * Tableau contenant toutes les grenouilles
 	 */
 	private static Pion[] grenouille;
-	
+
 	/**
 	 * Tableau contenant tous les crapauds
 	 */
 	private static Pion[] crapaud;
-	
+
 	/**
 	 * Servira peut être pour faire l'IA
 	 */
 	private static Action action;
-	
+
 	/**
 	 * Ajout de l'entrée courante
 	 */
-	Scanner entree = new Scanner(System.in);
+	private static Scanner entree = new Scanner(System.in);
 
 	/**
 	 * Initialise le tableau de crapauds
@@ -58,7 +58,7 @@ public class Partie {
 			plateau.setCase(crapaud[i]);
 		}
 	}
-	
+
 	/**
 	 * Initialise le tableau de grenouilles
 	 * @param nbGrenouille
@@ -77,7 +77,7 @@ public class Partie {
 			plateau.setCase(grenouille[i]);
 		}
 	}
-	
+
 	/**
 	 * Initialise le plateau de jeu
 	 * @param ligne
@@ -86,7 +86,7 @@ public class Partie {
 	public static void setPlateau(int ligne, int colonne) {
 		plateau = new Plateau(ligne, colonne);
 	}
-	
+
 	/**
 	 * Vérifie si tous les pions d'une équipe sont bloqués
 	 * @param pion les pions à vérifier
@@ -102,19 +102,50 @@ public class Partie {
 		return true;
 	}
 
+	public static void choixPion(Pion[] pion) {
+		for (int x = 0 ; x < pion.length ; x++) {
+			// Si un pion n'est pas bloqué
+			if (!pion[x].isBloque()) {
+				System.out.print("Pion (" + (pion[x].getAbscisse()+1) + ";" + (pion[x].getOrdonnee()+1) + ") ");
+			}
+		}
+	}
+
+	public static void joueurVsJoueur() {
+		String[] equipe = new String[2];
+		System.out.println("Entrer le nom de l'equipe Crapaud : ");
+		equipe[0] = entree.nextLine();
+		equipe[0] = equipe[0].length() == 0 ? "Crapaud" : equipe[0];
+		System.out.println("Entrer le nom de l'equipe Grenouille : ");
+		equipe[1] = entree.nextLine();
+		equipe[1] = equipe[1].length() == 0 ? "Grenouille" : equipe[1];
+		do {
+			int tourEquipe = 0;
+			System.out.println("\nC'est au tour de l'équipe " + equipe[tourEquipe]);
+			plateau.afficherPlateau();
+			if (tourEquipe == 0) {
+				System.out.println("Chosi ton crapaud");
+				choixPion(crapaud);
+			} else {
+				System.out.println("Chosi ta grenouille");
+				choixPion(grenouille);
+			}
+		} while(!victoire(crapaud) || !victoire(grenouille));
+	}
+
 	/**
 	 * Main principale qui lance le jeu
 	 * @param args non utilisé
 	 */
 	public static void main(String[] args) {
 		int abscisse = 7, // Nombre de ligne
-		ordonnee = 10, // Nombre de colonne
-		nbPion = 14, // Nombre de batraciens
-		ordinateur = 0; // Difficulte de l'ordinateur (0 signifie une partie contre un joueur)
+				ordonnee = 10, // Nombre de colonne
+				nbPion = 14, // Nombre de batraciens
+				ordinateur = 0; // Difficulte de l'ordinateur (0 signifie une partie contre un joueur)
 		setPlateau(abscisse, ordonnee);
 		setGrenouille(nbPion);
 		setCrapaud(nbPion);
-		plateau.afficherPlateau();
+		joueurVsJoueur();
 		System.out.println("Tout c'est bien passer");
 	}
 }
