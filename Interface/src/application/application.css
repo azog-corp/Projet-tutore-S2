@@ -1,0 +1,21 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.button {
+    -fx-background-radius:  5em;
+    -fx-border-radius: 5em;
+}
+
+.priobtn {
+    -fx-background-color:  #eda678;
+}
+
+.autrebtn {
+    -fx-background-color:   #515D6D;
+}
+
+.button:hover {
+	-fx-background-color: #088ad1  ;
+}
+
+.interactif {
+	-fx-cursor: HAND;
+}
