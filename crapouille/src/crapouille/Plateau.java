@@ -80,5 +80,21 @@ public class Plateau {
 			}
 		}
 	}
+	
+	/**
+	 * 
+	 * @param ligne
+	 */
+	public void updateBloque(int ligne) {
+		for (int x = 0 ; x < this.abscisse ; x++) {
+			if (this.plateau[ligne][x] != null) {
+				plateau[ligne][x].setBloque(this.plateau);
+			}
+		}
+	}
+
+	public int getAbscisse() {
+		return this.abscisse;
+	}
 
 }

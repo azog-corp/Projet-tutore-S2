@@ -34,14 +34,16 @@ public class Partie {
 	 * Ajout de l'entrée courante
 	 */
 	private static Scanner entree = new Scanner(System.in);
-	
+
 	/**
 	 * Initialise le tableau de grenouilles
 	 * @param nbGrenouille
 	 */
 	public static void setGrenouille(int nbGrenouille) {
 		// Coordonnées temporaires des grenouille
-		int[][] coordonnees = {{0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6},{0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 0, 1}};
+		int[][] coordonnees = {
+				{0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6},
+				{0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 0, 1}};
 		// On créé un tableau de grenouilles
 		batracien[0] = new Pion[nbGrenouille];
 		for (int i = 0; i < nbGrenouille; i++) {
@@ -60,7 +62,9 @@ public class Partie {
 	 */
 	public static void setCrapaud(int nbCrapaud) {
 		// Coordonnées temporaires des crapauds
-		int[][] coordonnees = {{0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6},{9, 8, 7, 6, 9, 8, 7, 6, 9, 8, 7, 6, 9, 8}};
+		int[][] coordonnees = {
+				{0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6},
+				{9, 8, 7, 6, 9, 8, 7, 6, 9, 8, 7, 6, 9, 8}};
 		// On créé un tableau de crapauds
 		batracien[1] = new Pion[nbCrapaud];
 		for (int i = 0; i < nbCrapaud; i++) {
@@ -119,7 +123,7 @@ public class Partie {
 	 * @return le pion s'il est valide
 	 */
 	public static Pion pionValide(int equipe, int absisse, int ordonnee) {
-		for (int x = 0 ; x < batracien.length ; x++) {
+		for (int x = 0 ; x < batracien[0].length ; x++) {
 			if (batracien[equipe][x].getAbscisse() == absisse && batracien[equipe][x].getOrdonnee() == ordonnee) {
 				return batracien[equipe][x];
 			}
@@ -127,6 +131,11 @@ public class Partie {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param tourEquipe
+	 * @return
+	 */
 	public static int tourJoueur(int tourEquipe) {
 		int abscisse = -1, // Abscisse d'un pion
 				ordonnee = -1; // Ordonnée d'un pion
@@ -143,6 +152,7 @@ public class Partie {
 		System.out.println(abscisse + " " + ordonnee);
 		if (pionValide(tourEquipe, abscisse, ordonnee) != null) {
 			plateau.movePion(pionValide(tourEquipe, abscisse, ordonnee));
+			plateau.updateBloque(abscisse);
 			tourEquipe = tourEquipe == 0 ? 1 : 0;
 			System.out.println("Le pion à été déplacé");
 		} else {
@@ -183,6 +193,11 @@ public class Partie {
 				} while(tourEquipe == 1);
 			}
 		} while(!victoire(batracien[0]) || !victoire(batracien[1]));
+		if (victoire(batracien[0])) {
+			System.out.println("Victoire de l'équipe " + equipe[0] + "avec les grenouilles");
+		} else {
+			System.out.println("Victoire de l'équipe " + equipe[1] + "avec les crapauds");
+		}
 	}
 
 	/**

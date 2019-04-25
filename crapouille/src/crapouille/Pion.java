@@ -3,8 +3,6 @@
  */
 package crapouille;
 
-import crapouille.Plateau;
-
 /**
  * 
  * @author Azog-corp
@@ -82,13 +80,13 @@ public class Pion {
 	 */
 	public void setBloque(Pion[][] pion) {
 		// Si le pion est une grenouille est que la première case de droite est vide
-		if (((!crapaud && this.ordonnee < pion[0].length-1 && pion[this.abscisse][this.ordonnee+1] == null) &&
+		if ((!crapaud && this.ordonnee < pion[0].length-1 && pion[this.abscisse][this.ordonnee+1] == null) ||
 				// Si le pion est une grenouille est que la deuxième case de droite est vide
-				(!crapaud && this.ordonnee < pion[0].length-2 && pion[this.abscisse][this.ordonnee+2] == null)) ||
+				(!crapaud && this.ordonnee < pion[0].length-2 && pion[this.abscisse][this.ordonnee+2] == null) ||
 				// Si le pion est un crapaud est que la première case de gauche est vide
-				((crapaud && this.ordonnee > 0 && pion[this.abscisse][this.ordonnee-1] == null) &&
+				(crapaud && this.ordonnee > 0 && pion[this.abscisse][this.ordonnee-1] == null) ||
 				// Si le pion est un crapaud est que la deuxième case de gauche est vide
-				(crapaud && this.ordonnee > 1 && pion[this.abscisse][this.ordonnee-2] == null))) {
+				(crapaud && this.ordonnee > 1 && pion[this.abscisse][this.ordonnee-2] == null)) {
 			this.bloque = false; // Le pion n'est pas bloqué
 		} else {
 			this.bloque = true; // Le pion est bloqué
