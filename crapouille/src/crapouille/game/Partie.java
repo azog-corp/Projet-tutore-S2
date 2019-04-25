@@ -8,6 +8,7 @@ import java.util.Scanner;
 import crapouille.Action;
 import crapouille.Pion;
 import crapouille.Plateau;
+import crapouille.initialisation.Initialisation;
 
 /**
  * @author Azog-corp
@@ -199,10 +200,13 @@ public class Partie {
 			System.out.println("Victoire de l'équipe " + equipe[1] + "avec les crapauds");
 		}
 	}
-	
+
+	/**
+	 * 
+	 */
 	private static void joueurVsCasse() {
-		
-		
+
+
 	}
 
 	/**
@@ -210,15 +214,13 @@ public class Partie {
 	 * @param args non utilisé
 	 */
 	public static void main(String[] args) {
-		int abscisse = 7, // Nombre de ligne
-				ordonnee = 10, // Nombre de colonne
-				nbPion = 14, // Nombre de batraciens
-				ordinateur = 0; // Difficulte de l'ordinateur (0 signifie une partie contre un joueur)
-		setPlateau(abscisse, ordonnee);
-		setGrenouille(nbPion);
-		setCrapaud(nbPion);
+		Initialisation parDefault = new Initialisation(7, 10, 14); // Initialisation par défault
+		int ordinateur = 0; // Difficulte de l'ordinateur (0 signifie une partie contre un joueur)
+		setPlateau(parDefault.getAbscisse(), parDefault.getOrdonnee());
+		setGrenouille(parDefault.getNbPion());
+		setCrapaud(parDefault.getNbPion());
 		// joueurVsJoueur();
-		joueurVsCasse();
+		// joueurVsCasse();
 		System.out.println("Tout c'est bien passer");
 	}
 }
