@@ -21,14 +21,9 @@ public class Partie {
 	private static Plateau plateau;
 
 	/**
-	 * Tableau contenant toutes les grenouilles
+	 * Tableau contenant toutes les grenouilles et tous les crapauds
 	 */
-	private static Pion[] grenouille;
-
-	/**
-	 * Tableau contenant tous les crapauds
-	 */
-	private static Pion[] crapaud;
+	private static Pion[][] batracien = new Pion[2][];
 
 	/**
 	 * Servira peut être pour faire l'IA
@@ -48,14 +43,14 @@ public class Partie {
 		// Coordonnées temporaires des crapauds
 		int[][] coordonnees = {{0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6},{9, 8, 7, 6, 9, 8, 7, 6, 9, 8, 7, 6, 9, 8}};
 		// On créé un tableau de crapauds
-		crapaud = new Pion[nbCrapaud];
-		for (int i = 0; i < crapaud.length; i++) {
+		batracien[1] = new Pion[nbCrapaud];
+		for (int i = 0; i < nbCrapaud; i++) {
 			// On créé les pions
-			crapaud[i] = new Pion(coordonnees[0][i], coordonnees[1][i], true);
+			batracien[1][i] = new Pion(coordonnees[0][i], coordonnees[1][i], true);
 			// On initialise le boolean bloque
-			crapaud[i].setBloque(plateau.getPlateau());
+			batracien[1][i].setBloque(plateau.getPlateau());
 			// On met le pion créé sur le plateau
-			plateau.setCase(crapaud[i]);
+			plateau.setCase(batracien[1][i]);
 		}
 	}
 
@@ -67,14 +62,14 @@ public class Partie {
 		// Coordonnées temporaires des grenouille
 		int[][] coordonnees = {{0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6},{0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 0, 1}};
 		// On créé un tableau de grenouilles
-		grenouille = new Pion[nbGrenouille];
-		for (int i = 0; i < grenouille.length; i++) {
+		batracien[0] = new Pion[nbGrenouille];
+		for (int i = 0; i < nbGrenouille; i++) {
 			// On créé les pions
-			grenouille[i] = new Pion(coordonnees[0][i], coordonnees[1][i], false);
+			batracien[0][i] = new Pion(coordonnees[0][i], coordonnees[1][i], false);
 			// On initialise le boolean bloque
-			grenouille[i].setBloque(plateau.getPlateau());
+			batracien[0][i].setBloque(plateau.getPlateau());
 			// On met le pion créé sur le plateau
-			plateau.setCase(grenouille[i]);
+			plateau.setCase(batracien[0][i]);
 		}
 	}
 
@@ -124,20 +119,37 @@ public class Partie {
 	 * @return le pion s'il est valide
 	 */
 	public static Pion pionValide(int equipe, int absisse, int ordonnee) {
-		if (equipe == 0) {
-			for (int x = 0 ; x < grenouille.length ; x++) {
-				if (grenouille[x].getAbscisse() == absisse && grenouille[x].getOrdonnee() == ordonnee) {
-					return grenouille[x];
-				}
-			}
-		} else {
-			for (int x = 0 ; x < crapaud.length ; x++) {
-				if (crapaud[x].getAbscisse() == absisse && crapaud[x].getOrdonnee() == ordonnee) {
-					return crapaud[x];
-				}
+		for (int x = 0 ; x < batracien.length ; x++) {
+			if (batracien[equipe][x].getAbscisse() == absisse && batracien[equipe][x].getOrdonnee() == ordonnee) {
+				return batracien[equipe][x];
 			}
 		}
 		return null;
+	}
+
+	public static int tourJoueur(int tourEquipe) {
+		int abscisse = -1, // Abscisse d'un pion
+				ordonnee = -1; // Ordonnée d'un pion
+		// On affiche le tableau
+		plateau.afficherPlateau();
+		System.out.println("Chosi ton batracien parmi les suivants x y");
+		// On affiche les pions déplaçable
+		choixPion(batracien[tourEquipe]);
+		System.out.print("\nAbscisse : ");
+		abscisse = entree.hasNextInt() ? entree.nextInt()-1 : abscisse;
+		System.out.print("\nOrdonnee : ");
+		ordonnee = entree.hasNextInt() ? entree.nextInt()-1 : ordonnee;
+		// Si le pion est existe et est non bloqué
+		if (pionValide(tourEquipe, abscisse, ordonnee) != null) {
+			// On bouge le pion
+			plateau.movePion(pionValide(tourEquipe, abscisse, ordonnee));
+			System.out.println("Le pion à été déplacé");
+			tourEquipe = tourEquipe == 0 ? 1 : 0;
+		} else {
+			System.out.println("Le pion est bloqué ou invalide");
+			entree.nextLine(); // Vidage du tampon
+		}
+		return tourEquipe;
 	}
 
 	/**
@@ -150,6 +162,7 @@ public class Partie {
 	public static void joueurVsJoueur() {
 		// Tableau contenant les nom des deux équipes
 		String[] equipe = new String[2];
+		int tourEquipe = 0; // Numéro de l'équipe dont c'est le tour
 		System.out.println("Entrer le nom de l'equipe Crapaud : ");
 		equipe[0] = entree.nextLine();
 		// Si aucun nom n'est rentré, le nom par défault est Grenouille
@@ -159,55 +172,17 @@ public class Partie {
 		// Si aucun nom n'est rentré, le nom par défault est Crapaud
 		equipe[1] = equipe[1].length() == 0 ? "Crapaud" : equipe[1];
 		do {
-			int tourEquipe = 0, // Numéro de l'équipe dont c'est le tour
-					abscisse = -1, // Abscisse d'un pion
-					ordonnee = -1; // Ordonnée d'un pion
 			System.out.println("\nC'est au tour de l'équipe " + equipe[tourEquipe]);
 			if (tourEquipe == 0) {
 				do {
-					// On affiche le tableau
-					plateau.afficherPlateau();
-					System.out.println("Chosi ta grenouille parmi les suivantes x y");
-					// On affiche les pions déplaçable
-					choixPion(grenouille);
-					System.out.print("\nAbscisse : ");
-					abscisse = entree.hasNextInt() ? entree.nextInt()-1 : abscisse;
-					System.out.print("\nOrdonnee : ");
-					ordonnee = entree.hasNextInt() ? entree.nextInt()-1 : ordonnee;
-					// Si le pion est existe et est non bloqué
-					if (pionValide(tourEquipe, abscisse, ordonnee) != null) {
-						// On bouge le pion
-						plateau.movePion(pionValide(tourEquipe, abscisse, ordonnee));
-						System.out.println("Le pion à été déplacé");
-						tourEquipe++;
-					} else {
-						System.out.println("Le pion est bloqué ou invalide");
-						entree.nextLine(); // Vidage du tampon
-					}
-				} while(pionValide(tourEquipe, abscisse, ordonnee) == null);
+					tourEquipe = tourJoueur(tourEquipe);
+				} while(tourEquipe == 0);
 			} else {
 				do {
-					// On affiche le tableau
-					plateau.afficherPlateau();
-					System.out.println("Chosi ton crapaud parmi les suivantes x y");
-					// On affiche les pions déplaçable
-					choixPion(crapaud);
-					System.out.print("\nAbscisse : ");
-					abscisse = entree.hasNextInt() ? entree.nextInt() : abscisse;
-					System.out.print("\nOrdonnee : ");
-					ordonnee = entree.hasNextInt() ? entree.nextInt() : ordonnee;
-					// Si le pion est existe et est non bloqué
-					if (pionValide(tourEquipe, abscisse, ordonnee) != null) {
-						// On bouge le pion
-						plateau.movePion(pionValide(tourEquipe, abscisse, ordonnee));
-						tourEquipe--;
-					} else {
-						System.out.println("Le pion est bloqué ou invalide");
-						entree.nextLine(); // Vidage du tampon
-					}
-				} while(pionValide(tourEquipe, abscisse, ordonnee) == null);
+					tourEquipe = tourJoueur(tourEquipe);
+				} while(tourEquipe == 1);
 			}
-		} while(!victoire(crapaud) || !victoire(grenouille));
+		} while(!victoire(batracien[0]) || !victoire(batracien[1]));
 	}
 
 	/**

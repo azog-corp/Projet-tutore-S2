@@ -62,12 +62,13 @@ public class Plateau {
 		// On met le pion dans sa case
 		plateau[pion.getAbscisse()][pion.getOrdonnee()] = pion;
 	}
+	
 	/**
 	 * Affiche le plateau
 	 */
 	public void afficherPlateau() {
 		for (int x = 0 ; x < this.abscisse ; x++) {
-			System.out.print("[");
+			System.out.print("\n|");
 			for (int y = 0 ; y < this.ordonnee ; y++) {
 				if (this.plateau[x][y] != null) {
 					if (this.plateau[x][y].isCrapaud()) {
@@ -79,7 +80,6 @@ public class Plateau {
 					System.out.print(" |");
 				}
 			}
-			System.out.print("]\n");
 		}
 	}
 
