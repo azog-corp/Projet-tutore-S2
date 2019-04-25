@@ -63,14 +63,16 @@ public class Pion {
 		if (!crapaud && this.ordonnee < pion.length-1 && pion[this.abscisse][this.ordonnee+1] == null) {
 			this.ordonnee = ordonnee+1;
 			// Si le pion est une grenouille est que la deuxième case de droite est vide
-		} else if (!crapaud && this.abscisse < pion.length-2 && pion[this.abscisse][this.ordonnee+2] == null) {
+		} else if (!crapaud && this.ordonnee < pion.length-2 && pion[this.abscisse][this.ordonnee+2] == null) {
 			this.ordonnee = ordonnee+2;
 			// Si le pion est un crapaud est que la première case de gauche est vide
-		} else if (crapaud && this.abscisse > 0 && pion[this.abscisse][this.ordonnee-1] == null) {
+		} else if (crapaud && this.ordonnee > 0 && pion[this.abscisse][this.ordonnee-1] == null) {
 			this.ordonnee = ordonnee-1;
 			// Si le pion est un crapaud est que la deuxième case de gauche est vide
-		} else if (crapaud && this.abscisse > 1 && pion[this.abscisse][this.ordonnee-2] == null) {
+		} else if (crapaud && this.ordonnee > 1 && pion[this.abscisse][this.ordonnee-2] == null) {
 			this.ordonnee = ordonnee-2;
+		} else {
+			System.out.println("aucun changement");
 		}
 	}
 

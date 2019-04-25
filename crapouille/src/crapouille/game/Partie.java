@@ -34,6 +34,25 @@ public class Partie {
 	 * Ajout de l'entrée courante
 	 */
 	private static Scanner entree = new Scanner(System.in);
+	
+	/**
+	 * Initialise le tableau de grenouilles
+	 * @param nbGrenouille
+	 */
+	public static void setGrenouille(int nbGrenouille) {
+		// Coordonnées temporaires des grenouille
+		int[][] coordonnees = {{0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6},{0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 0, 1}};
+		// On créé un tableau de grenouilles
+		batracien[0] = new Pion[nbGrenouille];
+		for (int i = 0; i < nbGrenouille; i++) {
+			// On créé les pions
+			batracien[0][i] = new Pion(coordonnees[0][i], coordonnees[1][i], false);
+			// On initialise le boolean bloque
+			batracien[0][i].setBloque(plateau.getPlateau());
+			// On met le pion créé sur le plateau
+			plateau.setCase(batracien[0][i]);
+		}
+	}
 
 	/**
 	 * Initialise le tableau de crapauds
@@ -51,25 +70,6 @@ public class Partie {
 			batracien[1][i].setBloque(plateau.getPlateau());
 			// On met le pion créé sur le plateau
 			plateau.setCase(batracien[1][i]);
-		}
-	}
-
-	/**
-	 * Initialise le tableau de grenouilles
-	 * @param nbGrenouille
-	 */
-	public static void setGrenouille(int nbGrenouille) {
-		// Coordonnées temporaires des grenouille
-		int[][] coordonnees = {{0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6},{0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 0, 1}};
-		// On créé un tableau de grenouilles
-		batracien[0] = new Pion[nbGrenouille];
-		for (int i = 0; i < nbGrenouille; i++) {
-			// On créé les pions
-			batracien[0][i] = new Pion(coordonnees[0][i], coordonnees[1][i], false);
-			// On initialise le boolean bloque
-			batracien[0][i].setBloque(plateau.getPlateau());
-			// On met le pion créé sur le plateau
-			plateau.setCase(batracien[0][i]);
 		}
 	}
 
@@ -132,7 +132,7 @@ public class Partie {
 				ordonnee = -1; // Ordonnée d'un pion
 		// On affiche le tableau
 		plateau.afficherPlateau();
-		System.out.println("Chosi ton batracien parmi les suivants x y");
+		System.out.println("\nChosi ton batracien parmi les suivants x y");
 		// On affiche les pions déplaçable
 		choixPion(batracien[tourEquipe]);
 		System.out.print("\nAbscisse : ");
@@ -141,10 +141,9 @@ public class Partie {
 		ordonnee = entree.hasNextInt() ? entree.nextInt()-1 : ordonnee;
 		// Si le pion est existe et est non bloqué
 		if (pionValide(tourEquipe, abscisse, ordonnee) != null) {
-			// On bouge le pion
 			plateau.movePion(pionValide(tourEquipe, abscisse, ordonnee));
-			System.out.println("Le pion à été déplacé");
 			tourEquipe = tourEquipe == 0 ? 1 : 0;
+			System.out.println("Le pion à été déplacé");
 		} else {
 			System.out.println("Le pion est bloqué ou invalide");
 			entree.nextLine(); // Vidage du tampon

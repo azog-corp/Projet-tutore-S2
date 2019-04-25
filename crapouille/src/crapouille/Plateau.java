@@ -49,18 +49,15 @@ public class Plateau {
 	public void setCase(Pion pion) {
 		this.plateau[pion.getAbscisse()][pion.getOrdonnee()] = pion;
 	}
-
+	
 	/**
-	 * Déplace un pion sur le plateau
+	 * 
 	 * @param pion
 	 */
 	public void movePion(Pion pion) {
-		// La case ou se trouve le pion devient null
-		plateau[pion.getAbscisse()][pion.getOrdonnee()] = null;
-		// On change l'abscisse du pion
-		pion.setOrdonnee(pion.getAbscisse(), plateau);
-		// On met le pion dans sa case
-		plateau[pion.getAbscisse()][pion.getOrdonnee()] = pion;
+		this.plateau[pion.getAbscisse()][pion.getOrdonnee()] = null;
+		pion.setOrdonnee(pion.getAbscisse(), this.plateau);
+		this.plateau[pion.getAbscisse()][pion.getOrdonnee()] = pion;
 	}
 	
 	/**
