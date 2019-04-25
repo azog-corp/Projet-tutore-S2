@@ -199,6 +199,11 @@ public class Partie {
 			System.out.println("Victoire de l'équipe " + equipe[1] + "avec les crapauds");
 		}
 	}
+	
+	private static void joueurVsCasse() {
+		
+		
+	}
 
 	/**
 	 * Main principale qui lance le jeu
@@ -212,7 +217,8 @@ public class Partie {
 		setPlateau(abscisse, ordonnee);
 		setGrenouille(nbPion);
 		setCrapaud(nbPion);
-		joueurVsJoueur();
+		// joueurVsJoueur();
+		joueurVsCasse();
 		System.out.println("Tout c'est bien passer");
 	}
 }
