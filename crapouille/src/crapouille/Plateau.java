@@ -57,6 +57,7 @@ public class Plateau {
 	public void movePion(Pion pion) {
 		this.plateau[pion.getAbscisse()][pion.getOrdonnee()] = null;
 		pion.setOrdonnee(pion.getAbscisse(), this.plateau);
+		pion.setBloque(this.plateau);
 		this.plateau[pion.getAbscisse()][pion.getOrdonnee()] = pion;
 	}
 	

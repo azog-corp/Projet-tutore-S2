@@ -140,6 +140,7 @@ public class Partie {
 		System.out.print("\nOrdonnee : ");
 		ordonnee = entree.hasNextInt() ? entree.nextInt()-1 : ordonnee;
 		// Si le pion est existe et est non bloqué
+		System.out.println(abscisse + " " + ordonnee);
 		if (pionValide(tourEquipe, abscisse, ordonnee) != null) {
 			plateau.movePion(pionValide(tourEquipe, abscisse, ordonnee));
 			tourEquipe = tourEquipe == 0 ? 1 : 0;

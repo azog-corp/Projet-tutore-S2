@@ -60,10 +60,10 @@ public class Pion {
 	 */
 	public void setOrdonnee(int abscisse, Pion[][] pion) {
 		// Si le pion est une grenouille est que la première case de droite est vide
-		if (!crapaud && this.ordonnee < pion.length-1 && pion[this.abscisse][this.ordonnee+1] == null) {
+		if (!crapaud && this.ordonnee < pion[0].length-1 && pion[this.abscisse][this.ordonnee+1] == null) {
 			this.ordonnee = ordonnee+1;
 			// Si le pion est une grenouille est que la deuxième case de droite est vide
-		} else if (!crapaud && this.ordonnee < pion.length-2 && pion[this.abscisse][this.ordonnee+2] == null) {
+		} else if (!crapaud && this.ordonnee < pion[0].length-2 && pion[this.abscisse][this.ordonnee+2] == null) {
 			this.ordonnee = ordonnee+2;
 			// Si le pion est un crapaud est que la première case de gauche est vide
 		} else if (crapaud && this.ordonnee > 0 && pion[this.abscisse][this.ordonnee-1] == null) {
@@ -81,15 +81,14 @@ public class Pion {
 	 * @param pion
 	 */
 	public void setBloque(Pion[][] pion) {
-
 		// Si le pion est une grenouille est que la première case de droite est vide
-		if ((!crapaud && this.ordonnee < pion.length-1 && pion[this.abscisse][this.ordonnee+1] == null) ||
+		if (((!crapaud && this.ordonnee < pion[0].length-1 && pion[this.abscisse][this.ordonnee+1] == null) &&
 				// Si le pion est une grenouille est que la deuxième case de droite est vide
-				(!crapaud && this.ordonnee < pion.length-2 && pion[this.abscisse][this.ordonnee+2] == null) ||
+				(!crapaud && this.ordonnee < pion[0].length-2 && pion[this.abscisse][this.ordonnee+2] == null)) ||
 				// Si le pion est un crapaud est que la première case de gauche est vide
-				(crapaud && this.ordonnee > 0 && pion[this.abscisse][this.ordonnee-1] == null) || 
+				((crapaud && this.ordonnee > 0 && pion[this.abscisse][this.ordonnee-1] == null) &&
 				// Si le pion est un crapaud est que la deuxième case de gauche est vide
-				(crapaud && this.ordonnee > 1 && pion[this.abscisse][this.ordonnee-2] == null)) {
+				(crapaud && this.ordonnee > 1 && pion[this.abscisse][this.ordonnee-2] == null))) {
 			this.bloque = false; // Le pion n'est pas bloqué
 		} else {
 			this.bloque = true; // Le pion est bloqué
