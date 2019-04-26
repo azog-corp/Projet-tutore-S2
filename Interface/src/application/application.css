@@ -2,20 +2,29 @@
 .button {
     -fx-background-radius:  5em;
     -fx-border-radius: 5em;
+    -fx-pref-width: 180px;
+    -fx-pref-height: 35px;
+    -fx-font-size: 16px;
 }
 
 .priobtn {
     -fx-background-color:  #eda678;
+    -fx-text-fill: #000000;
 }
 
 .autrebtn {
     -fx-background-color:   #515D6D;
+    -fx-text-fill: #ffffff;
 }
 
 .button:hover {
-	-fx-background-color: #088ad1  ;
+	-fx-background-color: #088ad1;
 }
 
 .interactif {
 	-fx-cursor: HAND;
+}
+
+.AnchorPane {
+	-fx-background-color: #3D4956;
 }
