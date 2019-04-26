@@ -39,12 +39,9 @@ public class Partie {
 	/**
 	 * Initialise le tableau de grenouilles
 	 * @param nbGrenouille
+	 * @param coordonnees 
 	 */
-	public static void setGrenouille(int nbGrenouille) {
-		// Coordonnées temporaires des grenouille
-		int[][] coordonnees = {
-				{0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6},
-				{0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 0, 1}};
+	public static void setGrenouille(int nbGrenouille, int[][] coordonnees) {
 		// On créé un tableau de grenouilles
 		batracien[0] = new Pion[nbGrenouille];
 		for (int i = 0; i < nbGrenouille; i++) {
@@ -61,11 +58,7 @@ public class Partie {
 	 * Initialise le tableau de crapauds
 	 * @param nbCrapaud
 	 */
-	public static void setCrapaud(int nbCrapaud) {
-		// Coordonnées temporaires des crapauds
-		int[][] coordonnees = {
-				{0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6},
-				{9, 8, 7, 6, 9, 8, 7, 6, 9, 8, 7, 6, 9, 8}};
+	public static void setCrapaud(int nbCrapaud, int[][] coordonnees) {
 		// On créé un tableau de crapauds
 		batracien[1] = new Pion[nbCrapaud];
 		for (int i = 0; i < nbCrapaud; i++) {
@@ -100,6 +93,30 @@ public class Partie {
 			}
 		}
 		return true;
+	}
+
+	public static boolean victoireCasseTete() {
+		int nbPion,
+		colonne,
+		pionVictoire = batracien[0].length*2;
+		Pion[][] tab = plateau.getPlateau();
+		nbPion = colonne = 0;
+		for (int ligne = 0 ; ligne < tab.length ; ligne++) {
+			if (tab[ligne][colonne] != null && tab[ligne][colonne].isCrapaud()) {
+				nbPion++;
+				colonne++;
+				ligne--;
+			}
+		}
+		colonne = tab[0].length;
+		for (int ligne = 0 ; ligne < tab.length ; ligne++) {
+			if (tab[ligne][colonne] != null && !tab[ligne][colonne].isCrapaud()) {
+				nbPion++;
+				colonne--;
+				ligne--;
+			}
+		}
+		return nbPion == pionVictoire;
 	}
 
 	/**
@@ -144,18 +161,26 @@ public class Partie {
 		plateau.afficherPlateau();
 		System.out.println("\nChosi ton batracien parmi les suivants x y");
 		// On affiche les pions déplaçable
-		choixPion(batracien[tourEquipe]);
+		if (tourEquipe == 2) {
+			choixPion(batracien[0]);
+			choixPion(batracien[1]);
+		} else {
+			choixPion(batracien[tourEquipe]);
+		}
 		System.out.print("\nAbscisse : ");
 		abscisse = entree.hasNextInt() ? entree.nextInt()-1 : abscisse;
 		System.out.print("\nOrdonnee : ");
 		ordonnee = entree.hasNextInt() ? entree.nextInt()-1 : ordonnee;
 		// Si le pion est existe et est non bloqué
-		System.out.println(abscisse + " " + ordonnee);
-		if (pionValide(tourEquipe, abscisse, ordonnee) != null) {
+		if (tourEquipe < 2 && pionValide(tourEquipe, abscisse, ordonnee) != null) {
 			plateau.movePion(pionValide(tourEquipe, abscisse, ordonnee));
 			plateau.updateBloque(abscisse);
 			tourEquipe = tourEquipe == 0 ? 1 : 0;
 			System.out.println("Le pion à été déplacé");
+		} else if (tourEquipe == 2 && pionValide(0, abscisse, ordonnee) != null) {
+			plateau.movePion(pionValide(0, abscisse, ordonnee));
+		} else if (tourEquipe == 2 && pionValide(1, abscisse, ordonnee) != null) {
+			plateau.movePion(pionValide(1, abscisse, ordonnee));
 		} else {
 			System.out.println("Le pion est bloqué ou invalide");
 			entree.nextLine(); // Vidage du tampon
@@ -205,8 +230,18 @@ public class Partie {
 	 * 
 	 */
 	private static void joueurVsCasse() {
-
-
+		System.out.println("Bienvenu dans le mode casse tête !\n" +
+				"Pour gagner, placer toutes les grenouilles à " +
+				"droite et tous les crapaud à gauche !\n" +
+				"Bonne chance !");
+		do {
+			tourJoueur(2);
+		} while (!victoire(batracien[0]) && !victoire(batracien[1]));
+		if (victoireCasseTete()) {
+			System.out.println("Bravo ! Tu as gagné !");
+		} else {
+			System.out.println("Dommage ! Tu as perdu !");
+		}
 	}
 
 	/**
@@ -214,13 +249,22 @@ public class Partie {
 	 * @param args non utilisé
 	 */
 	public static void main(String[] args) {
-		Initialisation parDefault = new Initialisation(7, 10, 14); // Initialisation par défault
+		// Coordonnées par défault des grenouille
+		int[][] coGrenouille = {
+				{0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6},
+				{0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 0, 1}};
+		// Coordonnées par défault des crapauds
+		int[][] coCrapaud = {
+				{0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6},
+				{9, 8, 7, 6, 9, 8, 7, 6, 9, 8, 7, 6, 9, 8}};
+		// Initialisation par défault
+		Initialisation parDefault = new Initialisation(7, 10, 14, coGrenouille, coCrapaud);
 		int ordinateur = 0; // Difficulte de l'ordinateur (0 signifie une partie contre un joueur)
 		setPlateau(parDefault.getAbscisse(), parDefault.getOrdonnee());
-		setGrenouille(parDefault.getNbPion());
-		setCrapaud(parDefault.getNbPion());
+		setGrenouille(parDefault.getNbPion(), parDefault.getCoGrenouille());
+		setCrapaud(parDefault.getNbPion(), parDefault.getCoCrapaud());
 		// joueurVsJoueur();
-		// joueurVsCasse();
+		joueurVsCasse();
 		System.out.println("Tout c'est bien passer");
 	}
 }

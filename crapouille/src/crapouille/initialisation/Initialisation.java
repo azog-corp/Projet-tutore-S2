@@ -12,11 +12,15 @@ public class Initialisation {
 	private int abscisse,
 	ordonnee,
 	nbPion;
+	private int[][] coGrenouille,
+	coCrapaud;
 
-	public Initialisation(int abscisse, int ordonnee, int nbPion) {
+	public Initialisation(int abscisse, int ordonnee, int nbPion, int[][] coGrenouille, int[][] coCrapaud) {
 		this.abscisse = abscisse;
 		this.ordonnee = ordonnee;
 		this.nbPion = nbPion;
+		this.coGrenouille = coGrenouille;
+		this.coCrapaud = coCrapaud;
 	}
 
 	public int getAbscisse() {
@@ -41,5 +45,20 @@ public class Initialisation {
 
 	public void setNbPion(int nbPion) {
 		this.nbPion = nbPion;
+	}
+	public int[][] getCoGrenouille() {
+		return coGrenouille;
+	}
+
+	public void setCoGrenouille(int[][] coGrenouille) {
+		this.coGrenouille = coGrenouille;
+	}
+
+	public int[][] getCoCrapaud() {
+		return coCrapaud;
+	}
+
+	public void setCoCrapaud(int[][] coCrapaud) {
+		this.coCrapaud = coCrapaud;
 	}
 }
