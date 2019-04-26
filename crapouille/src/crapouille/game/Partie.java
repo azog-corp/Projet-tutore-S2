@@ -266,7 +266,7 @@ public class Partie {
 					if (ordinateur == 0) {
 						tourEquipe = tourJoueur(tourEquipe);
 					} else {
-						plateau.movePion(Ordinateur.terminator(plateau.getPlateau(), batracien[1], ordinateur));
+						movePion(Ordinateur.choixOrdi(plateau.getPlateau(), batracien[1], ordinateur));
 						tourEquipe--;
 					}
 				} while(tourEquipe == 1);
@@ -312,7 +312,7 @@ public class Partie {
 				{9, 8, 7, 6, 9, 8, 7, 6, 9, 8, 7, 6, 9, 8}};
 		// Initialisation par défault
 		Initialisation parDefault = new Initialisation(7, 10, 14, coGrenouille, coCrapaud);
-		int ordinateur = 1; // Difficulte de l'ordinateur (0 signifie une partie contre un joueur)
+		int ordinateur = 2; // Difficulte de l'ordinateur (0 signifie une partie contre un joueur)
 		setPlateau(parDefault.getAbscisse(), parDefault.getOrdonnee());
 		setGrenouille(parDefault.getNbPion(), parDefault.getCoGrenouille());
 		setCrapaud(parDefault.getNbPion(), parDefault.getCoCrapaud());
