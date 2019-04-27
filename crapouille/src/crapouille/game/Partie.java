@@ -31,7 +31,7 @@ public class Partie {
 	 */
 	private static Scanner entree = new Scanner(System.in);
 
-	
+
 	/**
 	 * Initialise le plateau de jeu
 	 * @param ligne
@@ -40,7 +40,22 @@ public class Partie {
 	public static void setPlateau(int ligne, int colonne) {
 		plateau = new Plateau(ligne, colonne);
 	}
-	
+
+	private static String[] repliques =
+		{"Bienvenue Crapouile !\nVeut tu faire une partie ou un casse-tête ?"
+				+ "\n - 1 : Jeux\n - 2 : Casse-tête\n - 3 : Quitter",
+				
+		"Veut tu jouer contre une homme ou mes fidèles laquais ?"
+				+ "\n - 0 : Contre un déveuloppeur (par défault)"
+				+ "\n - 1 : contre Franck Syslvestre, attention à ces... QCM mortels"
+				+ "\n - 2 : Contre Bruno bélière sacré champion de citation que personne ne connais"
+				+ "\n - 3 : Contre BARRIOS NOTRE MAITRE SUPREME",
+				
+				"Tu pensais que \"casse-tête\" c'était une méthaphore ahaha le con",
+				
+				"Tu es pourrais être un peu plus attentif... Comme au CM de Servère AHAHAHAH... pardon\n1, 2 ou 3"
+		};
+
 	/**
 	 * Initialise le tableau de grenouilles
 	 * @param nbGrenouille taille du tableau
@@ -75,7 +90,7 @@ public class Partie {
 			plateau.setCase(batracien[1][i]);
 		}
 	}
-	
+
 	public static void setBloque() {
 		for (int x = 0 ; x < batracien[0].length ; x++) {
 			batracien[0][x].setBloque(plateau.getPlateau());
@@ -266,7 +281,7 @@ public class Partie {
 					if (ordinateur == 0) {
 						tourEquipe = tourJoueur(tourEquipe);
 					} else {
-						movePion(Ordinateur.choixOrdi(plateau.getPlateau(), batracien[1], ordinateur));
+						plateau.movePion(Ordinateur.choixOrdi(plateau.getPlateau(), batracien[1], ordinateur));
 						tourEquipe--;
 					}
 				} while(tourEquipe == 1);
@@ -312,13 +327,31 @@ public class Partie {
 				{9, 8, 7, 6, 9, 8, 7, 6, 9, 8, 7, 6, 9, 8}};
 		// Initialisation par défault
 		Initialisation parDefault = new Initialisation(7, 10, 14, coGrenouille, coCrapaud);
-		int ordinateur = 2; // Difficulte de l'ordinateur (0 signifie une partie contre un joueur)
+		int ordinateur = 0, // Difficulte de l'ordinateur (0 signifie une partie contre un joueur)
+				choix = 3;
 		setPlateau(parDefault.getAbscisse(), parDefault.getOrdonnee());
 		setGrenouille(parDefault.getNbPion(), parDefault.getCoGrenouille());
 		setCrapaud(parDefault.getNbPion(), parDefault.getCoCrapaud());
 		setBloque();
-		joueurVs(ordinateur);
-		casseTete();
+		System.out.println(repliques[0]);
+
+		do {
+			choix = entree.hasNextInt() ? entree.nextInt() : -1;
+			entree.nextLine();
+			if (choix == 1) {
+				System.out.println(repliques[1]);
+				ordinateur = entree.hasNextInt() ? entree.nextInt() : 0;
+				joueurVs(ordinateur);
+			} else if (choix == 2) {
+				System.out.println(repliques[2]);
+				casseTete();
+			} else {
+				System.out.println(repliques[3]);
+			}
+		} while (choix != 3);
+
+
+
 		System.out.println("Tout c'est bien passer");
 	}
 }
