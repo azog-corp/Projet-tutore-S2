@@ -12,9 +12,35 @@ public class Pion {
 	bloque;
 
 	public Pion(int abscisse, int ordonnee, boolean crapaud) {
-		this.abscisse = abscisse;
-		this.ordonnee = ordonnee;
+		this.setAbscisse(abscisse);
+		this.setOrdonnee(ordonnee);
 		this.crapaud = crapaud;
+	}
+
+	/**  
+	 * Vérifie si l'ordonnee d'un pion est positif lors de l'initialisation
+	 * @param ordonnee, valeur rentré par l'utilisateur pour l'ordonee du pion
+	 * sur le plateau
+	 */
+	private void setOrdonnee(int ordonnee) {
+		if ( ordonnee < 0) {
+			System.out.println("Vous ne pouvez pas mettre d'abscisse négative");
+		} else {
+			this.abscisse = ordonnee;
+		}
+	}
+
+	/**  
+	 * Vérifie si l'abscisse d'un pion est positif lors de l'initialisation
+	 * @param abscisse, valeur rentré par l'utilisateur pour l'ordonee du pion
+	 * sur le plateau
+	 */
+	private void setAbscisse(int abscisse) {
+		if ( abscisse < 0) {
+			System.out.println("Vous ne pouvez pas mettre d'abscisse négative");
+		} else {
+			this.abscisse = abscisse;
+		}
 	}
 
 	public int getAbscisse() {
@@ -63,4 +89,12 @@ public class Pion {
 	public boolean isBloque() {
 		return bloque;
 	}
+
+	@Override
+	public String toString() {
+		return "Pion(" + abscisse + "," + ordonnee + ") crapaud=" + crapaud + ", bloque=" + bloque
+				+ "]";
+	}
+	
+	
 }
