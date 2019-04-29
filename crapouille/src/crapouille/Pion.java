@@ -43,14 +43,31 @@ public class Pion {
 		}
 	}
 
+	/**
+	 * Renvoie la valeur de l'asbscisse de l'objet Pion demandé
+	 * @return l'abscisse du pion demandé
+	 */
 	public int getAbscisse() {
 		return abscisse;
 	}
 
+	/**
+	 * Renvoie la valeur de l'ordonnee de l'objet Pion demandé
+	 * @return l'ordonnee du pion demandé
+	 */
 	public int getOrdonnee() {
 		return ordonnee;
 	}
 
+	/**
+	 * Fonction permettant de bouger un pion sur un tableau en vérifiant si le pion n'est pas bloqué.<br/>
+	 * Si le poin est un crapaud la fonction lui ajoute +1 a son abscisse si la 1er case devant lui est 
+	 * libre ou ajoute +2 si la deuxieme case est libre.
+	 * Si le poin est une grenouille la fonction lui ajoute -1 a son abscisse si la 1er case devant lui est 
+	 * libre ou ajoute -2 si la deuxieme case est libre.
+	 * @param abscisse, L'abscisse ou ce situe le pion
+	 * @param plateau, tableau contenant des Pions
+	 */
 	public void setAbscisse(int abscisse, Pion[][] plateau) {
 		// Si le pion est un crapaud est que la première case de droite est vide
 		if (crapaud && plateau[this.abscisse+1][this.ordonnee] == null) {
@@ -67,6 +84,15 @@ public class Pion {
 		}
 	}
 
+	/**
+	 * Vérifie si un pion est bloqué :
+	 * <ol><li>- Si un pion n'est pas bloqué, il ajoute la valeur false à 
+	 *         la propriéter bloque de l'objet Pion.</li>
+	 *     <li>- Si un pion est bloqué, il ajoute la valeur true à 
+	 *         la propriéter bloque de l'objet Pion.</li></ol>
+	 * @param bloque, boolean indiquant si un pion est bloqué ou non
+	 * @param plateau, tableau contenant des Pions
+	 */
 	public void setBloque(boolean bloque, Pion[][] plateau) {
 		// Si le pion est un crapaud est que la première case de gauche est vide
 		if ((crapaud && plateau[this.abscisse+1][this.ordonnee] == null) || 
@@ -90,6 +116,10 @@ public class Pion {
 		return bloque;
 	}
 
+	/**
+	 * Renvoie une représentation sous forme de chaîne de l'objet d'un Pion
+	 * @return un string représentant un Pion
+	 */
 	@Override
 	public String toString() {
 		return "Pion(" + abscisse + "," + ordonnee + ") crapaud=" + crapaud + ", bloque=" + bloque
