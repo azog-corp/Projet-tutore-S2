@@ -191,6 +191,10 @@ public class interfaceAppliController {
     }
     
     //TODO fonction pour placer chaque element dans le grid pane et le rendre iteractif
+    //Idee recuperer coordonnées grid pane + largeur longueur la diviser par le nombre d'arguments et creer des des maps
+    // Au click appel fonction pour deplacer au coordonnes
+    // Probleme comment savoir quelle case correspond a quoi
+    //Creer bouton a la place mais comment definir quel bouton et quoi
     
     
 
