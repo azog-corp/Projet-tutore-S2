@@ -1,6 +1,8 @@
 package application;
 
 
+import com.jfoenix.controls.JFXButton;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -97,6 +99,7 @@ public class interfaceAppliController {
 	    @FXML
 	    private CheckBox chk_vsIA;
 
+
     @FXML
     void leave(MouseEvent click) {
     	Platform.exit(); 
@@ -177,5 +180,18 @@ public class interfaceAppliController {
     	reinitialiser();
     	plateau.setVisible(true);
     }
+    
+    @FXML
+    void recupererCoord() { // Se declanche avec appui sur ok
+    	entreeUti.getText().getCoordonees 
+    	// TODO fonction recuperant les coordonnees du pion qui doit bouger et la ou il doit bouger; ( get chartAt + StringBuilder)
+    	//TODO appel fonction bouger pion + verfication coordonnes donnees etc
+    	//(les fonctions de mael)
+    	//Quand deplacement fini afficher nouvelles positions sinon afficher message box
+    }
+    
+    //TODO fonction pour placer chaque element dans le grid pane et le rendre iteractif
+    
+    
 
 }
