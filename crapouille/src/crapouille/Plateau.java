@@ -13,13 +13,14 @@ import crapouille.Pion;
 public class Plateau {
 
 	/**
-	 *  Création des attributs de l'objet Plateau
 	 *  ligne et ordonnée correspondent à la taille du tableau
-	 *  Pion est est un tableau contenant soit :
-	 *  Une grenouille, un crapaud, ou la valeur null
-	 */
+	 */ 
 	private int ligne,
 	colonne;
+	/**
+	 * Pion est est un tableau contenant soit :
+	 * Une grenouille, un crapaud, ou la valeur null
+	 */
 	private Pion[][] plateau;
 
 	/**
@@ -58,7 +59,7 @@ public class Plateau {
 	 */
 	public void movePion(Pion pion) {
 		this.plateau[pion.getLigne()][pion.getColonne()] = null;
-		pion.setLigne(pion.getLigne(), this.plateau);
+		pion.setColonne(pion.getLigne(), this.plateau);
 		pion.setBloque(this.plateau);
 		updateBloque(pion.getLigne());
 		this.plateau[pion.getLigne()][pion.getColonne()] = pion;

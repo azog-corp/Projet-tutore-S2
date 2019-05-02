@@ -340,16 +340,17 @@ public class Partie {
 
 		do {
 			choix = entree.hasNextInt() ? entree.nextInt() : -1;
-			entree.nextLine();
 			if (choix == 1) {
 				System.out.println(repliques[1]);
 				ordinateur = entree.hasNextInt() ? entree.nextInt() : 0;
+				entree.nextLine();
 				joueurVs(ordinateur);
 			} else if (choix == 2) {
 				System.out.println(repliques[2]);
 				casseTete();
 			} else {
 				System.out.println(repliques[3]);
+				entree.nextLine();
 			}
 		} while (choix != 3);
 

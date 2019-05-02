@@ -5,7 +5,9 @@ import crapouille.Pion;
 
 public class Pion {
 
-
+	/**
+	 * 
+	 */
 	private int ligne,
 	colonne;
 	private boolean crapaud,
@@ -46,7 +48,7 @@ public class Pion {
 	 * @param ligne, L'ligne ou ce situe le pion
 	 * @param plateau, tableau contenant des Pions
 	 */
-	public void setLigne(int ligne, Pion[][] plateau) {
+	public void setColonne(int ligne, Pion[][] plateau) {
 		// Si le pion est une grenouille est que la première case de droite est vide
 		if (!crapaud && this.colonne < plateau[0].length-1 && plateau[this.ligne][this.colonne+1] == null) {
 			this.colonne = colonne+1;
