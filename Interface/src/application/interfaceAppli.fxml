@@ -194,7 +194,7 @@
       </AnchorPane>
       <AnchorPane fx:id="plateau" layoutY="85.0" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@../../bin/application/application.css">
          <children>
-            <TextField fx:id="entreeUti" layoutX="11.0" layoutY="472.0" prefHeight="26.0" prefWidth="448.0" style="-fx-background-color: #2c374c;" />
+            <TextField fx:id="entreeUti" layoutX="11.0" layoutY="472.0" prefHeight="26.0" prefWidth="448.0" />
             <GridPane fx:id="plateauJeu" gridLinesVisible="true" layoutX="60.0" layoutY="74.0" styleClass="mygridStyle">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
