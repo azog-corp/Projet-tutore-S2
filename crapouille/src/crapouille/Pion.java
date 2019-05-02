@@ -93,7 +93,7 @@ public class Pion {
 	 * @param bloque, boolean indiquant si un pion est bloqué ou non
 	 * @param plateau, tableau contenant des Pions
 	 */
-	public void setBloque(boolean bloque, Pion[][] plateau) {
+	public void setBloque(Pion[][] plateau) {
 		// Si le pion est un crapaud est que la première case de gauche est vide
 		if ((crapaud && plateau[this.abscisse+1][this.ordonnee] == null) || 
 				// Si le pion est un crapaud est que la deuxième case de gauche est vide
