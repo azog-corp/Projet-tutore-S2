@@ -58,13 +58,13 @@ public class TestPion {
     /**
      * Test usuel permettant de vérifier la création d'un pion
      * Un pion est initailiser avec les valeur suivante :
-     * <ol><li>abscisse = 0</li>
-     *     <li>ordonnee = 0</li>
+     * <ol><li>ligne = 0</li>
+     *     <li>colonne = 0</li>
      *     <li>crapaud  = false</li></ol>
      */
 	public static void testCreationPion() {
-		int abscisse = 0,
-		    ordonnee = 0;
+		int ligne = 0,
+		    colonne = 0;
 		boolean crapaud = true;
 		Pion pionTest;
 		
@@ -74,22 +74,22 @@ public class TestPion {
 		/* répete plusieur fois la création d'un pion pour tester */
 		for (int nbEssai = 0; nbEssai < 5; nbEssai++) {
 			
-			/* boucle vérifiant si l'utilisateur rentre un entier en abscisse */
+			/* boucle vérifiant si l'utilisateur rentre un entier en ligne */
 			do {
-				System.out.println("Veillez rentrer une valeur pour l'abscisse du pion :");
+				System.out.println("Veillez rentrer une valeur pour l'ligne du pion :");
 				if ( entree.hasNextInt()) {
-					abscisse = entree.nextInt();
+					ligne = entree.nextInt();
 				} else {
 					System.out.println("Erreur, veillez rentrer un entier");
 					entree.nextLine();
 				}
 			} while(!entree.hasNextInt());
 		
-			/* boucle vérifiant si l'utilisateur rentre un entier en ordonnee */
+			/* boucle vérifiant si l'utilisateur rentre un entier en colonne */
 			do {
 				System.out.print("Veillez rentrer une valeur pour l'ordonnée du pion :");
 				if ( entree.hasNextInt()) {
-					ordonnee = entree.nextInt();
+					colonne = entree.nextInt();
 				} else {
 					System.out.println("Erreur, veillez rentrer un entier");
 				}
@@ -108,80 +108,80 @@ public class TestPion {
 			} while(!entree.hasNextBoolean());
 			
 			/* initialise un pion avec les valeur rentré au dessus */
-			pionTest = new Pion( abscisse, ordonnee, crapaud);
+			pionTest = new Pion( ligne, colonne, crapaud);
 			/* affiche les coordonné des pion rentré par l'utilisateur ou un pion avec les valeurs initialisé */
 			System.out.println(pionTest);
 		}
 	}
 
-	public static void testSetAbscisse() {
-		int abscisseDebut,
-		    abscisseFin,
+	public static void testSetligne() {
+		int ligneDebut,
+		    ligneFin,
 		    nbEchec = 0;
 		
-		System.out.println("----------- Test pour la fonction setAbscisse ----------\n\n");
+		System.out.println("----------- Test pour la fonction setligne ----------\n\n");
 		
 		/* Test d'avancement pour un crapaud sans être bloqué */
-		abscisseDebut = pionTest1.getAbscisse();
-		pionTest1.setAbscisse(0, jeuTest);
-		abscisseFin = pionTest1.getAbscisse();
-		if ((abscisseDebut + 1 ) != abscisseFin ) {
+		ligneDebut = pionTest1.getligne();
+		pionTest1.setligne(0, jeuTest);
+		ligneFin = pionTest1.getligne();
+		if ((ligneDebut + 1 ) != ligneFin ) {
 			nbEchec++;
 		}
 		
 		/* Test si un crapaud avancé s'il y a u pion devant lui */
-		abscisseDebut = pionTest2.getAbscisse();
-		pionTest2.setAbscisse(0, jeuTest);
-		abscisseFin = pionTest2.getAbscisse();
-		if ((abscisseDebut + 2 ) != abscisseFin ) {
+		ligneDebut = pionTest2.getligne();
+		pionTest2.setligne(0, jeuTest);
+		ligneFin = pionTest2.getligne();
+		if ((ligneDebut + 2 ) != ligneFin ) {
 			nbEchec++;
 		}
 		
 		/* Test quand un crapaud est bloqué par deux autre Pion */
-		abscisseDebut = pionTest4.getAbscisse();
-		pionTest4.setAbscisse(0, jeuTest);
-		abscisseFin = pionTest4.getAbscisse();
-		if (abscisseDebut != abscisseFin ) {
+		ligneDebut = pionTest4.getligne();
+		pionTest4.setligne(0, jeuTest);
+		ligneFin = pionTest4.getligne();
+		if (ligneDebut != ligneFin ) {
 			nbEchec++;
 		}
 		
 		/*test si le pion est arriver à  la fin */
-		abscisseDebut = pionTest7.getAbscisse();
-		pionTest7.setAbscisse(4, jeuTest);
-		abscisseFin = pionTest7.getAbscisse();
-		if (abscisseDebut != abscisseFin ) {
+		ligneDebut = pionTest7.getligne();
+		pionTest7.setligne(4, jeuTest);
+		ligneFin = pionTest7.getligne();
+		if (ligneDebut != ligneFin ) {
 			nbEchec++;
 		}
 		
 		/* Test d'avancement pour un crapaud sans être bloqué */
-		abscisseDebut = pionTest8.getAbscisse();
-		pionTest8.setAbscisse(0, jeuTest);
-		abscisseFin = pionTest8.getAbscisse();
-		if ((abscisseDebut - 1 ) != abscisseFin ) {
+		ligneDebut = pionTest8.getligne();
+		pionTest8.setligne(0, jeuTest);
+		ligneFin = pionTest8.getligne();
+		if ((ligneDebut - 1 ) != ligneFin ) {
 			nbEchec++;
 		}
 		
 		/* Test si un crapaud avancé s'il y a u pion devant lui */
-		abscisseDebut = pionTest10.getAbscisse();
-		pionTest10.setAbscisse(0, jeuTest);
-		abscisseFin = pionTest10.getAbscisse();
-		if ((abscisseDebut - 2 ) != abscisseFin ) {
+		ligneDebut = pionTest10.getligne();
+		pionTest10.setligne(0, jeuTest);
+		ligneFin = pionTest10.getligne();
+		if ((ligneDebut - 2 ) != ligneFin ) {
 			nbEchec++;
 		}
 		
 		/* Test quand un crapaud est bloqué par deux autre Pion */
-		abscisseDebut = pionTest13.getAbscisse();
-		pionTest13.setAbscisse(0, jeuTest);
-		abscisseFin = pionTest13.getAbscisse();
-		if (abscisseDebut != abscisseFin ) {
+		ligneDebut = pionTest13.getligne();
+		pionTest13.setligne(0, jeuTest);
+		ligneFin = pionTest13.getligne();
+		if (ligneDebut != ligneFin ) {
 			nbEchec++;
 		}
 		
 		/*test si le pion est arriver à  la fin */
-		abscisseDebut = pionTest14.getAbscisse();
-		pionTest14.setAbscisse(0, jeuTest);
-		abscisseFin = pionTest14.getAbscisse();
-		if (abscisseDebut != abscisseFin ) {
+		ligneDebut = pionTest14.getligne();
+		pionTest14.setligne(0, jeuTest);
+		ligneFin = pionTest14.getligne();
+		if (ligneDebut != ligneFin ) {
 			nbEchec++;
 		}
 		
@@ -189,7 +189,7 @@ public class TestPion {
 	}
 	
 	public static void main(String[] args) {
-		testSetAbscisse();
+		testSetligne();
 		testCreationPion();
 
 	}

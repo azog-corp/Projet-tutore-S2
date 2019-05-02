@@ -34,13 +34,16 @@ public class Partie {
 
 	/**
 	 * Initialise le plateau de jeu
-	 * @param ligne
-	 * @param colonne
+	 * @param ligne nombre de ligne du plateau
+	 * @param colonne nombre de colonne du plateau
 	 */
 	public static void setPlateau(int ligne, int colonne) {
 		plateau = new Plateau(ligne, colonne);
 	}
 
+	/**
+	 * Réplique (à modifier bien sur si on veut pas avoir 0)
+	 */
 	private static String[] repliques =
 		{"Bienvenue Crapouile !\nVeut tu faire une partie ou un casse-tête ?"
 				+ "\n - 1 : Jeux\n - 2 : Casse-tête\n - 3 : Quitter",
@@ -59,14 +62,14 @@ public class Partie {
 	/**
 	 * Initialise le tableau de grenouilles
 	 * @param nbGrenouille taille du tableau
-	 * @param coordonnees des grenouilles sur le plateau
+	 * @param coordonnee des grenouilles sur le plateau
 	 */
-	public static void setGrenouille(int nbGrenouille, int[][] coordonnees) {
+	public static void setGrenouille(int nbGrenouille, int[][] coordonnee) {
 		// On créé un tableau de grenouilles
 		batracien[0] = new Pion[nbGrenouille];
 		for (int i = 0; i < nbGrenouille; i++) {
 			// On créé les pions
-			batracien[0][i] = new Pion(coordonnees[0][i], coordonnees[1][i], false);
+			batracien[0][i] = new Pion(coordonnee[0][i], coordonnee[1][i], false);
 			// On met le pion créé sur le plateau
 			plateau.setCase(batracien[0][i]);
 		}
@@ -76,14 +79,14 @@ public class Partie {
 	/**
 	 * Initialise le tableau de crapaud
 	 * @param nbCrapaud taille du tableau
-	 * @param coordonnees des crapauds sur le plateau
+	 * @param coordonnee des crapauds sur le plateau
 	 */
-	public static void setCrapaud(int nbCrapaud, int[][] coordonnees) {
+	public static void setCrapaud(int nbCrapaud, int[][] coordonnee) {
 		// On créé un tableau de crapauds
 		batracien[1] = new Pion[nbCrapaud];
 		for (int i = 0; i < nbCrapaud; i++) {
 			// On créé les pions
-			batracien[1][i] = new Pion(coordonnees[0][i], coordonnees[1][i], true);
+			batracien[1][i] = new Pion(coordonnee[0][i], coordonnee[1][i], true);
 			// On initialise le boolean bloque
 			batracien[1][i].setBloque(plateau.getPlateau());
 			// On met le pion créé sur le plateau
@@ -170,7 +173,7 @@ public class Partie {
 		for (int x = 0 ; x < pion.length ; x++) {
 			// Si le pion n'est pas bloqué
 			if (!pion[x].isBloque()) {
-				System.out.print("Pion (" + (pion[x].getAbscisse()+1) + ";" + (pion[x].getOrdonnee()+1) + ") ");
+				System.out.print("Pion (" + (pion[x].getLigne()+1) + ";" + (pion[x].getColonne()+1) + ") ");
 			}
 		}
 		System.out.print("\n");
@@ -180,12 +183,12 @@ public class Partie {
 	 * Vérifie si un pion existe
 	 * @param equipe du pion
 	 * @param absisse du pion
-	 * @param ordonnee du pion
+	 * @param colonne du pion
 	 * @return le pion s'il est valide
 	 */
-	public static Pion pionValide(int equipe, int absisse, int ordonnee) {
+	public static Pion pionValide(int equipe, int ligne, int colonne) {
 		for (int x = 0 ; x < batracien[0].length ; x++) {
-			if (batracien[equipe][x].getAbscisse() == absisse && batracien[equipe][x].getOrdonnee() == ordonnee) {
+			if (batracien[equipe][x].getligne() == ligne && batracien[equipe][x].getcolonne() == colonne) {
 				return batracien[equipe][x];
 			}
 		}
@@ -200,8 +203,8 @@ public class Partie {
 	 * @return
 	 */
 	public static int tourJoueur(int tourEquipe) {
-		int abscisse = -1, // Abscisse d'un pion
-				ordonnee = -1; // Ordonnée d'un pion
+		int ligne = -1, // ligne d'un pion
+				colonne = -1; // Ordonnée d'un pion
 		// On affiche le tableau
 		plateau.afficherPlateau();
 		System.out.println("\nChosi ton batracien parmi les suivants x y");
@@ -212,33 +215,33 @@ public class Partie {
 		} else {
 			choixPion(batracien[tourEquipe]);
 		}
-		System.out.print("\nAbscisse : ");
-		abscisse = entree.hasNextInt() ? entree.nextInt()-1 : abscisse;
-		System.out.print("\nOrdonnee : ");
-		ordonnee = entree.hasNextInt() ? entree.nextInt()-1 : ordonnee;
+		System.out.print("\nLigne : ");
+		ligne = entree.hasNextInt() ? entree.nextInt()-1 : ligne;
+		System.out.print("\nColonne : ");
+		colonne = entree.hasNextInt() ? entree.nextInt()-1 : colonne;
 		// Si le mode de jeu est joueurVs
 		if (tourEquipe < 2) {
 			// Si le pion existe et qu'il n'est pas bloqué
-			if (pionValide(tourEquipe, abscisse, ordonnee) != null &&
-					!pionValide(tourEquipe, abscisse, ordonnee).isBloque()) {
+			if (pionValide(tourEquipe, ligne, colonne) != null &&
+					!pionValide(tourEquipe, ligne, colonne).isBloque()) {
 				// On bouge le pion
-				plateau.movePion(pionValide(tourEquipe, abscisse, ordonnee));
+				plateau.movePion(pionValide(tourEquipe, ligne, colonne));
 				tourEquipe = tourEquipe == 0 ? 1 : 0;
 				System.out.println("Le pion à été déplacé");
 			}
 			// Si le mode de jeu est casse tête
 		} else if (tourEquipe == 2) {
 			// Si la grenouille existe et qu'elle n'est pas bloquée
-			if (pionValide(0, abscisse, ordonnee) != null &&
-					!pionValide(tourEquipe, abscisse, ordonnee).isBloque()) {
+			if (pionValide(0, ligne, colonne) != null &&
+					!pionValide(tourEquipe, ligne, colonne).isBloque()) {
 				// On bouge le pion
-				plateau.movePion(pionValide(0, abscisse, ordonnee));
+				plateau.movePion(pionValide(0, ligne, colonne));
 				System.out.println("Le pion à été déplacé");
 				// Si le crapaud existe et qu'il n'est pas bloqué
-			} else if (pionValide(1, abscisse, ordonnee) != null &&
-					!pionValide(1, abscisse, ordonnee).isBloque()) {
+			} else if (pionValide(1, ligne, colonne) != null &&
+					!pionValide(1, ligne, colonne).isBloque()) {
 				// On bouge le pion
-				plateau.movePion(pionValide(1, abscisse, ordonnee));
+				plateau.movePion(pionValide(1, ligne, colonne));
 				System.out.println("Le pion à été déplacé");
 			}
 		} else {
@@ -267,7 +270,7 @@ public class Partie {
 		// Si aucun nom n'est rentré, le nom par défault est Grenouille
 		equipe[0] = equipe[0].length() == 0 ? "Grenouille" : equipe[0];
 		System.out.println("Entrer le nom de l'equipe Grenouille : ");
-		equipe[1] = entree.nextLine();
+		equipe[1] = ordinateur == 0 ? entree.nextLine() : "";
 		// Si aucun nom n'est rentré, le nom par défault est Crapaud
 		equipe[1] = equipe[1].length() == 0 ? "Crapaud" : equipe[1];
 		do {
@@ -329,7 +332,7 @@ public class Partie {
 		Initialisation parDefault = new Initialisation(7, 10, 14, coGrenouille, coCrapaud);
 		int ordinateur = 0, // Difficulte de l'ordinateur (0 signifie une partie contre un joueur)
 				choix = 3;
-		setPlateau(parDefault.getAbscisse(), parDefault.getOrdonnee());
+		setPlateau(parDefault.getligne(), parDefault.getcolonne());
 		setGrenouille(parDefault.getNbPion(), parDefault.getCoGrenouille());
 		setCrapaud(parDefault.getNbPion(), parDefault.getCoCrapaud());
 		setBloque();

@@ -9,34 +9,34 @@ package crapouille.initialisation;
  */
 public class Initialisation {
 
-	private int abscisse,
-	ordonnee,
+	private int ligne,
+	colonne,
 	nbPion;
 	private int[][] coGrenouille,
 	coCrapaud;
 
-	public Initialisation(int abscisse, int ordonnee, int nbPion, int[][] coGrenouille, int[][] coCrapaud) {
-		this.abscisse = abscisse;
-		this.ordonnee = ordonnee;
+	public Initialisation(int ligne, int colonne, int nbPion, int[][] coGrenouille, int[][] coCrapaud) {
+		this.ligne = ligne;
+		this.colonne = colonne;
 		this.nbPion = nbPion;
 		this.coGrenouille = coGrenouille;
 		this.coCrapaud = coCrapaud;
 	}
 
-	public int getAbscisse() {
-		return abscisse;
+	public int getligne() {
+		return ligne;
 	}
 
-	public void setAbscisse(int abscisse) {
-		this.abscisse = abscisse;
+	public void setligne(int ligne) {
+		this.ligne = ligne;
 	}
 
-	public int getOrdonnee() {
-		return ordonnee;
+	public int getcolonne() {
+		return colonne;
 	}
 
-	public void setOrdonnee(int ordonnee) {
-		this.ordonnee = ordonnee;
+	public void setcolonne(int colonne) {
+		this.colonne = colonne;
 	}
 
 	public int getNbPion() {

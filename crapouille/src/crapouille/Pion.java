@@ -6,81 +6,81 @@ import crapouille.Pion;
 public class Pion {
 
 
-	private int abscisse,
-	ordonnee;
+	private int ligne,
+	colonne;
 	private boolean crapaud,
 	bloque;
 
-	public Pion(int abscisse, int ordonnee, boolean crapaud) {
-		this.setAbscisse(abscisse);
-		this.setOrdonnee(ordonnee);
+	public Pion(int ligne, int colonne, boolean crapaud) {
+		this.setLigne(ligne);
+		this.setColonne(colonne);
 		this.crapaud = crapaud;
 	}
 
 	/**  
-	 * Vérifie si l'ordonnee d'un pion est positif lors de l'initialisation
-	 * @param ordonnee, valeur rentré par l'utilisateur pour l'ordonee du pion
+	 * Vérifie si l'colonne d'un pion est positif lors de l'initialisation
+	 * @param colonne, valeur rentré par l'utilisateur pour l'ordonee du pion
 	 * sur le plateau
 	 */
-	private void setOrdonnee(int ordonnee) {
-		if ( ordonnee < 0) {
-			System.out.println("Vous ne pouvez pas mettre d'abscisse négative");
+	private void setColonne(int colonne) {
+		if (colonne < 0) {
+			System.out.println("Vous ne pouvez pas mettre d'ligne négative");
 		} else {
-			this.abscisse = ordonnee;
+			this.ligne = colonne;
 		}
 	}
 
 	/**  
-	 * Vérifie si l'abscisse d'un pion est positif lors de l'initialisation
-	 * @param abscisse, valeur rentré par l'utilisateur pour l'ordonee du pion
+	 * Vérifie si l'ligne d'un pion est positif lors de l'initialisation
+	 * @param ligne, valeur rentré par l'utilisateur pour l'ordonee du pion
 	 * sur le plateau
 	 */
-	private void setAbscisse(int abscisse) {
-		if ( abscisse < 0) {
-			System.out.println("Vous ne pouvez pas mettre d'abscisse négative");
+	private void setLigne(int ligne) {
+		if (ligne < 0) {
+			System.out.println("Vous ne pouvez pas mettre d'ligne négative");
 		} else {
-			this.abscisse = abscisse;
+			this.ligne = ligne;
 		}
 	}
 
 	/**
 	 * Renvoie la valeur de l'asbscisse de l'objet Pion demandé
-	 * @return l'abscisse du pion demandé
+	 * @return l'ligne du pion demandé
 	 */
-	public int getAbscisse() {
-		return abscisse;
+	public int getLigne() {
+		return ligne;
 	}
 
 	/**
-	 * Renvoie la valeur de l'ordonnee de l'objet Pion demandé
-	 * @return l'ordonnee du pion demandé
+	 * Renvoie la valeur de l'colonne de l'objet Pion demandé
+	 * @return l'colonne du pion demandé
 	 */
-	public int getOrdonnee() {
-		return ordonnee;
+	public int getColonne() {
+		return colonne;
 	}
 
 	/**
 	 * Fonction permettant de bouger un pion sur un tableau en vérifiant si le pion n'est pas bloqué.<br/>
-	 * Si le poin est un crapaud la fonction lui ajoute +1 a son abscisse si la 1er case devant lui est 
+	 * Si le poin est un crapaud la fonction lui ajoute +1 a son ligne si la 1er case devant lui est 
 	 * libre ou ajoute +2 si la deuxieme case est libre.
-	 * Si le poin est une grenouille la fonction lui ajoute -1 a son abscisse si la 1er case devant lui est 
+	 * Si le poin est une grenouille la fonction lui ajoute -1 a son ligne si la 1er case devant lui est 
 	 * libre ou ajoute -2 si la deuxieme case est libre.
-	 * @param abscisse, L'abscisse ou ce situe le pion
+	 * @param ligne, L'ligne ou ce situe le pion
 	 * @param plateau, tableau contenant des Pions
 	 */
-	public void setAbscisse(int abscisse, Pion[][] plateau) {
+	public void setLigne(int ligne, Pion[][] plateau) {
 		// Si le pion est un crapaud est que la première case de droite est vide
-		if (crapaud && plateau[this.abscisse+1][this.ordonnee] == null) {
-			this.abscisse = abscisse+1;
+		if (crapaud && plateau[this.ligne+1][this.colonne] == null) {
+			this.ligne = ligne+1;
 		// Si le pion est un crapaud est que la deuxième case de droite est vide
-		} else if (crapaud && plateau[this.abscisse+2][this.ordonnee] == null) {
-			this.abscisse = abscisse+2;
+		} else if (crapaud && plateau[this.ligne+2][this.colonne] == null) {
+			this.ligne = ligne+2;
 		// Si le pion est une grenouille est que la première case de droite est vide
-		} else if (!crapaud && plateau[this.abscisse-1][this.ordonnee] == null) {
-			this.abscisse = abscisse-1;
+		} else if (!crapaud && plateau[this.ligne-1][this.colonne] == null) {
+			this.ligne = ligne-1;
 		// Si le pion est une grenouille est que la deuxième case de droite est vide
-		} else if (!crapaud && plateau[this.abscisse-2][this.ordonnee] == null) {
-			this.abscisse = abscisse-2;
+		} else if (!crapaud && plateau[this.ligne-2][this.colonne] == null) {
+			this.ligne = ligne-2;
 		}
 	}
 
@@ -95,13 +95,13 @@ public class Pion {
 	 */
 	public void setBloque(Pion[][] plateau) {
 		// Si le pion est un crapaud est que la première case de gauche est vide
-		if ((crapaud && plateau[this.abscisse+1][this.ordonnee] == null) || 
+		if ((crapaud && plateau[this.ligne+1][this.colonne] == null) || 
 				// Si le pion est un crapaud est que la deuxième case de gauche est vide
-				(crapaud && plateau[this.abscisse+2][this.ordonnee] == null) ||
+				(crapaud && plateau[this.ligne+2][this.colonne] == null) ||
 				// Si le pion est une grenouille est que la première case de droite est vide
-				((!crapaud && plateau[this.abscisse-1][this.ordonnee] == null) || 
+				((!crapaud && plateau[this.ligne-1][this.colonne] == null) || 
 						// Si le pion est une grenouille est que la première case de droite est vide
-						(!crapaud && plateau[this.abscisse-2][this.ordonnee] == null))) {
+						(!crapaud && plateau[this.ligne-2][this.colonne] == null))) {
 			this.bloque = false; // Le pion n'est pas bloqué
 		} else {
 			this.bloque = true; // Le pion est bloqué
@@ -122,7 +122,7 @@ public class Pion {
 	 */
 	@Override
 	public String toString() {
-		return "Pion(" + abscisse + "," + ordonnee + ") crapaud=" + crapaud + ", bloque=" + bloque
+		return "Pion(" + ligne + "," + colonne + ") crapaud=" + crapaud + ", bloque=" + bloque
 				+ "]";
 	}
 	
