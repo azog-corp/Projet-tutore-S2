@@ -69,18 +69,20 @@ public class Pion {
 	 * @param plateau, tableau contenant des Pions
 	 */
 	public void setLigne(int ligne, Pion[][] plateau) {
-		// Si le pion est un crapaud est que la première case de droite est vide
-		if (crapaud && plateau[this.ligne+1][this.colonne] == null) {
-			this.ligne = ligne+1;
-		// Si le pion est un crapaud est que la deuxième case de droite est vide
-		} else if (crapaud && plateau[this.ligne+2][this.colonne] == null) {
-			this.ligne = ligne+2;
 		// Si le pion est une grenouille est que la première case de droite est vide
-		} else if (!crapaud && plateau[this.ligne-1][this.colonne] == null) {
-			this.ligne = ligne-1;
-		// Si le pion est une grenouille est que la deuxième case de droite est vide
-		} else if (!crapaud && plateau[this.ligne-2][this.colonne] == null) {
-			this.ligne = ligne-2;
+		if (!crapaud && this.colonne < plateau[0].length-1 && plateau[this.ligne][this.colonne+1] == null) {
+			this.colonne = colonne+1;
+			// Si le pion est une grenouille est que la deuxième case de droite est vide
+		} else if (!crapaud && this.colonne < plateau[0].length-2 && plateau[this.ligne][this.colonne+2] == null) {
+			this.colonne = colonne+2;
+			// Si le pion est un crapaud est que la première case de gauche est vide
+		} else if (crapaud && this.colonne > 0 && plateau[this.ligne][this.colonne-1] == null) {
+			this.colonne = colonne-1;
+			// Si le pion est un crapaud est que la deuxième case de gauche est vide
+		} else if (crapaud && this.colonne > 1 && plateau[this.ligne][this.colonne-2] == null) {
+			this.colonne = colonne-2;
+		} else {
+			System.out.println("aucun changement");
 		}
 	}
 
@@ -94,14 +96,14 @@ public class Pion {
 	 * @param plateau, tableau contenant des Pions
 	 */
 	public void setBloque(Pion[][] plateau) {
-		// Si le pion est un crapaud est que la première case de gauche est vide
-		if ((crapaud && plateau[this.ligne+1][this.colonne] == null) || 
+		// Si le pion est une grenouille est que la première case de droite est vide
+		if ((!crapaud && this.colonne < plateau[0].length-1 && plateau[this.ligne][this.colonne+1] == null) ||
+				// Si le pion est une grenouille est que la deuxième case de droite est vide
+				(!crapaud && this.colonne < plateau[0].length-2 && plateau[this.ligne][this.colonne+2] == null) ||
+				// Si le pion est un crapaud est que la première case de gauche est vide
+				(crapaud && this.colonne > 0 && plateau[this.ligne][this.colonne-1] == null) ||
 				// Si le pion est un crapaud est que la deuxième case de gauche est vide
-				(crapaud && plateau[this.ligne+2][this.colonne] == null) ||
-				// Si le pion est une grenouille est que la première case de droite est vide
-				((!crapaud && plateau[this.ligne-1][this.colonne] == null) || 
-						// Si le pion est une grenouille est que la première case de droite est vide
-						(!crapaud && plateau[this.ligne-2][this.colonne] == null))) {
+				(crapaud && this.colonne > 1 && plateau[this.ligne][this.colonne-2] == null)) {
 			this.bloque = false; // Le pion n'est pas bloqué
 		} else {
 			this.bloque = true; // Le pion est bloqué
