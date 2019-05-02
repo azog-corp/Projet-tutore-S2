@@ -69,7 +69,7 @@ public class Partie {
 		batracien[0] = new Pion[nbGrenouille];
 		for (int i = 0; i < nbGrenouille; i++) {
 			// On créé les pions
-			batracien[0][i] = new Pion(coordonnee[0][i], coordonnee[1][i], false);
+			batracien[0][i] = new Pion(coordonnee[0][i], coordonnee[1][i], false, plateau);
 			// On met le pion créé sur le plateau
 			plateau.setCase(batracien[0][i]);
 		}
@@ -86,7 +86,7 @@ public class Partie {
 		batracien[1] = new Pion[nbCrapaud];
 		for (int i = 0; i < nbCrapaud; i++) {
 			// On créé les pions
-			batracien[1][i] = new Pion(coordonnee[0][i], coordonnee[1][i], true);
+			batracien[1][i] = new Pion(coordonnee[0][i], coordonnee[1][i], true, plateau);
 			// On initialise le boolean bloque
 			batracien[1][i].setBloque(plateau.getPlateau());
 			// On met le pion créé sur le plateau
@@ -188,7 +188,7 @@ public class Partie {
 	 */
 	public static Pion pionValide(int equipe, int ligne, int colonne) {
 		for (int x = 0 ; x < batracien[0].length ; x++) {
-			if (batracien[equipe][x].getligne() == ligne && batracien[equipe][x].getcolonne() == colonne) {
+			if (batracien[equipe][x].getLigne() == ligne && batracien[equipe][x].getColonne() == colonne) {
 				return batracien[equipe][x];
 			}
 		}
@@ -332,7 +332,7 @@ public class Partie {
 		Initialisation parDefault = new Initialisation(7, 10, 14, coGrenouille, coCrapaud);
 		int ordinateur = 0, // Difficulte de l'ordinateur (0 signifie une partie contre un joueur)
 				choix = 3;
-		setPlateau(parDefault.getligne(), parDefault.getcolonne());
+		setPlateau(parDefault.getLigne(), parDefault.getColonne());
 		setGrenouille(parDefault.getNbPion(), parDefault.getCoGrenouille());
 		setCrapaud(parDefault.getNbPion(), parDefault.getCoCrapaud());
 		setBloque();

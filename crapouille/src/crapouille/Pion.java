@@ -11,36 +11,14 @@ public class Pion {
 	private boolean crapaud,
 	bloque;
 
-	public Pion(int ligne, int colonne, boolean crapaud) {
-		this.setLigne(ligne);
-		this.setColonne(colonne);
+	public Pion(int ligne, int colonne, boolean crapaud, Plateau plateau) {
+		if (ligne < 0 || ligne > plateau.getLigne() ||
+				colonne < 0 || colonne > plateau.getColonne()) {
+			throw new RuntimeException("Les coordonnées sont invalides");
+		}
+		this.ligne = ligne;
+		this.colonne = colonne;
 		this.crapaud = crapaud;
-	}
-
-	/**  
-	 * Vérifie si l'colonne d'un pion est positif lors de l'initialisation
-	 * @param colonne, valeur rentré par l'utilisateur pour l'ordonee du pion
-	 * sur le plateau
-	 */
-	private void setColonne(int colonne) {
-		if (colonne < 0) {
-			System.out.println("Vous ne pouvez pas mettre d'ligne négative");
-		} else {
-			this.ligne = colonne;
-		}
-	}
-
-	/**  
-	 * Vérifie si l'ligne d'un pion est positif lors de l'initialisation
-	 * @param ligne, valeur rentré par l'utilisateur pour l'ordonee du pion
-	 * sur le plateau
-	 */
-	private void setLigne(int ligne) {
-		if (ligne < 0) {
-			System.out.println("Vous ne pouvez pas mettre d'ligne négative");
-		} else {
-			this.ligne = ligne;
-		}
 	}
 
 	/**

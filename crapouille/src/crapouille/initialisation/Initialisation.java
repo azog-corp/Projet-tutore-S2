@@ -23,19 +23,19 @@ public class Initialisation {
 		this.coCrapaud = coCrapaud;
 	}
 
-	public int getligne() {
+	public int getLigne() {
 		return ligne;
 	}
 
-	public void setligne(int ligne) {
+	public void setLigne(int ligne) {
 		this.ligne = ligne;
 	}
 
-	public int getcolonne() {
+	public int getColonne() {
 		return colonne;
 	}
 
-	public void setcolonne(int colonne) {
+	public void setColonne(int colonne) {
 		this.colonne = colonne;
 	}
 

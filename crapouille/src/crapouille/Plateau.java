@@ -31,6 +31,8 @@ public class Plateau {
 		if (ligne < 0 || colonne < 0) {
 			throw new RuntimeException ("Les coordonnées doivent être positives");
 		}
+		this.ligne = ligne;
+		this.colonne = colonne;
 		this.plateau = new Pion[ligne][colonne];
 	}
 
@@ -94,8 +96,12 @@ public class Plateau {
 		}
 	}
 
-	public int getligne() {
+	public int getLigne() {
 		return this.ligne;
+	}
+	
+	public int getColonne() {
+		return this.colonne;
 	}
 
 }
