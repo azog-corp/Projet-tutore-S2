@@ -1,8 +1,5 @@
 package application;
 
-
-import com.jfoenix.controls.JFXButton;
-
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,93 +8,120 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 public class interfaceAppliController {
 
 	@FXML
-	private AnchorPane configuration;
+    private Label labelIA;
+	
+    @FXML
+    private Label plateauString;
 
-	@FXML
-	private AnchorPane backpanel;
+    @FXML
+    private AnchorPane configuration;
 
-	@FXML
-	private ImageView btn_createur;
+    @FXML
+    private AnchorPane backpanel;
 
-	@FXML
-	private ImageView btn_mvp;
+    @FXML
+    private ImageView btn_createur;
 
-	    @FXML
-	    private AnchorPane score;
+    @FXML
+    private ImageView btn_mvp;
 
-	    @FXML
-	    private Button quittermenu;
+    @FXML
+    private AnchorPane score;
 
-	    @FXML
-	    private Slider sliderTaille;
+    @FXML
+    private Button quittermenu;
 
-	    @FXML
-	    private AnchorPane createur;
+    @FXML
+    private ToggleGroup lvlIA;
 
-	    @FXML
-	    private AnchorPane plateau;
+    @FXML
+    private Slider sliderTaille;
 
-	    @FXML
-	    private Button jouermenu;
+    @FXML
+    private AnchorPane createur;
 
-	    @FXML
-	    private Button confirmationJouer;
+    @FXML
+    private AnchorPane plateau;
 
-	    @FXML
-	    private ImageView btn_quitter;
+    @FXML
+    private Button jouermenu;
 
-	    @FXML
-	    private RadioButton lvl2;
+    @FXML
+    private Button confirmationJouer;
 
-	    @FXML
-	    private RadioButton lvl3;
+    @FXML
+    private Button okPlateau;
 
-	    @FXML
-	    private Button retourMenu;
+    @FXML
+    private ImageView btn_quitter;
 
-	    @FXML
-	    private Label lb_nomJ1, lb_lvlIa;
+    @FXML
+    private RadioButton lvl2;
 
-	    @FXML
-	    private TextField tb_nomJ2;
+    @FXML
+    private RadioButton lvl3;
 
-	    @FXML
-	    private ImageView btn_acceuil;
+    @FXML
+    private Button retourMenu;
 
-	    @FXML
-	    private Label lb_nomJ2;
+    @FXML
+    private Label lb_nomJ1;
 
-	    @FXML
-	    private TextField tb_nomJ1;
+    @FXML
+    private TextField tb_nomJ2;
 
-	    @FXML
-	    private AnchorPane menu;
+    @FXML
+    private ImageView btn_acceuil;
 
-	    @FXML
-	    private Button aidemenu;
+    @FXML
+    private Label lb_nomJ2;
 
-	    @FXML
-	    private AnchorPane settingsBar;
+    @FXML
+    private CheckBox chk_vsIA;
 
-	    @FXML
-	    private Label nomMVP;
+    @FXML
+    private TextField tb_nomJ1;
 
-	    @FXML
-	    private Text scoreMVP;
+    @FXML
+    private AnchorPane menu;
 
-	    @FXML
-	    private RadioButton lvl1;
-	    
-	    @FXML
-	    private CheckBox chk_vsIA;
+    @FXML
+    private Button aidemenu;
+
+    @FXML
+    private AnchorPane settingsBar;
+
+    @FXML
+    private Label lb_lvlIa;
+
+    @FXML
+    private Label nomMVP;
+
+    @FXML
+    private CheckBox chk_casseT;
+
+    @FXML
+    private TextField entreeUti;
+
+    @FXML
+    private Text scoreMVP;
+
+    @FXML
+    private GridPane plateauJeu;
+
+    @FXML
+    private RadioButton lvl1;
+
 
 
     @FXML
@@ -118,7 +142,7 @@ public class interfaceAppliController {
     }
     
     @FXML
-    void retourMenu(MouseEvent Click) {
+    void showMenu(MouseEvent Click) {
     	reinitialiser();
     	menu.setVisible(true);
     }
@@ -128,8 +152,9 @@ public class interfaceAppliController {
     	reinitialiser();
     	razConfig();
     	configuration.setVisible(true);
-    	
     }
+    
+    
     
     @FXML
     void reinitialiser() {
@@ -148,31 +173,78 @@ public class interfaceAppliController {
     		caseIaPasCheck();
     	}
     }
+    @FXML
+    void verificationModeJeu() {
+    	if (chk_casseT.isSelected()) {
+    		casseTeteConf();
+    	} else {
+    		versusConf();
+    	}
+    }
+    @FXML
+    void versusConf() {
+    	chk_vsIA.setVisible(true);
+    	labelIA.setVisible(true);
+    	lb_nomJ2.setVisible(true);
+		tb_nomJ2.setVisible(true);
+    }
+    
+    void razIa() {
+    	chk_vsIA.setSelected(false);
+    	lvl1.setSelected(false);
+    	lvl2.setSelected(false);
+    	lvl3.setSelected(false);
+    }
+    
+    @FXML
+    void casseTeteConf() {
+    	cacherIa();
+		cacherJ2();
+		razIa();
+		labelIA.setVisible(false);
+		chk_vsIA.setVisible(false);
+    }
+    
+    @FXML
+    void cacherJ2() {
+    	lb_nomJ2.setVisible(false);
+		tb_nomJ2.setVisible(false);
+    }
     
     @FXML
     void razConfig() {
     	chk_vsIA.setSelected(false);
+    	chk_casseT.setSelected(false);
     	verificationCheck();
     }
-    
     @FXML
-    void caseIaPasCheck() {
+    void cacherIa() {
     	lvl1.setVisible(false);
 		lvl2.setVisible(false);
 		lvl3.setVisible(false);
 		lb_lvlIa.setVisible(false);
-		lb_nomJ2.setVisible(true);
-		tb_nomJ2.setVisible(true);
     }
     
     @FXML
-    void caseIaCheck() {
+    void montrerIA() {
     	lvl1.setVisible(true);
 		lvl2.setVisible(true);
 		lvl3.setVisible(true);
 		lb_lvlIa.setVisible(true);
-		lb_nomJ2.setVisible(false);
-		tb_nomJ2.setVisible(false);
+    }
+    
+    @FXML
+    void caseIaPasCheck() {
+    	cacherIa();
+    	razIa();
+    	lb_nomJ2.setVisible(true);
+    	tb_nomJ2.setVisible(true);
+    }
+    
+    @FXML
+    void caseIaCheck() {
+    	montrerIA();
+		cacherJ2();
     }
     
     @FXML
@@ -183,7 +255,7 @@ public class interfaceAppliController {
     
     @FXML
     void recupererCoord() { // Se declanche avec appui sur ok
-    	entreeUti.getText().getCoordonees 
+    	//entreeUti.getText().getCoordonees 
     	// TODO fonction recuperant les coordonnees du pion qui doit bouger et la ou il doit bouger; ( get chartAt + StringBuilder)
     	//TODO appel fonction bouger pion + verfication coordonnes donnees etc
     	//(les fonctions de mael)
