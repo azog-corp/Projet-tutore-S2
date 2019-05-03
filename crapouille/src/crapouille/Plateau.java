@@ -1,14 +1,14 @@
 /*
- * 
+ * Plateau.java
+ * Azog-corp 2019, droit d'auteur
  */
 package crapouille;
 
 import crapouille.Pion;
 
 /**
- * 
+ * Class de l'objet plateau
  * @author Azog-corp
- *
  */
 public class Plateau {
 
