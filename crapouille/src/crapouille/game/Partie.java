@@ -47,16 +47,16 @@ public class Partie {
 	private static String[] repliques =
 		{"Bienvenue Crapouile !\nVeut tu faire une partie ou un casse-tête ?"
 				+ "\n - 1 : Jeux\n - 2 : Casse-tête\n - 3 : Quitter",
-				
-		"Veut tu jouer contre une homme ou mes fidèles laquais ?"
-				+ "\n - 0 : Contre un déveuloppeur (par défault)"
-				+ "\n - 1 : contre Franck Syslvestre, attention à ces... QCM mortels"
-				+ "\n - 2 : Contre Bruno bélière sacré champion de citation que personne ne connais"
-				+ "\n - 3 : Contre BARRIOS NOTRE MAITRE SUPREME",
-				
-				"Tu pensais que \"casse-tête\" c'était une méthaphore ahaha le con",
-				
-				"Tu es pourrais être un peu plus attentif... Comme au CM de Servère AHAHAHAH... pardon\n1, 2 ou 3"
+
+				"Veut tu jouer contre une homme ou mes fidèles laquais ?"
+						+ "\n - 0 : Contre un déveuloppeur (par défault)"
+						+ "\n - 1 : contre Franck Syslvestre, attention à ces... QCM mortels"
+						+ "\n - 2 : Contre Bruno bélière sacré champion de citation que personne ne connais"
+						+ "\n - 3 : Contre BARRIOS NOTRE MAITRE SUPREME",
+
+						"Tu pensais que \"casse-tête\" c'était une méthaphore ahaha le con",
+
+						"Tu es pourrais être un peu plus attentif... Comme au CM de Servère AHAHAHAH... pardon\n1, 2 ou 3"
 		};
 
 	/**
@@ -269,10 +269,14 @@ public class Partie {
 		equipe[0] = entree.nextLine();
 		// Si aucun nom n'est rentré, le nom par défault est Grenouille
 		equipe[0] = equipe[0].length() == 0 ? "Grenouille" : equipe[0];
-		System.out.println("Entrer le nom de l'equipe Grenouille : ");
-		equipe[1] = ordinateur == 0 ? entree.nextLine() : "";
-		// Si aucun nom n'est rentré, le nom par défault est Crapaud
-		equipe[1] = equipe[1].length() == 0 ? "Crapaud" : equipe[1];
+		if (ordinateur == 0) {
+			System.out.println("Entrer le nom de l'equipe Grenouille : ");
+			equipe[1] = entree.nextLine();
+			// Si aucun nom n'est rentré, le nom par défault est Crapaud
+			equipe[1] = equipe[1].length() == 0 ? "Crapaud" : equipe[1];
+		} else {
+			equipe[1] = "Crapuillus";
+		}
 		do {
 			System.out.println("\nC'est au tour de l'équipe " + equipe[tourEquipe]);
 			if (tourEquipe == 0) {

@@ -15,7 +15,8 @@ public class Pion {
 	 * @param ligne, représente la ligne où sera situé notre pion
 	 * @param colonne, représente la colonne où sera situé notre pion
 	 * @param crapaud, Indique si le pion est un crapoaud ou non
-	 * @param plateau TODO remplir ce commentaire
+	 * @param plateau permet de vérifier que les coordonnées du pion
+	 * sont incluses dans le plateau
 	 */
 	public Pion(int ligne, int colonne, boolean crapaud, Plateau plateau) {
 		if (ligne < 0 || ligne > plateau.getLigne() ||
@@ -104,7 +105,7 @@ public class Pion {
 
 	/**
 	 * Fonction qui permet d'indiquer si un pion est bloqué ou non
-	 * @return bloque, un boolean indiquant si le pion est bloqué ou non
+	 * @return true si le pion et bloque
 	 */
 	public boolean isBloque() {
 		return bloque;
