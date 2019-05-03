@@ -16,7 +16,7 @@ public class Plateau {
 	 *  ligne et ordonnée correspondent à la taille du tableau
 	 */ 
 	private int ligne,
-	colonne;
+	            colonne;
 	/**
 	 * Pion est est un tableau contenant soit :
 	 * Une grenouille, un crapaud, ou la valeur null
@@ -38,8 +38,8 @@ public class Plateau {
 	}
 
 	/**
-	 * 
-	 * @return le plateau
+	 * Fonction renvoyant le tableau de pion du plateau 
+	 * @return plateau, un tableau contenant les pions du plateau
 	 */
 	public Pion[][] getPlateau() {
 		return plateau;
@@ -47,15 +47,16 @@ public class Plateau {
 
 	/**
 	 * Associe une case à un pion
-	 * @param pion
+	 * @param pion, Le pion qui doit être associé
 	 */
 	public void setCase(Pion pion) {
 		this.plateau[pion.getLigne()][pion.getColonne()] = pion;
 	}
 	
 	/**
-	 * 
-	 * @param pion
+	 * Fonction permettant d'avancer un pion et aussi vérifiant si le pion n'est 
+	 * pas bloqué 
+	 * @param pion, Le pion qu'on veut bouger
 	 */
 	public void movePion(Pion pion) {
 		this.plateau[pion.getLigne()][pion.getColonne()] = null;
@@ -86,8 +87,8 @@ public class Plateau {
 	}
 	
 	/**
-	 * 
-	 * @param ligne
+	 * Vérifie sur une ligne si des cases ne sont pas bloqué
+	 * @param ligne, la ligne que l'on veut vérifier
 	 */
 	public void updateBloque(int ligne) {
 		for (int x = 0 ; x < this.ligne ; x++) {
@@ -97,10 +98,18 @@ public class Plateau {
 		}
 	}
 
+	/**
+	 * Renvoie le nombre de ligne que contient le tableau
+	 * @return Le nombre de ligne du tableau
+	 */
 	public int getLigne() {
 		return this.ligne;
 	}
 	
+	/**
+	 * Renvoie le nombre de colonne que contient le tableau
+	 * @return Le nombre de colonne du tableau
+	 */
 	public int getColonne() {
 		return this.colonne;
 	}
