@@ -1,3 +1,7 @@
+/*
+ * Ordinateur.java
+ * Azog-corp 2019, droit d'auteur
+ */
 package crapouille;
 
 import java.util.ArrayList;
@@ -5,6 +9,10 @@ import java.util.ArrayList;
 import crapouille.Pion;
 import crapouille.Plateau;
 
+/**
+ * Class de l'objet ordinateur(IA)
+ * @author Azog-corp
+ */
 public class Ordinateur {
 	
 	Pion G; // Est un pion grenouille
