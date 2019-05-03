@@ -5,14 +5,18 @@ import crapouille.Pion;
 
 public class Pion {
 
-	/**
-	 * 
-	 */
-	private int ligne,
-	colonne;
-	private boolean crapaud,
-	bloque;
+	private int ligne,         // indique sur qu'elle ligne ce situe le pion
+	            colonne;       // indique sur qu'elle colonne ce situe le pion
+	private boolean crapaud,   // indique si le pîon est un crapaud ou non
+	                bloque;    // indique si le pion est bloqué
 
+	/**
+	 * Constructeur d'un pion vérifiant si les lignes et colonne rentré sont valide
+	 * @param ligne, représente la ligne où sera situé notre pion
+	 * @param colonne, représente la colonne où sera situé notre pion
+	 * @param crapaud, Indique si le pion est un crapoaud ou non
+	 * @param plateau TODO remplir ce commentaire
+	 */
 	public Pion(int ligne, int colonne, boolean crapaud, Plateau plateau) {
 		if (ligne < 0 || ligne > plateau.getLigne() ||
 				colonne < 0 || colonne > plateau.getColonne()) {
@@ -90,22 +94,29 @@ public class Pion {
 		}
 	}
 
+	/**
+	 * Fonction qui permet d'indiquer si un pion est un crapaud ou non
+	 * @return crapaud, un boolean indiquant si le pion est un crapaud ou non
+	 */
 	public boolean isCrapaud() {
 		return crapaud;
 	}
 
+	/**
+	 * Fonction qui permet d'indiquer si un pion est bloqué ou non
+	 * @return bloque, un boolean indiquant si le pion est bloqué ou non
+	 */
 	public boolean isBloque() {
 		return bloque;
 	}
 
 	/**
 	 * Renvoie une représentation sous forme de chaîne de l'objet d'un Pion
-	 * @return un string représentant un Pion
+	 * @return un string représentant un Pion avec c'est coordonée
 	 */
 	@Override
 	public String toString() {
-		return "Pion(" + ligne + "," + colonne + ") crapaud=" + crapaud + ", bloque=" + bloque
-				+ "]";
+		return "Pion(" + ligne + "," + colonne + ")";
 	}
 	
 	
