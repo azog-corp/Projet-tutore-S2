@@ -44,7 +44,10 @@ public class Initialisation {
 	 * Fonction permettant de modifier le nombre de ligne de l'objet Initialisation
 	 */
 	public void setLigne(int ligne) {
-		this.ligne = ligne;
+		if (ligne < 0) {
+			throw new RuntimeException("Une ligne ne peut pas être négatif");
+		} 
+		this.ligne = ligne;	
 	}
 
 	/**
