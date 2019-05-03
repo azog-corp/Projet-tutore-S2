@@ -1,8 +1,15 @@
+/*
+ * Pion.java
+ * Azog-corp 2019, droit d'auteur 
+ */
 package crapouille;
 
 import crapouille.Pion;
 
-
+/**
+ * Class de l'objet Pion
+ * @author Azog-corp
+ */
 public class Pion {
 
 	private int ligne,         // indique sur qu'elle ligne ce situe le pion
@@ -15,7 +22,7 @@ public class Pion {
 	 * @param ligne, représente la ligne où sera situé notre pion
 	 * @param colonne, représente la colonne où sera situé notre pion
 	 * @param crapaud, Indique si le pion est un crapoaud ou non
-	 * @param plateau permet de vérifier que les coordonnées du pion
+	 * @param plateau, permet de vérifier que les coordonnées du pion
 	 * sont incluses dans le plateau
 	 */
 	public Pion(int ligne, int colonne, boolean crapaud, Plateau plateau) {
@@ -97,7 +104,7 @@ public class Pion {
 
 	/**
 	 * Fonction qui permet d'indiquer si un pion est un crapaud ou non
-	 * @return crapaud, un boolean indiquant si le pion est un crapaud ou non
+	 * @return true, si le pion est un crapaud
 	 */
 	public boolean isCrapaud() {
 		return crapaud;
@@ -105,7 +112,7 @@ public class Pion {
 
 	/**
 	 * Fonction qui permet d'indiquer si un pion est bloqué ou non
-	 * @return true si le pion et bloque
+	 * @return bloque, un boolean indiquant si le pion est bloqué ou non
 	 */
 	public boolean isBloque() {
 		return bloque;
