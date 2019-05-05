@@ -1,113 +1,133 @@
 /**
- * Initialisation.java
- * Azog-corp 2019, droit d'auteur
+ * 
  */
 package crapouille.initialisation;
 
+import java.util.Scanner;
+
 /**
- * Class de l'objet Initialisation
- * @author Azog-corp
+ * @author Azog
+ *
  */
 public class Initialisation {
-
-	private int ligne,            // Nombre de ligne pour l'initialisation
-	            colonne,          // Nombre de colonne pour l'initialisation
-	            nbPion;           // Nombre de pion à initialiser
-	private int[][] coGrenouille, // Coordonées de base des grenouilles
-	                coCrapaud;    // Coordonées de base des crapauds
-
+	
 	/**
-	 * COnstructeur de l'objet Initailisation
-	 * @param ligne, Nombre de ligne pour l'initialisation
-	 * @param colonne, Nombre de colonne pour l'initialisation
-	 * @param nbPion, Nombre de pion à initialiser
-	 * @param coGrenouille, Coordonées de base des grenouilles
-	 * @param coCrapaud, Coordonées de base des crapauds
+	 * Ajout de l'entrée courante
 	 */
+	private static Scanner entree = new Scanner(System.in);
+
+	private int ligne,
+	colonne,
+	nbPion;
+	private int[][] coGrenouille,
+	coCrapaud;
+
+	public Initialisation() {
+		boolean ok = true;
+		
+		do {
+			System.out.print("Entrez le nombre de lignes du plateau : ");
+		    ok = entree.hasNextInt();
+		    
+		    if (!ok) {
+		    	System.err.println("Erreur !\nEntrer un nombre de colonnes positifs et non nul :\nEx : 6 ou 10"
+				           + "\nAttention le plateau est limité à 20 colonnes");
+		    } else {
+		    	ligne = entree.nextInt();
+				if(ligne <= 0 || ligne > 20) {
+					System.err.println("Erreur !\nEntrer nombre de lignes positifs et non nul :\nEx : 6 ou 10"
+							           + "\nAttention le plateau est limité à 20 lignes");
+					ok = false;
+				}
+	        }
+	        entree.nextLine();
+		} while (!ok);
+		
+		do {
+			System.out.print("Entrez le nombre de colonnes du plateau : ");
+		    ok = entree.hasNextInt();
+		    
+		    if (!ok) {
+		    	System.err.println("Erreur !\nEntrer un nombre de colonnes positifs et non nul :\nEx : 6 ou 10"
+				           + "\nAttention le plateau est limité à 20 colonnes");	
+		    } else {
+		    	colonne = entree.nextInt();
+				if(colonne <= 0 || colonne > 20) {
+					System.err.println("Erreur !\nEntrer un nombre de colonnes positifs et non nul :\nEx : 6 ou 10"
+							           + "\nAttention, le plateau est limité à 20 colonnes");
+					ok = false;
+				}
+	        }
+	        entree.nextLine();
+		} while (!ok);
+
+		do {
+			System.out.print("Entrez le nombre de pions présents sur le plateau : ");
+		    ok = entree.hasNextInt();
+		    
+		    if (!ok) {
+		    	System.err.println("Erreur !\nEntrer un nombre de pions positifs pair et non nul :\nEx : 6 ou 10 ");	
+		    } else {
+		    	nbPion = entree.nextInt();
+				if(nbPion <= 0 || nbPion >= ligne * colonne || nbPion % 2 == 1) {
+					System.err.println("Erreur !\nEntrer un un nombre de pions positifs pair et non nul :\nEx : 6 ou 10"
+							           + "\nAttention, le nombre de pions doit être inférieur à la dimension du plateau"
+							           + " (soit nombres de pions < lignes * colonnes)\n");
+					ok = false;
+				}
+	        }
+	        entree.nextLine();
+		} while (!ok);
+		
+		System.out.printf("\nLe plateau sera composé :\n" 
+					     + "- %d" + " lignes\n"
+					     + "- %d" + " colonnes\n"
+					     + "- %d" + " pions\n", ligne, colonne, nbPion);		
+	}
+	
 	public Initialisation(int ligne, int colonne, int nbPion, int[][] coGrenouille, int[][] coCrapaud) {
 		this.ligne = ligne;
 		this.colonne = colonne;
 		this.nbPion = nbPion;
-		this.coGrenouille = coGrenouille;
+		this.coGrenouille = coGrenouille;      
 		this.coCrapaud = coCrapaud;
 	}
 
-	/**
-	 * Retourne la le nombre de ligne qui ont été initialisé
-	 * @return ligne
-	 */
 	public int getLigne() {
 		return ligne;
 	}
 
-	/**
-	 * Fonction permettant de modifier le nombre de ligne de l'objet Initialisation
-	 */
 	public void setLigne(int ligne) {
-		if (ligne < 0) {
-			throw new RuntimeException("Une ligne ne peut pas être négatif");
-		} 
-		this.ligne = ligne;	
+		this.ligne = ligne;
 	}
 
-	/**
-	 * Retourne la le nombre de colonne qui ont été initialisé
-	 * @return colonne
-	 */
 	public int getColonne() {
 		return colonne;
 	}
 
-	/**
-	 * Fonction permettant de modifier le nombre de colonne de l'objet Initialisation
-	 */
 	public void setColonne(int colonne) {
 		this.colonne = colonne;
 	}
 
-	/**
-	 * Retourne la le nombre de pion qui ont été initialisé
-	 * @return nbPion, le nombre de pion initialisé
-	 */
 	public int getNbPion() {
 		return nbPion;
 	}
 
-	/**
-	 * Fonction permettant de modifier le nombre de Pion de l'objet Initialisation
-	 */
 	public void setNbPion(int nbPion) {
 		this.nbPion = nbPion;
 	}
-	
-	/**
-	 * Retourne un tableau avec les coordonées des grenouilles qui ont été initialisé
-	 * @return coGrenouille, tableau des coordonnée des grenouilles
-	 */
 	public int[][] getCoGrenouille() {
 		return coGrenouille;
 	}
 
-	/**
-	 * Fonction permettant de modifier le tableau des 
-	 * coordonnées des grenouilles de l'objet Initialisation
-	 */
 	public void setCoGrenouille(int[][] coGrenouille) {
 		this.coGrenouille = coGrenouille;
 	}
 
-	/**
-	 * Retourne un tableau avec les coordonées des crapauds qui ont été initialisé
-	 * @return coCrapaud, tableau des coordonnée des Crapauds
-	 */
 	public int[][] getCoCrapaud() {
 		return coCrapaud;
 	}
 
-	/**
-	 * Fonction permettant de modifier le tableau des 
-	 * coordonnées des grenouilles de l'objet Initialisation
-	 */
 	public void setCoCrapaud(int[][] coCrapaud) {
 		this.coCrapaud = coCrapaud;
 	}
