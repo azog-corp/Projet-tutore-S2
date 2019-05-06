@@ -35,18 +35,22 @@ public class Ordinateur {
 		ArrayList<Integer> pionLibre = new ArrayList<Integer>();
 		ArrayList<Pion[]> casActuel = new ArrayList<>();
 		Pion[] cas = {null, null, null, O};
+		int ligne,
+		colonne;
 		for (int x = 0 ; x < crapaud.length ; x++) {
 			if (!crapaud[x].isBloque()) {
 				pionLibre.add(x);
+				ligne = crapaud[x].getLigne();
+				colonne = crapaud[x].getColonne();
 				if (crapaud[x].getColonne() > 2) {
-					cas[2] = crapaud[x-1] == null ? null : crapaud[x-1].isCrapaud() ? G : C;
-					cas[1] = crapaud[x-2] == null ? null : crapaud[x-2].isCrapaud() ? G : C;
-					cas[0] = crapaud[x-3] == null ? null : crapaud[x-3].isCrapaud() ? G : C;
+					cas[2] = plateau[ligne][colonne-1] == null ? null : plateau[ligne][colonne-1].isCrapaud() ? G : C;
+					cas[1] = plateau[ligne][colonne-2] == null ? null : plateau[ligne][colonne-2].isCrapaud() ? G : C;
+					cas[0] = plateau[ligne][colonne-3] == null ? null : plateau[ligne][colonne-3].isCrapaud() ? G : C;
 				} else if (crapaud[x].getColonne() > 1) {
-					cas[2] = crapaud[x-1] == null ? null : crapaud[x-1].isCrapaud() ? G : C;
-					cas[1] = crapaud[x-2] == null ? null : crapaud[x-2].isCrapaud() ? G : C;
+					cas[2] = plateau[ligne][colonne-1] == null ? null : plateau[ligne][colonne-1].isCrapaud() ? G : C;
+					cas[1] = plateau[ligne][colonne-1] == null ? null : plateau[ligne][colonne-2].isCrapaud() ? G : C;
 				} else if (crapaud[x].getColonne() > 1) {
-					cas[2] = crapaud[x-1] == null ? null : crapaud[x-1].isCrapaud() ? G : C;
+					cas[2] = plateau[ligne][colonne-1] == null ? null : plateau[ligne][colonne-1].isCrapaud() ? G : C;
 				}
 				casActuel.add(cas);
 			}
@@ -55,7 +59,7 @@ public class Ordinateur {
 		int indice = -1;
 		switch (ordinateur) {
 		case 3 :
-			indice = ordiLvl1(pionLibre);
+			indice = ordiLvl3(pionLibre, casActuel, plateau);
 			if (indice == -1) {
 				break;
 			}
@@ -65,7 +69,7 @@ public class Ordinateur {
 				break;
 			}
 		case 1 :
-			indice = ordiLvl3(pionLibre, casActuel, plateau);
+			indice = ordiLvl1(pionLibre);
 			if (indice == -1) {
 				break;
 			}
@@ -75,11 +79,11 @@ public class Ordinateur {
 		return crapaud[indice];
 	}
 
-	public static Integer ordiLvl1(ArrayList<Integer> pionLibre) {
-		return pionLibre.get((int) (0 + (Math.random() * (pionLibre.size()))));
+	public static int ordiLvl1(ArrayList<Integer> pionLibre) {
+		return pionLibre.get((int) (1 + (Math.random() * (pionLibre.size()))));
 	}
 
-	public static Integer ordiLvl2(ArrayList<Integer> pionLibre, ArrayList<Pion[]> casActuel, Pion[][] plateau) {
+	public static int ordiLvl2(ArrayList<Integer> pionLibre, ArrayList<Pion[]> casActuel, Pion[][] plateau) {
 		for (int x = 0 ; x < pionLibre.size() ; x++) {
 			if (casActuel.get(x) == casPossibles[0] || 
 					casActuel.get(x) == casPossibles[1] || 
@@ -88,10 +92,10 @@ public class Ordinateur {
 				return x;
 			}
 		}
-		return null;
+		return -1;
 	}
 
-	public static Integer ordiLvl3(ArrayList<Integer> pionLibre, ArrayList<Pion[]> casActuel, Pion[][] plateau) {
+	public static int ordiLvl3(ArrayList<Integer> pionLibre, ArrayList<Pion[]> casActuel, Pion[][] plateau) {
 		for (int x = 0 ; x < pionLibre.size() ; x++) {
 			if (casActuel.get(x) == casPossibles[4] || 
 					casActuel.get(x) == casPossibles[5] || 
@@ -99,6 +103,6 @@ public class Ordinateur {
 				return x;
 			}
 		}
-		return null;
+		return -1;
 	}
 }
