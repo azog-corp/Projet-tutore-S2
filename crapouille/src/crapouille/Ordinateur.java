@@ -14,11 +14,11 @@ import crapouille.Plateau;
  * @author Azog-corp
  */
 public class Ordinateur {
-	
-	Pion G; // Est un pion grenouille
-	Pion C; // Est un pion crapaud
-	Pion O; // Est le pion vérifié par l'IA
-	Pion[][] casPossibles = {
+
+	private static Pion G, // Est un pion grenouille
+	C, // Est un pion crapaud
+	O; // Est le pion vérifié par l'IA
+	private static Pion[][] casPossibles = {
 			// Cas où l'IA peut bloquer une ou plusieurs grenouilles
 			{G, G, null, O},
 			{G, null, C, O},
@@ -31,44 +31,74 @@ public class Ordinateur {
 			{C, null, null, O},
 	};
 
-	public static ArrayList<int[]> pionLibre(Pion[] crapaud) {
-		ArrayList<int[]> pion = new ArrayList<int[]>(0);
+	public static Pion choixOrdi(Pion[][] plateau, Pion[] crapaud, int ordinateur) {
+		ArrayList<Integer> pionLibre = new ArrayList<Integer>();
+		ArrayList<Pion[]> casActuel = new ArrayList<>();
+		Pion[] cas = {null, null, null, O};
 		for (int x = 0 ; x < crapaud.length ; x++) {
 			if (!crapaud[x].isBloque()) {
-				pion.add(x);
+				pionLibre.add(x);
+				if (crapaud[x].getColonne() > 2) {
+					cas[2] = crapaud[x-1] == null ? null : crapaud[x-1].isCrapaud() ? G : C;
+					cas[1] = crapaud[x-2] == null ? null : crapaud[x-2].isCrapaud() ? G : C;
+					cas[0] = crapaud[x-3] == null ? null : crapaud[x-3].isCrapaud() ? G : C;
+				} else if (crapaud[x].getColonne() > 1) {
+					cas[2] = crapaud[x-1] == null ? null : crapaud[x-1].isCrapaud() ? G : C;
+					cas[1] = crapaud[x-2] == null ? null : crapaud[x-2].isCrapaud() ? G : C;
+				} else if (crapaud[x].getColonne() > 1) {
+					cas[2] = crapaud[x-1] == null ? null : crapaud[x-1].isCrapaud() ? G : C;
+				}
+				casActuel.add(cas);
 			}
 		}
-		return pion;
-	}
 
-	public static Pion choixOrdi(Pion[][] plateau, Pion[] crapaud, int ordinateur) {
-		ArrayList<int[]> pionLibre = pionLibre(crapaud);
-		Pion pion = null;
+		int indice = -1;
 		switch (ordinateur) {
-		case 1 :
-			pion = ordiLvl1(pionLibre);
-			break;
-		case 2 :
-			pion = ordiLvl2(pionLibre, plateau);
-			break;
 		case 3 :
-			pion = ordiLvl3(pionLibre, plateau);
-			break;
+			indice = ordiLvl1(pionLibre);
+			if (indice == -1) {
+				break;
+			}
+		case 2 :
+			indice = ordiLvl2(pionLibre, casActuel, plateau);
+			if (indice == -1) {
+				break;
+			}
+		case 1 :
+			indice = ordiLvl3(pionLibre, casActuel, plateau);
+			if (indice == -1) {
+				break;
+			}
 		default :
 			throw new RuntimeException("Erreur de l'IA");
 		}
-		return pion;
+		return crapaud[indice];
 	}
-	
-	public static int[] ordiLvl1(ArrayList<int[]> pionLibre) {
+
+	public static Integer ordiLvl1(ArrayList<Integer> pionLibre) {
 		return pionLibre.get((int) (0 + (Math.random() * (pionLibre.size()))));
 	}
-	
-	public static Pion ordiLvl2(ArrayList<int[]> pionLibre, Pion[][] plateau) {
+
+	public static Integer ordiLvl2(ArrayList<Integer> pionLibre, ArrayList<Pion[]> casActuel, Pion[][] plateau) {
+		for (int x = 0 ; x < pionLibre.size() ; x++) {
+			if (casActuel.get(x) == casPossibles[0] || 
+					casActuel.get(x) == casPossibles[1] || 
+					casActuel.get(x) == casPossibles[2] || 
+					casActuel.get(x) == casPossibles[3]) {
+				return x;
+			}
+		}
 		return null;
 	}
-	
-	public static Pion ordiLvl3(ArrayList<int[]> pionLibre, Pion[][] plateau) {
+
+	public static Integer ordiLvl3(ArrayList<Integer> pionLibre, ArrayList<Pion[]> casActuel, Pion[][] plateau) {
+		for (int x = 0 ; x < pionLibre.size() ; x++) {
+			if (casActuel.get(x) == casPossibles[4] || 
+					casActuel.get(x) == casPossibles[5] || 
+					casActuel.get(x) == casPossibles[6]) {
+				return x;
+			}
+		}
 		return null;
 	}
 }

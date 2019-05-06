@@ -380,7 +380,7 @@ public class Partie {
 				nbPion = entree.hasNextInt() ? entree.nextInt() : 0;
 				if (nbPion <= 0 || nbPion >= ligne * colonne + colonne || nbPion % 2 == 1) {
 					System.out.println("Erreur !\nEntrer un nombre de pions positifs pair et non nul :\nEx : 6 ou 10\n"
-							+ "Compris entre 0 et " + (ligne * colonne + colonne));	
+							+ "Compris entre 0 et " + (ligne * colonne + colonne));
 					nbPion = 0;
 				}
 				entree.nextLine();
@@ -452,13 +452,14 @@ public class Partie {
 							coCrapaud[1][x] = colonne;
 						}
 					}
-				} while (!pionJuste);
-
-				System.out.printf("\nLe plateau sera composé :\n" 
-						+ "- %d" + " lignes\n"
-						+ "- %d" + " colonnes\n"
-						+ "- %d" + " pions\n", ligne, colonne, nbPion);		
+				} while (!pionJuste);	
 			}
+			
+			System.out.printf("\nLe plateau sera composé :\n" 
+					+ "- %d" + " lignes\n"
+					+ "- %d" + " colonnes\n"
+					+ "- %d" + " pions\n", ligne, colonne, nbPion);	
+			
 			initialisation = new Initialisation(ligne, colonne, nbPion, coGrenouille, coCrapaud);
 		}
 		return null;
