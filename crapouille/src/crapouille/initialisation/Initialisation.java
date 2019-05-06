@@ -17,10 +17,10 @@ public class Initialisation {
 	
 	
 	public Initialisation(int ligne, int colonne, int nbPion, int[][] coGrenouille, int[][] coCrapaud) {
-		if(ligne <= 0 || colonne <= 0) {
+		if (ligne <= 0 || colonne <= 0) {
 			throw new RuntimeException("Erreur ! Les coordonnées du plateau doivent être positives");
 		}
-		if (nbPion > (ligne * colonne)) {
+		if (nbPion > (ligne * colonne - colonne)) {
 			throw new RuntimeException("Erreur ! Il y a trop de pion");
 		}
 		if (coGrenouille[0].length != coGrenouille[1].length ||

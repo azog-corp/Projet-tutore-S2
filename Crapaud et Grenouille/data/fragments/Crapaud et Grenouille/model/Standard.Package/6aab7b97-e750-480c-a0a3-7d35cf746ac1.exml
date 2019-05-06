@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 <!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="game" version="4">
   <OBJECT>
-    <ID name="game" mc="Standard.Package" uid="eb41e388-7eaf-4b16-8bc8-8dfd74706bf7"/>
-    <PID name="crapouille" mc="Standard.Package" uid="d49297d2-7b3a-4d52-af40-9ac2888f079f"/>
+    <ID name="game" mc="Standard.Package" uid="6aab7b97-e750-480c-a0a3-7d35cf746ac1"/>
+    <PID name="crapouille" mc="Standard.Package" uid="61bb4190-c48e-44b0-8778-8916f8ff62ae"/>
     <ATTRIBUTES>
       <ATT name="IsInstantiable">false</ATT>
       <ATT name="IsAbstract">false</ATT>
@@ -14,7 +14,7 @@
     </ATTRIBUTES>
     <DEPENDENCIES>
       <COMP relation="OwnedElement">
-        <COMPID name="Crapouille" mc="Standard.Class" uid="82318ec0-c52a-4f6f-a9da-b979fd1d3087"/>
+        <COMPID name="Partie" mc="Standard.Class" uid="4110bc02-02b0-4d6e-a0bb-6aa705a10917"/>
       </COMP>
       <LINK relation="Extension">
         <FOREIGNID name="JavaPackage" mc="Infrastructure.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>

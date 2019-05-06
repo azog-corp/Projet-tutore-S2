@@ -38,7 +38,7 @@ public class Partie {
 	 * @param ligne nombre de ligne du plateau
 	 * @param colonne nombre de colonne du plateau
 	 */
-	public static void setPlateau(int ligne, int colonne) {
+	public static void initPlateau(int ligne, int colonne) {
 		plateau = new Plateau(ligne, colonne);
 	}
 
@@ -49,17 +49,17 @@ public class Partie {
 	 */
 	private static String[] repliques =
 		{"Bienvenue Crapouile !\nVeut tu faire une partie ou un casse-tête ?"
-				+ "\n - 1 : Jeux\n - 2 : Casse-tête\n - 3 Configuration\n - 4 : Quitter",
+				+ "\n - 1 : Jeux\n - 2 : Casse-tête\n - 3 : Configuration\n - 4 : Quitter",
 
 				"Veut tu jouer contre une homme ou mes fidèles laquais ?"
-						+ "\n - 0 : Contre un déveuloppeur (par défault)"
-						+ "\n - 1 : contre Franck Syslvestre, attention à ces... QCM mortels"
-						+ "\n - 2 : Contre Bruno bélière sacré champion de citation que personne ne connais"
-						+ "\n - 3 : Contre BARRIOS NOTRE MAITRE SUPREME",
+						+ "\n - 0 : Contre un déveuloppeur aguerri (par défault)"
+						+ "\n - 1 : contre crapus (facile)"
+						+ "\n - 2 : Contre batrus (medium)"
+						+ "\n - 3 : Contre craporitus (difficile)",
 
-						"Tu pensais que \"casse-tête\" c'était une méthaphore ahaha le con",
+						"Tu pensais que \"casse-tête\" c'était une méthaphore ahaha",
 
-						"Tu es pourrais être un peu plus attentif... Comme au CM de Servère AHAHAHAH... pardon\n1, 2 ou 3"
+						"Chosi 1, 2, 3"
 		};
 
 	/**
@@ -67,7 +67,7 @@ public class Partie {
 	 * @param nbGrenouille taille du tableau
 	 * @param coordonnee des grenouilles sur le plateau
 	 */
-	public static void setGrenouille(int nbGrenouille, int[][] coordonnee) {
+	public static void initGrenouille(int nbGrenouille, int[][] coordonnee) {
 		// On créé un tableau de grenouilles
 		batracien[0] = new Pion[nbGrenouille];
 		for (int i = 0; i < nbGrenouille; i++) {
@@ -84,7 +84,7 @@ public class Partie {
 	 * @param nbCrapaud taille du tableau
 	 * @param coordonnee des crapauds sur le plateau
 	 */
-	public static void setCrapaud(int nbCrapaud, int[][] coordonnee) {
+	public static void initCrapaud(int nbCrapaud, int[][] coordonnee) {
 		// On créé un tableau de crapauds
 		batracien[1] = new Pion[nbCrapaud];
 		for (int i = 0; i < nbCrapaud; i++) {
@@ -100,7 +100,7 @@ public class Partie {
 	/**
 	 * Vérifie et bloque les pions sur le plateau
 	 */
-	public static void setBloque() {
+	public static void initBloque() {
 		for (int x = 0 ; x < batracien[0].length ; x++) {
 			batracien[0][x].setBloque(plateau.getPlateau());
 			batracien[1][x].setBloque(plateau.getPlateau());
@@ -378,9 +378,9 @@ public class Partie {
 			System.out.print("Entrez le nombre de pions présents sur le plateau : ");
 			do {
 				nbPion = entree.hasNextInt() ? entree.nextInt() : 0;
-				if (nbPion <= 0 || nbPion >= ligne * colonne + colonne || nbPion % 2 == 1) {
+				if (nbPion <= 0 || nbPion >= ligne * colonne - colonne || nbPion % 2 == 1) {
 					System.out.println("Erreur !\nEntrer un nombre de pions positifs pair et non nul :\nEx : 6 ou 10\n"
-							+ "Compris entre 0 et " + (ligne * colonne + colonne));
+							+ "Compris entre 0 et " + (ligne * colonne - colonne));
 					nbPion = 0;
 				}
 				entree.nextLine();
@@ -460,7 +460,7 @@ public class Partie {
 					+ "- %d" + " colonnes\n"
 					+ "- %d" + " pions\n", ligne, colonne, nbPion);	
 			
-			initialisation = new Initialisation(ligne, colonne, nbPion, coGrenouille, coCrapaud);
+			return initialisation = new Initialisation(ligne, colonne, nbPion, coGrenouille, coCrapaud);
 		}
 		return null;
 	}
@@ -473,9 +473,7 @@ public class Partie {
 
 		int ordinateur = 0, // Difficulte de l'ordinateur (0 signifie une partie contre un joueur)
 				choix = 3;
-		/*
-
-		 */
+		
 		System.out.println(repliques[0]);
 
 		do {
@@ -490,10 +488,11 @@ public class Partie {
 				casseTete();
 			} else if (choix == 3) {
 				Initialisation confif = chooseConfig();
-				setPlateau(confif.getLigne(), confif.getColonne());
-				setGrenouille(confif.getNbPion(), confif.getCoGrenouille());
-				setCrapaud(confif.getNbPion(), confif.getCoCrapaud());
-				setBloque();
+				initPlateau(confif.getLigne(), confif.getColonne());
+				initGrenouille(confif.getNbPion(), confif.getCoGrenouille());
+				initCrapaud(confif.getNbPion(), confif.getCoCrapaud());
+				initBloque();
+				System.out.println("Initialistion créé");
 			} else {
 				System.out.println(repliques[3]);
 				entree.nextLine();

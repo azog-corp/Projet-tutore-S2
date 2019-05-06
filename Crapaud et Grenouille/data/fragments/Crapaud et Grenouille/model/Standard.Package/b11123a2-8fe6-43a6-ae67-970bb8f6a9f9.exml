@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
-<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="crapaud et grenouille" version="4">
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="rfgsr" version="4">
   <OBJECT>
-    <ID name="crapaud et grenouille" mc="Standard.Package" uid="3e76d371-baa0-4e4f-bb92-2d16b2131857"/>
+    <ID name="rfgsr" mc="Standard.Package" uid="b11123a2-8fe6-43a6-ae67-970bb8f6a9f9"/>
     <PID name="Crapaud et Grenouille" mc="Standard.Project" uid="6e6a5f89-d07e-448b-973c-d9c0a43fcf1e"/>
     <ATTRIBUTES>
       <ATT name="IsInstantiable">false</ATT>
@@ -9,15 +9,15 @@
       <ATT name="IsLeaf">false</ATT>
       <ATT name="IsRoot">false</ATT>
       <ATT name="Visibility">Public</ATT>
-      <ATT name="Name"><![CDATA[crapaud et grenouille]]></ATT>
+      <ATT name="Name"><![CDATA[rfgsr]]></ATT>
       <ATT name="status">1970354901745664</ATT>
     </ATTRIBUTES>
     <DEPENDENCIES>
       <COMP relation="OwnedElement">
-        <COMPID name="crapouille" mc="Standard.Package" uid="d49297d2-7b3a-4d52-af40-9ac2888f079f"/>
+        <COMPID name="crapouille" mc="Standard.Package" uid="61bb4190-c48e-44b0-8778-8916f8ff62ae"/>
       </COMP>
       <COMP relation="Product">
-        <COMPID name="crapaud et grenouille Class diagram" mc="Standard.ClassDiagram" uid="343d1e3a-9033-46c6-ba5f-182a5ea33447"/>
+        <COMPID name="rfgsr Class diagram" mc="Standard.ClassDiagram" uid="3b499a5a-c5c2-4eb3-97d7-8cc831c87cf1"/>
       </COMP>
     </DEPENDENCIES>
   </OBJECT>
