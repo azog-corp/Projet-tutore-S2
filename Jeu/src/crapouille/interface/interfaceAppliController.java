@@ -1,4 +1,9 @@
-package application;
+/*
+ * interfaceAppliController.java
+ * Azog-corp 2019, droit d'auteur
+ */
+
+package ;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -249,13 +254,16 @@ public class interfaceAppliController {
     
     @FXML
     void afficherJeu(MouseEvent Click) {
+    	config.getText(); //TODO FONCTION QUI AFFICHE TABLEAU ORIGINE SELON CONFIGURATION
     	reinitialiser();
     	gameBoard.setVisible(true);
-    	rafraichirJeu();
+    	config.
+    	rafraichirJeu(Plateau.afficherPlateau());
+    	
     }
     
-    void rafrachirJeu() {
-    	entreeUti.setText(Plateau.afficherJeu());
+    void rafraichirJeu(String plateauJeu) {
+    	entreeUti.setText(plateauJeu);
     }
     
     @FXML
