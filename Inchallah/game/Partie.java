@@ -346,7 +346,7 @@ public class Partie {
 		Initialisation initialisation;
 		System.out.println("Veut tu jouer avec le plateau par défault (1) ou en créér un (2) ?");
 		do {
-			choixConfiguration = entree.hasNextInt() ? entree.nextInt() : 0;
+			choixConfiguration = getChoixConfiguration();
 			if (choixConfiguration == 0) {
 				System.out.println("Erreur ! Veuillez rentrer 1 ou 2 :");
 			}
@@ -484,7 +484,7 @@ public class Partie {
 	 * Main principale qui lance le jeu
 	 * @param args non utilisé
 	 */
-	public static void main(String[] args) {
+	public static void crapouille() {
 
 		int ordinateur = 0, // Difficulte de l'ordinateur (0 signifie une partie contre un joueur)
 				choix = 3;
