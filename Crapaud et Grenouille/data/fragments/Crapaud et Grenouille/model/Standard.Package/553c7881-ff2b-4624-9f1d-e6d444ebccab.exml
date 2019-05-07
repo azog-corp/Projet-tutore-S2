@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="test" version="4">
+  <OBJECT>
+    <ID name="test" mc="Standard.Package" uid="553c7881-ff2b-4624-9f1d-e6d444ebccab"/>
+    <PID name="crapouille" mc="Standard.Package" uid="61bb4190-c48e-44b0-8778-8916f8ff62ae"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[test]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="TestOrdinateur" mc="Standard.Class" uid="9f065c00-cd93-4080-9af2-7876ca384939"/>
+        <COMPID name="TestPartie" mc="Standard.Class" uid="d765cafa-8a67-402e-bc48-408c6e7bff0b"/>
+        <COMPID name="TestPion" mc="Standard.Class" uid="54f38be2-d199-4c81-b306-212869f89960"/>
+        <COMPID name="TestPlateau" mc="Standard.Class" uid="572a2030-f62a-420b-b97c-eaf4aa589bdb"/>
+      </COMP>
+      <LINK relation="Extension">
+        <FOREIGNID name="JavaPackage" mc="Infrastructure.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>
+      </LINK>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

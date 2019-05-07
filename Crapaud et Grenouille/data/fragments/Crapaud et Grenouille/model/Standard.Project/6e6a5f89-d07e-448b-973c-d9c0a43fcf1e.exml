@@ -10,7 +10,7 @@
     </ATTRIBUTES>
     <DEPENDENCIES>
       <COMP relation="Model">
-        <COMPID name="crapaud et grenouille" mc="Standard.Package" uid="3e76d371-baa0-4e4f-bb92-2d16b2131857"/>
+        <COMPID name="rfgsr" mc="Standard.Package" uid="b11123a2-8fe6-43a6-ae67-970bb8f6a9f9"/>
       </COMP>
       <COMP relation="DiagramRoot">
         <COMPID name="Crapaud et Grenouille" mc="Infrastructure.DiagramSet" uid="9e9612bd-2b47-48d2-97c3-4ca9e79ae4cc"/>

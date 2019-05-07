@@ -1,9 +1,11 @@
 package crapouille.test;
 
-public class TestAction {
+import crapouille.Ordinateur;
+
+public class TestOrdinateur {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 
 	}
 

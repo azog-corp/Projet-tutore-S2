@@ -1,34 +1,117 @@
+/*
+ * Plateau.java
+ * Azog-corp 2019, droit d'auteur
+ */
 package crapouille;
 
 import crapouille.Pion;
 
+/**
+ * Class de l'objet plateau
+ * @author Azog-corp
+ */
 public class Plateau {
-	
+
+	/**
+	 *  ligne et ordonnée correspondent à la taille du tableau
+	 */ 
+	private int ligne,
+	            colonne;
+	/**
+	 * Pion est est un tableau contenant soit :
+	 * Une grenouille, un crapaud, ou la valeur null
+	 */
 	private Pion[][] plateau;
 
-	public Plateau(int abscisse, int ordonnee) {
-		this.plateau = new Pion[abscisse][ordonnee];
+	/**
+	 * Création de l'objet plateau
+	 * @param ligne nombre de ligne
+	 * @param colonne nombre de collone 
+	 */
+	public Plateau(int ligne, int colonne) {
+		if (ligne < 0 || colonne < 0) {
+			throw new RuntimeException ("Les coordonnées doivent être positives");
+		}
+		this.ligne = ligne;
+		this.colonne = colonne;
+		this.plateau = new Pion[ligne][colonne];
 	}
-	
 
+	/**
+	 * Fonction renvoyant le tableau de pion du plateau 
+	 * @return plateau, un tableau contenant les pions du plateau
+	 */
 	public Pion[][] getPlateau() {
 		return plateau;
 	}
 
-
-	public void setPlateau(Plateau[][] plateaus, Pion[] pion) {
-		for (int nbPion = 0 ; nbPion < 20 ; nbPion++) {
-			this.plateau[pion[nbPion].getAbscisse()][pion[nbPion].getOrdonnee()] = pion[nbPion];
+	/**
+	 * Associe une case à un pion
+	 * @param pion, Le pion qui doit être associé
+	 */
+	public void setCase(Pion pion) {
+		this.plateau[pion.getLigne()][pion.getColonne()] = pion;
+	}
+	
+	/**
+	 * Fonction permettant d'avancer un pion et aussi vérifiant si le pion n'est 
+	 * pas bloqué 
+	 * @param pion, Le pion qu'on veut bouger
+	 */
+	public void movePion(Pion pion) {
+		this.plateau[pion.getLigne()][pion.getColonne()] = null;
+		pion.setColonne(this.plateau);
+		pion.setBloque(this.plateau);
+		updateBloque(pion.getLigne());
+		this.plateau[pion.getLigne()][pion.getColonne()] = pion;
+	}
+	
+	/**
+	 * Affiche le plateau
+	 */
+	public void afficherPlateau() {
+		for (int x = 0 ; x < this.ligne ; x++) {
+			System.out.print("\n|");
+			for (int y = 0 ; y < this.colonne ; y++) {
+				if (this.plateau[x][y] != null) {
+					if (this.plateau[x][y].isCrapaud()) {
+						System.out.print("C|");
+					} else if (!this.plateau[x][y].isCrapaud()) {
+						System.out.print("G|");
+					}
+				} else {
+					System.out.print(" |");
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Vérifie sur une ligne si des cases ne sont pas bloqué
+	 * @param ligne, la ligne que l'on veut vérifier
+	 */
+	public void updateBloque(int ligne) {
+		for (int x = 0 ; x < this.ligne ; x++) {
+			if (this.plateau[ligne][x] != null) {
+				plateau[ligne][x].setBloque(this.plateau);
+			}
 		}
 	}
 
-
-	public void movePion(Pion pion) {
-		// La case ou se trouve le pion devient null
-		plateau[pion.getAbscisse()][pion.getOrdonnee()] = null;
-		// On change l'abscisse du pion
-		pion.setAbscisse(pion.getAbscisse(), plateau);
-		// On met le pion dans sa case
-		plateau[pion.getAbscisse()][pion.getOrdonnee()] = pion;
+	/**
+	 * Renvoie le nombre de ligne que contient le tableau
+	 * @return Le nombre de ligne du tableau
+	 */
+	public int getLigne() {
+		return this.ligne;
 	}
+	
+	/**
+	 * Renvoie le nombre de colonne que contient le tableau
+	 * @return Le nombre de colonne du tableau
+	 */
+	public int getColonne() {
+		return this.colonne;
+	}
+
 }
