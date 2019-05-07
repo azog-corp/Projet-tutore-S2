@@ -69,21 +69,23 @@ public class Plateau {
 	/**
 	 * Affiche le plateau
 	 */
-	public void afficherPlateau() {
+	public String toString() {
+		StringBuilder plateau = new StringBuilder();
 		for (int x = 0 ; x < this.ligne ; x++) {
-			System.out.print("\n|");
+			plateau.append("\n|");
 			for (int y = 0 ; y < this.colonne ; y++) {
 				if (this.plateau[x][y] != null) {
 					if (this.plateau[x][y].isCrapaud()) {
-						System.out.print("C|");
+						plateau.append("C|");
 					} else if (!this.plateau[x][y].isCrapaud()) {
-						System.out.print("G|");
+						plateau.append("G|");
 					}
 				} else {
-					System.out.print(" |");
+					plateau.append(" |");
 				}
 			}
 		}
+		return plateau.toString();
 	}
 	
 	/**
