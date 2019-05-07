@@ -1,4 +1,9 @@
-package application;
+/*
+ * interfaceAppliController.java
+ * Azog-corp 2019, droit d'auteur
+ */
+
+package ;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -21,7 +26,7 @@ public class interfaceAppliController {
     private Label labelIA;
 	
     @FXML
-    private Label plateauString;
+    private Label gameBoardString;
 
     @FXML
     private AnchorPane configuration;
@@ -51,7 +56,7 @@ public class interfaceAppliController {
     private AnchorPane createur;
 
     @FXML
-    private AnchorPane plateau;
+    private AnchorPane gameBoard;
 
     @FXML
     private Button jouermenu;
@@ -60,7 +65,7 @@ public class interfaceAppliController {
     private Button confirmationJouer;
 
     @FXML
-    private Button okPlateau;
+    private Button okgameBoard;
 
     @FXML
     private ImageView btn_quitter;
@@ -117,7 +122,7 @@ public class interfaceAppliController {
     private Text scoreMVP;
 
     @FXML
-    private GridPane plateauJeu;
+    private GridPane gameBoardJeu;
 
     @FXML
     private RadioButton lvl1;
@@ -161,7 +166,7 @@ public class interfaceAppliController {
     	menu.setVisible(false);
     	configuration.setVisible(false);
     	score.setVisible(false);
-    	plateau.setVisible(false);
+    	gameBoard.setVisible(false);
     	createur.setVisible(false);
     }
     
@@ -249,8 +254,16 @@ public class interfaceAppliController {
     
     @FXML
     void afficherJeu(MouseEvent Click) {
+    	config.getText(); //TODO FONCTION QUI AFFICHE TABLEAU ORIGINE SELON CONFIGURATION
     	reinitialiser();
-    	plateau.setVisible(true);
+    	gameBoard.setVisible(true);
+    	config.
+    	rafraichirJeu(Plateau.afficherPlateau());
+    	
+    }
+    
+    void rafraichirJeu(String plateauJeu) {
+    	entreeUti.setText(plateauJeu);
     }
     
     @FXML
