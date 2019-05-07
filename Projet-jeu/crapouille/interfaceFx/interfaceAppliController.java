@@ -5,7 +5,6 @@ package crapouille.interfaceFx;
  */
 
 
-import crapouille.Plateau;
 import crapouille.game.Partie;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
