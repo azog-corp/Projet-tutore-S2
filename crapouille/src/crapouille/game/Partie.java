@@ -20,13 +20,18 @@ public class Partie {
 	/**
 	 * Plateau de jeu
 	 */
-	private static Plateau plateau;
+	public static Plateau plateau;
 
 	/**
 	 * Tableau contenant toutes les grenouilles et tous les crapauds
 	 */
-	private static Pion[][] batracien = new Pion[2][];
+	public static Pion[][] batracien = new Pion[2][];
 
+	/**
+	 * 
+	 */
+	public static int choix = 0;
+	
 	/**
 	 * Ajout de l'entrée courante
 	 */
@@ -212,7 +217,7 @@ public class Partie {
 		int ligne = -1, // ligne d'un pion
 				colonne = -1; // Ordonnée d'un pion
 		// On affiche le tableau
-		plateau.afficherPlateau();
+		System.out.println(plateau.toString());
 		System.out.println("\nChosi ton batracien parmi les suivants x y");
 		// On affiche les pions déplaçable en fonction du mode de jeu
 		if (tourEquipe == 2) {
@@ -328,7 +333,6 @@ public class Partie {
 	 */
 	public static Initialisation chooseConfig() {
 		Initialisation initialisation;
-		int choix = 0;
 		System.out.println("Veut tu jouer avec le plateau par défault (1) ou en créér un (2) ?");
 		do {
 			choix = entree.hasNextInt() ? entree.nextInt() : 0;
