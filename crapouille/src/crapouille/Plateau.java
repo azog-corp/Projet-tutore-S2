@@ -60,7 +60,7 @@ public class Plateau {
 	 */
 	public void movePion(Pion pion) {
 		this.plateau[pion.getLigne()][pion.getColonne()] = null;
-		pion.setColonne(pion.getLigne(), this.plateau);
+		pion.setColonne(this.plateau);
 		pion.setBloque(this.plateau);
 		updateBloque(pion.getLigne());
 		this.plateau[pion.getLigne()][pion.getColonne()] = pion;
