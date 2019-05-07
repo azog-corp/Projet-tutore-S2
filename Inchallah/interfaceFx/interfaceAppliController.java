@@ -6,6 +6,7 @@ package crapouille.interfaceFx;
 
 
 import crapouille.Plateau;
+import crapouille.game.Partie;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -255,12 +256,11 @@ public class interfaceAppliController {
     
     @FXML
     void afficherJeu(MouseEvent Click) {
-    	config.getText(); //TODO FONCTION QUI AFFICHE TABLEAU ORIGINE SELON CONFIGURATION
+    	Partie.setChoixConfiguration(0);
+    	Partie.main(args);
     	reinitialiser();
     	gameBoard.setVisible(true);
-    	config.
-    	rafraichirJeu(Plateau.toString());
-    	
+    	rafraichirJeu(Plateau.afficherJeu());
     }
     
     void rafraichirJeu(String plateauJeu) {

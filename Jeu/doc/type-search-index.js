@@ -1,1 +1,0 @@
-typeSearchIndex = [{"p":"crapouille","l":"Action"},{"l":"All Classes","url":"allclasses-index.html"},{"p":"crapouille.game","l":"Partie"},{"p":"crapouille","l":"Pion"},{"p":"crapouille","l":"Plateau"},{"p":"crapouille.test","l":"TestAction"},{"p":"crapouille.test","l":"TestPartie"},{"p":"crapouille.test","l":"TestPion"},{"p":"crapouille.test","l":"TestPlateau"}]
