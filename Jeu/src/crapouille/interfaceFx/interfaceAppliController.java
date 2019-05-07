@@ -255,10 +255,9 @@ public class interfaceAppliController {
     
     @FXML
     void afficherJeu(MouseEvent Click) {
-    	config.getText(); //TODO FONCTION QUI AFFICHE TABLEAU ORIGINE SELON CONFIGURATION
+    	setChoix(0);
     	reinitialiser();
     	gameBoard.setVisible(true);
-    	config.
     	rafraichirJeu(Plateau.toString());
     	
     }

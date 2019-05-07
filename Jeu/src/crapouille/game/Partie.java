@@ -32,6 +32,17 @@ public class Partie {
 	 */
 	public static int choix = 0;
 	
+	
+	//TODO BOUGER DE LA 
+	public static int getChoix() {
+		return choix;
+	}
+
+
+	public static void setChoix(int choix) {
+		Partie.choix = choix;
+	}
+
 	/**
 	 * Ajout de l'entrée courante
 	 */
