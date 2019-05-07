@@ -1,4 +1,4 @@
-package application;
+package crapouille.interfaceFx;
 	
 import javafx.application.Application;
 import javafx.stage.Stage;

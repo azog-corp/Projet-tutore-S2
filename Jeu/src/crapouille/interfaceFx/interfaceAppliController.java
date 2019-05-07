@@ -1,10 +1,11 @@
+package crapouille.interfaceFx;
 /*
  * interfaceAppliController.java
  * Azog-corp 2019, droit d'auteur
  */
 
-package ;
 
+import crapouille.Plateau;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -258,7 +259,7 @@ public class interfaceAppliController {
     	reinitialiser();
     	gameBoard.setVisible(true);
     	config.
-    	rafraichirJeu(Plateau.afficherPlateau());
+    	rafraichirJeu(Plateau.toString());
     	
     }
     
