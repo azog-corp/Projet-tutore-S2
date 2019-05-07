@@ -228,7 +228,7 @@ public class Partie {
 		int ligne = -1, // ligne d'un pion
 				colonne = -1; // Ordonnée d'un pion
 		// On affiche le tableau
-		System.out.println(plateau.toString());
+		System.out.println(plateau.afficherJeu());
 		System.out.println("\nChosi ton batracien parmi les suivants x y");
 		// On affiche les pions déplaçable en fonction du mode de jeu
 		if (tourEquipe == 2) {
@@ -350,7 +350,6 @@ public class Partie {
 			if (choixConfiguration == 0) {
 				System.out.println("Erreur ! Veuillez rentrer 1 ou 2 :");
 			}
-			entree.nextLine();
 		} while (choixConfiguration == 0);
 		if (choixConfiguration == 1) {
 			// Coordonnées par défault des grenouille
@@ -484,7 +483,7 @@ public class Partie {
 	 * Main principale qui lance le jeu
 	 * @param args non utilisé
 	 */
-	public static void crapouille() {
+	public static void main(String[] args) {
 
 		int ordinateur = 0, // Difficulte de l'ordinateur (0 signifie une partie contre un joueur)
 				choix = 3;

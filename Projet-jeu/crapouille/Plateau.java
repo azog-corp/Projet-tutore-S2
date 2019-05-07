@@ -69,7 +69,7 @@ public class Plateau {
 	/**
 	 * Affiche le plateau
 	 */
-	public String toString() {
+	public String afficherJeu() {
 		StringBuilder plateau = new StringBuilder();
 		for (int x = 0 ; x < this.ligne ; x++) {
 			plateau.append("\n|");
