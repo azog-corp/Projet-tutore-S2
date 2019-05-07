@@ -30,17 +30,17 @@ public class Partie {
 	/**
 	 * 
 	 */
-	public static int choixConfiguration = 0;
+	public static int choix = 0;
 	
 	
 	//TODO BOUGER DE LA 
-	public static int getChoixConfiguration() {
-		return choixConfiguration;
+	public static int getChoix() {
+		return choix;
 	}
 
 
-	public static void setChoixConfiguration(int choixConfiguration) {
-		Partie.choixConfiguration = choixConfiguration;
+	public static void setChoix(int choix) {
+		Partie.choix = choix;
 	}
 
 	/**
