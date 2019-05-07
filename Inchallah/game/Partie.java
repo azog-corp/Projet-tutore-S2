@@ -346,7 +346,7 @@ public class Partie {
 		Initialisation initialisation;
 		System.out.println("Veut tu jouer avec le plateau par défault (1) ou en créér un (2) ?");
 		do {
-			choixConfiguration = entree.hasNextInt() ? entree.nextInt() : 0;
+			choixConfiguration = getChoixConfiguration();
 			if (choixConfiguration == 0) {
 				System.out.println("Erreur ! Veuillez rentrer 1 ou 2 :");
 			}
