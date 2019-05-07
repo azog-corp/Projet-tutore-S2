@@ -484,7 +484,7 @@ public class Partie {
 	 * Main principale qui lance le jeu
 	 * @param args non utilisé
 	 */
-	public static void main(String[] args) {
+	public static void crapouille() {
 
 		int ordinateur = 0, // Difficulte de l'ordinateur (0 signifie une partie contre un joueur)
 				choix = 3;
