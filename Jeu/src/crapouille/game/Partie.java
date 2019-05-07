@@ -30,17 +30,17 @@ public class Partie {
 	/**
 	 * 
 	 */
-	public static int choix = 0;
+	public static int choixConfiguration = 0;
 	
 	
 	//TODO BOUGER DE LA 
-	public static int getChoix() {
-		return choix;
+	public static int getChoixConfiguration() {
+		return choixConfiguration;
 	}
 
 
-	public static void setChoix(int choix) {
-		Partie.choix = choix;
+	public static void setChoixConfiguration(int choix) {
+		Partie.choixConfiguration = choix;
 	}
 
 	/**
@@ -346,13 +346,13 @@ public class Partie {
 		Initialisation initialisation;
 		System.out.println("Veut tu jouer avec le plateau par défault (1) ou en créér un (2) ?");
 		do {
-			choix = entree.hasNextInt() ? entree.nextInt() : 0;
-			if (choix == 0) {
+			choixConfiguration = entree.hasNextInt() ? entree.nextInt() : 0;
+			if (choixConfiguration == 0) {
 				System.out.println("Erreur ! Veuillez rentrer 1 ou 2 :");
 			}
 			entree.nextLine();
-		} while (choix == 0);
-		if (choix == 1) {
+		} while (choixConfiguration == 0);
+		if (choixConfiguration == 1) {
 			// Coordonnées par défault des grenouille
 			int[][] coGrenouille = {
 					{0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6},
@@ -364,7 +364,7 @@ public class Partie {
 			// Initialisation par défault
 			initialisation = new Initialisation(7, 10, 14, coGrenouille, coCrapaud);
 			return initialisation;
-		} else if (choix == 2) {
+		} else if (choixConfiguration == 2) {
 
 			int ligne = 0,
 					colonne = 0,
