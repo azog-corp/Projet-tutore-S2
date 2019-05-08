@@ -7,7 +7,7 @@ package crapouille.initialisation;
  * @author Azog
  *
  */
-public class Initialisation {
+public class Configuration {
 
 	private int ligne,
 	colonne,
@@ -16,7 +16,7 @@ public class Initialisation {
 	coCrapaud;
 	
 	
-	public Initialisation(int ligne, int colonne, int nbPion, int[][] coGrenouille, int[][] coCrapaud) {
+	public Configuration(int ligne, int colonne, int nbPion, int[][] coGrenouille, int[][] coCrapaud) {
 		if (ligne <= 0 || colonne <= 0) {
 			throw new RuntimeException("Erreur ! Les coordonnées du plateau doivent être positives");
 		}

@@ -4,12 +4,15 @@
  */
 package crapouille.game;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 import crapouille.Ordinateur;
 import crapouille.Pion;
 import crapouille.Plateau;
-import crapouille.initialisation.Initialisation;
+import crapouille.initialisation.Configuration;
 
 /**
  * class avec toute les fonctionalité permettant de faire une partie
@@ -31,8 +34,8 @@ public class Partie {
 	 * 
 	 */
 	public static int choixConfiguration = 0;
-	
-	
+
+
 	//TODO BOUGER DE LA 
 	public static int getChoixConfiguration() {
 		return choixConfiguration;
@@ -58,7 +61,7 @@ public class Partie {
 		plateau = new Plateau(ligne, colonne);
 	}
 
-	Initialisation init = null;
+	Configuration init = null;
 
 	/**
 	 * Réplique (à modifier bien sur si on veut pas avoir 0)
@@ -342,141 +345,118 @@ public class Partie {
 	/**
 	 * 
 	 */
-	public static Initialisation chooseConfig() {
-		Initialisation initialisation;
-		System.out.println("Veut tu jouer avec le plateau par défault (1) ou en créér un (2) ?");
+	public static Configuration chooseConfig() {
+
+		int ligne = 0,
+				colonne = 0,
+				nbPion = 0;
+
+		System.out.print("Entrez le nombre de lignes du plateau (entre 1 et 20) : ");
 		do {
-			choixConfiguration = getChoixConfiguration();
-			if (choixConfiguration == 0) {
-				System.out.println("Erreur ! Veuillez rentrer 1 ou 2 :");
+			ligne = entree.hasNextInt() ? entree.nextInt() : 0;
+			if (ligne <= 0 || ligne > 20) {
+				System.out.println("Erreur !\nEntrer un nombre de colonnes positifs et non nul :\nEx : 6 ou 10"
+						+ "\nAttention le plateau est limité à 20 colonnes");
 			}
-		} while (choixConfiguration == 0);
-		if (choixConfiguration == 1) {
-			// Coordonnées par défault des grenouille
-			int[][] coGrenouille = {
-					{0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6},
-					{0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 0, 1}};
-			// Coordonnées par défault des crapauds
-			int[][] coCrapaud = {
-					{0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6},
-					{9, 8, 7, 6, 9, 8, 7, 6, 9, 8, 7, 6, 9, 8}};
-			// Initialisation par défault
-			initialisation = new Initialisation(7, 10, 14, coGrenouille, coCrapaud);
-			return initialisation;
-		} else if (choixConfiguration == 2) {
+			entree.nextLine();
+		} while (ligne <= 0 || ligne > 20);
 
-			int ligne = 0,
-					colonne = 0,
-					nbPion = 0;
+		System.out.print("Entrez le nombre de colonnes du plateau (entre 1 et 20) : ");
+		do {
+			colonne = entree.hasNextInt() ? entree.nextInt() : 0;
+			if (colonne <= 0 || colonne > 20) {
+				System.out.println("Erreur !\nEntrer un nombre de colonnes positifs et non nul :\nEx : 6 ou 10"
+						+ "\nAttention le plateau est limité à 20 colonnes");	
+			}
+			entree.nextLine();
+		} while (colonne <= 0 || colonne > 20);
 
-			System.out.print("Entrez le nombre de lignes du plateau (entre 1 et 20) : ");
+		System.out.print("Entrez le nombre de pions présents sur le plateau : ");
+		do {
+			nbPion = entree.hasNextInt() ? entree.nextInt() : 0;
+			if (nbPion <= 0 || nbPion >= ligne * colonne - colonne || nbPion % 2 == 1) {
+				System.out.println("Erreur !\nEntrer un nombre de pions positifs pair et non nul :\nEx : 6 ou 10\n"
+						+ "Compris entre 0 et " + (ligne * colonne - colonne));
+				nbPion = 0;
+			}
+			entree.nextLine();
+		} while (nbPion == 0);
+
+		int[][] coGrenouille = new int[2][nbPion],
+				coCrapaud = new int [2][nbPion];
+
+		for (int x = 0; x < nbPion ; x++) {
+			boolean pionJuste = true;
+			System.out.println("Entrez les coordonnées de la grenouille " + (x+1));
 			do {
-				ligne = entree.hasNextInt() ? entree.nextInt() : 0;
-				if (ligne <= 0 || ligne > 20) {
-					System.out.println("Erreur !\nEntrer un nombre de colonnes positifs et non nul :\nEx : 6 ou 10"
-							+ "\nAttention le plateau est limité à 20 colonnes");
-				}
+				System.out.println("ligne : ");
+				ligne = entree.hasNextInt() ? entree.nextInt()-1 : 0;
 				entree.nextLine();
-			} while (ligne <= 0 || ligne > 20);
+				System.out.println("colonne : ");
+				colonne = entree.hasNextInt() ? entree.nextInt()-1 : 0;
+				entree.nextLine();
+				if (ligne < 0 || colonne < 0) {
+					System.out.println("Les coordonnées doivent être positives");
+					pionJuste = false;
+				} else {
+					for (int y = 0 ; y < x ; y++) {
+						if (ligne == coGrenouille[0][x] && colonne == coGrenouille[1][x]) {
+							System.out.println("Un pion a déjà ces coordonnées");
+							pionJuste = false;
+							break;
+						}
+					}
+				}
+				if (pionJuste) {
+					coGrenouille[0][x] = ligne;
+					coGrenouille[1][x] = colonne;
+				}
+			} while (!pionJuste);
+		}
 
-			System.out.print("Entrez le nombre de colonnes du plateau (entre 1 et 20) : ");
+		for (int x = 0; x < nbPion ; x++) {
+			boolean pionJuste = true;
+			System.out.println("Entrez les coordonnées du crapaud " + (x+1));
 			do {
-				colonne = entree.hasNextInt() ? entree.nextInt() : 0;
-				if (colonne <= 0 || colonne > 20) {
-					System.out.println("Erreur !\nEntrer un nombre de colonnes positifs et non nul :\nEx : 6 ou 10"
-							+ "\nAttention le plateau est limité à 20 colonnes");	
-				}
+				System.out.println("ligne : ");
+				ligne = entree.hasNextInt() ? entree.nextInt()-1 : 0;
 				entree.nextLine();
-			} while (colonne <= 0 || colonne > 20);
-
-			System.out.print("Entrez le nombre de pions présents sur le plateau : ");
-			do {
-				nbPion = entree.hasNextInt() ? entree.nextInt() : 0;
-				if (nbPion <= 0 || nbPion >= ligne * colonne - colonne || nbPion % 2 == 1) {
-					System.out.println("Erreur !\nEntrer un nombre de pions positifs pair et non nul :\nEx : 6 ou 10\n"
-							+ "Compris entre 0 et " + (ligne * colonne - colonne));
-					nbPion = 0;
-				}
+				System.out.println("colonne : ");
+				colonne = entree.hasNextInt() ? entree.nextInt()-1 : 0;
 				entree.nextLine();
-			} while (nbPion == 0);
+				if (ligne < 0 || colonne < 0) {
+					System.out.println("Les coordonnées doivent être positives");
+					pionJuste = false;
+				} else {
+					for (int y = 0 ; y < x ; y++) {
+						if (ligne == coCrapaud[0][x] && colonne == coCrapaud[1][x]) {
+							System.out.println("Un pion a déjà ces coordonnées");
+							pionJuste = false;
+							break;
+						}
+					}
 
-			int[][] coGrenouille = new int[2][nbPion],
-					coCrapaud = new int [2][nbPion];
-
-			for (int x = 0; x < nbPion ; x++) {
-				boolean pionJuste = true;
-				System.out.println("Entrez les coordonnées de la grenouille " + (x+1));
-				do {
-					System.out.println("ligne : ");
-					ligne = entree.hasNextInt() ? entree.nextInt()-1 : 0;
-					entree.nextLine();
-					System.out.println("colonne : ");
-					colonne = entree.hasNextInt() ? entree.nextInt()-1 : 0;
-					entree.nextLine();
-					if (ligne < 0 || colonne < 0) {
-						System.out.println("Les coordonnées doivent être positives");
-						pionJuste = false;
-					} else {
-						for (int y = 0 ; y < x ; y++) {
-							if (ligne == coGrenouille[0][x] && colonne == coGrenouille[1][x]) {
-								System.out.println("Un pion a déjà ces coordonnées");
-								pionJuste = false;
-								break;
-							}
+					for (int z = 0; z < nbPion ; z++) {
+						if (ligne == coGrenouille[0][x] && colonne == coGrenouille[1][x]) {
+							System.out.println("Un pion a déjà ces coordonnées");
+							pionJuste = false;
+							break;
 						}
 					}
 					if (pionJuste) {
-						coGrenouille[0][x] = ligne;
-						coGrenouille[1][x] = colonne;
+						coCrapaud[0][x] = ligne;
+						coCrapaud[1][x] = colonne;
 					}
-				} while (!pionJuste);
-			}
-
-			for (int x = 0; x < nbPion ; x++) {
-				boolean pionJuste = true;
-				System.out.println("Entrez les coordonnées du crapaud " + (x+1));
-				do {
-					System.out.println("ligne : ");
-					ligne = entree.hasNextInt() ? entree.nextInt()-1 : 0;
-					entree.nextLine();
-					System.out.println("colonne : ");
-					colonne = entree.hasNextInt() ? entree.nextInt()-1 : 0;
-					entree.nextLine();
-					if (ligne < 0 || colonne < 0) {
-						System.out.println("Les coordonnées doivent être positives");
-						pionJuste = false;
-					} else {
-						for (int y = 0 ; y < x ; y++) {
-							if (ligne == coCrapaud[0][x] && colonne == coCrapaud[1][x]) {
-								System.out.println("Un pion a déjà ces coordonnées");
-								pionJuste = false;
-								break;
-							}
-						}
-
-						for (int z = 0; z < nbPion ; z++) {
-							if (ligne == coGrenouille[0][x] && colonne == coGrenouille[1][x]) {
-								System.out.println("Un pion a déjà ces coordonnées");
-								pionJuste = false;
-								break;
-							}
-						}
-						if (pionJuste) {
-							coCrapaud[0][x] = ligne;
-							coCrapaud[1][x] = colonne;
-						}
-					}
-				} while (!pionJuste);	
-			}
-			
-			System.out.printf("\nLe plateau sera composé :\n" 
-					+ "- %d" + " lignes\n"
-					+ "- %d" + " colonnes\n"
-					+ "- %d" + " pions\n", ligne, colonne, nbPion);	
-			
-			return initialisation = new Initialisation(ligne, colonne, nbPion, coGrenouille, coCrapaud);
+				}
+			} while (!pionJuste);	
 		}
-		return null;
+
+		System.out.printf("\nLe plateau sera composé :\n" 
+				+ "- %d" + " lignes\n"
+				+ "- %d" + " colonnes\n"
+				+ "- %d" + " pions\n", ligne, colonne, nbPion);	
+
+		return new Configuration(ligne, colonne, nbPion, coGrenouille, coCrapaud);
 	}
 
 	/**
@@ -487,7 +467,7 @@ public class Partie {
 
 		int ordinateur = 0, // Difficulte de l'ordinateur (0 signifie une partie contre un joueur)
 				choix = 3;
-		
+
 		System.out.println(repliques[0]);
 
 		do {
@@ -501,7 +481,8 @@ public class Partie {
 				System.out.println(repliques[2]);
 				casseTete();
 			} else if (choix == 3) {
-				Initialisation confif = chooseConfig();
+				entree.nextLine();
+				Configuration confif = chooseConfig();
 				initPlateau(confif.getLigne(), confif.getColonne());
 				initGrenouille(confif.getNbPion(), confif.getCoGrenouille());
 				initCrapaud(confif.getNbPion(), confif.getCoCrapaud());
