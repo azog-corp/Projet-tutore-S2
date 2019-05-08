@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2019-04-29" view-index="2" gantt-divider-location="353" resource-divider-location="300" version="2.0" locale="fr_FR">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2019-05-03" view-index="0" gantt-divider-location="661" resource-divider-location="300" version="2.0" locale="fr_FR">
     <description/>
-    <view zooming-state="default:2" id="gantt-chart">
-        <field id="tpd3" name="Nom" width="57" order="0"/>
-        <field id="tpd4" name="Date de début" width="21" order="1"/>
-        <field id="tpd5" name="Date de fin" width="21" order="2"/>
+    <view zooming-state="default:1" id="gantt-chart">
+        <field id="tpd3" name="Nom" width="45" order="0"/>
+        <field id="tpd4" name="Date de début" width="27" order="1"/>
+        <field id="tpd5" name="Date de fin" width="26" order="2"/>
     </view>
     <view id="resource-table">
-        <field id="0" name="Nom" width="70" order="0"/>
-        <field id="1" name="Rôle par défaut" width="29" order="1"/>
+        <field id="0" name="Nom" width="56" order="0"/>
+        <field id="1" name="Rôle par défaut" width="43" order="1"/>
     </view>
     <!-- -->
     <calendars>
@@ -38,15 +38,19 @@
         <task id="0" name="Lier l'interface et le code" color="#8cb6ce" meeting="false" start="2019-05-13" duration="1" complete="0" expand="true">
             <depend id="1" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="1" name="Gérer les erreurs causé sur l'interface" color="#8cb6ce" meeting="false" start="2019-05-14" duration="5" complete="0" expand="true"/>
-        <task id="4" name="Base de donnée dans les fichiers" meeting="false" start="2019-05-06" duration="2" complete="0" expand="true">
+        <task id="1" name="Gérer les erreurs causé par l'interface sur le code" color="#8cb6ce" meeting="false" start="2019-05-14" duration="3" complete="0" expand="true"/>
+        <task id="4" name="Création des fichiers pour stocker les données" color="#8cb6ce" meeting="false" start="2019-05-06" duration="2" complete="0" expand="true">
             <depend id="6" type="2" difference="0" hardness="Strong"/>
             <depend id="7" type="2" difference="0" hardness="Strong"/>
+            <depend id="16" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="16" name="Programmation de l'ia ( Premier niv)" color="#8cb6ce" meeting="false" start="2019-05-08" duration="3" complete="0" expand="true">
+            <depend id="0" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="6" name="fonction permettant de sauvegarder des configurations" color="#8cb6ce" meeting="false" start="2019-05-08" duration="3" complete="0" expand="true">
             <depend id="0" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="7" name="programmer la fonction temps" color="#8cb6ce" meeting="false" start="2019-05-08" duration="1" complete="0" expand="true">
+        <task id="7" name="programmer la fonction temps &amp; score" color="#8cb6ce" meeting="false" start="2019-05-08" duration="3" complete="0" expand="true">
             <depend id="0" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="14" name="Continuer l'interface" meeting="false" start="2019-05-06" duration="5" complete="0" expand="true">
@@ -66,9 +70,9 @@
         <displaycolumn property-id="tpd9" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd8" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd0" order="-1" width="75" visible="false"/>
-        <displaycolumn property-id="tpd3" order="0" width="199" visible="true"/>
-        <displaycolumn property-id="tpd4" order="1" width="75" visible="true"/>
-        <displaycolumn property-id="tpd5" order="2" width="75" visible="true"/>
+        <displaycolumn property-id="tpd3" order="0" width="302" visible="true"/>
+        <displaycolumn property-id="tpd4" order="1" width="178" visible="true"/>
+        <displaycolumn property-id="tpd5" order="2" width="177" visible="true"/>
     </taskdisplaycolumns>
     <previous/>
     <roles roleset-name="Default"/>
