@@ -70,22 +70,22 @@ public class Plateau {
 	 * Affiche le plateau
 	 */
 	public String afficherJeu() {
-		StringBuilder plateau = new StringBuilder();
+		StringBuilder plateauString = new StringBuilder();
 		for (int x = 0 ; x < this.ligne ; x++) {
-			plateau.append("\n|");
+			plateauString.append("\n|");
 			for (int y = 0 ; y < this.colonne ; y++) {
-				if (this.plateau[x][y] != null) {
-					if (this.plateau[x][y].isCrapaud()) {
-						plateau.append("C|");
-					} else if (!this.plateau[x][y].isCrapaud()) {
-						plateau.append("G|");
+				if (plateau[x][y] != null) {
+					if (plateau[x][y].isCrapaud()) {
+						plateauString.append("C|");
+					} else if (!plateau[x][y].isCrapaud()) {
+						plateauString.append("G|");
 					}
 				} else {
-					plateau.append(" |");
+					plateauString.append(" |");
 				}
 			}
 		}
-		return plateau.toString();
+		return plateauString.toString();
 	}
 	
 	/**

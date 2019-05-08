@@ -1,10 +1,13 @@
-package crapouille.interfaceFx;
 /*
  * interfaceAppliController.java
  * Azog-corp 2019, droit d'auteur
  */
 
 
+package crapouille.interfaceFx;
+
+
+import crapouille.Plateau;
 import crapouille.game.Partie;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -256,7 +259,7 @@ public class interfaceAppliController {
     @FXML
     void afficherJeu(MouseEvent Click) {
     	Partie.setChoixConfiguration(0);
-    	Partie.main(args);
+    	Partie.crapouille();
     	reinitialiser();
     	gameBoard.setVisible(true);
     	rafraichirJeu(Plateau.afficherJeu());
