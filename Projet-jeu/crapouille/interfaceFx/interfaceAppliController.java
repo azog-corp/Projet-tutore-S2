@@ -1,11 +1,12 @@
-package crapouille.interfaceFx;
 /*
  * interfaceAppliController.java
  * Azog-corp 2019, droit d'auteur
  */
 
 
-import crapouille.Plateau;
+package crapouille.interfaceFx;
+
+
 import crapouille.game.Partie;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -19,116 +20,111 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 public class interfaceAppliController {
 
-	@FXML
-    private Label labelIA;
-	
-    @FXML
-    private Label gameBoardString;
+	  @FXML
+	    private AnchorPane gameBoard;
 
-    @FXML
-    private AnchorPane configuration;
+	    @FXML
+	    private AnchorPane configuration;
 
-    @FXML
-    private AnchorPane backpanel;
+	    @FXML
+	    private AnchorPane backpanel;
 
-    @FXML
-    private ImageView btn_createur;
+	    @FXML
+	    private Button okGameBoard;
 
-    @FXML
-    private ImageView btn_mvp;
+	    @FXML
+	    private ImageView btn_createur;
 
-    @FXML
-    private AnchorPane score;
+	    @FXML
+	    private ImageView btn_mvp;
 
-    @FXML
-    private Button quittermenu;
+	    @FXML
+	    private AnchorPane score;
 
-    @FXML
-    private ToggleGroup lvlIA;
+	    @FXML
+	    private Button quittermenu;
 
-    @FXML
-    private Slider sliderTaille;
+	    @FXML
+	    private ToggleGroup lvlIA;
 
-    @FXML
-    private AnchorPane createur;
+	    @FXML
+	    private Slider sliderTaille;
 
-    @FXML
-    private AnchorPane gameBoard;
+	    @FXML
+	    private AnchorPane createur;
 
-    @FXML
-    private Button jouermenu;
+	    @FXML
+	    private Button confirmationJouer;
 
-    @FXML
-    private Button confirmationJouer;
+	    @FXML
+	    private Button jouermenu;
 
-    @FXML
-    private Button okgameBoard;
+	    @FXML
+	    private Label gameBoardString;
 
-    @FXML
-    private ImageView btn_quitter;
+	    @FXML
+	    private ImageView btn_quitter;
 
-    @FXML
-    private RadioButton lvl2;
+	    @FXML
+	    private RadioButton lvl2;
 
-    @FXML
-    private RadioButton lvl3;
+	    @FXML
+	    private RadioButton lvl3;
 
-    @FXML
-    private Button retourMenu;
+	    @FXML
+	    private Button retourMenu;
 
-    @FXML
-    private Label lb_nomJ1;
+	    @FXML
+	    private Label lb_nomJ1;
 
-    @FXML
-    private TextField tb_nomJ2;
+	    @FXML
+	    private TextField tb_nomJ2;
 
-    @FXML
-    private ImageView btn_acceuil;
+	    @FXML
+	    private ImageView btn_acceuil;
 
-    @FXML
-    private Label lb_nomJ2;
+	    @FXML
+	    private Label lb_nomJ2;
 
-    @FXML
-    private CheckBox chk_vsIA;
+	    @FXML
+	    private CheckBox chk_vsIA;
 
-    @FXML
-    private TextField tb_nomJ1;
+	    @FXML
+	    private TextField tb_nomJ1;
 
-    @FXML
-    private AnchorPane menu;
+	    @FXML
+	    private AnchorPane menu;
 
-    @FXML
-    private Button aidemenu;
+	    @FXML
+	    private Button aidemenu;
 
-    @FXML
-    private AnchorPane settingsBar;
+	    @FXML
+	    private AnchorPane settingsBar;
 
-    @FXML
-    private Label lb_lvlIa;
+	    @FXML
+	    private Label lb_lvlIa;
 
-    @FXML
-    private Label nomMVP;
+	    @FXML
+	    private Label labelIA;
 
-    @FXML
-    private CheckBox chk_casseT;
+	    @FXML
+	    private CheckBox chk_casseT;
 
-    @FXML
-    private TextField entreeUti;
+	    @FXML
+	    private Label nomMVP;
 
-    @FXML
-    private Text scoreMVP;
+	    @FXML
+	    private TextField entreeUti;
 
-    @FXML
-    private GridPane gameBoardJeu;
+	    @FXML
+	    private Text scoreMVP;
 
-    @FXML
-    private RadioButton lvl1;
-
+	    @FXML
+	    private RadioButton lvl1;
 
 
     @FXML
@@ -257,18 +253,19 @@ public class interfaceAppliController {
     @FXML
     void afficherJeu(MouseEvent Click) {
     	Partie.setChoixConfiguration(0);
-    	Partie.main(args);
+    	Partie.crapouille();
     	reinitialiser();
     	gameBoard.setVisible(true);
-    	rafraichirJeu(Plateau.afficherJeu());
+    	rafraichirJeu(Partie.plateau.afficherJeu());
     }
     
-    void rafraichirJeu(String plateauJeu) {
+    
+    public void rafraichirJeu(String plateauJeu) {
     	entreeUti.setText(plateauJeu);
     }
     
-    @FXML
-    void recupererCoord() { // Se declanche avec appui sur ok
+   // @FXML
+   // void recupererCoord() { // Se declanche avec appui sur ok
     	//entreeUti.getText().getCoordonees 
     	// TODO fonction recuperant les coordonnees du pion qui doit bouger et la ou il doit bouger; ( get chartAt + StringBuilder)
     	//TODO appel fonction bouger pion + verfication coordonnes donnees etc
@@ -284,4 +281,4 @@ public class interfaceAppliController {
     
     
 
-}
+//}

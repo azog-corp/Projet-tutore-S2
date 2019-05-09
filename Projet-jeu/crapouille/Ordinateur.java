@@ -7,7 +7,6 @@ package crapouille;
 import java.util.ArrayList;
 
 import crapouille.Pion;
-import crapouille.Plateau;
 
 /**
  * Class de l'objet ordinateur(IA)
