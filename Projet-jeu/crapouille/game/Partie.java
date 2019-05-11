@@ -7,6 +7,7 @@ package crapouille.game;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import crapouille.Ordinateur;
@@ -34,6 +35,21 @@ public class Partie {
 	 * 
 	 */
 	public static int choixConfiguration = 0;
+	
+	/**
+	 * ArrayList contenant toutes les configurations existantes
+	 */
+	private static ArrayList<Configuration> listConfiguration;
+	
+	/**
+	 * Configuration appartenant à listConfiguration
+	 */
+	private static Configuration configuration;
+	
+	/**
+	 * Ajout de l'entrée courante
+	 */
+	private static Scanner entree = new Scanner(System.in);
 
 
 	//TODO BOUGER DE LA 
@@ -45,11 +61,6 @@ public class Partie {
 	public static void setChoixConfiguration(int choix) {
 		Partie.choixConfiguration = choix;
 	}
-
-	/**
-	 * Ajout de l'entrée courante
-	 */
-	private static Scanner entree = new Scanner(System.in);
 
 
 	/**
