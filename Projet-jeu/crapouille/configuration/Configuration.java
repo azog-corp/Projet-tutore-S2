@@ -1,7 +1,7 @@
 /**
  * 
  */
-package crapouille.initialisation;
+package crapouille.configuration;
 
 /**
  * @author Azog
