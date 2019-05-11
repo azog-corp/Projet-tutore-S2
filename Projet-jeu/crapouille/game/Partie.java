@@ -4,8 +4,11 @@
  */
 package crapouille.game;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -32,34 +35,68 @@ public class Partie {
 	public static Pion[][] batracien = new Pion[2][];
 
 	/**
-	 * 
+	 * création des variables utilisé pour
+	 * l'interface
 	 */
-	public static int choixConfiguration = 0;
-	
+	public static int choixConfiguration = 0,
+			choixModeDeJeu,
+			ligne,
+			colonne;
+
 	/**
 	 * ArrayList contenant toutes les configurations existantes
 	 */
 	private static ArrayList<Configuration> listConfiguration;
-	
+
 	/**
 	 * Configuration appartenant à listConfiguration
 	 */
 	private static Configuration configuration;
-	
+
 	/**
 	 * Ajout de l'entrée courante
 	 */
 	private static Scanner entree = new Scanner(System.in);
 
 
-	//TODO BOUGER DE LA 
+
+	public static int getChoixModeDeJeu() {
+		return choixModeDeJeu;
+	}
+
+
+	public static void setChoixModeDeJeu(int choixModeDeJeu) {
+		Partie.choixModeDeJeu = choixModeDeJeu;
+	}
+
+
+	public static int getLigne() {
+		return ligne;
+	}
+
+
+	public static void setLigne(int ligne) {
+		Partie.ligne = ligne;
+	}
+
+
+	public static int getColonne() {
+		return colonne;
+	}
+
+
+	public static void setColonne(int colonne) {
+		Partie.colonne = colonne;
+	}
+
+
 	public static int getChoixConfiguration() {
 		return choixConfiguration;
 	}
 
 
 	public static void setChoixConfiguration(int choix) {
-		Partie.choixConfiguration = choix;
+		choixConfiguration = choix;
 	}
 
 
@@ -71,8 +108,6 @@ public class Partie {
 	public static void initPlateau(int ligne, int colonne) {
 		plateau = new Plateau(ligne, colonne);
 	}
-
-	Configuration init = null;
 
 	/**
 	 * Réplique (à modifier bien sur si on veut pas avoir 0)
@@ -91,6 +126,36 @@ public class Partie {
 
 						"Chosi 1, 2, 3"
 		};
+
+	@SuppressWarnings("unchecked")
+	public static void initConfig() {
+		try(ObjectInputStream fichier = new ObjectInputStream(new FileInputStream("crapouille/configuration/configuration.bin"))) {           
+
+			// lecture de l'objet contenu dans le fichier
+			listConfiguration = (ArrayList<Configuration>) fichier.readObject();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public static void saveConfig() {
+		// création et ouverture du fichier NOM_FICHIER_PAIRE
+		try(ObjectOutputStream fichier = new ObjectOutputStream(new FileOutputStream("crapouille/configuration/configuration.bin"))) {
+
+			// on écrit l'objet argument dans le fichier
+			fichier.writeObject(listConfiguration); 
+
+		}  catch (IOException erreur) {
+			// une erreur s'est produite lors de l'accès au fichier
+		}
+	}
 
 	/**
 	 * Initialise le tableau de grenouilles
