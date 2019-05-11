@@ -12,7 +12,7 @@ import java.util.Scanner;
 import crapouille.Ordinateur;
 import crapouille.Pion;
 import crapouille.Plateau;
-import crapouille.initialisation.Configuration;
+import crapouille.configuration.Configuration;
 
 /**
  * class avec toute les fonctionalité permettant de faire une partie
