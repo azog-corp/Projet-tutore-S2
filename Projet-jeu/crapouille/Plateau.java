@@ -72,8 +72,12 @@ public class Plateau {
 	 */
 	public String afficherJeu() {
 		StringBuilder plateauString = new StringBuilder();
+		plateauString.append(" |");
+		for (int z = 0 ; z < this.colonne ; z++) {
+			plateauString.append(z+1 + " | ");
+		}
 		for (int x = 0 ; x < this.ligne ; x++) {
-			plateauString.append("\n|");
+			plateauString.append("\n" + (x+1) + " |");
 			for (int y = 0 ; y < this.colonne ; y++) {
 				if (plateau[x][y] != null) {
 					if (plateau[x][y].isCrapaud()) {
