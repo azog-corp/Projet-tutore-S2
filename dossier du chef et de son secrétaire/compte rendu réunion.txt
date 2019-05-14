@@ -24,3 +24,12 @@ Résumé de la réunion 17/04/19
 -	La sauvegarde des config doit être systématique
 -	Supprimer la classe outilAction
 -	Faire interface
+
+Réunion projet 14/05/2019
+
+-	Faut pas faire une IA qui encule tout le temps le joueur
+-	Mettre un module controle qualité du code
+-	Préciser les tâches sur les 10 prochains jours
+-	Travailler à deux (sur la meme machine)
+-	Il faut arreter de tout faire en CM
+-	Tout discuter en groupe

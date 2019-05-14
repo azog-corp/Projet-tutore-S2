@@ -127,7 +127,7 @@ public class TestPion {
 		
 		/* Test d'avancement pour un crapaud sans être bloqué */
 		ligneDebut = pionTest1.getLigne();
-		pionTest1.setColonne(0, jeuTest);
+		pionTest1.setColonne(jeuTest);
 		ligneFin = pionTest1.getLigne();
 		if ((ligneDebut + 1 ) != ligneFin ) {
 			nbEchec++;
@@ -135,7 +135,7 @@ public class TestPion {
 		
 		/* Test si un crapaud avancé s'il y a u pion devant lui */
 		ligneDebut = pionTest2.getLigne();
-		pionTest2.setColonne(0, jeuTest);
+		pionTest2.setColonne(jeuTest);
 		ligneFin = pionTest2.getLigne();
 		if ((ligneDebut + 2 ) != ligneFin ) {
 			nbEchec++;
@@ -143,7 +143,7 @@ public class TestPion {
 		
 		/* Test quand un crapaud est bloqué par deux autre Pion */
 		ligneDebut = pionTest4.getLigne();
-		pionTest4.setColonne(0, jeuTest);
+		pionTest4.setColonne(jeuTest);
 		ligneFin = pionTest4.getLigne();
 		if (ligneDebut != ligneFin ) {
 			nbEchec++;
@@ -151,7 +151,7 @@ public class TestPion {
 		
 		/*test si le pion est arriver à  la fin */
 		ligneDebut = pionTest7.getLigne();
-		pionTest7.setColonne(4, jeuTest);
+		pionTest7.setColonne(jeuTest);
 		ligneFin = pionTest7.getLigne();
 		if (ligneDebut != ligneFin ) {
 			nbEchec++;
@@ -159,7 +159,7 @@ public class TestPion {
 		
 		/* Test d'avancement pour un crapaud sans être bloqué */
 		ligneDebut = pionTest8.getLigne();
-		pionTest8.setColonne(0, jeuTest);
+		pionTest8.setColonne(jeuTest);
 		ligneFin = pionTest8.getLigne();
 		if ((ligneDebut - 1 ) != ligneFin ) {
 			nbEchec++;
@@ -167,7 +167,7 @@ public class TestPion {
 		
 		/* Test si un crapaud avancé s'il y a u pion devant lui */
 		ligneDebut = pionTest10.getLigne();
-		pionTest10.setColonne(0, jeuTest);
+		pionTest10.setColonne(jeuTest);
 		ligneFin = pionTest10.getLigne();
 		if ((ligneDebut - 2 ) != ligneFin ) {
 			nbEchec++;
@@ -175,7 +175,7 @@ public class TestPion {
 		
 		/* Test quand un crapaud est bloqué par deux autre Pion */
 		ligneDebut = pionTest13.getLigne();
-		pionTest13.setColonne(0, jeuTest);
+		pionTest13.setColonne(jeuTest);
 		ligneFin = pionTest13.getLigne();
 		if (ligneDebut != ligneFin ) {
 			nbEchec++;
@@ -183,7 +183,7 @@ public class TestPion {
 		
 		/*test si le pion est arriver à  la fin */
 		ligneDebut = pionTest14.getLigne();
-		pionTest14.setColonne(0, jeuTest);
+		pionTest14.setColonne(jeuTest);
 		ligneFin = pionTest14.getLigne();
 		if (ligneDebut != ligneFin ) {
 			nbEchec++;

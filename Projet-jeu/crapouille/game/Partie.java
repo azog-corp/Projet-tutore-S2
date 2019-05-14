@@ -386,8 +386,6 @@ public class Partie {
 	 * @return
 	 */
 	public static int tourJoueur(int tourEquipe) {
-		int ligne = -1, // ligne d'un pion
-				colonne = -1; // Ordonnée d'un pion
 		// On affiche le tableau
 		System.out.println(plateau.afficherJeu());
 		System.out.println("\nChosi ton batracien parmi les suivants x y");
