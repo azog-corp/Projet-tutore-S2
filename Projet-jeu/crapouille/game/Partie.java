@@ -433,65 +433,8 @@ public class Partie {
 	/**
 	 * 
 	 */
-	public static Configuration createOrDeleteConfig() {
-
-		do {
-			// TODO : mettre une valeure à ligne
-			if (ligne <= 0 || ligne > 20) {
-			}
-		} while (ligne <= 0 || ligne > 20);
-		do {
-			// TODO : mettre une valeure à colonne
-			if (colonne <= 0 || colonne > 20) {
-			}
-		} while (colonne <= 0 || colonne > 20);
-		do {
-			// TODO : mettre une valeure à nbPion
-			if (nbPion <= 0 || nbPion >= ligne * colonne - colonne || nbPion % 2 == 1) {
-				nbPion = 0;
-			}
-		} while (nbPion == 0);
-
-		int abscisse = ligne,
-				ordonnee = colonne;
-
-		int[][] coGrenouille = new int[2][nbPion],
-				coCrapaud = new int [2][nbPion];
-
-		for (int x = 0; x < nbPion ; x++) {
-			boolean pionJuste = true;
-			do {
-				System.out.println("ligne : ");
-				// TODO : mettre une valeur à ligne
-				System.out.println("colonne : ");
-				// TODO : mettre une valeur à colonne
-				if (ligne < 0 || colonne < 0) {
-					pionJuste = false;
-				}
-				if (pionJuste) {
-					coGrenouille[0][x] = ligne;
-					coGrenouille[1][x] = colonne;
-				}
-			} while (!pionJuste);
-		}
-
-		for (int x = 0; x < nbPion ; x++) {
-			boolean pionJuste = true;
-			do {
-				System.out.println("ligne : ");
-				// TODO : mettre une valeur à ligne
-				System.out.println("colonne : ");
-				// TODO : mettre une valeur à colonne
-				if (ligne < 0 || colonne < 0) {
-					pionJuste = false;
-				} 
-				if (pionJuste) {
-					coCrapaud[0][x] = ligne;
-					coCrapaud[1][x] = colonne;
-				}
-			} while (!pionJuste);	
-		}
-		return new Configuration(abscisse, ordonnee, nbPion, coGrenouille, coCrapaud);
+	public static Configuration createOrDeleteConfig(char choix) {
+		//TODO REFAIRE
 	}
 
 	/**
@@ -513,9 +456,6 @@ public class Partie {
 				do {
 					tourJoueur(2);
 				} while (!victoire(batracien[0]) && !victoire(batracien[1]));
-			} else if (choixModeDeJeu == 3) {
-				//TODO WTF QUEST CE QUE CEST QUE SA
-				createOrDeleteConfig();
 			}
 		} while (choixModeDeJeu != 4);
 	}
