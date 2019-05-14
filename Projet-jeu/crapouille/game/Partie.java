@@ -235,13 +235,14 @@ public class Partie {
 
 	public static void saveConfig() {
 		// création et ouverture du fichier NOM_FICHIER_PAIRE
-		try(ObjectOutputStream fichier = new ObjectOutputStream(new FileOutputStream("crapouille/configuration/configuration.bin"))) {
+		try(ObjectOutputStream fichier = new ObjectOutputStream(new FileOutputStream("crapouille/configuration/listeCconfiguration.bin"))) {
 
 			// on écrit l'objet argument dans le fichier
 			fichier.writeObject(listConfiguration); 
 
 		}  catch (IOException erreur) {
 			// une erreur s'est produite lors de l'accès au fichier
+			System.out.println("Erreur");
 		}
 	}
 
