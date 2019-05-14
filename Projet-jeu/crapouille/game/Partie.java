@@ -34,16 +34,41 @@ public class Partie {
 	public static Pion[][] batracien = new Pion[2][];
 
 	/**
-	 * création des variables utilisé pour
-	 * l'interface
+	 * Valeure qui signifie quelle configuration prédéfini
+	 * l'utilisateur souhaite charger
 	 */
-	public static int choixConfiguration = 0,
-			choixModeDeJeu,
-			choixDifficulte,
-			ligne,
-			colonne,
-			nbPion;
+	public static int choixConfiguration = 0;
 	
+	/**
+	 * Valeure qui signifie quelle mode de jeu
+	 * l'utilisateur souhaite charger
+	 */
+	public static int choixModeDeJeu = 0;
+	
+	/**
+	 * Valeur qui détermine si la deuxième entité est
+	 * un humain ou une IA et son niveau de difficulté
+	 */
+	public static int choixDifficulte = 0;
+	
+	/**
+	 * Valeure d'une ligne du plateau
+	 */
+	public static int ligne = 0;
+	
+	/**
+	 * Valeure d'une colonne du plateau
+	 */
+	public static int colonne = 0;
+	
+	/**
+	 * Nombre de pion présent sur le plateau
+	 */
+	public static int nbPion = 0;
+
+	/**
+	 * Tableau contenant le nom des deux équipes
+	 */
 	public static String[] equipe = new String[2];
 
 	/**
@@ -53,72 +78,105 @@ public class Partie {
 
 	/**
 	 * Configuration appartenant à listConfiguration
+	 * et qui est celle sur laquelle l'utilisateur
+	 * joue une partie
 	 */
 	private static Configuration configuration;
 
-
+	/**
+	 * @return choixModeDeJeu
+	 */
 	public static int getChoixModeDeJeu() {
 		return choixModeDeJeu;
 	}
 
-
+	/**
+	 * @param choixModeDeJeu la nouvelle valeure choixModeDeJeu
+	 */
 	public static void setChoixModeDeJeu(int choixModeDeJeu) {
 		Partie.choixModeDeJeu = choixModeDeJeu;
 	}
 
-
+	/**
+	 * @return ligne
+	 */
 	public static int getLigne() {
 		return ligne;
 	}
 
-
+	/**
+	 * @param ligne la nouvelle valeure de ligne
+	 */
 	public static void setLigne(int ligne) {
 		Partie.ligne = ligne;
 	}
 
-
+	/**
+	 * @return colonne
+	 */
 	public static int getColonne() {
 		return colonne;
 	}
 
-
+	/**
+	 * @param colonne la nouvelle valeure de colonne
+	 */
 	public static void setColonne(int colonne) {
 		Partie.colonne = colonne;
 	}
 
-
+	/**
+	 * @return getChoixConfiguration
+	 */
 	public static int getChoixConfiguration() {
 		return choixConfiguration;
 	}
 
-
+	/**
+	 * @param choix la nouvelle valeure de choix
+	 */
 	public static void setChoixConfiguration(int choix) {
 		choixConfiguration = choix;
 	}
 
+	/**
+	 * @return nbPion
+	 */
 	public static int getNbPion() {
 		return nbPion;
 	}
 
-
+	/**
+	 * @param nbPion la nouvelle valeur de nbPion
+	 */
 	public static void setNbPion(int nbPion) {
 		Partie.nbPion = nbPion;
 	}
 
+	/**
+	 * @return getChoixDifficulte
+	 */
 	public static int getChoixDifficulte() {
 		return choixDifficulte;
 	}
-	
+
+	/**
+	 * @return equipe
+	 */
 	public static String[] getEquipe() {
 		return equipe;
 	}
 
-
+	/**
+	 * @param equipe la nouvelle valeure d'une case
+	 */
 	public static void setEquipe(String[] equipe) {
 		Partie.equipe = equipe;
 	}
 
-
+	/**
+	 * @param choixDifficulte la nouvelle valeure de choixDifficulte
+	 */
 	public static void setChoixDifficulte(int choixDifficulte) {
 		Partie.choixDifficulte = choixDifficulte;
 	}
@@ -151,12 +209,11 @@ public class Partie {
 						"Chosi 1, 2, 3"
 		};
 
-	@SuppressWarnings("unchecked")
 	public static void initConfig() {
-		try(ObjectInputStream fichier = new ObjectInputStream(new FileInputStream("crapouille/configuration/configuration.bin"))) {           
+		try(ObjectInputStream fichier = new ObjectInputStream(new FileInputStream("crapouille/configuration/default.bin"))) {           
 
 			// lecture de l'objet contenu dans le fichier
-			listConfiguration = (ArrayList<Configuration>) fichier.readObject();
+			configuration = (Configuration) fichier.readObject();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -167,7 +224,7 @@ public class Partie {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		configuration = listConfiguration.get(0);
+		listConfiguration.add(configuration);
 	}
 
 	public static void saveConfig() {
@@ -533,6 +590,8 @@ public class Partie {
 	 */
 	public static void crapouille() {
 
+		initConfig();
+		saveConfig();
 		System.out.println(repliques[0]);
 
 		do {
