@@ -13,7 +13,7 @@ import crapouille.Pion;
 public class Plateau {
 
 	/**
-	 *  ligne et ordonnée correspondent à la taille du tableau
+	 *  ligne et colonne correspondent à la taille du tableau
 	 */ 
 	private int ligne,
 	            colonne;
@@ -29,6 +29,7 @@ public class Plateau {
 	 * @param colonne nombre de collone 
 	 */
 	public Plateau(int ligne, int colonne) {
+		/* Vérification taille du tableau est valide */
 		if (ligne < 0 || colonne < 0) {
 			throw new RuntimeException ("Les coordonnées doivent être positives");
 		}
@@ -38,7 +39,7 @@ public class Plateau {
 	}
 
 	/**
-	 * Fonction renvoyant le tableau de pion du plateau 
+	 * Fonction renvoyant un tableau de pion 
 	 * @return plateau, un tableau contenant les pions du plateau
 	 */
 	public Pion[][] getPlateau() {
