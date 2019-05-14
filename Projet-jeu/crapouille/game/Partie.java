@@ -572,12 +572,6 @@ public class Partie {
 				}
 			} while (!pionJuste);	
 		}
-
-		System.out.printf("\nLe plateau sera composé :\n" 
-				+ "- %d" + " lignes\n"
-				+ "- %d" + " colonnes\n"
-				+ "- %d" + " pions\n", ligne, colonne, nbPion);	
-
 		return new Configuration(ligne, colonne, nbPion, coGrenouille, coCrapaud);
 	}
 
@@ -589,9 +583,9 @@ public class Partie {
 
 		initConfig();
 		saveConfig();
-		System.out.println("1, 2, 3 ou 4");
 
 		do {
+			System.out.println("1, 2, 3 ou 4");
 			// TODO : mettre une valeur à choixModeDeJeu
 			if (choixModeDeJeu == 1) {
 				System.out.println("0 contre joueur, l'ia marche pas");
@@ -609,7 +603,7 @@ public class Partie {
 				initBloque();
 				System.out.println("Initialisation créé");
 			} else {
-				System.out.println(repliques[3]);
+				System.out.println("Erreur !");
 			}
 		} while (choixModeDeJeu != 4);
 	}
