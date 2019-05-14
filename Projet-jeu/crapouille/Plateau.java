@@ -29,10 +29,6 @@ public class Plateau {
 	 * @param colonne nombre de collone 
 	 */
 	public Plateau(int ligne, int colonne) {
-		/* Vérification taille du tableau est valide */
-		if (ligne < 0 || colonne < 0) {
-			throw new RuntimeException ("Les coordonnées doivent être positives");
-		}
 		this.ligne = ligne;
 		this.colonne = colonne;
 		this.plateau = new Pion[ligne][colonne];
