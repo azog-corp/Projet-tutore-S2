@@ -24,29 +24,16 @@ import javafx.scene.text.Text;
 
 public class interfaceAppliController {
 
-	  @FXML
-	    private AnchorPane gameBoard;
+	    @FXML
+	    private AnchorPane configuration,backpanel,score,createur,menu,gameBoard;
 
 	    @FXML
-	    private AnchorPane configuration;
+	    private Button okGameBoard,quittermenu,
+		    confirmationJouer,jouermenu,retourMenu,
+		    retourMenu,aidemenu,settingsBar;
 
 	    @FXML
-	    private AnchorPane backpanel;
-
-	    @FXML
-	    private Button okGameBoard;
-
-	    @FXML
-	    private ImageView btn_createur;
-
-	    @FXML
-	    private ImageView btn_mvp;
-
-	    @FXML
-	    private AnchorPane score;
-
-	    @FXML
-	    private Button quittermenu;
+	    private ImageView btn_createur,btn_mvp,btn_quitter,btn_acceuil;
 
 	    @FXML
 	    private ToggleGroup lvlIA;
@@ -55,70 +42,18 @@ public class interfaceAppliController {
 	    private Slider sliderTaille;
 
 	    @FXML
-	    private AnchorPane createur;
+	    private Label gameBoardString,lb_nomJ1,lb_nomJ2,
+			  lb_lvlIa,labelIA,nomMVP;
 
 	    @FXML
-	    private Button confirmationJouer;
+	    private RadioButton lvl2,lvl3;
 
 	    @FXML
-	    private Button jouermenu;
+	    private TextField tb_nomJ2,tb_nomJ1,entreeUti;
 
 	    @FXML
-	    private Label gameBoardString;
+	    private CheckBox chk_vsIA,chk_casseT;
 
-	    @FXML
-	    private ImageView btn_quitter;
-
-	    @FXML
-	    private RadioButton lvl2;
-
-	    @FXML
-	    private RadioButton lvl3;
-
-	    @FXML
-	    private Button retourMenu;
-
-	    @FXML
-	    private Label lb_nomJ1;
-
-	    @FXML
-	    private TextField tb_nomJ2;
-
-	    @FXML
-	    private ImageView btn_acceuil;
-
-	    @FXML
-	    private Label lb_nomJ2;
-
-	    @FXML
-	    private CheckBox chk_vsIA;
-
-	    @FXML
-	    private TextField tb_nomJ1;
-
-	    @FXML
-	    private AnchorPane menu;
-
-	    @FXML
-	    private Button aidemenu;
-
-	    @FXML
-	    private AnchorPane settingsBar;
-
-	    @FXML
-	    private Label lb_lvlIa;
-
-	    @FXML
-	    private Label labelIA;
-
-	    @FXML
-	    private CheckBox chk_casseT;
-
-	    @FXML
-	    private Label nomMVP;
-
-	    @FXML
-	    private TextField entreeUti;
 
 	    @FXML
 	    private Text scoreMVP;
@@ -274,7 +209,7 @@ public class interfaceAppliController {
     }
     
     //TODO fonction pour placer chaque element dans le grid pane et le rendre iteractif
-    //Idee recuperer coordonnées grid pane + largeur longueur la diviser par le nombre d'arguments et creer des des maps
+    //Idee recuperer coordonnÃ©es grid pane + largeur longueur la diviser par le nombre d'arguments et creer des des maps
     // Au click appel fonction pour deplacer au coordonnes
     // Probleme comment savoir quelle case correspond a quoi
     //Creer bouton a la place mais comment definir quel bouton et quoi
