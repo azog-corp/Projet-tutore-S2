@@ -38,7 +38,7 @@ public class Partie {
 	 * l'utilisateur souhaite charger
 	 */
 	public static int choixConfiguration = 0;
-	
+
 	/**
 	 * Valeur qui signifie quelle est le mode de jeu
 	 * que l'utilisateur souhaite charger
@@ -46,7 +46,7 @@ public class Partie {
 	 * 1 = versus
 	 */
 	public static int choixModeDeJeu = 0;
-	
+
 	/**
 	 * Valeur qui détermine si la deuxième entité est
 	 * un humain ou une IA et son niveau de difficulté
@@ -56,17 +56,17 @@ public class Partie {
 	 * 3 correspondra a une ia de niveau 3
 	 */
 	public static int choixAdversaire = 0;
-	
+
 	/**
 	 * Valeure d'une ligne du plateau
 	 */
 	public static int ligne = 0;
-	
+
 	/**
 	 * Valeure d'une colonne du plateau
 	 */
 	public static int colonne = 0;
-	
+
 	/**
 	 * Nombre de pion présent sur le plateau
 	 */
@@ -196,7 +196,7 @@ public class Partie {
 	public static void initPlateau(int ligne, int colonne) {
 		plateau = new Plateau(ligne, colonne);
 	}
-	
+
 	public static void initConfig() {
 		try(ObjectInputStream fichier = new ObjectInputStream(new FileInputStream("crapouille/configuration/default.bin"))) {           
 
@@ -338,20 +338,6 @@ public class Partie {
 	}
 
 	/**
-	 * Affiche tous les pions déplaçable
-	 * @param pion crapaud ou grnouille
-	 */
-	public static void choixPion(Pion[] pion) {
-		for (int x = 0 ; x < pion.length ; x++) {
-			// Si le pion n'est pas bloqué
-			if (!pion[x].isBloque()) {
-				System.out.print("Pion (" + (pion[x].getLigne()+1) + ";" + (pion[x].getColonne()+1) + ") ");
-			}
-		}
-		System.out.print("\n");
-	}
-
-	/**
 	 * Vérifie si un pion existe
 	 * @param equipe équipe du pion
 	 * @param ligne ligne du pion
@@ -375,19 +361,7 @@ public class Partie {
 	 * @return
 	 */
 	public static int tourJoueur(int tourEquipe) {
-		// On affiche le tableau
-		System.out.println(plateau.afficherJeu());
-		System.out.println("\nChoisi ton batracien parmi les suivants x y");
-		// On affiche les pions déplaçable en fonction du mode de jeu
-		if (tourEquipe == 2) {
-			choixPion(batracien[0]);
-			choixPion(batracien[1]);
-		} else {
-			choixPion(batracien[tourEquipe]);
-		}
-		System.out.print("\nLigne : ");
 		// TODO : mettre une valeure à ligne
-		System.out.print("\nColonne : ");
 		// TODO : mettre une valeure à colonne
 		// Si le mode de jeu est joueurVs
 		if (tourEquipe < 2) {
@@ -397,7 +371,6 @@ public class Partie {
 				// On bouge le pion
 				plateau.movePion(pionValide(tourEquipe, ligne, colonne));
 				tourEquipe = tourEquipe == 0 ? 1 : 0;
-				System.out.println("Le pion à été déplacé");
 			}
 			// Si le mode de jeu est casse tête
 		} else if (tourEquipe == 2) {
@@ -406,16 +379,12 @@ public class Partie {
 					!pionValide(tourEquipe, ligne, colonne).isBloque()) {
 				// On bouge le pion
 				plateau.movePion(pionValide(0, ligne, colonne));
-				System.out.println("Le pion à été déplacé");
 				// Si le crapaud existe et qu'il n'est pas bloqué
 			} else if (pionValide(1, ligne, colonne) != null &&
 					!pionValide(1, ligne, colonne).isBloque()) {
 				// On bouge le pion
 				plateau.movePion(pionValide(1, ligne, colonne));
-				System.out.println("Le pion à été déplacé");
 			}
-		} else {
-			System.out.println("Le pion est bloqué ou invalide");
 		}
 		return tourEquipe;
 	}
@@ -430,23 +399,20 @@ public class Partie {
 	 * @param ordinateur détermine si le joueur joue contre un humain
 	 * et si non, le niveau de difficulté de l'IA
 	 */
-	
+
 	//TODO BOOLEAN PLUS ADAPTE POUR SAVOIR SI ordi ?
 	//
 	public static void joueurVs(int ordinateur) {
 		// Tableau contenant les nom des deux équipes
 		String[] equipe = new String[2];
 		int tourEquipe = 0; // Numéro de l'équipe dont c'est le tour
-		System.out.println("AVANCEMENT EN COURS: Sélection nom équipe Crapaud...");
 		// TODO : mettre une valeure à equipe[0]
 		// Si aucun nom n'est rentré, le nom par défault est Grenouille
 		equipe[0] = equipe[0].length() == 0 ? "Grenouille" : equipe[0];
-		System.out.println("AVANCEMENT EN COURS: Sélection nom équipe Grenouille...");
 		// TODO : mettre une valeure à equipe[1]
 		// Si aucun nom n'est rentré, le nom par défault est Crapaud
 		equipe[1] = equipe[1].length() == 0 ? "Crapaud" : equipe[1];
 		do {
-			System.out.println("\nC'est au tour de l'équipe " + equipe[tourEquipe]);
 			if (tourEquipe == 0) {
 				do {
 					tourEquipe = tourJoueur(tourEquipe);
@@ -462,28 +428,6 @@ public class Partie {
 				} while(tourEquipe == 1);
 			}
 		} while(!victoire(batracien[0]) || !victoire(batracien[1]));
-		if (victoire(batracien[0])) {
-			System.out.println("Victoire de l'équipe " + equipe[0] + "avec les grenouilles");
-		} else {
-			System.out.println("Victoire de l'équipe " + equipe[1] + "avec les crapauds");
-		}
-	}
-
-	/**
-	 * Lance une partie de casse tête.
-	 * Le joueur pourra déplacer tous les pions du plateau
-	 * La partie ce termine quand tous les batraciens sont sur les coté du plateau
-	 */
-	private static void casseTete() {
-		System.out.println("AVANCEMENT EN COURS: Sélection mode jeu casse tête...");
-		do {
-			tourJoueur(2);
-		} while (!victoire(batracien[0]) && !victoire(batracien[1]));
-		if (victoireCasseTete()) {
-			System.out.println("AVANCEMENT EN COURS: Fin de partie Victoire...");
-		} else {
-			System.out.println("AVANCEMENT EN COURS: Fin de partie Défaite...");
-		}
 	}
 
 	/**
@@ -491,30 +435,19 @@ public class Partie {
 	 */
 	public static Configuration createOrDeleteConfig() {
 
-		System.out.print("Entrez le nombre de lignes du plateau (entre 1 et 20) : ");
 		do {
 			// TODO : mettre une valeure à ligne
 			if (ligne <= 0 || ligne > 20) {
-				System.out.println("Erreur !\nEntrer un nombre de colonnes positifs et non nul :\nEx : 6 ou 10"
-						+ "\nAttention le plateau est limité à 20 colonnes");
 			}
 		} while (ligne <= 0 || ligne > 20);
-
-		System.out.print("Entrez le nombre de colonnes du plateau (entre 1 et 20) : ");
 		do {
 			// TODO : mettre une valeure à colonne
 			if (colonne <= 0 || colonne > 20) {
-				System.out.println("Erreur !\nEntrer un nombre de colonnes positifs et non nul :\nEx : 6 ou 10"
-						+ "\nAttention le plateau est limité à 20 colonnes");	
 			}
 		} while (colonne <= 0 || colonne > 20);
-
-		System.out.print("Entrez le nombre de pions présents sur le plateau : ");
 		do {
 			// TODO : mettre une valeure à nbPion
 			if (nbPion <= 0 || nbPion >= ligne * colonne - colonne || nbPion % 2 == 1) {
-				System.out.println("Erreur !\nEntrer un nombre de pions positifs pair et non nul :\nEx : 6 ou 10\n"
-						+ "Compris entre 0 et " + (ligne * colonne - colonne));
 				nbPion = 0;
 			}
 		} while (nbPion == 0);
@@ -527,14 +460,12 @@ public class Partie {
 
 		for (int x = 0; x < nbPion ; x++) {
 			boolean pionJuste = true;
-			System.out.println("Entrez les coordonnées de la grenouille " + (x+1));
 			do {
 				System.out.println("ligne : ");
 				// TODO : mettre une valeur à ligne
 				System.out.println("colonne : ");
 				// TODO : mettre une valeur à colonne
 				if (ligne < 0 || colonne < 0) {
-					System.out.println("Les coordonnées doivent être positives");
 					pionJuste = false;
 				}
 				if (pionJuste) {
@@ -546,14 +477,12 @@ public class Partie {
 
 		for (int x = 0; x < nbPion ; x++) {
 			boolean pionJuste = true;
-			System.out.println("Entrez les coordonnées du crapaud " + (x+1));
 			do {
 				System.out.println("ligne : ");
 				// TODO : mettre une valeur à ligne
 				System.out.println("colonne : ");
 				// TODO : mettre une valeur à colonne
 				if (ligne < 0 || colonne < 0) {
-					System.out.println("Les coordonnées doivent être positives");
 					pionJuste = false;
 				} 
 				if (pionJuste) {
@@ -562,7 +491,7 @@ public class Partie {
 				}
 			} while (!pionJuste);	
 		}
-		return new Configuration(ligne, colonne, nbPion, coGrenouille, coCrapaud);
+		return new Configuration(abscisse, ordonnee, nbPion, coGrenouille, coCrapaud);
 	}
 
 	/**
@@ -573,26 +502,20 @@ public class Partie {
 
 		initConfig();
 		saveConfig();
-		Configuration confif = listConfiguration.get(0);
-		initPlateau(confif.getLigne(), confif.getColonne());
-		initGrenouille(confif.getNbPion(), confif.getCoGrenouille());
-		initCrapaud(confif.getNbPion(), confif.getCoCrapaud());
-		initBloque();
-		
+
 		do {
-			System.out.println("1, 2, 3 ou 4");
 			// TODO : mettre une valeur à choixModeDeJeu
 			if (choixModeDeJeu == 1) {
 				System.out.println("1, 2, 3 ou 4");
 				// TODO : mettre une valeur à choixAdversaire
 				joueurVs(choixAdversaire);
 			} else if (choixModeDeJeu == 2) {
-				casseTete();
+				do {
+					tourJoueur(2);
+				} while (!victoire(batracien[0]) && !victoire(batracien[1]));
 			} else if (choixModeDeJeu == 3) {
 				//TODO WTF QUEST CE QUE CEST QUE SA
 				createOrDeleteConfig();
-			} else {
-				System.out.println("Erreur !");
 			}
 		} while (choixModeDeJeu != 4);
 	}
