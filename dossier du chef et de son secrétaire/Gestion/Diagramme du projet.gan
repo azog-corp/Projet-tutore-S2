@@ -42,10 +42,10 @@
         <task id="1" name="Codage de l'objet Plateau" meeting="false" start="2019-04-19" duration="5" complete="0" expand="true">
             <depend id="25" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="24" name="Codage de la configuration" meeting="false" start="2019-04-19" duration="6" complete="0" expand="true">
+        <task id="24" name="Codage de la configuration" meeting="false" start="2019-04-19" duration="5" complete="0" expand="true">
             <depend id="25" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="25" name="Codage du jeu sur console" color="#8cb6ce" meeting="false" start="2019-04-29" duration="5" complete="0" expand="true"/>
+        <task id="25" name="Codage du jeu sur console" color="#8cb6ce" meeting="false" start="2019-04-26" duration="6" complete="0" expand="true"/>
         <task id="4" name="Création de l'interface" meeting="false" start="2019-04-19" duration="11" complete="0" expand="true"/>
     </tasks>
     <resources/>
