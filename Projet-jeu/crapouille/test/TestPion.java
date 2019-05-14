@@ -13,33 +13,33 @@ public class TestPion {
     static Plateau plateau = new Plateau(4, 9);
     
     /* initialisation des pions pour les test */
-    static Pion pionTest1 = new Pion(0, 1, true, plateau);
+    static Pion pionTest1 = new Pion(0, 1, true);
 
-	static Pion pionTest2 = new Pion(0, 2, true, plateau);
+	static Pion pionTest2 = new Pion(0, 2, true);
 
-	static Pion pionTest3 = new Pion(1, 2, false, plateau);
+	static Pion pionTest3 = new Pion(1, 2, false);
 
-	static Pion pionTest4 = new Pion(0, 3, true, plateau);
+	static Pion pionTest4 = new Pion(0, 3, true);
 
-	static Pion pionTest5 = new Pion(1, 3, false, plateau);
+	static Pion pionTest5 = new Pion(1, 3, false);
 
-	static Pion pionTest6 = new Pion(2, 3, false, plateau);
+	static Pion pionTest6 = new Pion(2, 3, false);
 
-	static Pion pionTest7 = new Pion(4, 4, true, plateau);
+	static Pion pionTest7 = new Pion(4, 4, true);
 
-	static Pion pionTest8 = new Pion(4, 5, false, plateau);
+	static Pion pionTest8 = new Pion(4, 5, false);
 
-	static Pion pionTest9 = new Pion(3, 6, true, plateau);
+	static Pion pionTest9 = new Pion(3, 6, true);
 
-	static Pion pionTest10 = new Pion(4, 6, false, plateau);
+	static Pion pionTest10 = new Pion(4, 6, false);
 
-	static Pion pionTest11 = new Pion(2, 7, true, plateau);
+	static Pion pionTest11 = new Pion(2, 7, true);
 
-	static Pion pionTest12 = new Pion(3, 7, true, plateau);
+	static Pion pionTest12 = new Pion(3, 7, true);
 
-	static Pion pionTest13 = new Pion(4, 7, false, plateau);
+	static Pion pionTest13 = new Pion(4, 7, false);
 
-	static Pion pionTest14 = new Pion(0, 8, false, plateau);
+	static Pion pionTest14 = new Pion(0, 8, false);
          
     
     
@@ -112,7 +112,7 @@ public class TestPion {
 			} while(!entree.hasNextBoolean());
 			
 			/* initialise un pion avec les valeur rentré au dessus */
-			pionTest = new Pion(ligne, colonne, crapaud, plateau);
+			pionTest = new Pion(ligne, colonne, crapaud);
 			/* affiche les coordonné des pion rentré par l'utilisateur ou un pion avec les valeurs initialisé */
 			System.out.println(pionTest);
 		}

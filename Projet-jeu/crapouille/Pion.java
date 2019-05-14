@@ -25,11 +25,7 @@ public class Pion {
 	 * @param plateau, permet de vérifier que les coordonnées du pion
 	 * sont incluses dans le plateau
 	 */
-	public Pion(int ligne, int colonne, boolean crapaud, Plateau plateau) {
-		if (ligne < 0 || ligne > plateau.getLigne() ||
-				colonne < 0 || colonne > plateau.getColonne()) {
-			throw new RuntimeException("Les coordonnées sont invalides");
-		}
+	public Pion(int ligne, int colonne, boolean crapaud) {
 		this.ligne = ligne;
 		this.colonne = colonne;
 		this.crapaud = crapaud;

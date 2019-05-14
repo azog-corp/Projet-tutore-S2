@@ -238,7 +238,7 @@ public class Partie {
 		batracien[0] = new Pion[nbGrenouille];
 		for (int i = 0; i < nbGrenouille; i++) {
 			// On créé les pions
-			batracien[0][i] = new Pion(coordonnee[0][i], coordonnee[1][i], false, plateau);
+			batracien[0][i] = new Pion(coordonnee[0][i], coordonnee[1][i], false);
 			// On met le pion créé sur le plateau
 			plateau.setCase(batracien[0][i]);
 		}
@@ -255,7 +255,7 @@ public class Partie {
 		batracien[1] = new Pion[nbCrapaud];
 		for (int i = 0; i < nbCrapaud; i++) {
 			// On créé les pions
-			batracien[1][i] = new Pion(coordonnee[0][i], coordonnee[1][i], true, plateau);
+			batracien[1][i] = new Pion(coordonnee[0][i], coordonnee[1][i], true);
 			// On initialise le boolean bloque
 			batracien[1][i].setBloque(plateau.getPlateau());
 			// On met le pion créé sur le plateau
@@ -437,7 +437,7 @@ public class Partie {
 		Plateau newConfig = new Plateau(getLigne(), getColonne());
 		Pion[] batracien = new Pion[getNbPion()];
 		for (int x = 0; x < getNbPion(); x++) {
-			Pion pion = new Pion(getLigne(), getColonne(), isCrapaud, newConfig);
+			Pion pion = new Pion(getLigne(), getColonne(), isCrapaud);
 			newConfig.setCase(pion);
 			batracien[x] = pion;
 		}
