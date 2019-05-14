@@ -24,43 +24,113 @@ import javafx.scene.text.Text;
 
 public class interfaceAppliController {
 
-	    @FXML
-	    private AnchorPane configuration,backpanel,score,createur,menu,gameBoard;
+	@FXML
+    private AnchorPane gameBoard;
 
-	    @FXML
-	    private Button okGameBoard,quittermenu,
-		    confirmationJouer,jouermenu,retourMenu,
-		    retourMenu,aidemenu,settingsBar;
+    @FXML
+    private AnchorPane configuration;
 
-	    @FXML
-	    private ImageView btn_createur,btn_mvp,btn_quitter,btn_acceuil;
+    @FXML
+    private AnchorPane backpanel;
 
-	    @FXML
-	    private ToggleGroup lvlIA;
+    @FXML
+    private Button okGameBoard;
 
-	    @FXML
-	    private Slider sliderTaille;
+    @FXML
+    private Button btn_jouermenu;
 
-	    @FXML
-	    private Label gameBoardString,lb_nomJ1,lb_nomJ2,
-			  lb_lvlIa,labelIA,nomMVP;
+    @FXML
+    private ImageView btn_createur;
 
-	    @FXML
-	    private RadioButton lvl2,lvl3;
+    @FXML
+    private ImageView btn_mvp;
 
-	    @FXML
-	    private TextField tb_nomJ2,tb_nomJ1,entreeUti;
+    @FXML
+    private AnchorPane score;
 
-	    @FXML
-	    private CheckBox chk_vsIA,chk_casseT;
+    @FXML
+    private ToggleGroup lvlIA;
 
+    @FXML
+    private Button btn_quittermenu;
 
-	    @FXML
-	    private Text scoreMVP;
+    @FXML
+    private AnchorPane createur;
 
-	    @FXML
-	    private RadioButton lvl1;
+    @FXML
+    private Button confirmationJouer;
 
+    @FXML
+    private Label gameBoardString;
+
+    @FXML
+    private ImageView btn_quitter;
+
+    @FXML
+    private RadioButton lvl2;
+
+    @FXML
+    private RadioButton lvl3;
+
+    @FXML
+    private TextField choixConfig;
+
+    @FXML
+    private Button retourMenu;
+
+    @FXML
+    private Label lb_nomJ1;
+
+    @FXML
+    private TextField tb_nomJ2;
+
+    @FXML
+    private ImageView btn_acceuil;
+
+    @FXML
+    private Label lb_nomJ2;
+
+    @FXML
+    private CheckBox chk_vsIA;
+
+    @FXML
+    private TextField tb_nomJ1;
+
+    @FXML
+    private AnchorPane menu;
+
+    @FXML
+    private AnchorPane settingsBar;
+
+    @FXML
+    private Button btn_aidemenu;
+
+    @FXML
+    private Label lb_lvlIa;
+
+    @FXML
+    private Label labelIA;
+
+    @FXML
+    private Label nomMVP;
+
+    @FXML
+    private CheckBox chk_casseT;
+
+    @FXML
+    private TextField entreeUti;
+
+    @FXML
+    private Text scoreMVP;
+
+    @FXML
+    private ImageView btn_configuration;
+
+    @FXML
+    private AnchorPane configurationPartie;
+
+    @FXML
+    private RadioButton lvl1;
 
     @FXML
     void leave(MouseEvent click) {
@@ -86,18 +156,22 @@ public class interfaceAppliController {
     }
     
     @FXML
-    void choixConf(MouseEvent Click) {
+    void showConfigurationPartie(MouseEvent Click) {
     	reinitialiser();
     	razConfig();
-    	configuration.setVisible(true);
+    	configurationPartie.setVisible(true);
     }
     
-    
+    @FXML
+    void showConfiguration(MouseEvent Click) {
+    	reinitialiser();
+    	configuration.setVisible(true);
+    }
     
     @FXML
     void reinitialiser() {
     	menu.setVisible(false);
-    	configuration.setVisible(false);
+    	configurationPartie.setVisible(false);
     	score.setVisible(false);
     	gameBoard.setVisible(false);
     	createur.setVisible(false);
