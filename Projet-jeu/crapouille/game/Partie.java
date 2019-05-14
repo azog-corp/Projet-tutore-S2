@@ -197,23 +197,6 @@ public class Partie {
 		plateau = new Plateau(ligne, colonne);
 	}
 
-	/**
-	 * Réplique (à modifier bien sur si on veut pas avoir 0)
-	 */
-	private static String[] repliques =
-		{"Bienvenue Crapouile !\nVeut tu faire une partie ou un casse-tête ?"
-				+ "\n - 1 : Jeux\n - 2 : Casse-tête\n - 3 : Configuration\n - 4 : Quitter",
-
-				"Veut tu jouer contre une homme ou mes fidèles laquais ?"
-						+ "\n - 0 : Contre un déveuloppeur aguerri (par défault)"
-						+ "\n - 1 : contre crapus (facile)"
-						+ "\n - 2 : Contre batrus (medium)"
-						+ "\n - 3 : Contre craporitus (difficile)",
-
-						"Tu pensais que \"casse-tête\" c'était une méthaphore ahaha",
-
-						"Chosi 1, 2, 3"
-		};
 
 	public static void initConfig() {
 		try(ObjectInputStream fichier = new ObjectInputStream(new FileInputStream("crapouille/configuration/default.bin"))) {           
@@ -250,7 +233,7 @@ public class Partie {
 	 * @param nbGrenouille taille du tableau
 	 * @param coordonnee des grenouilles sur le plateau
 	 */
-	public static void initGrenouille(int nbGrenouille, int[][] coordonnee) {
+	public static Pion[][] initGrenouille(int nbGrenouille, int[][] coordonnee) {
 		// On créé un tableau de grenouilles
 		batracien[0] = new Pion[nbGrenouille];
 		for (int i = 0; i < nbGrenouille; i++) {
@@ -259,6 +242,7 @@ public class Partie {
 			// On met le pion créé sur le plateau
 			plateau.setCase(batracien[0][i]);
 		}
+		return batracien;
 	}
 
 
@@ -267,7 +251,7 @@ public class Partie {
 	 * @param nbCrapaud taille du tableau
 	 * @param coordonnee des crapauds sur le plateau
 	 */
-	public static void initCrapaud(int nbCrapaud, int[][] coordonnee) {
+	public static Pion[][] initCrapaud(int nbCrapaud, int[][] coordonnee) {
 		// On créé un tableau de crapauds
 		batracien[1] = new Pion[nbCrapaud];
 		for (int i = 0; i < nbCrapaud; i++) {
@@ -278,16 +262,25 @@ public class Partie {
 			// On met le pion créé sur le plateau
 			plateau.setCase(batracien[1][i]);
 		}
+		return batracien;
 	}
 
 	/**
 	 * Vérifie et bloque les pions sur le plateau
 	 */
-	public static void initBloque() {
+	public static int initBloque() {
+		int pionBloque = 0;
 		for (int x = 0 ; x < batracien[0].length ; x++) {
 			batracien[0][x].setBloque(plateau.getPlateau());
 			batracien[1][x].setBloque(plateau.getPlateau());
+			if (batracien[0][x].isBloque()) {
+				pionBloque++;
+			}
+			if (batracien[1][x].isBloque()) {
+				pionBloque++;
+			}
 		}
+		return pionBloque;
 	}
 
 	/**
@@ -358,14 +351,16 @@ public class Partie {
 	 * Affiche tous les pions déplaçable
 	 * @param pion crapaud ou grnouille
 	 */
-	public static void choixPion(Pion[] pion) {
+	public static String choixPion(Pion[] pion) {
+		StringBuilder pionNonBloque = new StringBuilder();
 		for (int x = 0 ; x < pion.length ; x++) {
 			// Si le pion n'est pas bloqué
 			if (!pion[x].isBloque()) {
-				System.out.print("Pion (" + (pion[x].getLigne()+1) + ";" + (pion[x].getColonne()+1) + ") ");
+				pionNonBloque.append("Pion (" + (pion[x].getLigne()+1) + ";" + (pion[x].getColonne()+1) + ") ");
 			}
 		}
 		System.out.print("\n");
+		return pionNonBloque.toString();
 	}
 
 	/**
@@ -397,10 +392,10 @@ public class Partie {
 		System.out.println("\nChoisi ton batracien parmi les suivants x y");
 		// On affiche les pions déplaçable en fonction du mode de jeu
 		if (tourEquipe == 2) {
-			choixPion(batracien[0]);
-			choixPion(batracien[1]);
+			System.out.println(choixPion(batracien[0]));
+			System.out.println(choixPion(batracien[1]));
 		} else {
-			choixPion(batracien[tourEquipe]);
+			System.out.println(choixPion(batracien[tourEquipe]));
 		}
 		System.out.print("\nLigne : ");
 		// TODO : mettre une valeure à ligne
@@ -448,8 +443,6 @@ public class Partie {
 	 * et si non, le niveau de difficulté de l'IA
 	 */
 	
-	//TODO BOOLEAN PLUS ADAPTE POUR SAVOIR SI ordi ?
-	//
 	public static void joueurVs(int ordinateur) {
 		// Tableau contenant les nom des deux équipes
 		String[] equipe = new String[2];
@@ -596,16 +589,16 @@ public class Partie {
 
 		initConfig();
 		saveConfig();
-		System.out.println(repliques[0]);
+		System.out.println("1, 2, 3 ou 4");
 
 		do {
 			// TODO : mettre une valeur à choixModeDeJeu
 			if (choixModeDeJeu == 1) {
-				System.out.println(repliques[1]);
+				System.out.println("0 contre joueur, l'ia marche pas");
 				// TODO : mettre une valeur à choixAdversaire
 				joueurVs(choixAdversaire);
 			} else if (choixModeDeJeu == 2) {
-				System.out.println(repliques[2]);
+				System.out.println("Casse t�te");
 				casseTete();
 			} else if (choixModeDeJeu == 3) {
 				//TODO WTF QUEST CE QUE CEST QUE SA
