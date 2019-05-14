@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import crapouille.Ordinateur;
 import crapouille.Pion;
@@ -40,8 +39,12 @@ public class Partie {
 	 */
 	public static int choixConfiguration = 0,
 			choixModeDeJeu,
+			choixDifficulte,
 			ligne,
-			colonne;
+			colonne,
+			nbPion;
+	
+	public static String[] equipe = new String[2];
 
 	/**
 	 * ArrayList contenant toutes les configurations existantes
@@ -52,12 +55,6 @@ public class Partie {
 	 * Configuration appartenant à listConfiguration
 	 */
 	private static Configuration configuration;
-
-	/**
-	 * Ajout de l'entrée courante
-	 */
-	private static Scanner entree = new Scanner(System.in);
-
 
 
 	public static int getChoixModeDeJeu() {
@@ -97,6 +94,33 @@ public class Partie {
 
 	public static void setChoixConfiguration(int choix) {
 		choixConfiguration = choix;
+	}
+
+	public static int getNbPion() {
+		return nbPion;
+	}
+
+
+	public static void setNbPion(int nbPion) {
+		Partie.nbPion = nbPion;
+	}
+
+	public static int getChoixDifficulte() {
+		return choixDifficulte;
+	}
+	
+	public static String[] getEquipe() {
+		return equipe;
+	}
+
+
+	public static void setEquipe(String[] equipe) {
+		Partie.equipe = equipe;
+	}
+
+
+	public static void setChoixDifficulte(int choixDifficulte) {
+		Partie.choixDifficulte = choixDifficulte;
 	}
 
 
@@ -143,6 +167,7 @@ public class Partie {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		configuration = listConfiguration.get(0);
 	}
 
 	public static void saveConfig() {
@@ -317,9 +342,9 @@ public class Partie {
 			choixPion(batracien[tourEquipe]);
 		}
 		System.out.print("\nLigne : ");
-		ligne = entree.hasNextInt() ? entree.nextInt()-1 : ligne;
+		// TODO : mettre une valeure à ligne
 		System.out.print("\nColonne : ");
-		colonne = entree.hasNextInt() ? entree.nextInt()-1 : colonne;
+		// TODO : mettre une valeure à colonne
 		// Si le mode de jeu est joueurVs
 		if (tourEquipe < 2) {
 			// Si le pion existe et qu'il n'est pas bloqué
@@ -347,7 +372,6 @@ public class Partie {
 			}
 		} else {
 			System.out.println("Le pion est bloqué ou invalide");
-			entree.nextLine(); // Vidage du tampon
 		}
 		return tourEquipe;
 	}
@@ -367,11 +391,11 @@ public class Partie {
 		String[] equipe = new String[2];
 		int tourEquipe = 0; // Numéro de l'équipe dont c'est le tour
 		System.out.println("Entrer le nom de l'equipe Crapaud : ");
-		equipe[0] = entree.nextLine();
+		// TODO : mettre une valeure à equipe[0]
 		// Si aucun nom n'est rentré, le nom par défault est Grenouille
 		equipe[0] = equipe[0].length() == 0 ? "Grenouille" : equipe[0];
 		System.out.println("Entrer le nom de l'equipe Grenouille : ");
-		equipe[1] = ordinateur == 0 ? entree.nextLine() : "";
+		// TODO : mettre une valeure à equipe[1]
 		// Si aucun nom n'est rentré, le nom par défault est Crapaud
 		equipe[1] = equipe[1].length() == 0 ? "Crapaud" : equipe[1];
 		do {
@@ -423,40 +447,36 @@ public class Partie {
 	 */
 	public static Configuration chooseConfig() {
 
-		int ligne = 0,
-				colonne = 0,
-				nbPion = 0;
-
 		System.out.print("Entrez le nombre de lignes du plateau (entre 1 et 20) : ");
 		do {
-			ligne = entree.hasNextInt() ? entree.nextInt() : 0;
+			// TODO : mettre une valeure à ligne
 			if (ligne <= 0 || ligne > 20) {
 				System.out.println("Erreur !\nEntrer un nombre de colonnes positifs et non nul :\nEx : 6 ou 10"
 						+ "\nAttention le plateau est limité à 20 colonnes");
 			}
-			entree.nextLine();
 		} while (ligne <= 0 || ligne > 20);
 
 		System.out.print("Entrez le nombre de colonnes du plateau (entre 1 et 20) : ");
 		do {
-			colonne = entree.hasNextInt() ? entree.nextInt() : 0;
+			// TODO : mettre une valeure à colonne
 			if (colonne <= 0 || colonne > 20) {
 				System.out.println("Erreur !\nEntrer un nombre de colonnes positifs et non nul :\nEx : 6 ou 10"
 						+ "\nAttention le plateau est limité à 20 colonnes");	
 			}
-			entree.nextLine();
 		} while (colonne <= 0 || colonne > 20);
 
 		System.out.print("Entrez le nombre de pions présents sur le plateau : ");
 		do {
-			nbPion = entree.hasNextInt() ? entree.nextInt() : 0;
+			// TODO : mettre une valeure à nbPion
 			if (nbPion <= 0 || nbPion >= ligne * colonne - colonne || nbPion % 2 == 1) {
 				System.out.println("Erreur !\nEntrer un nombre de pions positifs pair et non nul :\nEx : 6 ou 10\n"
 						+ "Compris entre 0 et " + (ligne * colonne - colonne));
 				nbPion = 0;
 			}
-			entree.nextLine();
 		} while (nbPion == 0);
+
+		int abscisse = ligne,
+				ordonnee = colonne;
 
 		int[][] coGrenouille = new int[2][nbPion],
 				coCrapaud = new int [2][nbPion];
@@ -466,22 +486,12 @@ public class Partie {
 			System.out.println("Entrez les coordonnées de la grenouille " + (x+1));
 			do {
 				System.out.println("ligne : ");
-				ligne = entree.hasNextInt() ? entree.nextInt()-1 : 0;
-				entree.nextLine();
+				// TODO : mettre une valeur à ligne
 				System.out.println("colonne : ");
-				colonne = entree.hasNextInt() ? entree.nextInt()-1 : 0;
-				entree.nextLine();
+				// TODO : mettre une valeur à colonne
 				if (ligne < 0 || colonne < 0) {
 					System.out.println("Les coordonnées doivent être positives");
 					pionJuste = false;
-				} else {
-					for (int y = 0 ; y < x ; y++) {
-						if (ligne == coGrenouille[0][x] && colonne == coGrenouille[1][x]) {
-							System.out.println("Un pion a déjà ces coordonnées");
-							pionJuste = false;
-							break;
-						}
-					}
 				}
 				if (pionJuste) {
 					coGrenouille[0][x] = ligne;
@@ -495,34 +505,16 @@ public class Partie {
 			System.out.println("Entrez les coordonnées du crapaud " + (x+1));
 			do {
 				System.out.println("ligne : ");
-				ligne = entree.hasNextInt() ? entree.nextInt()-1 : 0;
-				entree.nextLine();
+				// TODO : mettre une valeur à ligne
 				System.out.println("colonne : ");
-				colonne = entree.hasNextInt() ? entree.nextInt()-1 : 0;
-				entree.nextLine();
+				// TODO : mettre une valeur à colonne
 				if (ligne < 0 || colonne < 0) {
 					System.out.println("Les coordonnées doivent être positives");
 					pionJuste = false;
-				} else {
-					for (int y = 0 ; y < x ; y++) {
-						if (ligne == coCrapaud[0][x] && colonne == coCrapaud[1][x]) {
-							System.out.println("Un pion a déjà ces coordonnées");
-							pionJuste = false;
-							break;
-						}
-					}
-
-					for (int z = 0; z < nbPion ; z++) {
-						if (ligne == coGrenouille[0][x] && colonne == coGrenouille[1][x]) {
-							System.out.println("Un pion a déjà ces coordonnées");
-							pionJuste = false;
-							break;
-						}
-					}
-					if (pionJuste) {
-						coCrapaud[0][x] = ligne;
-						coCrapaud[1][x] = colonne;
-					}
+				} 
+				if (pionJuste) {
+					coCrapaud[0][x] = ligne;
+					coCrapaud[1][x] = colonne;
 				}
 			} while (!pionJuste);	
 		}
@@ -541,23 +533,18 @@ public class Partie {
 	 */
 	public static void crapouille() {
 
-		int ordinateur = 0, // Difficulte de l'ordinateur (0 signifie une partie contre un joueur)
-				choix = 3;
-
 		System.out.println(repliques[0]);
 
 		do {
-			choix = entree.hasNextInt() ? entree.nextInt() : -1;
-			if (choix == 1) {
+			// TODO : mettre une valeur à choixModeDeJeu
+			if (choixModeDeJeu == 1) {
 				System.out.println(repliques[1]);
-				ordinateur = entree.hasNextInt() ? entree.nextInt() : 0;
-				entree.nextLine();
-				joueurVs(ordinateur);
-			} else if (choix == 2) {
+				// TODO : mettre une valeur à choixDifficulte
+				joueurVs(choixDifficulte);
+			} else if (choixModeDeJeu == 2) {
 				System.out.println(repliques[2]);
 				casseTete();
-			} else if (choix == 3) {
-				entree.nextLine();
+			} else if (choixModeDeJeu == 3) {
 				Configuration confif = chooseConfig();
 				initPlateau(confif.getLigne(), confif.getColonne());
 				initGrenouille(confif.getNbPion(), confif.getCoGrenouille());
@@ -566,9 +553,8 @@ public class Partie {
 				System.out.println("Initialistion créé");
 			} else {
 				System.out.println(repliques[3]);
-				entree.nextLine();
 			}
-		} while (choix != 4);
+		} while (choixModeDeJeu != 4);
 
 
 
