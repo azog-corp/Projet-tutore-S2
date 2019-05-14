@@ -84,18 +84,6 @@
             <Text fx:id="scoreMVP" fill="WHITE" layoutX="250.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="678" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="gameBoard" layoutY="85.0" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
-         <children>
-            <TextField fx:id="entreeUti" layoutX="11.0" layoutY="472.0" prefHeight="26.0" prefWidth="448.0" />
-            <Label fx:id="gameBoardString" layoutX="246.0" layoutY="252.0" textFill="WHITE" />
-            <Button fx:id="okGameBoard" layoutX="465.0" layoutY="472.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="42.0" stylesheets="@application.css" text="Ok">
-               <styleClass>
-                  <String fx:value="btnPlateau" />
-                  <String fx:value="priobtn" />
-               </styleClass>
-            </Button>
-         </children>
-      </AnchorPane>
       <AnchorPane fx:id="createur" layoutY="88.0" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
          <children>
             <ImageView fitHeight="139.0" fitWidth="143.0" layoutX="190.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
@@ -129,65 +117,6 @@
                   <Font size="14.0" />
                </font>
             </Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="configuration" layoutX="-3.0" layoutY="89.0" prefHeight="520.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
-         <children>
-            <Label layoutX="92.0" layoutY="21.0" text="CREATION CONFIGURATION" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="25.0" />
-               </font>
-            </Label>
-            <Label layoutX="54.0" layoutY="100.0" text="NOM CONFIGURATION" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Label>
-            <TextField layoutX="260.0" layoutY="98.0" styleClass="mygridStyle" stylesheets="@application.css" />
-            <Text fill="WHITE" layoutX="54.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TAILLE">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Text>
-            <TextField layoutX="260.0" layoutY="139.0" />
-            <Label layoutX="78.0" layoutY="296.0" text="Afficher le plateau de jeu et ajouter les pions au fur et a mesure" />
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="menu" layoutY="86.0" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
-         <children>
-            <Label layoutX="90.0" layoutY="40.0" text="CRAPAUDS ET GRENOUILLES" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="25.0" />
-               </font>
-            </Label>
-            <Button fx:id="btn_jouermenu" layoutX="169.0" layoutY="138.0" mnemonicParsing="false" onMouseClicked="#showConfigurationPartie" prefHeight="45.0" prefWidth="180.0" stylesheets="@application.css" text="Jouer">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <styleClass>
-                  <String fx:value="priobtn" />
-                  <String fx:value="interactif" />
-               </styleClass>
-            </Button>
-            <Button fx:id="btn_aidemenu" layoutX="172.0" layoutY="203.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="177.0" stylesheets="@application.css" text="Comment jouer ?" textFill="WHITE">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <styleClass>
-                  <String fx:value="autrebtn" />
-                  <String fx:value="interactif" />
-               </styleClass>
-            </Button>
-            <Button fx:id="btn_quittermenu" layoutX="171.0" layoutY="403.0" mnemonicParsing="false" onMouseClicked="#leave" prefHeight="44.0" prefWidth="177.0" style=": ;" stylesheets="@application.css" text="Quitter" textFill="WHITE">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <styleClass>
-                  <String fx:value="autrebtn" />
-                  <String fx:value="interactif" />
-               </styleClass>
-            </Button>
-            <Line endX="100.0" layoutX="259.0" layoutY="93.0" startX="-100.0" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="configurationPartie" layoutX="-7.0" layoutY="88.0" prefHeight="521.0" prefWidth="526.0" styleClass="AnchorPane" stylesheets="@application.css">
@@ -243,6 +172,86 @@
             <CheckBox fx:id="chk_casseT" layoutX="377.0" layoutY="61.0" mnemonicParsing="false" onMouseClicked="#verificationModeJeu" styleClass="interactif" stylesheets="@application.css" />
             <TextField fx:id="choixConfig" layoutX="204.0" layoutY="381.0" />
             <Label layoutX="112.0" layoutY="385.0" text="Configuration : " textFill="WHITE" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="menu" layoutY="86.0" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
+         <children>
+            <Label layoutX="90.0" layoutY="40.0" text="CRAPAUDS ET GRENOUILLES" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <Button fx:id="btn_jouermenu" layoutX="169.0" layoutY="138.0" mnemonicParsing="false" onMouseClicked="#showConfigurationPartie" prefHeight="45.0" prefWidth="180.0" stylesheets="@application.css" text="Jouer">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="priobtn" />
+                  <String fx:value="interactif" />
+               </styleClass>
+            </Button>
+            <Button fx:id="btn_aidemenu" layoutX="172.0" layoutY="203.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="177.0" stylesheets="@application.css" text="Comment jouer ?" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="autrebtn" />
+                  <String fx:value="interactif" />
+               </styleClass>
+            </Button>
+            <Button fx:id="btn_quittermenu" layoutX="171.0" layoutY="403.0" mnemonicParsing="false" onMouseClicked="#leave" prefHeight="44.0" prefWidth="177.0" style=": ;" stylesheets="@application.css" text="Quitter" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="autrebtn" />
+                  <String fx:value="interactif" />
+               </styleClass>
+            </Button>
+            <Line endX="100.0" layoutX="259.0" layoutY="93.0" startX="-100.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="gameBoard" layoutY="85.0" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
+         <children>
+            <TextField fx:id="entreeUti" layoutX="11.0" layoutY="472.0" prefHeight="26.0" prefWidth="448.0" />
+            <Label fx:id="gameBoardString" layoutX="246.0" layoutY="252.0" textFill="WHITE" />
+            <Button fx:id="okGameBoard" layoutX="465.0" layoutY="472.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="42.0" stylesheets="@application.css" text="Ok">
+               <styleClass>
+                  <String fx:value="btnPlateau" />
+                  <String fx:value="priobtn" />
+               </styleClass>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="configuration" layoutX="-3.0" layoutY="89.0" prefHeight="520.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
+         <children>
+            <Label layoutX="92.0" layoutY="21.0" text="CREATION CONFIGURATION" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="54.0" layoutY="100.0" text="NOM CONFIGURATION" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <TextField layoutX="260.0" layoutY="98.0" styleClass="mygridStyle" stylesheets="@application.css" />
+            <Text fill="WHITE" layoutX="54.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TAILLE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <TextField fx:id="nbLigneConf" layoutX="260.0" layoutY="139.0" />
+            <Label fx:id="afficherConfig" layoutX="78.0" layoutY="349.0" text="Afficher le plateau de jeu et ajouter les pions au fur et a mesure" />
+            <Button fx:id="btn_validerTaille" layoutX="430.0" layoutY="173.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" stylesheets="@application.css" text="OK">
+               <styleClass>
+                  <String fx:value="interactif" />
+                  <String fx:value="priobtn" />
+               </styleClass>
+            </Button>
+            <Label layoutX="206.0" layoutY="143.0" text="Ligne :" textFill="WHITE" />
+            <Label layoutX="190.0" layoutY="177.0" text="Colonne :" textFill="WHITE" />
+            <TextField fx:id="nbColonneConf" layoutX="260.0" layoutY="173.0" />
          </children>
       </AnchorPane>
    </children>

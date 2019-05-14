@@ -433,7 +433,20 @@ public class Partie {
 	/**
 	 * 
 	 */
-	public static void createOrDeleteConfig(char choix) {
+	public static void createConfig(boolean isCrapaud) {
+		Plateau newConfig = new Plateau(getLigne(), getColonne());
+		Pion[] batracien = new Pion[getNbPion()];
+		for (int x = 0; x < getNbPion(); x++) {
+			Pion pion = new Pion(getLigne(), getColonne(), isCrapaud, newConfig);
+			newConfig.setCase(pion);
+			batracien[x] = pion;
+		}
+		for (int x = 0; x < getNbPion(); x++) {
+			batracien[x].setBloque(newConfig.getPlateau());
+		}
+	}
+	
+	public static void deleteConfig() {
 		
 	}
 
