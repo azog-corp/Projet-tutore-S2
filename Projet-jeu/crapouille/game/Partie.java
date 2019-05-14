@@ -433,8 +433,8 @@ public class Partie {
 	/**
 	 * 
 	 */
-	public static Configuration createOrDeleteConfig(char choix) {
-		//TODO REFAIRE
+	public static void createOrDeleteConfig(char choix) {
+		
 	}
 
 	/**
