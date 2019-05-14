@@ -25,12 +25,12 @@ import javafx.scene.text.Text;
 public class interfaceAppliController {
 
 	    @FXML
-	    private AnchorPane configuration,backpanel,score,createur,menu,gameBoard;
+	    private AnchorPane configurationPartie,backpanel,score,createur,menu,gameBoard;
 
 	    @FXML
 	    private Button okGameBoard,quittermenu,
-		    confirmationJouer,jouermenu,retourMenu,
-		    retourMenu,aidemenu,settingsBar;
+		    		   confirmationJouer,jouermenu,
+		    		   retourMenu,aidemenu,settingsBar;
 
 	    @FXML
 	    private ImageView btn_createur,btn_mvp,btn_quitter,btn_acceuil;
@@ -43,10 +43,10 @@ public class interfaceAppliController {
 
 	    @FXML
 	    private Label gameBoardString,lb_nomJ1,lb_nomJ2,
-			  lb_lvlIa,labelIA,nomMVP;
+			  		  lb_lvlIa,labelIA,nomMVP;
 
 	    @FXML
-	    private RadioButton lvl2,lvl3;
+	    private RadioButton lvl1,lvl2,lvl3;
 
 	    @FXML
 	    private TextField tb_nomJ2,tb_nomJ1,entreeUti;
@@ -54,13 +54,8 @@ public class interfaceAppliController {
 	    @FXML
 	    private CheckBox chk_vsIA,chk_casseT;
 
-
 	    @FXML
 	    private Text scoreMVP;
-
-	    @FXML
-	    private RadioButton lvl1;
-
 
     @FXML
     void leave(MouseEvent click) {
@@ -86,18 +81,22 @@ public class interfaceAppliController {
     }
     
     @FXML
-    void choixConf(MouseEvent Click) {
+    void showConfigurationPartie(MouseEvent Click) {
     	reinitialiser();
     	razConfig();
-    	configuration.setVisible(true);
+    	configurationPartie.setVisible(true);
     }
     
-    
+    @FXML
+    void showConfiguration(MouseEvent Click) {
+    	reinitialiser();
+    	configuration.setVisible(true);
+    }
     
     @FXML
     void reinitialiser() {
     	menu.setVisible(false);
-    	configuration.setVisible(false);
+    	configurationPartie.setVisible(false);
     	score.setVisible(false);
     	gameBoard.setVisible(false);
     	createur.setVisible(false);
