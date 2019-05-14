@@ -96,100 +96,6 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="configurationPartie" layoutX="-7.0" layoutY="88.0" prefHeight="521.0" prefWidth="526.0" styleClass="AnchorPane" stylesheets="@application.css">
-         <children>
-            <Button fx:id="confirmationJouer" layoutX="74.0" layoutY="459.0" mnemonicParsing="false" onMouseClicked="#afficherJeu" prefHeight="30.0" prefWidth="156.0" stylesheets="@application.css" text="Valider">
-               <styleClass>
-                  <String fx:value="priobtn" />
-                  <String fx:value="interactif" />
-                  <String fx:value="btnmenu" />
-               </styleClass></Button>
-            <Label fx:id="lb_lvlIa" layoutX="195.0" layoutY="128.0" text="CHOIX DIFFICULTEE IA" textFill="WHITE" visible="false">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <Label fx:id="labelIA" layoutX="39.0" layoutY="88.0" stylesheets="@application.css" text="JOUER CONTRE L'ORDINATEUR" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <Label layoutX="114.0" layoutY="14.0" text="CONFIGURATION PARTIE" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="25.0" />
-               </font>
-            </Label>
-            <Label layoutX="218.0" layoutY="365.0" text="TAILLE PLATEAU" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <Label fx:id="lb_nomJ1" layoutX="113.0" layoutY="225.0" text="Nom joueur 1 :" textFill="WHITE" />
-            <Label fx:id="lb_nomJ2" layoutX="113.0" layoutY="280.0" text="Nom joueur 2 :" textFill="WHITE" />
-            <CheckBox fx:id="chk_vsIA" layoutX="377.0" layoutY="89.0" mnemonicParsing="false" onMouseClicked="#verificationCheck" styleClass="interactif" stylesheets="@application.css" />
-            <RadioButton fx:id="lvl1" layoutX="117.0" layoutY="160.0" mnemonicParsing="false" text="Niveau 1" textFill="WHITE" visible="false">
-               <toggleGroup>
-                  <ToggleGroup fx:id="lvlIA" />
-               </toggleGroup>
-            </RadioButton>
-            <RadioButton fx:id="lvl2" layoutX="228.0" layoutY="160.0" mnemonicParsing="false" text="Niveau 2" textFill="WHITE" toggleGroup="$lvlIA" visible="false" />
-            <RadioButton fx:id="lvl3" layoutX="342.0" layoutY="160.0" mnemonicParsing="false" text="Niveau 3" textFill="WHITE" toggleGroup="$lvlIA" visible="false" />
-            <TextField fx:id="tb_nomJ2" layoutX="204.0" layoutY="276.0" stylesheets="@application.css" />
-            <TextField fx:id="tb_nomJ1" layoutX="204.0" layoutY="221.0" stylesheets="@application.css" />
-            <Slider fx:id="sliderTaille" blockIncrement="1.0" layoutX="117.0" layoutY="398.0" majorTickUnit="1.0" max="20.0" minorTickCount="0" prefHeight="14.0" prefWidth="305.0" showTickLabels="true" showTickMarks="true" />
-            <Button fx:id="retourMenu" layoutX="287.0" layoutY="459.0" mnemonicParsing="false" onMouseClicked="#showMenu" stylesheets="@application.css" text="Annuler">
-               <styleClass>
-                  <String fx:value="autrebtn" />
-                  <String fx:value="btnmenu" />
-                  <String fx:value="interactif" />
-               </styleClass></Button>
-            <Separator layoutX="88.0" layoutY="186.0" opacity="0.5" prefHeight="1.0" prefWidth="350.0" />
-            <Separator layoutX="79.0" layoutY="339.0" opacity="0.5" prefHeight="1.0" prefWidth="350.0" />
-            <Label layoutX="39.0" layoutY="60.0" text="CASSE TETE" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <CheckBox fx:id="chk_casseT" layoutX="377.0" layoutY="61.0" mnemonicParsing="false" onMouseClicked="#verificationModeJeu" styleClass="interactif" stylesheets="@application.css" />
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="menu" layoutY="86.0" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
-         <children>
-            <Label layoutX="90.0" layoutY="40.0" text="CRAPAUDS ET GRENOUILLES" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="25.0" />
-               </font>
-            </Label>
-            <Button fx:id="btn_jouermenu" layoutX="169.0" layoutY="138.0" mnemonicParsing="false" onMouseClicked="#showConfigurationPartie" prefHeight="45.0" prefWidth="180.0" stylesheets="@application.css" text="Jouer">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <styleClass>
-                  <String fx:value="priobtn" />
-                  <String fx:value="interactif" />
-               </styleClass>
-            </Button>
-            <Button fx:id="btn_aidemenu" layoutX="172.0" layoutY="203.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="177.0" stylesheets="@application.css" text="Comment jouer ?" textFill="WHITE">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <styleClass>
-                  <String fx:value="autrebtn" />
-                  <String fx:value="interactif" />
-               </styleClass>
-            </Button>
-            <Button fx:id="btn_quittermenu" layoutX="171.0" layoutY="403.0" mnemonicParsing="false" onMouseClicked="#leave" prefHeight="44.0" prefWidth="177.0" style=": ;" stylesheets="@application.css" text="Quitter" textFill="WHITE">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <styleClass>
-                  <String fx:value="autrebtn" />
-                  <String fx:value="interactif" />
-               </styleClass>
-            </Button>
-            <Line endX="100.0" layoutX="259.0" layoutY="93.0" startX="-100.0" />
-         </children>
-      </AnchorPane>
       <AnchorPane fx:id="createur" layoutY="88.0" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
          <children>
             <ImageView fitHeight="139.0" fitWidth="143.0" layoutX="190.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
@@ -245,6 +151,98 @@
             </Text>
             <TextField layoutX="260.0" layoutY="139.0" />
             <Label layoutX="78.0" layoutY="296.0" text="Afficher le plateau de jeu et ajouter les pions au fur et a mesure" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="menu" layoutY="86.0" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
+         <children>
+            <Label layoutX="90.0" layoutY="40.0" text="CRAPAUDS ET GRENOUILLES" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <Button fx:id="btn_jouermenu" layoutX="169.0" layoutY="138.0" mnemonicParsing="false" onMouseClicked="#showConfigurationPartie" prefHeight="45.0" prefWidth="180.0" stylesheets="@application.css" text="Jouer">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="priobtn" />
+                  <String fx:value="interactif" />
+               </styleClass>
+            </Button>
+            <Button fx:id="btn_aidemenu" layoutX="172.0" layoutY="203.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="177.0" stylesheets="@application.css" text="Comment jouer ?" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="autrebtn" />
+                  <String fx:value="interactif" />
+               </styleClass>
+            </Button>
+            <Button fx:id="btn_quittermenu" layoutX="171.0" layoutY="403.0" mnemonicParsing="false" onMouseClicked="#leave" prefHeight="44.0" prefWidth="177.0" style=": ;" stylesheets="@application.css" text="Quitter" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="autrebtn" />
+                  <String fx:value="interactif" />
+               </styleClass>
+            </Button>
+            <Line endX="100.0" layoutX="259.0" layoutY="93.0" startX="-100.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="configurationPartie" layoutX="-7.0" layoutY="88.0" prefHeight="521.0" prefWidth="526.0" styleClass="AnchorPane" stylesheets="@application.css">
+         <children>
+            <Button fx:id="confirmationJouer" layoutX="74.0" layoutY="459.0" mnemonicParsing="false" onMouseClicked="#afficherJeu" prefHeight="30.0" prefWidth="156.0" stylesheets="@application.css" text="Valider">
+               <styleClass>
+                  <String fx:value="priobtn" />
+                  <String fx:value="interactif" />
+                  <String fx:value="btnmenu" />
+               </styleClass>
+            </Button>
+            <Label fx:id="lb_lvlIa" layoutX="195.0" layoutY="128.0" text="CHOIX DIFFICULTEE IA" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelIA" layoutX="39.0" layoutY="88.0" stylesheets="@application.css" text="JOUER CONTRE L'ORDINATEUR" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="114.0" layoutY="14.0" text="CONFIGURATION PARTIE" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="lb_nomJ1" layoutX="113.0" layoutY="225.0" text="Nom joueur 1 :" textFill="WHITE" />
+            <Label fx:id="lb_nomJ2" layoutX="113.0" layoutY="280.0" text="Nom joueur 2 :" textFill="WHITE" />
+            <CheckBox fx:id="chk_vsIA" layoutX="377.0" layoutY="89.0" mnemonicParsing="false" onMouseClicked="#verificationCheck" styleClass="interactif" stylesheets="@application.css" />
+            <RadioButton fx:id="lvl1" layoutX="117.0" layoutY="160.0" mnemonicParsing="false" text="Niveau 1" textFill="WHITE" visible="false">
+               <toggleGroup>
+                  <ToggleGroup fx:id="lvlIA" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="lvl2" layoutX="228.0" layoutY="160.0" mnemonicParsing="false" text="Niveau 2" textFill="WHITE" toggleGroup="$lvlIA" visible="false" />
+            <RadioButton fx:id="lvl3" layoutX="342.0" layoutY="160.0" mnemonicParsing="false" text="Niveau 3" textFill="WHITE" toggleGroup="$lvlIA" visible="false" />
+            <TextField fx:id="tb_nomJ2" layoutX="204.0" layoutY="276.0" stylesheets="@application.css" />
+            <TextField fx:id="tb_nomJ1" layoutX="204.0" layoutY="221.0" stylesheets="@application.css" />
+            <Button fx:id="retourMenu" layoutX="287.0" layoutY="459.0" mnemonicParsing="false" onMouseClicked="#showMenu" stylesheets="@application.css" text="Annuler">
+               <styleClass>
+                  <String fx:value="autrebtn" />
+                  <String fx:value="btnmenu" />
+                  <String fx:value="interactif" />
+               </styleClass>
+            </Button>
+            <Separator layoutX="88.0" layoutY="186.0" opacity="0.5" prefHeight="1.0" prefWidth="350.0" />
+            <Separator layoutX="79.0" layoutY="339.0" opacity="0.5" prefHeight="1.0" prefWidth="350.0" />
+            <Label layoutX="39.0" layoutY="60.0" text="CASSE TETE" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <CheckBox fx:id="chk_casseT" layoutX="377.0" layoutY="61.0" mnemonicParsing="false" onMouseClicked="#verificationModeJeu" styleClass="interactif" stylesheets="@application.css" />
+            <TextField fx:id="choixConfig" layoutX="204.0" layoutY="381.0" />
+            <Label layoutX="112.0" layoutY="385.0" text="Configuration : " textFill="WHITE" />
          </children>
       </AnchorPane>
    </children>
