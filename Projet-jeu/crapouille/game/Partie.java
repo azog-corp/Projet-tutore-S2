@@ -80,7 +80,7 @@ public class Partie {
 	/**
 	 * ArrayList contenant toutes les configurations existantes
 	 */
-	private static ArrayList<Configuration> listConfiguration;
+	private static ArrayList<Configuration> listConfiguration = new ArrayList<Configuration>();
 
 	/**
 	 * Configuration appartenant à listConfiguration
@@ -196,30 +196,13 @@ public class Partie {
 	public static void initPlateau(int ligne, int colonne) {
 		plateau = new Plateau(ligne, colonne);
 	}
-
-	/**
-	 * Réplique (à modifier bien sur si on veut pas avoir 0)
-	 */
-	private static String[] repliques =
-		{"Bienvenue Crapouile !\nVeut tu faire une partie ou un casse-tête ?"
-				+ "\n - 1 : Jeux\n - 2 : Casse-tête\n - 3 : Configuration\n - 4 : Quitter",
-
-				"Veut tu jouer contre une homme ou mes fidèles laquais ?"
-						+ "\n - 0 : Contre un déveuloppeur aguerri (par défault)"
-						+ "\n - 1 : contre crapus (facile)"
-						+ "\n - 2 : Contre batrus (medium)"
-						+ "\n - 3 : Contre craporitus (difficile)",
-
-						"Tu pensais que \"casse-tête\" c'était une méthaphore ahaha",
-
-						"Chosi 1, 2, 3"
-		};
-
+	
 	public static void initConfig() {
 		try(ObjectInputStream fichier = new ObjectInputStream(new FileInputStream("crapouille/configuration/default.bin"))) {           
 
 			// lecture de l'objet contenu dans le fichier
 			configuration = (Configuration) fichier.readObject();
+			listConfiguration.add(configuration);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -230,12 +213,11 @@ public class Partie {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		listConfiguration.add(configuration);
 	}
 
 	public static void saveConfig() {
 		// création et ouverture du fichier NOM_FICHIER_PAIRE
-		try(ObjectOutputStream fichier = new ObjectOutputStream(new FileOutputStream("crapouille/configuration/listeCconfiguration.bin"))) {
+		try(ObjectOutputStream fichier = new ObjectOutputStream(new FileOutputStream("crapouille/configuration/listConfiguration.bin"))) {
 
 			// on écrit l'objet argument dans le fichier
 			fichier.writeObject(listConfiguration); 
@@ -507,7 +489,7 @@ public class Partie {
 	/**
 	 * 
 	 */
-	public static Configuration chooseConfig() {
+	public static Configuration createOrDeleteConfig() {
 
 		System.out.print("Entrez le nombre de lignes du plateau (entre 1 et 20) : ");
 		do {
@@ -591,25 +573,24 @@ public class Partie {
 
 		initConfig();
 		saveConfig();
-
+		Configuration confif = listConfiguration.get(0);
+		initPlateau(confif.getLigne(), confif.getColonne());
+		initGrenouille(confif.getNbPion(), confif.getCoGrenouille());
+		initCrapaud(confif.getNbPion(), confif.getCoCrapaud());
+		initBloque();
+		
 		do {
 			System.out.println("1, 2, 3 ou 4");
 			// TODO : mettre une valeur à choixModeDeJeu
 			if (choixModeDeJeu == 1) {
-				System.out.println(repliques[1]);
+				System.out.println("1, 2, 3 ou 4");
 				// TODO : mettre une valeur à choixAdversaire
 				joueurVs(choixAdversaire);
 			} else if (choixModeDeJeu == 2) {
-				System.out.println(repliques[2]);
 				casseTete();
 			} else if (choixModeDeJeu == 3) {
 				//TODO WTF QUEST CE QUE CEST QUE SA
-				Configuration confif = chooseConfig();
-				initPlateau(confif.getLigne(), confif.getColonne());
-				initGrenouille(confif.getNbPion(), confif.getCoGrenouille());
-				initCrapaud(confif.getNbPion(), confif.getCoCrapaud());
-				initBloque();
-				System.out.println("Initialisation créé");
+				createOrDeleteConfig();
 			} else {
 				System.out.println("Erreur !");
 			}
