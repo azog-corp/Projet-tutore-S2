@@ -26,7 +26,7 @@ import javafx.scene.text.Text;
 
 public class interfaceAppliController {
 	
-    Plateau config;
+    private String nom;
 
     @FXML
     private Label lb_cord;
@@ -324,22 +324,18 @@ public class interfaceAppliController {
     void creationInitialisation(MouseEvent Click) {
     	int nbLigne = Integer.parseInt(tb_nbLigneConf.getText());
     	int nbColonne = Integer.parseInt(tb_nbColonneConf.getText());
-    	int ligne = 0,
-    	    colonne = 0;
+    	Partie.setligneConf(nbLigne);
+	Partie.setcolonneConf(nbLigne);
     	boolean isCrapaud = true;
-    	String nom = tb_nomConf.getText();
-    	//TODO FAIRE VERIFICATION VALIDITE
-    	//SI BON FAIRE
-    	Plateau config = new Plateau(nbLigne,nbColonne);
-	
-    	Configuration nouvelleConfig = new Configuration(config.getPlateau(), nom);
-    	Partie.listConfiguration.add(nouvelleConfig);
+    	nom = tb_nomConf.getText();
     	showCreationConfig(); 	
-    	//SINON TEXTBOX / label avertir
     }
+	
+	//Config config = new Config(Partie.tableau, nom
+	//Partie.arr.add
     
     @FXML
-    void showCreationConfig() {
+    void showCreationConfig() { //chnqger pqr une pqge
     	lb_nbColonne.setVisible(false);
     	lb_nbLigne.setVisible(false);
     	tb_nbLigneConf.setVisible(false);
@@ -363,9 +359,20 @@ public class interfaceAppliController {
     	btn_validerCord.setVisible(false);
     	btn_validerConfig.setVisible(false);
     }
+	
+    private boolean recupType(Char choix) {
+	boolean choixUti;
+	if (choix == 'C' || choix == 'c') {
+	    choixUti = true;
+	} else {
+	    choixUti = false;
+	}
+	return choixUti;
+    }
     
     @FXML
     void actualiserConfig(MouseEvent Click) {
+	
     	StringBuilder recupCord = new StringBuilder(); 
     	recupCord.append(tb_cord.getText().charAt(1));
     	recupCord.append(tb_cord.getText().charAt(2));
@@ -373,10 +380,13 @@ public class interfaceAppliController {
     	StringBuilder recupCo = new StringBuilder(); 
     	recupCo.append(tb_cord.getText().charAt(4));
     	recupCo.append(tb_cord.getText().charAt(5));
+	//Verifier que coordonnees valides
+	//verifier char 3 -
+	//verifier char c ou g si tous bon continuer	
     	int colonnePion = Integer.parseInt(recupCo.toString());
-    	Pion placementUti = new Pion(lignePion,colonnePion,true);
-    	config.setCase(placementUti);
-    	rafraichirConf(config.afficherJeu());
+    	Pion placementUti = new Pion(lignePion,colonnePion,recupUti(tb_cord.getText().charAt(0)));
+	//SI TOUS TEST VALIDE +1 nb Pion
+    	rafraichirConf(Partie.plateau.afficherJeu());
     	
     	//TODO verifier coordonnees  
     	//TODO si correct modifier plateau + actualiser plateau
