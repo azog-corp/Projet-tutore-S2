@@ -26,19 +26,13 @@ import javafx.scene.text.Text;
 
 public class interfaceAppliController {
 	
-	Plateau config;
+    Plateau config;
 
     @FXML
     private Label lb_cord;
 
     @FXML
-    private AnchorPane gameBoard;
-
-    @FXML
-    private AnchorPane configuration;
-
-    @FXML
-    private AnchorPane backpanel;
+    private AnchorPane gameBoard,configuration,backpanel;
 
     @FXML
     private Button okGameBoard;
@@ -325,23 +319,13 @@ public class interfaceAppliController {
     	int nbLigne = Integer.parseInt(tb_nbLigneConf.getText());
     	int nbColonne = Integer.parseInt(tb_nbColonneConf.getText());
     	int ligne = 0,
-    	  colonne = 0,
-    	  nbPion = 0;
+    	    colonne = 0;
     	boolean isCrapaud = true;
     	String nom = tb_nomConf.getText();
     	//TODO FAIRE VERIFICATION VALIDITE
     	//SI BON FAIRE
     	Plateau config = new Plateau(nbLigne,nbColonne);
-		Pion[] batracien = new Pion[nbPion];
-		for (int x = 0; x < nbPion; x++) {
-			// Donné une valeur à ligne et colonne
-			Pion pion = new Pion(ligne, colonne, isCrapaud);
-			config.setCase(pion);
-			batracien[x] = pion;
-		}
-		for (int x = 0; x < nbPion; x++) {
-			batracien[x].setBloque(config.getPlateau());
-		}
+	
     	Configuration nouvelleConfig = new Configuration(config.getPlateau(), nom);
     	Partie.listConfiguration.add(nouvelleConfig);
     	showCreationConfig(); 	
