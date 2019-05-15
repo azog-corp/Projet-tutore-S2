@@ -92,8 +92,18 @@ public class PartieV2 {
 	
 	public static void initBatracien() {
 		batracien = new Pion[2][nbPion];
-		for (int x = 0 ; x < batracien[0].length ; x++) {
-			
+		int crapaud = 0,
+		grenouille = 0;
+		for (int x = 0 ; x < ligneConf ; x++) {
+			for (int y = 0 ; y < colonneConf ; y++) {
+				if (plateau[x][y] != null && plateau[x][y].isCrapaud()) {
+					batracien[1][crapaud] = plateau[x][y];
+					crapaud++;
+				} else if (plateau[x][y] != null && !plateau[x][y].isCrapaud()) {
+					batracien[0][grenouille] = plateau[x][y];
+					grenouille++;
+				}
+			}
 		}
 	}
 	
@@ -110,6 +120,35 @@ public class PartieV2 {
 			}
 		}
 		return true;
+	}
+	
+	/**
+	 * Vérifie si toutes les grenouilles sont à droite
+	 * et sir tous les crapaud sont à gauche
+	 * @return true si c'est vrai
+	 */
+	public static boolean victoireCasseTete() {
+		int nbPion, // Nombre de pion bien placés
+		colonne, // Colonne sur laquelle on fait une recherche
+		pionVictoire = batracien[0].length*2, // Nombre total de pion
+		ligne;
+		nbPion = ligne = colonne = 0; // On commence par la colonne la plus à gauche
+		// Pour chaque ligne du tableau
+		while (ligne < ligneConf) {
+			if (plateau[ligne][colonne] != null || plateau[ligne][colonne] != null) {
+				if (plateau[ligne][colonne] != null && plateau[ligne][colonne].isCrapaud()) {
+					nbPion++;
+					colonne++;
+				}
+				if (plateau[ligne][colonne] != null && !plateau[ligne][colonneConf].isCrapaud()) {
+					nbPion++;
+					colonneConf--;
+				}
+			} else {
+				ligne++;
+			}
+		}
+		return nbPion == pionVictoire;
 	}
 
 }
