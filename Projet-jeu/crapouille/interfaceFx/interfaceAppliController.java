@@ -313,16 +313,41 @@ public class interfaceAppliController {
     
     @FXML
     void configInitialisation(MouseEvent Click) {
-    	int nbLigne = Integer.parseInt(tb_nbLigneConf.getText());
-    	int nbColonne = Integer.parseInt(tb_nbColonneConf.getText());
-    	//Partie.setligneConf(nbLigne);
-    	//Partie.setcolonneConf(nbLigne);
-    	nom = tb_nomConf.getText();
-    	showCreationConfig(); 	
+    	boolean test = tb_nbLigneConf.getText().isEmpty();
+    	System.out.println(test);
+    	if (!tb_nbLigneConf.getText().isEmpty() && !tb_nbColonneConf.getText().isEmpty()) {
+    		//TODO verifier que il sagit bien de nombre
+    		int nbLigne = Integer.parseInt(tb_nbLigneConf.getText());
+    		int nbColonne = Integer.parseInt( tb_nbColonneConf.getText());
+    		if (nbLigne < 20 && nbColonne < 20) {
+    			//Partie.setligneConf(nbLigne);
+    				//Partie.setcolonneConf(nbLigne);
+    			recupNom();
+    			showCreationConfig(); 
+    		} else {
+    			//TODO afficher label ne peut pas etre superieur a 20
+    		}
+    	} else {
+    		//TODO afficher label ne peut pas etre vide
+    	}
     }
 	
 	//Config config = new Config(Partie.tableau, nom
 	//Partie.arr.add
+	/**
+	 * Recupere le nom que l'utilisateur a entre dans la textBox de creation de 
+	 * configuration si il est vide prend la valeur defaut
+	 * (remplacera donc la configuration par defaut)
+	 * @return nom Le nom de la configuration qui sera cree
+	 */
+	public String recupNom() {
+		if (tb_nomConf.getText() != "") {
+			nom = tb_nomConf.getText();
+		} else {
+			nom = "Defaut";
+		}
+		return nom;
+	}
     
     @FXML
     void showCreationConfig() { 
@@ -337,13 +362,7 @@ public class interfaceAppliController {
     }
 	
     private boolean recupType(char choix) {
-    	boolean choixUti;
-    	if (choix == 'C' || choix == 'c') {
-    		choixUti = true;
-    	} else {
-    		choixUti = false;
-    		}
-    	return choixUti;
+        return choix == 'C' || choix == 'c' ? true : false;
     }
     
     @FXML
