@@ -274,10 +274,9 @@ public class Partie {
 				// On bouge le pion
 				movePion(plateau[ligne][colonne]);
 				// Si le crapaud existe et qu'il n'est pas bloqué
-			} else if (pionValide(1, ligne, colonne) != null &&
-					!pionValide(1, ligne, colonne).isBloque()) {
+			} else if (pionValide(1, ligne, colonne)) {
 				// On bouge le pion
-				plateau.movePion(pionValide(1, ligne, colonne));
+				movePion(plateau[ligne][colonne]);
 			}
 		}
 		return tourEquipe;
