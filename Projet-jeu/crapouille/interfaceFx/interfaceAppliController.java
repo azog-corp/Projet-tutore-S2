@@ -337,13 +337,7 @@ public class interfaceAppliController {
     }
 	
     private boolean recupType(char choix) {
-    	boolean choixUti;
-    	if (choix == 'C' || choix == 'c') {
-    		choixUti = true;
-    	} else {
-    		choixUti = false;
-    		}
-    	return choixUti;
+    	return choix == 'C' || choix == 'c' ? true : false;
     }
     
     @FXML
