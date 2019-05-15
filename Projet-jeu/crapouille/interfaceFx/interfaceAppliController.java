@@ -32,7 +32,13 @@ public class interfaceAppliController {
     private Label lb_cord;
 
     @FXML
-    private AnchorPane gameBoard,configuration,backpanel;
+    private AnchorPane gameBoard;
+    
+    @FXML
+    private configuration;
+	
+    @FXML
+    private backpanel;
 
     @FXML
     private Button okGameBoard;
