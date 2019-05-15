@@ -60,19 +60,16 @@ public class interfaceAppliController {
     private AnchorPane score;
 
     @FXML
-    private Label lb_nbColonne;
-
-    @FXML
     private ToggleGroup lvlIA;
 
     @FXML
     private Button btn_validerTaille;
 
     @FXML
-    private Button btn_quittermenu;
+    private Label afficherConfig;
 
     @FXML
-    private Label afficherConfig;
+    private Button btn_quittermenu;
 
     @FXML
     private AnchorPane createur;
@@ -88,9 +85,6 @@ public class interfaceAppliController {
 
     @FXML
     private RadioButton lvl2;
-
-    @FXML
-    private Label lb_nbLigne;
 
     @FXML
     private RadioButton lvl3;
@@ -132,10 +126,10 @@ public class interfaceAppliController {
     private AnchorPane settingsBar;
 
     @FXML
-    private Button btn_aidemenu;
+    private Label lb_lvlIa;
 
     @FXML
-    private Label lb_lvlIa;
+    private Button btn_aidemenu;
 
     @FXML
     private Label labelIA;
@@ -206,7 +200,6 @@ public class interfaceAppliController {
     	gameBoard.setVisible(false);
     	createur.setVisible(false);
     	configuration.setVisible(false);
-    	backpanel.setVisible(false);
     }
     
     @FXML
@@ -297,7 +290,7 @@ public class interfaceAppliController {
     	Partie.crapouille();
     	reinitialiser();
     	gameBoard.setVisible(true);
-    	rafraichirJeu(Partie.plateau.afficherJeu());
+    	//rafraichirJeu(Partie.plateau.afficherJeu());
     }
     
     
@@ -362,21 +355,21 @@ public class interfaceAppliController {
     	StringBuilder recupCo = new StringBuilder(); 
     	recupCo.append(tb_cord.getText().charAt(4));
     	recupCo.append(tb_cord.getText().charAt(5));
-    	//Verifier que coordonnees valides
-    	//verifier char 3 -
-    	//verifier char c ou g si tous bon continuer	
+    	//TODO Verifier que coordonnees valides
+    	//TODO verifier char 3 -
+    	//TODO verifier char c ou g si tous bon continuer	
     	int colonnePion = Integer.parseInt(recupCo.toString());
     	Pion placementUti = new Pion(lignePion,colonnePion,recupType(tb_cord.getText().charAt(0)));
-    	//SI TOUS TEST VALIDE +1 nb Pion
+    	//TODO SI TOUS TEST VALIDE +1 nb Pion
     	//Partie.plateau[lignePion][colonnePion]= placementUti;
-    	rafraichirConf(Partie.plateau.afficherJeu());
+    	//rafraichirConf(Partie.plateau.afficherJeu());
     	
     	//TODO verifier coordonnees  
     	//TODO si correct modifier plateau + actualiser plateau
     	//TODO msg Box pas correct
     	
     }
-    
+    @FXML
     void enregistrerConfig(MouseEvent Click) {
     	//TODO ENVOYER LA CONFIG
     }

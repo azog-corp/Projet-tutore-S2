@@ -1,6 +1,4 @@
 package crapouille.interfaceFx;
-	
-import java.util.ResourceBundle;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -19,9 +17,6 @@ public class Main extends Application {
 			Scene scene = new Scene(root,519,606);
 			scene.getStylesheets().add(getClass().getResource("/crapouille/interfaceFx/application.css").toExternalForm());
 			primaryStage.setScene(scene);
-			Media media = new Media("file:///crapouille/musique/test.mp3");
-		    MediaPlayer player = new MediaPlayer(media); 
-		    player.play();
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
