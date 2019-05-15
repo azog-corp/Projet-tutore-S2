@@ -356,6 +356,7 @@ public class interfaceAppliController {
     void showInitialisationConfig() {
     	initialisationConfig.setVisible(true);
     	placementConfig.setVisible(false);
+    	rafraichirConf(Partie.afficherJeu());
     }
 	
     private boolean recupType(char choix) {
@@ -378,7 +379,7 @@ public class interfaceAppliController {
     	Pion placementUti = new Pion(lignePion,colonnePion,recupType(tb_cord.getText().charAt(0)));
     	//TODO SI TOUS TEST VALIDE +1 nb Pion
     	Partie.plateau[lignePion][colonnePion]= placementUti;
-    	rafraichirConf(Partie.plateau.afficherJeu());
+    	rafraichirConf(Partie.afficherJeu());
     	
     	//TODO verifier coordonnees  
     	//TODO si correct modifier plateau + actualiser plateau

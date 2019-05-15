@@ -203,7 +203,7 @@ public class Partie {
 	/**
 	 * Affiche le plateau
 	 */
-	public String afficherJeu() {
+	public static String afficherJeu() {
 		StringBuilder plateauString = new StringBuilder();
 		plateauString.append(" |");
 		for (int z = 0 ; z < colonneConf ; z++) {
