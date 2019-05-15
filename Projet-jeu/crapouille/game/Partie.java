@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 import crapouille.Ordinateur;
 import crapouille.Pion;
-import crapouille.Plateau;
 import crapouille.configuration.Configuration;
 
 /**
@@ -23,10 +22,6 @@ import crapouille.configuration.Configuration;
  */
 public class Partie {
 
-	/**
-	 * Plateau de jeu
-	 */
-	public static Plateau plateau;
 
 	/**
 	 * Tableau contenant toutes les grenouilles et tous les crapauds
@@ -81,7 +76,7 @@ public class Partie {
 	 * ArrayList contenant toutes les configurations existantes
 	 */
 	public static ArrayList<Configuration> listConfiguration = new ArrayList<Configuration>();
-
+	
 	/**
 	 * Configuration appartenant Ã  listConfiguration
 	 * et qui est celle sur laquelle l'utilisateur
@@ -351,6 +346,65 @@ public class Partie {
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * Associe une case à un pion
+	 * @param pion, Le pion qui doit être associé
+	 */
+	public void setCase(Pion pion) {
+		this.plateau[pion.getLigne()][pion.getColonne()] = pion;
+	}
+	
+	/**
+	 * Fonction permettant d'avancer un pion et aussi vérifiant si le pion n'est 
+	 * pas bloqué 
+	 * @param pion, Le pion qu'on veut bouger
+	 */
+	public void movePion(Pion pion) {
+		this.plateau[pion.getLigne()][pion.getColonne()] = null;
+		pion.setColonne(this.plateau);
+		pion.setBloque(this.plateau);
+		updateBloque(pion.getLigne());
+		this.plateau[pion.getLigne()][pion.getColonne()] = pion;
+	}
+	
+	/**
+	 * Vérifie sur une ligne si des cases ne sont pas bloqué
+	 * @param ligne, la ligne que l'on veut vérifier
+	 */
+	public void updateBloque(int ligne) {
+		for (int x = 0 ; x < this.ligne ; x++) {
+			if (this.plateau[ligne][x] != null) {
+				plateau[ligne][x].setBloque(this.plateau);
+			}
+		}
+	}
+	
+	/**
+	 * Affiche le plateau
+	 */
+	public String afficherJeu() {
+		StringBuilder plateauString = new StringBuilder();
+		plateauString.append(" |");
+		for (int z = 0 ; z < this.colonne ; z++) {
+			plateauString.append(z+1 + " | ");
+		}
+		for (int x = 0 ; x < this.ligne ; x++) {
+			plateauString.append("\n" + (x+1) + " |");
+			for (int y = 0 ; y < this.colonne ; y++) {
+				if (plateau[x][y] != null) {
+					if (plateau[x][y].isCrapaud()) {
+						plateauString.append("C|");
+					} else if (!plateau[x][y].isCrapaud()) {
+						plateauString.append("G|");
+					}
+				} else {
+					plateauString.append(" |");
+				}
+			}
+		}
+		return plateauString.toString();
 	}
 
 	/**

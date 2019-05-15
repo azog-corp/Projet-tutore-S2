@@ -4,7 +4,6 @@
  */
 package crapouille;
 
-import crapouille.Pion;
 
 /**
  * Class de l'objet Pion
