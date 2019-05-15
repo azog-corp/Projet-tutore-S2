@@ -286,8 +286,7 @@ public class interfaceAppliController {
     
     @FXML
     void afficherJeu(MouseEvent Click) {
-    	Partie.setChoixConfiguration(0);
-    	Partie.crapouille();
+    	Partie.setChoixConfig(0);
     	reinitialiser();
     	gameBoard.setVisible(true);
     	//rafraichirJeu(Partie.plateau.afficherJeu());
