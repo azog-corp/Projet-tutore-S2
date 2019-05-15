@@ -7,6 +7,8 @@
 package crapouille.interfaceFx;
 
 
+import java.time.LocalDate;
+
 import crapouille.Pion;
 import crapouille.game.Partie;
 import javafx.application.Platform;
@@ -25,6 +27,8 @@ import javafx.scene.text.Text;
 public class interfaceAppliController {
 	
     private String nom;
+    
+    private LocalDate debutCasseTete;
 
     @FXML
     private AnchorPane initialisationConfig;
@@ -398,5 +402,12 @@ public class interfaceAppliController {
     void enregistrerConfig(MouseEvent Click) {
     	//TODO ENVOYER LA CONFIG
     }
-
+    
+    private void score() {
+    	//TODO enregistrer temps + nombre de coup
+    }
+    
+    private void modeJeu() {
+    	
+    }
 }
