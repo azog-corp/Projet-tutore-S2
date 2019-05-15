@@ -408,6 +408,25 @@ public class interfaceAppliController {
     }
     
     private void modeJeu() {
-    	
+    	int ligne = 0,
+    	colonne = 0,
+    	tourEquipe = 0;
+    	Partie.setChoixAdversaire(0); // TODO
+    	do {
+    		// TODO : donné valeur à ligne et colonne
+    		tourEquipe = Partie.joueurVs(tourEquipe, ligne, colonne);
+    	} while (Partie.victoire(Partie.batracien[0])  || Partie.victoire(Partie.batracien[1]));
+    }
+    
+    private void modeCassTete() {
+    	int ligne = 0,
+    	colonne = 0;
+    	do {
+    		// TODO : donné valeur à ligne et colonne
+    		Partie.casseTete(ligne, colonne);
+    	} while (Partie.victoire(Partie.batracien[0])  || Partie.victoire(Partie.batracien[1]));
+    	if (Partie.victoireCasseTete()) {
+    		//TODO : tu dit bravo
+    	}
     }
 }

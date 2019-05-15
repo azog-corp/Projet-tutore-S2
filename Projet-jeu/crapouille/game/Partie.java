@@ -60,7 +60,7 @@ public class Partie {
 	public static void setNbPion(int nbPion) {
 		Partie.nbPion = nbPion;
 	}
-	
+
 	//TODO POURQUOI 2 DIFFERENTS
 	public static void setEquipe1(String equipe) {
 		Partie.equipe[0] = equipe;
@@ -237,14 +237,14 @@ public class Partie {
 	 * @param ordinateur détermine si le joueur joue contre un humain
 	 * et si non, le niveau de difficulté de l'IA
 	 */
-	public static void joueurVs(int ordinateur, int tourEquipe, int ligne, int colonne) {
+	public static int joueurVs(int tourEquipe, int ligne, int colonne) {
 		if (tourEquipe == 0) {
 			do {
 				tourEquipe = tourJoueur(tourEquipe, ligne, colonne);
 			} while(tourEquipe == 0);
 		} else {
 			do {
-				if (ordinateur == 0) {
+				if (choixAdversaire == 0) {
 					tourEquipe = tourJoueur(tourEquipe, ligne, colonne);
 				} else {
 					// TODO : Yanis tu fous l'IA ici avec un movePion
@@ -252,6 +252,7 @@ public class Partie {
 				}
 			} while(tourEquipe == 1);
 		}
+		return tourEquipe;
 	}
 
 	/**
@@ -268,18 +269,14 @@ public class Partie {
 			movePion(plateau[ligne][colonne]);
 			tourEquipe = tourEquipe == 0 ? 1 : 0;
 		}
-		// Si le mode de jeu est casse tête 
-		if (tourEquipe == 2) {
-			// Si la grenouille existe et qu'elle n'est pas bloquée
-			if (pionValide(0, ligne, colonne) || pionValide(1, ligne, colonne)) {
-				// On bouge le pion
-				movePion(plateau[ligne][colonne]);
-				// Si le crapaud existe et qu'il n'est pas bloqué
-			} else if (pionValide(1, ligne, colonne)) {
-				// On bouge le pion
-				movePion(plateau[ligne][colonne]);
-			}
-		}
 		return tourEquipe;
+	}
+
+	public static void casseTete(int ligne, int colonne) {
+		// Si la grenouille existe et qu'elle n'est pas bloquée
+		if (pionValide(0, ligne, colonne) || pionValide(1, ligne, colonne)) {
+			// On bouge le pion
+			movePion(plateau[ligne][colonne]);
+		}
 	}
 }
