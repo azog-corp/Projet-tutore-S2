@@ -12,10 +12,12 @@ import crapouille.Pion;
 public class Configuration {
 
 	private Pion[][] configPlateau;
+	private String nom;
 	
 	
-	public Configuration(Pion[][] configPlateau) {
+	public Configuration(Pion[][] configPlateau, String nom) {
 		this.configPlateau = configPlateau;
+		this.nom = nom;
 	}
 
 	public Pion[][] getConfigPlateau() {
@@ -26,7 +28,13 @@ public class Configuration {
 	public void setConfigPlateau(Pion[][] configPlateau) {
 		this.configPlateau = configPlateau;
 	}
-	
-	
 
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	
 }

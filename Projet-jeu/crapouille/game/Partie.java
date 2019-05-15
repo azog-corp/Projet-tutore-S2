@@ -80,14 +80,14 @@ public class Partie {
 	/**
 	 * ArrayList contenant toutes les configurations existantes
 	 */
-	private static ArrayList<Configuration> listConfiguration = new ArrayList<Configuration>();
+	public static ArrayList<Configuration> listConfiguration = new ArrayList<Configuration>();
 
 	/**
 	 * Configuration appartenant à listConfiguration
 	 * et qui est celle sur laquelle l'utilisateur
 	 * joue une partie
 	 */
-	private static Configuration configuration;
+	public static Configuration configuration;
 
 	/**
 	 * @return choixModeDeJeu
@@ -428,22 +428,6 @@ public class Partie {
 				} while(tourEquipe == 1);
 			}
 		} while(!victoire(batracien[0]) || !victoire(batracien[1]));
-	}
-
-	/**
-	 * 
-	 */
-	public static void createConfig(boolean isCrapaud) {
-		Plateau newConfig = new Plateau(getLigne(), getColonne());
-		Pion[] batracien = new Pion[getNbPion()];
-		for (int x = 0; x < getNbPion(); x++) {
-			Pion pion = new Pion(getLigne(), getColonne(), isCrapaud);
-			newConfig.setCase(pion);
-			batracien[x] = pion;
-		}
-		for (int x = 0; x < getNbPion(); x++) {
-			batracien[x].setBloque(newConfig.getPlateau());
-		}
 	}
 	
 	public static void deleteConfig() {

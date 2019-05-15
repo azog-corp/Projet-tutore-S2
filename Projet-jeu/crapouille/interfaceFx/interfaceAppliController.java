@@ -9,6 +9,7 @@ package crapouille.interfaceFx;
 
 import crapouille.Pion;
 import crapouille.Plateau;
+import crapouille.configuration.Configuration;
 import crapouille.game.Partie;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -323,13 +324,26 @@ public class interfaceAppliController {
     void creationInitialisation(MouseEvent Click) {
     	int nbLigne = Integer.parseInt(tb_nbLigneConf.getText());
     	int nbColonne = Integer.parseInt(tb_nbColonneConf.getText());
+    	int ligne = 0,
+    	  colonne = 0,
+    	  nbPion = 0;
+    	boolean isCrapaud = true;
     	String nom = tb_nomConf.getText();
     	//TODO FAIRE VERIFICATION VALIDITE
     	//SI BON FAIRE
-    	Partie.setLigne(nbLigne);
-    	Partie.setColonne(nbColonne);
-    	//Partie.setNom(nom);
     	Plateau config = new Plateau(nbLigne,nbColonne);
+		Pion[] batracien = new Pion[nbPion];
+		for (int x = 0; x < nbPion; x++) {
+			// Donné une valeur à ligne et colonne
+			Pion pion = new Pion(ligne, colonne, isCrapaud);
+			config.setCase(pion);
+			batracien[x] = pion;
+		}
+		for (int x = 0; x < nbPion; x++) {
+			batracien[x].setBloque(config.getPlateau());
+		}
+    	Configuration nouvelleConfig = new Configuration(config.getPlateau(), nom);
+    	Partie.listConfiguration.add(nouvelleConfig);
     	showCreationConfig(); 	
     	//SINON TEXTBOX / label avertir
     }
