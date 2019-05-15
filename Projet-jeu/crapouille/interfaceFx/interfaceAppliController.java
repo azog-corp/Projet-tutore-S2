@@ -297,9 +297,7 @@ public class interfaceAppliController {
     	entreeUti.setText(plateauJeu);
     }
     
-    public void rafraichirConf(String plateauJeu) {
-    	afficherConfig.setText(plateauJeu);
-    }
+
     
     @FXML
     void showConfiguration(MouseEvent Click) {
@@ -319,8 +317,8 @@ public class interfaceAppliController {
     		int nbLigne = Integer.parseInt(tb_nbLigneConf.getText());
     		int nbColonne = Integer.parseInt( tb_nbColonneConf.getText());
     		if (nbLigne < 20 && nbColonne < 20) {
-    			//Partie.setligneConf(nbLigne);
-    				//Partie.setcolonneConf(nbLigne);
+    			Partie.setLigneConf(nbLigne);
+    			Partie.setColonneConf(nbLigne);
     			recupNom();
     			showCreationConfig(); 
     		} else {
@@ -379,14 +377,19 @@ public class interfaceAppliController {
     	int colonnePion = Integer.parseInt(recupCo.toString());
     	Pion placementUti = new Pion(lignePion,colonnePion,recupType(tb_cord.getText().charAt(0)));
     	//TODO SI TOUS TEST VALIDE +1 nb Pion
-    	//Partie.plateau[lignePion][colonnePion]= placementUti;
-    	//rafraichirConf(Partie.plateau.afficherJeu());
+    	Partie.plateau[lignePion][colonnePion]= placementUti;
+    	rafraichirConf(Partie.plateau.afficherJeu());
     	
     	//TODO verifier coordonnees  
     	//TODO si correct modifier plateau + actualiser plateau
     	//TODO msg Box pas correct
     	
     }
+    
+    public void rafraichirConf(String plateauJeu) {
+    	afficherConfig.setText(plateauJeu);
+    }
+    
     @FXML
     void enregistrerConfig(MouseEvent Click) {
     	//TODO ENVOYER LA CONFIG

@@ -27,7 +27,7 @@ public class Partie {
 
 	private static String[] equipe = new String[2];
 
-	private static Pion[][] plateau = new Pion[LIGNE_MAX][COLONNE_MAX];
+	public static Pion[][] plateau = new Pion[LIGNE_MAX][COLONNE_MAX];
 
 	public static ArrayList<Configuration> listConfiguration;
 
