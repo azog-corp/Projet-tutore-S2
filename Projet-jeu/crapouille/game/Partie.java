@@ -429,10 +429,7 @@ public class Partie {
 			}
 		} while(!victoire(batracien[0]) || !victoire(batracien[1]));
 	}
-	
-	public static void deleteConfig() {
-		
-	}
+
 
 	/**
 	 * Main principale qui lance le jeu
