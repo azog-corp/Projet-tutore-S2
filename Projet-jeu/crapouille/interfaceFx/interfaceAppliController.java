@@ -365,7 +365,6 @@ public class interfaceAppliController {
     
     @FXML
     void actualiserConfig(MouseEvent Click) {
-    	//TODO verification validite <= 0 etc
     	StringBuilder recupCord = new StringBuilder(); 
     	recupCord.append(tb_cord.getText().charAt(1));
     	recupCord.append(tb_cord.getText().charAt(2));
@@ -373,10 +372,13 @@ public class interfaceAppliController {
     	StringBuilder recupCo = new StringBuilder(); 
     	recupCo.append(tb_cord.getText().charAt(4));
     	recupCo.append(tb_cord.getText().charAt(5));
-    	//TODO Verifier que coordonnees valides
+    	//TODO Verifier que coordonnees valides ligne et colonne pas superieur et > 0
     	//TODO verifier char 3 -
     	//TODO verifier char c ou g si tous bon continuer	
     	int colonnePion = Integer.parseInt(recupCo.toString());
+    	
+    	colonnePion--;
+    	lignePion--;
     	Pion placementUti = new Pion(lignePion,colonnePion,recupType(tb_cord.getText().charAt(0)));
     	//TODO SI TOUS TEST VALIDE +1 nb Pion
     	Partie.plateau[lignePion][colonnePion] = placementUti;
