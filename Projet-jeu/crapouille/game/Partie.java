@@ -236,20 +236,15 @@ public class Partie {
 	 * @param ordinateur détermine si le joueur joue contre un humain
 	 * et si non, le niveau de difficulté de l'IA
 	 */
-	public static void joueurVs(int ordinateur, int ligne, int colonne) {
-		int tourEquipe = 0; // Numéro de l'équipe dont c'est le tour
-		// Si aucun nom n'est rentré, le nom par défault est Grenouille
-		equipe[0] = equipe[0].length() == 0 ? "Grenouille" : equipe[0];
-		// Si aucun nom n'est rentré, le nom par défault est Crapaud
-		equipe[1] = equipe[1].length() == 0 ? "Crapaud" : equipe[1];
+	public static void joueurVs(int ordinateur, int tourEquipe, int ligne, int colonne) {
 		if (tourEquipe == 0) {
 			do {
-				tourEquipe = tourJoueur(tourEquipe, tourEquipe, tourEquipe);
+				tourEquipe = tourJoueur(tourEquipe, ligne, colonne);
 			} while(tourEquipe == 0);
 		} else {
 			do {
 				if (ordinateur == 0) {
-					tourEquipe = tourJoueur(tourEquipe);
+					tourEquipe = tourJoueur(tourEquipe, ligne, colonne);
 				} else {
 					// TODO : Yanis tu fous l'IA ici avec un movePion
 					tourEquipe--;
