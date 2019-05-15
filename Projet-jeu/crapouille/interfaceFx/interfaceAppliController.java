@@ -8,8 +8,6 @@ package crapouille.interfaceFx;
 
 
 import crapouille.Pion;
-import crapouille.Plateau;
-import crapouille.configuration.Configuration;
 import crapouille.game.Partie;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -29,16 +27,16 @@ public class interfaceAppliController {
     private String nom;
 
     @FXML
-    private Label lb_cord;
+    private AnchorPane initialisationConfig;
 
     @FXML
     private AnchorPane gameBoard;
-    
+
     @FXML
-    private configuration;
-	
+    private AnchorPane configuration;
+
     @FXML
-    private backpanel;
+    private AnchorPane backpanel;
 
     @FXML
     private Button okGameBoard;
@@ -86,9 +84,6 @@ public class interfaceAppliController {
     private Label gameBoardString;
 
     @FXML
-    private Button btn_validerCord;
-
-    @FXML
     private ImageView btn_quitter;
 
     @FXML
@@ -102,6 +97,9 @@ public class interfaceAppliController {
 
     @FXML
     private TextField choixConfig;
+
+    @FXML
+    private AnchorPane placementConfig;
 
     @FXML
     private Button retourMenu;
@@ -134,10 +132,10 @@ public class interfaceAppliController {
     private AnchorPane settingsBar;
 
     @FXML
-    private Label lb_lvlIa;
+    private Button btn_aidemenu;
 
     @FXML
-    private Button btn_aidemenu;
+    private Label lb_lvlIa;
 
     @FXML
     private Label labelIA;
@@ -321,12 +319,11 @@ public class interfaceAppliController {
     }
     
     @FXML
-    void creationInitialisation(MouseEvent Click) {
+    void configInitialisation(MouseEvent Click) {
     	int nbLigne = Integer.parseInt(tb_nbLigneConf.getText());
     	int nbColonne = Integer.parseInt(tb_nbColonneConf.getText());
-    	Partie.setligneConf(nbLigne);
-	Partie.setcolonneConf(nbLigne);
-    	boolean isCrapaud = true;
+    	//Partie.setligneConf(nbLigne);
+    	//Partie.setcolonneConf(nbLigne);
     	nom = tb_nomConf.getText();
     	showCreationConfig(); 	
     }
@@ -335,44 +332,29 @@ public class interfaceAppliController {
 	//Partie.arr.add
     
     @FXML
-    void showCreationConfig() { //chnqger pqr une pqge
-    	lb_nbColonne.setVisible(false);
-    	lb_nbLigne.setVisible(false);
-    	tb_nbLigneConf.setVisible(false);
-    	tb_nbColonneConf.setVisible(false);
-    	btn_validerTaille.setVisible(false);
-    	lb_cord.setVisible(true);
-    	tb_cord.setVisible(true);
-    	btn_validerCord.setVisible(true);
-    	btn_validerConfig.setVisible(true);
+    void showCreationConfig() { 
+    	initialisationConfig.setVisible(false);
+    	placementConfig.setVisible(true);
     }
     
     @FXML
     void showInitialisationConfig() {
-    	lb_nbColonne.setVisible(true);
-    	lb_nbLigne.setVisible(true);
-    	tb_nbLigneConf.setVisible(true);
-    	tb_nbColonneConf.setVisible(true);
-    	btn_validerTaille.setVisible(true);
-    	lb_cord.setVisible(false);
-    	tb_cord.setVisible(false);
-    	btn_validerCord.setVisible(false);
-    	btn_validerConfig.setVisible(false);
+    	initialisationConfig.setVisible(true);
+    	placementConfig.setVisible(false);
     }
 	
-    private boolean recupType(Char choix) {
-	boolean choixUti;
-	if (choix == 'C' || choix == 'c') {
-	    choixUti = true;
-	} else {
-	    choixUti = false;
-	}
-	return choixUti;
+    private boolean recupType(char choix) {
+    	boolean choixUti;
+    	if (choix == 'C' || choix == 'c') {
+    		choixUti = true;
+    	} else {
+    		choixUti = false;
+    		}
+    	return choixUti;
     }
     
     @FXML
     void actualiserConfig(MouseEvent Click) {
-	
     	StringBuilder recupCord = new StringBuilder(); 
     	recupCord.append(tb_cord.getText().charAt(1));
     	recupCord.append(tb_cord.getText().charAt(2));
@@ -380,18 +362,23 @@ public class interfaceAppliController {
     	StringBuilder recupCo = new StringBuilder(); 
     	recupCo.append(tb_cord.getText().charAt(4));
     	recupCo.append(tb_cord.getText().charAt(5));
-	//Verifier que coordonnees valides
-	//verifier char 3 -
-	//verifier char c ou g si tous bon continuer	
+    	//Verifier que coordonnees valides
+    	//verifier char 3 -
+    	//verifier char c ou g si tous bon continuer	
     	int colonnePion = Integer.parseInt(recupCo.toString());
-    	Pion placementUti = new Pion(lignePion,colonnePion,recupUti(tb_cord.getText().charAt(0)));
-	//SI TOUS TEST VALIDE +1 nb Pion
+    	Pion placementUti = new Pion(lignePion,colonnePion,recupType(tb_cord.getText().charAt(0)));
+    	//SI TOUS TEST VALIDE +1 nb Pion
+    	//Partie.plateau[lignePion][colonnePion]= placementUti;
     	rafraichirConf(Partie.plateau.afficherJeu());
     	
     	//TODO verifier coordonnees  
     	//TODO si correct modifier plateau + actualiser plateau
     	//TODO msg Box pas correct
     	
+    }
+    
+    void enregistrerConfig(MouseEvent Click) {
+    	//TODO ENVOYER LA CONFIG
     }
 
 }
