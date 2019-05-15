@@ -24,6 +24,8 @@ public class PartieV2 {
 	choixModeDeJeu,
 	choixConfig,
 	nbPion;
+	
+	private static String[] equipe = new String[2];
 
 	private static Pion[][] plateau = new Pion[LIGNE_MAX][COLONNE_MAX];
 
@@ -47,12 +49,24 @@ public class PartieV2 {
 		PartieV2.choixAdversaire = choixAdversaire;
 	}
 
+	public static void setChoixModeDeJeu(int choixModeDeJeu) {
+		PartieV2.choixModeDeJeu = choixModeDeJeu;
+	}
+
 	public static void setChoixConfig(int choixConfig) {
 		PartieV2.choixConfig = choixConfig;
 	}
 
 	public static void setNbPion(int nbPion) {
 		PartieV2.nbPion = nbPion;
+	}
+
+	public static void setEquipe1(String equipe) {
+		PartieV2.equipe[0] = equipe;
+	}
+	
+	public static void setEquipe2(String equipe) {
+		PartieV2.equipe[1] = equipe;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -108,6 +122,14 @@ public class PartieV2 {
 	}
 	
 	/**
+	 * Associe une case � un pion
+	 * @param pion, Le pion qui doit �tre associ�
+	 */
+	public void setCase(Pion pion) {
+		plateau[pion.getLigne()][pion.getColonne()] = pion;
+	}
+	
+	/**
 	 * Vérifie si tous les pions d'une équipe sont bloqués
 	 * @param pion les pions à vérifier
 	 * @return true si les pions sont bloqué
@@ -120,6 +142,22 @@ public class PartieV2 {
 			}
 		}
 		return true;
+	}
+	
+	/**
+	 * Fonction permettant d'avancer un pion et aussi v�rifiant si le pion n'est 
+	 * pas bloqu� 
+	 * @param pion, Le pion qu'on veut bouger
+	 */
+	public void movePion(Pion pion) {
+		plateau[pion.getLigne()][pion.getColonne()] = null;
+		pion.setColonne(plateau);
+		plateau[pion.getLigne()][pion.getColonne()] = pion;
+		for (int x = 0 ; x < pion.getLigne() ; x++) {
+			if (plateau[pion.getLigne()][x] != null) {
+				plateau[pion.getLigne()][x].setBloque(plateau);
+			}
+		}
 	}
 	
 	/**
@@ -151,4 +189,73 @@ public class PartieV2 {
 		return nbPion == pionVictoire;
 	}
 
+	public static boolean pionValide(int equipe, int ligne, int colonne) {
+        for (int x = 0 ; x < batracien[0].length ; x++) {
+            if (batracien[equipe][x].getLigne() == ligne && batracien[equipe][x].getColonne() == colonne) {
+                return true;
+            }
+        }
+        return false;
+    }
+	
+	/**
+	 * Affiche le plateau
+	 */
+	public String afficherJeu() {
+		StringBuilder plateauString = new StringBuilder();
+		plateauString.append(" |");
+		for (int z = 0 ; z < colonneConf ; z++) {
+			plateauString.append(z+1 + " | ");
+		}
+		for (int x = 0 ; x < ligneConf ; x++) {
+			plateauString.append("\n" + (x+1) + " |");
+			for (int y = 0 ; y < colonneConf ; y++) {
+				if (plateau[x][y] != null) {
+					if (plateau[x][y].isCrapaud()) {
+						plateauString.append("C|");
+					} else if (!plateau[x][y].isCrapaud()) {
+						plateauString.append("G|");
+					}
+				} else {
+					plateauString.append(" |");
+				}
+			}
+		}
+		return plateauString.toString();
+	}
+	
+	/**
+	 * Lance une partie entre un joueur et
+	 * soit un humain soit une IA
+	 * Leurs demande de nommé leur équipe puis
+	 * à tour de role il vont selectionner
+	 * un pion de leur équipe à déplacer jusqu'à ce que l'une des
+	 * deux équipe soit bloqué
+	 * @param ordinateur détermine si le joueur joue contre un humain
+	 * et si non, le niveau de difficulté de l'IA
+	 */
+	public static void joueurVs(int ordinateur) {
+		int tourEquipe = 0; // Numéro de l'équipe dont c'est le tour
+		// Si aucun nom n'est rentré, le nom par défault est Grenouille
+		equipe[0] = equipe[0].length() == 0 ? "Grenouille" : equipe[0];
+		// Si aucun nom n'est rentré, le nom par défault est Crapaud
+		equipe[1] = equipe[1].length() == 0 ? "Crapaud" : equipe[1];
+		do {
+			if (tourEquipe == 0) {
+				do {
+					tourEquipe = tourJoueur(tourEquipe);
+				} while(tourEquipe == 0);
+			} else {
+				do {
+					if (ordinateur == 0) {
+						tourEquipe = tourJoueur(tourEquipe);
+					} else {
+						// TODO : Yanis tu fous l'IA ici avec un movePion
+						tourEquipe--;
+					}
+				} while(tourEquipe == 1);
+			}
+		} while(!victoire(batracien[0]) || !victoire(batracien[1]));
+	}
+	
 }
