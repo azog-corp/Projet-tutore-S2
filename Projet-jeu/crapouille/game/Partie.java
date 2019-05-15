@@ -60,7 +60,8 @@ public class Partie {
 	public static void setNbPion(int nbPion) {
 		Partie.nbPion = nbPion;
 	}
-
+	
+	//TODO POURQUOI 2 DIFFERENTS
 	public static void setEquipe1(String equipe) {
 		Partie.equipe[0] = equipe;
 	}

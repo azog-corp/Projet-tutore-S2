@@ -350,13 +350,13 @@ public class interfaceAppliController {
     void showCreationConfig() { 
     	initialisationConfig.setVisible(false);
     	placementConfig.setVisible(true);
+    	rafraichirConf(Partie.afficherJeu());
     }
     
     @FXML
     void showInitialisationConfig() {
     	initialisationConfig.setVisible(true);
     	placementConfig.setVisible(false);
-    	rafraichirConf(Partie.afficherJeu());
     }
 	
     private boolean recupType(char choix) {
@@ -365,6 +365,7 @@ public class interfaceAppliController {
     
     @FXML
     void actualiserConfig(MouseEvent Click) {
+    	//TODO verification validite <= 0 etc
     	StringBuilder recupCord = new StringBuilder(); 
     	recupCord.append(tb_cord.getText().charAt(1));
     	recupCord.append(tb_cord.getText().charAt(2));
@@ -378,7 +379,7 @@ public class interfaceAppliController {
     	int colonnePion = Integer.parseInt(recupCo.toString());
     	Pion placementUti = new Pion(lignePion,colonnePion,recupType(tb_cord.getText().charAt(0)));
     	//TODO SI TOUS TEST VALIDE +1 nb Pion
-    	Partie.plateau[lignePion][colonnePion]= placementUti;
+    	Partie.plateau[lignePion][colonnePion] = placementUti;
     	rafraichirConf(Partie.afficherJeu());
     	
     	//TODO verifier coordonnees  
