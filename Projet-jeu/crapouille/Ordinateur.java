@@ -82,26 +82,6 @@ public class Ordinateur {
 		return pionLibre.get((int) (1 + (Math.random() * (pionLibre.size()))));
 	}
 
-	public static int ordiLvl2(ArrayList<Integer> pionLibre, ArrayList<Pion[]> casActuel, Pion[][] plateau) {
-		for (int x = 0 ; x < pionLibre.size() ; x++) {
-			if (casActuel.get(x) == casPossibles[0] || 
-					casActuel.get(x) == casPossibles[1] || 
-					casActuel.get(x) == casPossibles[2] || 
-					casActuel.get(x) == casPossibles[3]) {
-				return x;
-			}
-		}
-		return -1;
-	}
-
-	public static int ordiLvl3(ArrayList<Integer> pionLibre, ArrayList<Pion[]> casActuel, Pion[][] plateau) {
-		for (int x = 0 ; x < pionLibre.size() ; x++) {
-			if (casActuel.get(x) == casPossibles[4] || 
-					casActuel.get(x) == casPossibles[5] || 
-					casActuel.get(x) == casPossibles[6]) {
-				return x;
-			}
-		}
-		return -1;
+	
 	}
 }
