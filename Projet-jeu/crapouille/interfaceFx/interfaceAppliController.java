@@ -308,12 +308,15 @@ public class interfaceAppliController {
     	reinitialiser();
     	gameBoard.setVisible(true);
     	rafraichirJeu(Partie.afficherJeu());
+    	//Lancer chrono
     }
     
     void actualiserJeu(MouseEvent Click) {
     	//Recuperer coordonees
     	//Deplacer pion
+    	//nb coup++
     	rafraichirJeu(Partie.afficherJeu());
+    	
     }
     
     private void recupModeJeu() {
