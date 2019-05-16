@@ -289,7 +289,7 @@
          <children>
             <TextField fx:id="entreeUti" layoutX="11.0" layoutY="472.0" prefHeight="26.0" prefWidth="448.0" />
             <Label fx:id="gameBoardString" layoutX="246.0" layoutY="252.0" textFill="WHITE" />
-            <Button fx:id="okGameBoard" layoutX="465.0" layoutY="472.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="42.0" stylesheets="@application.css" text="Ok">
+            <Button fx:id="okGameBoard" layoutX="465.0" layoutY="472.0" mnemonicParsing="false" onMouseClicked="#actualiserJeu" prefHeight="25.0" prefWidth="42.0" stylesheets="@application.css" text="Ok">
                <styleClass>
                   <String fx:value="btnPlateau" />
                   <String fx:value="priobtn" />
