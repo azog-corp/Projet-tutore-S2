@@ -312,11 +312,13 @@ public class interfaceAppliController {
     }
     
     void actualiserJeu(MouseEvent Click) {
-    	//Recuperer coordonees
-    	//Deplacer pion
-    	//nb coup++
+    	//Recuperer et valider coordonees
+    	Partie.movePion(); //joueur joue nbcoup++
+    	//move pion doit changer le tour equipe
+    	if (Partie.tourequipe == 2 && Partie.getChoixAdversaire() != 0) {
+    		//appeler IA
+    	} //Sinon rien faire et attendre que lautre equipe joue
     	rafraichirJeu(Partie.afficherJeu());
-    	
     }
     
     private void recupModeJeu() {
