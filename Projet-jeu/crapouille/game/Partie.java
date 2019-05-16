@@ -13,106 +13,199 @@ import crapouille.Pion;
 import crapouille.configuration.Configuration;
 
 public class Partie {
-	/*Nombre Ligne max pour les configuraions*/
+
+	/**
+	 * Nombre Ligne max pour les configuraions
+	 */
 	private final static int LIGNE_MAX = 20;
-	/*Nombre Colonne max pour les configurations*/
+
+	/**
+	 * Nombre Colonne max pour les configurations
+	 */
 	private final static int COLONNE_MAX = 20;
-	/*Nombre de ligne de la configuration actuelle*/
+
+	/**
+	 * Nombre de ligne de la configuration actuelle
+	 */
 	private static int ligneConf;
-	/*Nombre de colonne de la configuration actuelle*/
+
+	/**
+	 * Nombre de colonne de la configuration actuelle
+	 */
 	private static int colonneConf;
-	/* Adversaire choisi par l'utilisateur
+
+	/** Adversaire choisi par l'utilisateur
 	 * 0 = humain
 	 * 1 = ia niveau 1
 	 * 2 = ia niveau 2
 	 * 3 = ia niveau 3
 	 */
 	private static int choixAdversaire;
-	
-	/*
-	 *  Mode de jeu choisi par l'adversaire
+
+	/**
+	 * Mode de jeu choisi par l'adversaire
 	 * 0 = casse tete
 	 * 1 = versus
 	 */
 	private static int choixModeDeJeu;
-	
-	/*Configuration choisie par l'utilisateur*/
+
+	/**
+	 * Configuration choisie par l'utilisateur
+	 */
 	private static int choixConfig;
-	
-	/*Nombre de pion present dans la configuration */
+
+	/**
+	 * Nombre de pion present dans la configuration 
+	 */
 	private static int nbPion;
-	
 
-	private static String nomEquipe1Defaut = "Crapauds";
+	/**
+	 * Nom par défaut de l'équipe Crapaud
+	 */
+	private static String nomEquipe1Defaut = "Crapaud";
 
+	/**
+	 * Nom par défaut de l'équipe Grenouille
+	 */
 	private static String nomEquipe2Defaut = "Grenouille";
 
+	/**
+	 * Tableau contenant le nom des deux équipes
+	 * saisies par le ou les joueurs
+	 */
 	public static String[] equipe = new String[2];
 
+	/**
+	 * Plateau sur lequel sont placés et déplacés
+	 * chaque pion des deux équipes.
+	 * Les dimensions de celui-ci ne sont
+	 * pas necessairement celles de la configuaration
+	 */
 	public static Pion[][] plateau = new Pion[LIGNE_MAX][COLONNE_MAX];
 
+	/**
+	 * ArrayList contenant toutes les configurations créé
+	 * ainsi que la configuration par défaut.
+	 * Cette variable est enregistré lorsque le joueur
+	 * quitte l'application
+	 */
 	public static ArrayList<Configuration> listConfiguration;
 
+	/**
+	 * Configuration sur laquelle la partie en cours
+	 * est joué
+	 */
 	public static Configuration currentConfig;
 
+	/**
+	 * Tableau contenant toutes les instances de pions
+	 * présentent sur le plateau.
+	 * La première ligne contient tous les pion grenouilles
+	 * et la seconde tous les crapaud
+	 */
 	public static Pion[][] batracien = new Pion[2][];
 
+	/**
+	 * Chemin du fichier bin dans lequel est enregistré
+	 * la ArryList listConfiguration
+	 */
 	private final static String CHEMIN_FICHIER = "/crapouille/configuration/listeConfiguration.bin";
-	
-	public static String getNomEquipe2Defaut() {
-		return nomEquipe2Defaut;
-	}
-	
+
+	/**
+	 * @return le nom de l'équipe grenouille
+	 */
 	public static String getNomEquipe1Defaut() {
 		return nomEquipe1Defaut;
 	}
 
+	/**
+	 * @return le nom de l'équipe crapaud
+	 */
+	public static String getNomEquipe2Defaut() {
+		return nomEquipe2Defaut;
+	}
+
+	/**
+	 * @param ligneConf le nombre de lignes de la configuration
+	 */
 	public static void setLigneConf(int ligneConf) {
 		Partie.ligneConf = ligneConf;
 	}
-	
+
+	/**
+	 * @param colonneConf le nombre de colonnes de la configuration
+	 */
 	public static void setColonneConf(int colonneConf) {
 		Partie.colonneConf = colonneConf;
 	}
 
+	/**
+	 * @param choixAdversaire l'entité contre laquelle
+	 * le joueur veut faire une partie :
+	 * - 0 pour un humain
+	 * - 1 ou plus pour une IA
+	 */
 	public static void setChoixAdversaire(int choixAdversaire) {
 		Partie.choixAdversaire = choixAdversaire;
 	}
-	
+
+	/**
+	 * @return l'entité contre laquelle le joueur veut faire une partie
+	 */
 	public static int getChoixAdversaire() {
 		return choixAdversaire;
 	}
 
+	/**
+	 * @param choixModeDeJeu 0 pour joueur versus et 1 pour casse tête
+	 */
 	public static void setChoixModeDeJeu(int choixModeDeJeu) {
 		Partie.choixModeDeJeu = choixModeDeJeu;
 	}
-	
+
+	/**
+	 * @return le mode de jeu en cours
+	 */
 	public static int getChoixModeDeJeu() {
 		return choixModeDeJeu;
 	}
 
+	/**
+	 * @param choixConfig l'index de listConfiguration déésignant une
+	 * configuration spécifique
+	 */
 	public static void setChoixConfig(int choixConfig) {
 		Partie.choixConfig = choixConfig;
 	}
 
+	/**
+	 * @param nbPion le nombre de pion présent sur le plateau
+	 */
 	public static void setNbPion(int nbPion) {
 		Partie.nbPion = nbPion;
 	}
 
-	//TODO POURQUOI 2 DIFFERENTS
+	/**
+	 * @param equipe le nom de l'équipe grenouille
+	 */
 	public static void setEquipe1(String equipe) {
 		Partie.equipe[0] = equipe;
 	}
 
-
+	/**
+	 * @param equipe le nom de l'équipe crapaud
+	 */
 	public static void setEquipe2(String equipe) {
 		Partie.equipe[1] = equipe;
 	}
 
+	/**
+	 * Récupère la ArrayList contenant toutes les configurations
+	 * qui ont été crées et celle par défaut
+	 */
 	@SuppressWarnings("unchecked")
 	public static void initConfig() {
 		try(ObjectInputStream fichier = new ObjectInputStream(new FileInputStream(CHEMIN_FICHIER))) {           
-
 			// lecture de l'objet contenu dans le fichier
 			listConfiguration = (ArrayList<Configuration>) fichier.readObject();
 		} catch (FileNotFoundException e) {
@@ -124,16 +217,21 @@ public class Partie {
 		}
 	}
 
+	/**
+	 * Sauvegarde en mémoire la ArrayList contenant toutes les configurations
+	 */
 	public static void saveConfig() {
 		try(ObjectOutputStream fichier = new ObjectOutputStream(new FileOutputStream(CHEMIN_FICHIER))) {
-
 			fichier.writeObject(listConfiguration); 
-
 		}  catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * Fonction appelé lors de la création d'une configuration
+	 * et qui initialise l'attribut bloque de chaque pion
+	 */
 	public static void initBloque() {
 		for (int x = 0 ; x < ligneConf ; x++) {
 			for (int y = 0 ; y < colonneConf ; y++) {
@@ -144,6 +242,11 @@ public class Partie {
 		}
 	}
 
+	/**
+	 * Fonction appelé lors du chargement d'une configuration
+	 * et qui met dans le tableau batracien toutes les
+	 * instances des pions grenouilles et crapaud
+	 */
 	public static void initBatracien() {
 		batracien = new Pion[2][nbPion];
 		int crapaud = 0,
@@ -162,7 +265,7 @@ public class Partie {
 	}
 
 	/**
-	 * Associe une case à un pion
+	 * Associe un pion à une case du plateau
 	 * @param pion, Le pion qui doit être associé
 	 */
 	public static void setCase(Pion pion) {
@@ -185,15 +288,16 @@ public class Partie {
 	}
 
 	/**
-	 * Fonction permettant d'avancer un pion et aussi vérifiant si le pion n'est 
-	 * pas bloqué 
-	 * @param pion, Le pion qu'on veut bouger
+	 * Cette fonction déplace un pion sur le plateau, puis change
+	 * la colonne de celui-ci et enfin, réinitialise l'attribut
+	 * bloque de chaque pion présent sur la ligne du pion déplacé
+	 * @param pion le pion bougé
 	 */
 	public static void movePion(Pion pion) {
 		plateau[pion.getLigne()][pion.getColonne()] = null;
 		pion.setColonne(plateau);
 		plateau[pion.getLigne()][pion.getColonne()] = pion;
-		for (int x = 0 ; x < pion.getLigne() ; x++) {
+		for (int x = 0 ; x < ligneConf ; x++) {
 			if (plateau[pion.getLigne()][x] != null) {
 				plateau[pion.getLigne()][x].setBloque(plateau);
 			}
@@ -202,7 +306,7 @@ public class Partie {
 
 	/**
 	 * VÃ©rifie si toutes les grenouilles sont Ã  droite
-	 * et sir tous les crapaud sont Ã  gauche
+	 * et si tous les crapaud sont Ã  gauche
 	 * @return true si c'est vrai
 	 */
 	public static boolean victoireCasseTete() {
@@ -229,6 +333,14 @@ public class Partie {
 		return nbPion == pionVictoire;
 	}
 
+	/**
+	 * Vérifie si un pion dont les coordonnées sont placées en argument
+	 * existe et s'il appartient à l'équipe dont c'est le tour
+	 * @param equipe 0 sigifie l'équipe grnouille, 1 l'équipe crapaud
+	 * @param ligne du potentiel pion
+	 * @param colonne du potentiel pio
+	 * @return true si le pion existe et appartient à la vonne équipe
+	 */
 	public static boolean pionValide(int equipe, int ligne, int colonne) {
 		for (int x = 0 ; x < batracien[0].length ; x++) {
 			if (batracien[equipe][x].getLigne() == ligne && 
@@ -241,7 +353,8 @@ public class Partie {
 	}
 
 	/**
-	 * Affiche le plateau
+	 * Crée un String qui représente le plateau de jeu
+	 * avec les pions et leur type
 	 */
 	public static String afficherJeu() {
 		StringBuilder plateauString = new StringBuilder();
@@ -259,7 +372,7 @@ public class Partie {
 						plateauString.append("G|");
 					}
 				} else {
-					plateauString.append(" |");
+					plateauString.append("  |");
 				}
 			}
 		}
