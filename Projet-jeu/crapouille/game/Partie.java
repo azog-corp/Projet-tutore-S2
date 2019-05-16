@@ -13,17 +13,39 @@ import crapouille.Pion;
 import crapouille.configuration.Configuration;
 
 public class Partie {
-
+	/*Nombre Ligne max pour les configuraions*/
 	private final static int LIGNE_MAX = 20;
-
+	/*Nombre Colonne max pour les configurations*/
 	private final static int COLONNE_MAX = 20;
+	/*Nombre de ligne de la configuration actuelle*/
+	private static int ligneConf;
+	/*Nombre de colonne de la configuration actuelle*/
+	private static int colonneConf;
+	/* Adversaire choisi par l'utilisateur
+	 * 0 = humain
+	 * 1 = ia niveau 1
+	 * 2 = ia niveau 2
+	 * 3 = ia niveau 3
+	 */
+	private static int choixAdversaire;
+	
+	/*
+	 *  Mode de jeu choisi par l'adversaire
+	 * 0 = casse tete
+	 * 1 = versus
+	 */
+	private static int choixModeDeJeu;
+	
+	/*Configuration choisie par l'utilisateur*/
+	private static int choixConfig;//Changer en String ? a discuter
+	
+	/*Nombre de pion present dans la configuration */
+	private static int nbPion;
+	
 
-	private static int ligneConf,
-	colonneConf,
-	choixAdversaire,
-	choixModeDeJeu,
-	choixConfig,
-	nbPion;
+	private static String nomEquipe1Defaut = "Crapauds";
+
+	private static String nomEquipe2Defaut = "Grenouille";
 
 	private static String[] equipe = new String[2];
 
@@ -36,11 +58,19 @@ public class Partie {
 	public static Pion[][] batracien = new Pion[2][];
 
 	private final static String CHEMIN_FICHIER = "/crapouille/configuration/listeConfiguration.bin";
+	
+	public static String getNomEquipe2Defaut() {
+		return nomEquipe2Defaut;
+	}
+	
+	public static String getNomEquipe1Defaut() {
+		return nomEquipe1Defaut;
+	}
 
 	public static void setLigneConf(int ligneConf) {
 		Partie.ligneConf = ligneConf;
 	}
-
+	
 	public static void setColonneConf(int colonneConf) {
 		Partie.colonneConf = colonneConf;
 	}
@@ -48,9 +78,17 @@ public class Partie {
 	public static void setChoixAdversaire(int choixAdversaire) {
 		Partie.choixAdversaire = choixAdversaire;
 	}
+	
+	public static int getChoixAdversaire() {
+		return choixAdversaire;
+	}
 
 	public static void setChoixModeDeJeu(int choixModeDeJeu) {
 		Partie.choixModeDeJeu = choixModeDeJeu;
+	}
+	
+	public static int getChoixModeDeJeu() {
+		return choixModeDeJeu;
 	}
 
 	public static void setChoixConfig(int choixConfig) {
@@ -65,6 +103,7 @@ public class Partie {
 	public static void setEquipe1(String equipe) {
 		Partie.equipe[0] = equipe;
 	}
+
 
 	public static void setEquipe2(String equipe) {
 		Partie.equipe[1] = equipe;

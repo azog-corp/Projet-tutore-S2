@@ -28,7 +28,7 @@ public class interfaceAppliController {
 	
     private String nom;
     
-    private LocalDate debutCasseTete;
+    //private LocalDate debutCasseTete;
 
     @FXML
     private AnchorPane initialisationConfig;
@@ -185,8 +185,19 @@ public class interfaceAppliController {
     @FXML
     void showMenu(MouseEvent Click) {
     	reinitialiser();
+    	razMenu();
     	menu.setVisible(true);
     }
+    
+    @FXML
+    void razMenu() {
+    	tb_nomJ1.setText("");
+    	tb_nomJ2.setText("");
+    	choixConfig.setText("");
+    	chk_casseT.setSelected(false);
+    	chk_vsIA.setSelected(false);
+    }
+  
     
     @FXML
     void showConfigurationPartie(MouseEvent Click) {
@@ -290,18 +301,75 @@ public class interfaceAppliController {
     
     @FXML
     void afficherJeu(MouseEvent Click) {
-    	Partie.setChoixConfig(0);
+    	recupAdversaire();
+    	recupModeJeu();
+    	recupNomEquipe();
+    	recupConfiguration();
     	reinitialiser();
     	gameBoard.setVisible(true);
-    	//rafraichirJeu(Partie.plateau.afficherJeu());
+    	rafraichirJeu(Partie.afficherJeu());
+    }
+    
+    private void recupModeJeu() {
+    	if (chk_casseT.isSelected()) {
+    		Partie.setChoixModeDeJeu(0);
+    	} else {
+    		Partie.setChoixModeDeJeu(1);
+    	}
+    }
+    
+    private void recupConfiguration() {
+    	if (choixConfig.getText().isEmpty()) {
+    		//defaut
+    	} else {
+    		choixConfig.getText();
+    	}
+    }
+    
+    private void recupNomEquipe() {
+    	if (Partie.getChoixModeDeJeu() == 0 || Partie.getChoixAdversaire() != 0
+    			&& Partie.getChoixModeDeJeu() == 1) {
+    		attribuerNomJ1();
+    	} else {
+    		attribuerNomJ1();
+    		attribuerNomJ2();
+    	}
+    }
+    
+    private void attribuerNomJ1() {
+    	if (tb_nomJ1.getText().isEmpty()) {
+    		Partie.setEquipe1(Partie.getNomEquipe1Defaut());
+		} else {
+			Partie.setEquipe1(tb_nomJ1.getText());
+		}
+    }
+    
+    private void attribuerNomJ2() {
+    	if (tb_nomJ2.getText().isEmpty()) {
+    		Partie.setEquipe2(Partie.getNomEquipe2Defaut());
+		} else {
+			Partie.setEquipe2(tb_nomJ2.getText());
+		}
+    }
+    
+    private void recupAdversaire() {
+    	if (chk_vsIA.isSelected()) {
+    		if (lvl1.isSelected()) {
+    			Partie.setChoixAdversaire(1);
+        	} else if (lvl2.isSelected()) {
+        		Partie.setChoixAdversaire(2);
+    		} else {
+    			Partie.setChoixAdversaire(3);
+    		}
+    	} else {
+    		Partie.setChoixAdversaire(0);
+    	}
     }
     
     
     public void rafraichirJeu(String plateauJeu) {
     	entreeUti.setText(plateauJeu);
     }
-    
-
     
     @FXML
     void showConfiguration(MouseEvent Click) {
@@ -403,30 +471,30 @@ public class interfaceAppliController {
     	//TODO ENVOYER LA CONFIG
     }
     
-    private void score() {
-    	//TODO enregistrer temps + nombre de coup
-    }
+//    private void score() {
+//    	//TODO enregistrer temps + nombre de coup
+//    }
     
-    private void modeJeu() {
-    	int ligne = 0,
-    	colonne = 0,
-    	tourEquipe = 0;
-    	Partie.setChoixAdversaire(0); // TODO
-    	do {
-    		// TODO : donné valeur à ligne et colonne
-    		tourEquipe = Partie.joueurVs(tourEquipe, ligne, colonne);
-    	} while (Partie.victoire(Partie.batracien[0])  || Partie.victoire(Partie.batracien[1]));
-    }
-    
-    private void modeCassTete() {
-    	int ligne = 0,
-    	colonne = 0;
-    	do {
-    		// TODO : donné valeur à ligne et colonne
-    		Partie.casseTete(ligne, colonne);
-    	} while (Partie.victoire(Partie.batracien[0])  || Partie.victoire(Partie.batracien[1]));
-    	if (Partie.victoireCasseTete()) {
-    		//TODO : tu dit bravo
-    	}
-    }
+//    private void modeJeu() {
+//    	int ligne = 0,
+//    	colonne = 0,
+//    	tourEquipe = 0;
+//    	Partie.setChoixAdversaire(0); // TODO
+//    	do {
+//    		// TODO : donné valeur à ligne et colonne
+//    		tourEquipe = Partie.joueurVs(tourEquipe, ligne, colonne);
+//    	} while (Partie.victoire(Partie.batracien[0])  || Partie.victoire(Partie.batracien[1]));
+//    }
+//    
+//    private void modeCassTete() {
+//    	int ligne = 0,
+//    	colonne = 0;
+//    	do {
+//    		// TODO : donné valeur à ligne et colonne
+//    		Partie.casseTete(ligne, colonne);
+//    	} while (Partie.victoire(Partie.batracien[0])  || Partie.victoire(Partie.batracien[1]));
+//    	if (Partie.victoireCasseTete()) {
+//    		//TODO : tu dit bravo
+//    	}
+//    }
 }
