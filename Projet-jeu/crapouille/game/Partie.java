@@ -37,7 +37,7 @@ public class Partie {
 	private static int choixModeDeJeu;
 	
 	/*Configuration choisie par l'utilisateur*/
-	private static int choixConfig;//Changer en String ? a discuter
+	private static int choixConfig;
 	
 	/*Nombre de pion present dans la configuration */
 	private static int nbPion;

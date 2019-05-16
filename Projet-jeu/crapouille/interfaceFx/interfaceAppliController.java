@@ -10,6 +10,7 @@ package crapouille.interfaceFx;
 import java.time.LocalDate;
 
 import crapouille.Pion;
+import crapouille.configuration.Configuration;
 import crapouille.game.Partie;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -165,6 +166,7 @@ public class interfaceAppliController {
     @FXML
     private TextField tb_nomConf;
 
+    private String nomConfig;
     @FXML
     void leave(MouseEvent click) {
     	Platform.exit(); 
@@ -205,6 +207,7 @@ public class interfaceAppliController {
     	razConfig();
     	configurationPartie.setVisible(true);
     }
+    
     
 
     @FXML
@@ -311,6 +314,8 @@ public class interfaceAppliController {
     	//Lancer chrono
     }
     
+    
+    
     void actualiserJeu(MouseEvent Click) {
     	//Recuperer et valider coordonees
     	Partie.movePion(Partie.plateau[ligne][colonne]); //joueur joue nbcoup++
@@ -330,10 +335,10 @@ public class interfaceAppliController {
     }
     
     private void recupConfiguration() {
-    	if (choixConfig.getText().isEmpty()) {
-    		//defaut
+    	if (!choixConfig.getText().isEmpty()) {
+    		//regarder s'il la configuration existe
     	} else {
-    		choixConfig.getText();
+    		Partie.setChoixConfig(0);
     	}
     }
     
@@ -411,9 +416,7 @@ public class interfaceAppliController {
     		//TODO afficher label ne peut pas etre vide
     	}
     }
-	
-	//Config config = new Config(Partie.tableau, nom
-	//Partie.arr.add
+
 	/**
 	 * Recupere le nom que l'utilisateur a entre dans la textBox de creation de 
 	 * configuration si il est vide prend la valeur defaut
@@ -479,33 +482,8 @@ public class interfaceAppliController {
     
     @FXML
     void enregistrerConfig(MouseEvent Click) {
-    	//TODO ENVOYER LA CONFIG
+    	Configuration config = new Configuration (Partie.plateau, nomConfig);
+    	Partie.listConfiguration.add(config);
+    	Partie.saveConfig();
     }
-    
-//    private void score() {
-//    	//TODO enregistrer temps + nombre de coup
-//    }
-    
-//    private void modeJeu() {
-//    	int ligne = 0,
-//    	colonne = 0,
-//    	tourEquipe = 0;
-//    	Partie.setChoixAdversaire(0); // TODO
-//    	do {
-//    		// TODO : donné valeur à ligne et colonne
-//    		tourEquipe = Partie.joueurVs(tourEquipe, ligne, colonne);
-//    	} while (Partie.victoire(Partie.batracien[0])  || Partie.victoire(Partie.batracien[1]));
-//    }
-//    
-//    private void modeCassTete() {
-//    	int ligne = 0,
-//    	colonne = 0;
-//    	do {
-//    		// TODO : donné valeur à ligne et colonne
-//    		Partie.casseTete(ligne, colonne);
-//    	} while (Partie.victoire(Partie.batracien[0])  || Partie.victoire(Partie.batracien[1]));
-//    	if (Partie.victoireCasseTete()) {
-//    		//TODO : tu dit bravo
-//    	}
-//    }
 }
