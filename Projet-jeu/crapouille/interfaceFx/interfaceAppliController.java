@@ -7,9 +7,9 @@
 package crapouille.interfaceFx;
 
 
+import java.time.LocalDate;
+
 import crapouille.Pion;
-import crapouille.Plateau;
-import crapouille.configuration.Configuration;
 import crapouille.game.Partie;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -27,18 +27,20 @@ import javafx.scene.text.Text;
 public class interfaceAppliController {
 	
     private String nom;
+    
+    //private LocalDate debutCasseTete;
 
     @FXML
-    private Label lb_cord;
+    private AnchorPane initialisationConfig;
 
     @FXML
     private AnchorPane gameBoard;
-    
+
     @FXML
-    private configuration;
-	
+    private AnchorPane configuration;
+
     @FXML
-    private backpanel;
+    private AnchorPane backpanel;
 
     @FXML
     private Button okGameBoard;
@@ -62,19 +64,16 @@ public class interfaceAppliController {
     private AnchorPane score;
 
     @FXML
-    private Label lb_nbColonne;
-
-    @FXML
     private ToggleGroup lvlIA;
 
     @FXML
     private Button btn_validerTaille;
 
     @FXML
-    private Button btn_quittermenu;
+    private Label afficherConfig;
 
     @FXML
-    private Label afficherConfig;
+    private Button btn_quittermenu;
 
     @FXML
     private AnchorPane createur;
@@ -86,22 +85,19 @@ public class interfaceAppliController {
     private Label gameBoardString;
 
     @FXML
-    private Button btn_validerCord;
-
-    @FXML
     private ImageView btn_quitter;
 
     @FXML
     private RadioButton lvl2;
 
     @FXML
-    private Label lb_nbLigne;
-
-    @FXML
     private RadioButton lvl3;
 
     @FXML
     private TextField choixConfig;
+
+    @FXML
+    private AnchorPane placementConfig;
 
     @FXML
     private Button retourMenu;
@@ -189,8 +185,19 @@ public class interfaceAppliController {
     @FXML
     void showMenu(MouseEvent Click) {
     	reinitialiser();
+    	razMenu();
     	menu.setVisible(true);
     }
+    
+    @FXML
+    void razMenu() {
+    	tb_nomJ1.setText("");
+    	tb_nomJ2.setText("");
+    	choixConfig.setText("");
+    	chk_casseT.setSelected(false);
+    	chk_vsIA.setSelected(false);
+    }
+  
     
     @FXML
     void showConfigurationPartie(MouseEvent Click) {
@@ -208,7 +215,6 @@ public class interfaceAppliController {
     	gameBoard.setVisible(false);
     	createur.setVisible(false);
     	configuration.setVisible(false);
-    	backpanel.setVisible(false);
     }
     
     @FXML
@@ -295,20 +301,83 @@ public class interfaceAppliController {
     
     @FXML
     void afficherJeu(MouseEvent Click) {
-    	Partie.setChoixConfiguration(0);
-    	Partie.crapouille();
+    	recupAdversaire();
+    	recupModeJeu();
+    	recupNomEquipe();
+    	recupConfiguration();
     	reinitialiser();
     	gameBoard.setVisible(true);
-    	rafraichirJeu(Partie.plateau.afficherJeu());
+    	rafraichirJeu(Partie.afficherJeu());
+    	//Lancer chrono
+    }
+    
+    void actualiserJeu(MouseEvent Click) {
+    	//Recuperer coordonees
+    	//Deplacer pion
+    	//nb coup++
+    	rafraichirJeu(Partie.afficherJeu());
+    	
+    }
+    
+    private void recupModeJeu() {
+    	if (chk_casseT.isSelected()) {
+    		Partie.setChoixModeDeJeu(0);
+    	} else {
+    		Partie.setChoixModeDeJeu(1);
+    	}
+    }
+    
+    private void recupConfiguration() {
+    	if (choixConfig.getText().isEmpty()) {
+    		//defaut
+    	} else {
+    		choixConfig.getText();
+    	}
+    }
+    
+    private void recupNomEquipe() {
+    	if (Partie.getChoixModeDeJeu() == 0 || Partie.getChoixAdversaire() != 0
+    			&& Partie.getChoixModeDeJeu() == 1) {
+    		attribuerNomJ1();
+    	} else {
+    		attribuerNomJ1();
+    		attribuerNomJ2();
+    	}
+    }
+    
+    private void attribuerNomJ1() {
+    	if (tb_nomJ1.getText().isEmpty()) {
+    		Partie.setEquipe1(Partie.getNomEquipe1Defaut());
+		} else {
+			Partie.setEquipe1(tb_nomJ1.getText());
+		}
+    }
+    
+    private void attribuerNomJ2() {
+    	if (tb_nomJ2.getText().isEmpty()) {
+    		Partie.setEquipe2(Partie.getNomEquipe2Defaut());
+		} else {
+			Partie.setEquipe2(tb_nomJ2.getText());
+		}
+    }
+    
+    private void recupAdversaire() {
+    	if (chk_vsIA.isSelected()) {
+    		if (lvl1.isSelected()) {
+    			Partie.setChoixAdversaire(1);
+        	} else if (lvl2.isSelected()) {
+        		Partie.setChoixAdversaire(2);
+    		} else {
+    			Partie.setChoixAdversaire(3);
+    		}
+    	} else {
+    		Partie.setChoixAdversaire(0);
+    	}
     }
     
     
     public void rafraichirJeu(String plateauJeu) {
-    	entreeUti.setText(plateauJeu);
-    }
-    
-    public void rafraichirConf(String plateauJeu) {
-    	afficherConfig.setText(plateauJeu);
+    	gameBoardString.setText(plateauJeu);
     }
     
     @FXML
@@ -321,58 +390,62 @@ public class interfaceAppliController {
     }
     
     @FXML
-    void creationInitialisation(MouseEvent Click) {
-    	int nbLigne = Integer.parseInt(tb_nbLigneConf.getText());
-    	int nbColonne = Integer.parseInt(tb_nbColonneConf.getText());
-    	Partie.setligneConf(nbLigne);
-	Partie.setcolonneConf(nbLigne);
-    	boolean isCrapaud = true;
-    	nom = tb_nomConf.getText();
-    	showCreationConfig(); 	
+    void configInitialisation(MouseEvent Click) {
+    	boolean test = tb_nbLigneConf.getText().isEmpty();
+    	System.out.println(test);
+    	if (!tb_nbLigneConf.getText().isEmpty() && !tb_nbColonneConf.getText().isEmpty()) {
+    		//TODO verifier que il sagit bien de nombre
+    		int nbLigne = Integer.parseInt(tb_nbLigneConf.getText());
+    		int nbColonne = Integer.parseInt( tb_nbColonneConf.getText());
+    		if (nbLigne < 20 && nbColonne < 20) {
+    			Partie.setLigneConf(nbLigne);
+    			Partie.setColonneConf(nbLigne);
+    			recupNom();
+    			showCreationConfig(); 
+    		} else {
+    			//TODO afficher label ne peut pas etre superieur a 20
+    		}
+    	} else {
+    		//TODO afficher label ne peut pas etre vide
+    	}
     }
 	
 	//Config config = new Config(Partie.tableau, nom
 	//Partie.arr.add
+	/**
+	 * Recupere le nom que l'utilisateur a entre dans la textBox de creation de 
+	 * configuration si il est vide prend la valeur defaut
+	 * (remplacera donc la configuration par defaut)
+	 * @return nom Le nom de la configuration qui sera cree
+	 */
+	public String recupNom() {
+		if (tb_nomConf.getText() != "") {
+			nom = tb_nomConf.getText();
+		} else {
+			nom = "Defaut";
+		}
+		return nom;
+	}
     
     @FXML
-    void showCreationConfig() { //chnqger pqr une pqge
-    	lb_nbColonne.setVisible(false);
-    	lb_nbLigne.setVisible(false);
-    	tb_nbLigneConf.setVisible(false);
-    	tb_nbColonneConf.setVisible(false);
-    	btn_validerTaille.setVisible(false);
-    	lb_cord.setVisible(true);
-    	tb_cord.setVisible(true);
-    	btn_validerCord.setVisible(true);
-    	btn_validerConfig.setVisible(true);
+    void showCreationConfig() { 
+    	initialisationConfig.setVisible(false);
+    	placementConfig.setVisible(true);
+    	rafraichirConf(Partie.afficherJeu());
     }
     
     @FXML
     void showInitialisationConfig() {
-    	lb_nbColonne.setVisible(true);
-    	lb_nbLigne.setVisible(true);
-    	tb_nbLigneConf.setVisible(true);
-    	tb_nbColonneConf.setVisible(true);
-    	btn_validerTaille.setVisible(true);
-    	lb_cord.setVisible(false);
-    	tb_cord.setVisible(false);
-    	btn_validerCord.setVisible(false);
-    	btn_validerConfig.setVisible(false);
+    	initialisationConfig.setVisible(true);
+    	placementConfig.setVisible(false);
     }
 	
-    private boolean recupType(Char choix) {
-	boolean choixUti;
-	if (choix == 'C' || choix == 'c') {
-	    choixUti = true;
-	} else {
-	    choixUti = false;
-	}
-	return choixUti;
+    private boolean recupType(char choix) {
+        return choix == 'C' || choix == 'c' ? true : false;
     }
     
     @FXML
     void actualiserConfig(MouseEvent Click) {
-	
     	StringBuilder recupCord = new StringBuilder(); 
     	recupCord.append(tb_cord.getText().charAt(1));
     	recupCord.append(tb_cord.getText().charAt(2));
@@ -380,18 +453,57 @@ public class interfaceAppliController {
     	StringBuilder recupCo = new StringBuilder(); 
     	recupCo.append(tb_cord.getText().charAt(4));
     	recupCo.append(tb_cord.getText().charAt(5));
-	//Verifier que coordonnees valides
-	//verifier char 3 -
-	//verifier char c ou g si tous bon continuer	
+    	//TODO Verifier que coordonnees valides ligne et colonne pas superieur et > 0
+    	//TODO verifier char 3 -
+    	//TODO verifier char c ou g si tous bon continuer	
     	int colonnePion = Integer.parseInt(recupCo.toString());
-    	Pion placementUti = new Pion(lignePion,colonnePion,recupUti(tb_cord.getText().charAt(0)));
-	//SI TOUS TEST VALIDE +1 nb Pion
-    	rafraichirConf(Partie.plateau.afficherJeu());
+    	
+    	colonnePion--;
+    	lignePion--;
+    	Pion placementUti = new Pion(lignePion,colonnePion,recupType(tb_cord.getText().charAt(0)));
+    	//TODO SI TOUS TEST VALIDE +1 nb Pion
+    	Partie.plateau[lignePion][colonnePion] = placementUti;
+    	rafraichirConf(Partie.afficherJeu());
     	
     	//TODO verifier coordonnees  
     	//TODO si correct modifier plateau + actualiser plateau
     	//TODO msg Box pas correct
     	
     }
-
+    
+    public void rafraichirConf(String plateauJeu) {
+    	afficherConfig.setText(plateauJeu);
+    }
+    
+    @FXML
+    void enregistrerConfig(MouseEvent Click) {
+    	//TODO ENVOYER LA CONFIG
+    }
+    
+//    private void score() {
+//    	//TODO enregistrer temps + nombre de coup
+//    }
+    
+//    private void modeJeu() {
+//    	int ligne = 0,
+//    	colonne = 0,
+//    	tourEquipe = 0;
+//    	Partie.setChoixAdversaire(0); // TODO
+//    	do {
+//    		// TODO : donné valeur à ligne et colonne
+//    		tourEquipe = Partie.joueurVs(tourEquipe, ligne, colonne);
+//    	} while (Partie.victoire(Partie.batracien[0])  || Partie.victoire(Partie.batracien[1]));
+//    }
+//    
+//    private void modeCassTete() {
+//    	int ligne = 0,
+//    	colonne = 0;
+//    	do {
+//    		// TODO : donné valeur à ligne et colonne
+//    		Partie.casseTete(ligne, colonne);
+//    	} while (Partie.victoire(Partie.batracien[0])  || Partie.victoire(Partie.batracien[1]));
+//    	if (Partie.victoireCasseTete()) {
+//    		//TODO : tu dit bravo
+//    	}
+//    }
 }

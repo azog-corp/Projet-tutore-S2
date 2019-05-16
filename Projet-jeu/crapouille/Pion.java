@@ -79,22 +79,22 @@ public class Pion {
 	/**
 	 * Vérifie si un pion est bloqué :
 	 * <ol><li>- Si un pion n'est pas bloqué, il ajoute la valeur false à 
-	 *         la propriéter bloque de l'objet Pion.</li>
+	 *         la propriéte bloque de l'objet Pion.</li>
 	 *     <li>- Si un pion est bloqué, il ajoute la valeur true à 
 	 *         la propriéter bloque de l'objet Pion.</li></ol>
 	 * @param bloque, boolean indiquant si un pion est bloqué ou non
 	 * @param plateau, tableau contenant des Pions
 	 */
 	public void setBloque(Pion[][] plateau) {
-		if ((!crapaud && this.colonne < plateau[0].length-1 && plateau[this.ligne][this.colonne+1] == null) ||
-				(!crapaud && this.colonne < plateau[0].length-2 && plateau[this.ligne][this.colonne+1].crapaud && 
-						plateau[this.ligne][this.colonne+2] == null) ||
-				((crapaud && this.colonne > 0 && plateau[this.ligne][this.colonne-1] == null) ||
-						(crapaud && this.colonne > 1 && !plateau[this.ligne][this.colonne-1].crapaud && 
-								plateau[this.ligne][this.colonne-2] == null))) {
+		if ((!crapaud && this.colonne < plateau[0].length-1 && plateau[this.ligne][this.colonne+1] == null) 
+			||(!crapaud && this.colonne < plateau[0].length-2 && plateau[this.ligne][this.colonne+1].crapaud && 
+						plateau[this.ligne][this.colonne+2] == null) 
+			||((crapaud && this.colonne > 0 && plateau[this.ligne][this.colonne-1] == null) 
+			||(crapaud && this.colonne > 1 && !plateau[this.ligne][this.colonne-1].crapaud && 
+						plateau[this.ligne][this.colonne-2] == null))) 
+		{
 			this.bloque = false;
 		} else {
-			System.out.println("pion bloqué" + ligne + " " + colonne);
 			this.bloque = true;
 		}
 	}
