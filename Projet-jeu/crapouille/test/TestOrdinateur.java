@@ -6,10 +6,9 @@ package crapouille.test;
 
 import crapouille.Ordinateur;
 import crapouille.Pion;
-import game.Partie;
 
 /**
- * Fonction permettant de test le 
+ * Fonction permettant de test la class ordi
  * @author yanis
  */
 class TestOrdinateur {
@@ -30,8 +29,21 @@ class TestOrdinateur {
     static Pion pion7 = new Pion(3,0,false);
 
     static Pion pion8 = new Pion(3,1,true);
-    
+
     static Pion pion9 = new Pion(3,0,true);
+    
+    /* Creation pion resultat */
+    static Pion pion1Res = new Pion(0,2,true);
+    
+    static Pion pion3Res = new Pion(1,2,true);
+    
+    static Pion pion5Res = new Pion(2,1,true);
+    
+    static Pion pion8Res = new Pion(3,1,true);
+
+    static Pion pion9Res = new Pion(3,0,true);
+    
+    /* Déclaration des tableau des pions pour les Test */
 
     static Pion[][] plateauPionTest1 = {
 	    {null,null,null,pion1},
@@ -39,28 +51,28 @@ class TestOrdinateur {
 	    {pion4,null,pion5,pion6},
 	    {pion7,pion8,null,null}
     };
-    
+
     static Pion[][] plateauPionTest2 = {
 	    {null,null,null,null},
 	    {pion2,null,null,pion3},
 	    {pion4,null,pion5,pion6},
 	    {pion7,pion8,null,null}
     };
-    
+
     static Pion[][] plateauPionTest3 = {
 	    {null,null,null,null},
 	    {null,null,null,null},
 	    {pion4,null,pion5,pion6},
 	    {pion7,pion8,null,null}
     };
-    
+
     static Pion[][] plateauPionTest4 = {
 	    {null,null,null,null},
 	    {null,null,null,null},
 	    {null,null,null,null},
 	    {pion7,pion8,null,null}
     };
-    
+
     static Pion[][] plateauPionTest5 = {
 	    {null,null,null,null},
 	    {null,null,null,null},
@@ -68,7 +80,6 @@ class TestOrdinateur {
 	    {pion9,null,null,null}
     };
     
-
 
     /**
      * Fonction test sur la fonction recherchePion
@@ -113,9 +124,35 @@ class TestOrdinateur {
      * 
      */
     public static void testMoveOrdi () {
-	System.out.println(pion1);
-	Ordinateur.moveOrdi();
-	System.out.println(pion1);
+	System.out.println("Test n°1 :");
+	 Ordinateur.ordinateurMove(plateauPionTest1);
+	if (pion1.getColonne() == pion1Res.getColonne()) {
+	    System.out.println("Test Réussie");
+	}
+	
+	System.out.println("Test n°2 :");
+	 Ordinateur.ordinateurMove(plateauPionTest2);
+	if (pion3.getColonne() == pion3Res.getColonne()) {
+	    System.out.println("Test Réussie");
+	}
+	
+	System.out.println("Test n°3 :");
+	 Ordinateur.ordinateurMove(plateauPionTest3);
+	if (pion5.getColonne() == pion5Res.getColonne() ) {
+	    System.out.println("Test Réussie");
+	}
+	
+	System.out.println("Test n°4 :");
+	 Ordinateur.ordinateurMove(plateauPionTest4);
+	if (pion8.getColonne() == pion8Res.getColonne()) {
+	    System.out.println("Test Réussie");
+	}
+	
+	System.out.println("Test n°5 :");
+	 Ordinateur.ordinateurMove(plateauPionTest5);
+	if (pion9.getColonne() == pion9Res.getColonne()) {
+	    System.out.println("Test Réussie");
+	}
     }
 
     /**
@@ -132,6 +169,9 @@ class TestOrdinateur {
 	pion8.setBloque(plateauPionTest1);
 	pion9.setBloque(plateauPionTest5);
 	testRecherchePion();
+	System.out.println("--------- Test moveOrdi ----------");
+	testMoveOrdi();
+	
     }
 
 }
