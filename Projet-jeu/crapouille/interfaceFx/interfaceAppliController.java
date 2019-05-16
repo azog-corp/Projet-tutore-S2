@@ -310,6 +310,12 @@ public class interfaceAppliController {
     	rafraichirJeu(Partie.afficherJeu());
     }
     
+    void actualiserJeu(MouseEvent Click) {
+    	//Recuperer coordonees
+    	//Deplacer pion
+    	rafraichirJeu(Partie.afficherJeu());
+    }
+    
     private void recupModeJeu() {
     	if (chk_casseT.isSelected()) {
     		Partie.setChoixModeDeJeu(0);
@@ -368,7 +374,7 @@ public class interfaceAppliController {
     
     
     public void rafraichirJeu(String plateauJeu) {
-    	entreeUti.setText(plateauJeu);
+    	gameBoardString.setText(plateauJeu);
     }
     
     @FXML

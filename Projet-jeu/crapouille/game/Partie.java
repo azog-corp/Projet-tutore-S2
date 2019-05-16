@@ -47,7 +47,7 @@ public class Partie {
 
 	private static String nomEquipe2Defaut = "Grenouille";
 
-	private static String[] equipe = new String[2];
+	public static String[] equipe = new String[2];
 
 	public static Pion[][] plateau = new Pion[LIGNE_MAX][COLONNE_MAX];
 
