@@ -313,7 +313,7 @@ public class interfaceAppliController {
     
     void actualiserJeu(MouseEvent Click) {
     	//Recuperer et valider coordonees
-    	Partie.movePion(); //joueur joue nbcoup++
+    	Partie.movePion(Partie.plateau[ligne][colonne]); //joueur joue nbcoup++
     	//move pion doit changer le tour equipe
     	if (Partie.tourequipe == 2 && Partie.getChoixAdversaire() != 0) {
     		//appeler IA
