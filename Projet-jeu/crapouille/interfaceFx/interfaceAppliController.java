@@ -167,9 +167,29 @@ public class interfaceAppliController {
     private TextField tb_nomConf;
 
     private String nomConfig;
+    
+    										/* --------------------------------------------------------
+    										 * --------------- FONCTION NAVIGATION MENU --------------- 
+    										 * --------------------------------------------------------
+    										 */
+    /**
+     * Si l'utilisateur clique sur l'un des boutons pour quitter l'application
+     * Appel cette fonction qui ferme l'application
+     * @param click
+     */
     @FXML
     void leave(MouseEvent click) {
     	Platform.exit(); 
+    }
+    
+    @FXML
+    void reinitialiser() {
+    	menu.setVisible(false);
+    	configurationPartie.setVisible(false);
+    	score.setVisible(false);
+    	gameBoard.setVisible(false);
+    	createur.setVisible(false);
+    	configuration.setVisible(false);
     }
     
     @FXML
@@ -192,32 +212,35 @@ public class interfaceAppliController {
     }
     
     @FXML
-    void razMenu() {
-    	tb_nomJ1.setText("");
-    	tb_nomJ2.setText("");
-    	choixConfig.setText("");
-    	chk_casseT.setSelected(false);
-    	chk_vsIA.setSelected(false);
-    }
-  
-    
-    @FXML
     void showConfigurationPartie(MouseEvent Click) {
     	reinitialiser();
     	razConfig();
     	configurationPartie.setVisible(true);
     }
     
-    
-
+    /**
+     * Affiche la premiere page de la section de configuration
+     *  presentant le menu qui permet a l'utilisateur
+     * de choisir entre supprimer et ajouter des configurations
+     * lorsque celui ci clic sur la section configuration
+     * TODO creer la page de selection + fonction navigation
+     * @param Click clic de l'utilisateur declanchant l'appel de la fonction
+     */
     @FXML
-    void reinitialiser() {
-    	menu.setVisible(false);
-    	configurationPartie.setVisible(false);
-    	score.setVisible(false);
-    	gameBoard.setVisible(false);
-    	createur.setVisible(false);
-    	configuration.setVisible(false);
+    void showConfiguration(MouseEvent Click) {
+    	reinitialiser();
+    	configuration.setVisible(true);
+    	//TODO rajouter supprimer
+    	showInitialisationConfig();
+    }
+    
+    @FXML
+    void razMenu() {
+    	tb_nomJ1.setText("");
+    	tb_nomJ2.setText("");
+    	choixConfig.setText("");
+    	chk_casseT.setSelected(false);
+    	chk_vsIA.setSelected(false);
     }
     
     @FXML
@@ -341,7 +364,7 @@ public class interfaceAppliController {
     		Partie.setChoixConfig(0);
     	}
     }
-	
+	//TODO
     private boolean chercherConfig(String config) {
     	Partie.listConfiguration.length
     }
@@ -372,6 +395,12 @@ public class interfaceAppliController {
 		}
     }
     
+    /**
+	 * Recupere l'adversaire choisi par l'utilisateur
+	 * Et modifie la variable definissant l'adversaire dans la classe Partie
+	 * (Verifie si l'utilisateur souhaite jouer contre une ia et son niveau
+	 * sinon defini l'adversaire comme etant humain)
+	 */
     private void recupAdversaire() {
     	if (chk_vsIA.isSelected()) {
     		if (lvl1.isSelected()) {
@@ -386,72 +415,19 @@ public class interfaceAppliController {
     	}
     }
     
+
+    
     
     public void rafraichirJeu(String plateauJeu) {
     	gameBoardString.setText(plateauJeu);
     }
     
-    @FXML
-    void showConfiguration(MouseEvent Click) {
-    	reinitialiser();
-    	configuration.setVisible(true);
-    	//TODO rajouter supprimer
-    	showInitialisationConfig();
-    	
-    }
+    								/* ------------------------------------------------------
+    								 * --------------- FONCTION CONFIGURATION --------------- 
+    								 * ------------------------------------------------------
+    								 */
     
-    @FXML
-    void configInitialisation(MouseEvent Click) {
-    	boolean test = tb_nbLigneConf.getText().isEmpty();
-    	System.out.println(test);
-    	if (!tb_nbLigneConf.getText().isEmpty() && !tb_nbColonneConf.getText().isEmpty()) {
-    		//TODO verifier que il sagit bien de nombre
-    		int nbLigne = Integer.parseInt(tb_nbLigneConf.getText());
-    		int nbColonne = Integer.parseInt( tb_nbColonneConf.getText());
-    		if (nbLigne < 20 && nbColonne < 20) {
-    			Partie.setLigneConf(nbLigne);
-    			Partie.setColonneConf(nbLigne);
-    			recupNom();
-    			showCreationConfig(); 
-    		} else {
-    			//TODO afficher label ne peut pas etre superieur a 20
-    		}
-    	} else {
-    		//TODO afficher label ne peut pas etre vide
-    	}
-    }
-
-	/**
-	 * Recupere le nom que l'utilisateur a entre dans la textBox de creation de 
-	 * configuration si il est vide prend la valeur defaut
-	 * (remplacera donc la configuration par defaut)
-	 * @return nom Le nom de la configuration qui sera cree
-	 */
-	public String recupNom() {
-		if (tb_nomConf.getText() != "") {
-			nom = tb_nomConf.getText();
-		} else {
-			nom = "Defaut";
-		}
-		return nom;
-	}
-    
-    @FXML
-    void showCreationConfig() { 
-    	initialisationConfig.setVisible(false);
-    	placementConfig.setVisible(true);
-    	rafraichirConf(Partie.afficherJeu());
-    }
-    
-
-
-    
-    /* ------------------------------------------------------
-     * --------------- FONCTION CONFIGURATION --------------- 
-     * ------------------------------------------------------
-     */
-    
-    /*--------------- FONCTION CONFIGURATION: TRAITEMENT DONNEES / AVANCEMENT  ---------------*/
+    					/*--------------- FONCTION CONFIGURATION: TRAITEMENT DONNEES / AVANCEMENT  ---------------*/
     
     /**
      * Recupere les coordonnees rentre par l'utilisateur lors de la creation 
@@ -459,7 +435,7 @@ public class interfaceAppliController {
      * Si toutes les donnees sont valides ajoute au plateau le pion demander
      * par l'utilisateur. Puis actualise le plateau sur l'interface
      * Pour afficher le changement
-     * @param Click clique de l'utilisateur declanchant l'appel de la fonction
+     * @param Click clic de l'utilisateur declanchant l'appel de la fonction
      */
     @FXML
     void actualiserConfig(MouseEvent Click) {
@@ -487,9 +463,40 @@ public class interfaceAppliController {
     }
     
     /**
+     * Fonction qui est declenche lorsque l'utilisateur souhaite acceder 
+     * au plateau pour le placement des pions lors de la creation d'une config
+     * Celle ci verifie que toutes les donnees rentre par l'utilisateur 
+     * sont correct si se n'est pas le cas reste sur la page actuelle
+     * TODO et lui indique ses erreurs
+     * @param Click clic de l'utilisateur declanchant l'appel de la fonction
+     */
+    @FXML
+    void configInitialisation(MouseEvent Click) {
+    	boolean test = tb_nbLigneConf.getText().isEmpty();
+    	System.out.println(test);
+    	if (!tb_nbLigneConf.getText().isEmpty() && !tb_nbColonneConf.getText().isEmpty()) {
+    		//TODO verifier que il sagit bien de nombre
+    		int nbLigne = Integer.parseInt(tb_nbLigneConf.getText());
+    		int nbColonne = Integer.parseInt( tb_nbColonneConf.getText());
+    		if (nbLigne < 20 && nbColonne < 20) {
+    			Partie.setLigneConf(nbLigne);
+    			Partie.setColonneConf(nbLigne);
+    			recupNom();
+    			showCreationConfig(); 
+    		} else {
+    			//TODO afficher label ne peut pas etre superieur a 20
+    		}
+    	} else {
+    		//TODO afficher label ne peut pas etre vide
+    	}
+    }
+    
+    /**
      * Fonction qui enregistre la configuration lorsque l'utilisateur souhaite
      * l'enregistrer. (La sauvegarde dans la liste des configuration)
-     * @param Click clique de l'utilisateur declanchant l'appel de la fonction
+     * Se declanche lorsque l'utilisateur clic sur le bouton valider
+     * Sur la page de placement des pions dans configuration
+     * @param Click clic de l'utilisateur declanchant l'appel de la fonction
      */
     @FXML
     void enregistrerConfig(MouseEvent Click) {
@@ -511,7 +518,24 @@ public class interfaceAppliController {
         return choix == 'C' || choix == 'c' ? true : false;
     }
     
-    /*--------------- FONCTION CONFIGURATION: TRAITEMENT INTERFACE  ---------------*/
+	/**
+	 * Recupere le nom que l'utilisateur a entre dans la textBox de creation de 
+	 * configuration si il est vide prend la valeur defaut
+	 * (remplacera donc la configuration par defaut)
+	 * @return nom Le nom de la configuration qui sera cree
+	 */
+	public String recupNom() {
+		if (tb_nomConf.getText() != "") {
+			nom = tb_nomConf.getText();
+		} else {
+			nom = "Defaut";
+		}
+		return nom;
+	}
+	
+	
+    
+    					/*--------------- FONCTION CONFIGURATION: TRAITEMENT INTERFACE  ---------------*/
     
     /**
      * Actualise le label affichant le plateau sur l'interface
@@ -522,13 +546,27 @@ public class interfaceAppliController {
     }
     
     /**
-     * Lorsque l'utilisateur clique sur valider apres avoir
-     * entree le nom de la configuration ainsi que le nombre de ligne/colonne
-     * affiche la page de placement des pions sur la config en creation
+     * Lorsque l'utilisateur arrivera sur la page configuration
+     * Il aura le choix entre Supprimer ou ajouter des configs
+     * S'il choisi d'ajouter des configs cette fonction
+     * s'executera et fera disparaitre le menu,et les autres pages indesirables
      */
     @FXML
     void showInitialisationConfig() {
     	initialisationConfig.setVisible(true);
     	placementConfig.setVisible(false);
+    }
+
+    /**
+     * Lorsque l'utilisateur clic sur valider apres avoir
+     * entree le nom de la configuration ainsi que le nombre de ligne/colonne
+     * et que les informations est toutes etaient valides precedemment
+     * affiche la page de placement des pions sur la config en creation
+     */
+    @FXML
+    void showCreationConfig() { 
+    	initialisationConfig.setVisible(false);
+    	placementConfig.setVisible(true);
+    	rafraichirConf(Partie.afficherJeu());
     }
 }
