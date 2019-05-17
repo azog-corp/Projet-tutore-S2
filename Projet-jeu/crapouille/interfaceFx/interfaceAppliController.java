@@ -315,13 +315,13 @@ public class interfaceAppliController {
     }
     
     
-    
+    @FXML
     void actualiserJeu(MouseEvent Click) {
     	//Recuperer et valider coordonees
     	Partie.movePion(Partie.plateau[ligne][colonne]); //joueur joue nbcoup++
     	//move pion doit changer le tour equipe
-    	if (Partie.tourequipe == 2 && Partie.getChoixAdversaire() != 0) {
-    		//appeler IA
+    	if (Partie.tourEquipe == 2 && Partie.getChoixAdversaire() != 0) {
+    		Ordinateur.ChoixOrdinateur();
     	} //Sinon rien faire et attendre que lautre equipe joue
     	rafraichirJeu(Partie.afficherJeu());
     }
@@ -340,6 +340,10 @@ public class interfaceAppliController {
     	} else {
     		Partie.setChoixConfig(0);
     	}
+    }
+	
+    private boolean chercherConfig(String config) {
+	Partie.listConfiguration.length
     }
     
     private void recupNomEquipe() {
