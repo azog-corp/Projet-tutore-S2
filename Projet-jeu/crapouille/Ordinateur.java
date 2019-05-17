@@ -50,9 +50,8 @@ public class Ordinateur {
 	/* fonction recherchant un pion à bouger */
 	pionBouger = recherchePion( plateauJeu );
 	if (pionBouger != null) {
-	    movePion(pionBouger, plateauJeu);
+            movePion(pionBouger, plateauJeu);
 	}
-	//return plateauJeu;
     }
     
     /**
@@ -62,28 +61,37 @@ public class Ordinateur {
 	 * @param  plateauJeu, le plateau du jeu contenant les pions
 	 */
 	public static void movePion(Pion pion,Pion[][] plateauJeu) {
+	        /* Mets la valeur null dans l'ancienne case où ce situé le pion */
 		plateauJeu[pion.getLigne()][pion.getColonne()] = null;
+		/* vérifie si le pion peut avancé, si oui il l'avance le pion */
 		pion.setColonne(plateauJeu);
+		/* Mets le dans la nouvelle case où doit ce situé le pion */
 		plateauJeu[pion.getLigne()][pion.getColonne()] = pion;
+		/* Boucle parcourant la ligne ou ce situe le pion */
 		for (int x = 0 ; x < pion.getLigne() ; x++) {
-			if (plateauJeu[pion.getLigne()][x] != null) {
+	            /* vérifie sur le tableau si les case posséde un pion dessus */
+		    if (plateauJeu[pion.getLigne()][x] != null) {
 				plateauJeu[pion.getLigne()][x].setBloque(plateauJeu);
 			}
 		}
-		//return plateauJeu;
 	}
     
     /**
      * Choix du niveau de l'ordianteur
-     * @param ordiFacile, ordiFacile est initialisé à true : 
-     * il indique que l'ordi est de difficulté est en facile
+     * @param niveauOrdi, niveauOrdi représente le niv de l'ordinateur choisis allant de 1 à 3
      * @param plateauJeu, le plateau du jeu contenant les pions
      */
-     public static void ChoixOrdinateur(boolean ordiFacile,Pion[][] plateauJeu ) {
-	 if (ordiFacile) {
+     public static void ChoixOrdinateur(int niveauOrdi,Pion[][] plateauJeu ) {
+	 if (niveauOrdi == 1){
 	     ordinateurMove(plateauJeu);
-	 } else {
-	     /* Mettre la ou les fonction de L'ordinateur Difficile */
 	 }
+	 if (niveauOrdi == 2) {
+	     /* Mettre la ou les fonction de L'ordinateur Moyenne */
+	 } 
+	 if (niveauOrdi == 3) {
+	     /* Mettre la ou les fonction de L'ordinateur difficil */
+	 } 
+	
+	
      }
 }
