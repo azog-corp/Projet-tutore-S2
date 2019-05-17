@@ -31,18 +31,18 @@ class TestOrdinateur {
     static Pion pion8 = new Pion(3,1,true);
 
     static Pion pion9 = new Pion(3,0,true);
-    
+
     /* Creation pion resultat */
     static Pion pion1Res = new Pion(0,2,true);
-    
+
     static Pion pion3Res = new Pion(1,2,true);
-    
+
     static Pion pion5Res = new Pion(2,1,true);
-    
+
     static Pion pion8Res = new Pion(3,1,true);
 
     static Pion pion9Res = new Pion(3,0,true);
-    
+
     /* Déclaration des tableau des pions pour les Test */
 
     static Pion[][] plateauPionTest1 = {
@@ -79,7 +79,7 @@ class TestOrdinateur {
 	    {null,null,null,null},
 	    {pion9,null,null,null}
     };
-    
+
 
     /**
      * Fonction test sur la fonction recherchePion
@@ -123,43 +123,43 @@ class TestOrdinateur {
 	    System.out.println("Test Réussie");
 	}
     }
-    
+
     /**
      * Test si l'ordinateur avance bien un pion
      * 
      */
     public static void testMoveOrdi () {
 	System.out.println("Test n°1 :");
-	 Ordinateur.ordinateurMove(plateauPionTest1);
-	 /*vérifie si le pion chercher ce situe sur la même collone que le pion résultat*/
+	Ordinateur.ordinateurMove(plateauPionTest1);
+	/*vérifie si le pion chercher ce situe sur la même collone que le pion résultat*/
 	if (pion1.getColonne() == pion1Res.getColonne()) {
 	    System.out.println("Test Réussie");
 	}
-	
+
 	System.out.println("Test n°2 :");
-	 Ordinateur.ordinateurMove(plateauPionTest2);
-	 /*vérifie si le pion chercher ce situe sur la même collone que le pion résultat*/
+	Ordinateur.ordinateurMove(plateauPionTest2);
+	/*vérifie si le pion chercher ce situe sur la même collone que le pion résultat*/
 	if (pion3.getColonne() == pion3Res.getColonne()) {
 	    System.out.println("Test Réussie");
 	}
-	
+
 	System.out.println("Test n°3 :");
-	 Ordinateur.ordinateurMove(plateauPionTest3);
-	 /*vérifie si le pion chercher ce situe sur la même collone que le pion résultat*/
+	Ordinateur.ordinateurMove(plateauPionTest3);
+	/*vérifie si le pion chercher ce situe sur la même collone que le pion résultat*/
 	if (pion5.getColonne() == pion5Res.getColonne() ) {
 	    System.out.println("Test Réussie");
 	}
-	
+
 	System.out.println("Test n°4 :");
-	 Ordinateur.ordinateurMove(plateauPionTest4);
-	 /*vérifie si le pion chercher ce situe sur la même collone que le pion résultat*/
+	Ordinateur.ordinateurMove(plateauPionTest4);
+	/*vérifie si le pion chercher ce situe sur la même collone que le pion résultat*/
 	if (pion8.getColonne() == pion8Res.getColonne()) {
 	    System.out.println("Test Réussie");
 	}
-	
+
 	System.out.println("Test n°5 :");
-	 Ordinateur.ordinateurMove(plateauPionTest5);
-	 /*vérifie si le pion chercher ce situe sur la même collone que le pion résultat*/
+	Ordinateur.ordinateurMove(plateauPionTest5);
+	/*vérifie si le pion chercher ce situe sur la même collone que le pion résultat*/
 	if (pion9.getColonne() == pion9Res.getColonne()) {
 	    System.out.println("Test Réussie");
 	}
@@ -184,7 +184,7 @@ class TestOrdinateur {
 	System.out.println("--------- Test moveOrdi ----------");
 	/* fonction qui test la fonction moveOrdi */
 	testMoveOrdi();
-	
+
     }
 
 }
