@@ -60,66 +60,66 @@ public class Partie {
 	private static int nbPion;
 
 	/**
-	 * Nom par d�faut de l'�quipe Crapaud
+	 * Nom par défaut de l'équipe Crapaud
 	 */
 	private static String nomEquipe1Defaut = "Crapaud";
 
 	/**
-	 * Nom par d�faut de l'�quipe Grenouille
+	 * Nom par défaut de l'équipe Grenouille
 	 */
 	private static String nomEquipe2Defaut = "Grenouille";
 
 	/**
-	 * Tableau contenant le nom des deux �quipes
+	 * Tableau contenant le nom des deux équipes
 	 * saisies par le ou les joueurs
 	 */
 	public static String[] equipe = new String[2];
 
 	/**
-	 * Plateau sur lequel sont plac�s et d�plac�s
-	 * chaque pion des deux �quipes.
+	 * Plateau sur lequel sont placés et déplacés
+	 * chaque pion des deux équipes.
 	 * Les dimensions de celui-ci ne sont
 	 * pas necessairement celles de la configuaration
 	 */
 	public static Pion[][] plateau = new Pion[LIGNE_MAX][COLONNE_MAX];
 
 	/**
-	 * ArrayList contenant toutes les configurations cr��
-	 * ainsi que la configuration par d�faut.
-	 * Cette variable est enregistr� lorsque le joueur
+	 * ArrayList contenant toutes les configurations créé
+	 * ainsi que la configuration par défaut.
+	 * Cette variable est enregistré lorsque le joueur
 	 * quitte l'application
 	 */
 	public static ArrayList<Configuration> listConfiguration;
 
 	/**
 	 * Configuration sur laquelle la partie en cours
-	 * est jou�
+	 * est joué
 	 */
 	public static Configuration currentConfig;
 
 	/**
 	 * Tableau contenant toutes les instances de pions
-	 * pr�sentent sur le plateau.
-	 * La premi�re ligne contient tous les pion grenouilles
+	 * présentent sur le plateau.
+	 * La première ligne contient tous les pion grenouilles
 	 * et la seconde tous les crapaud
 	 */
 	public static Pion[][] batracien = new Pion[2][];
 
 	/**
-	 * Chemin du fichier bin dans lequel est enregistr�
+	 * Chemin du fichier bin dans lequel est enregistré
 	 * la ArryList listConfiguration
 	 */
 	private final static String CHEMIN_FICHIER = "/crapouille/configuration/listeConfiguration.bin";
 
 	/**
-	 * @return le nom de l'�quipe grenouille
+	 * @return le nom de l'équipe grenouille
 	 */
 	public static String getNomEquipe1Defaut() {
 		return nomEquipe1Defaut;
 	}
 
 	/**
-	 * @return le nom de l'�quipe crapaud
+	 * @return le nom de l'équipe crapaud
 	 */
 	public static String getNomEquipe2Defaut() {
 		return nomEquipe2Defaut;
@@ -140,7 +140,7 @@ public class Partie {
 	}
 
 	/**
-	 * @param choixAdversaire l'entit� contre laquelle
+	 * @param choixAdversaire l'entité contre laquelle
 	 * le joueur veut faire une partie :
 	 * - 0 pour un humain
 	 * - 1 ou plus pour une IA
@@ -150,14 +150,14 @@ public class Partie {
 	}
 
 	/**
-	 * @return l'entit� contre laquelle le joueur veut faire une partie
+	 * @return l'entité contre laquelle le joueur veut faire une partie
 	 */
 	public static int getChoixAdversaire() {
 		return choixAdversaire;
 	}
 
 	/**
-	 * @param choixModeDeJeu 0 pour joueur versus et 1 pour casse t�te
+	 * @param choixModeDeJeu 0 pour joueur versus et 1 pour casse tête
 	 */
 	public static void setChoixModeDeJeu(int choixModeDeJeu) {
 		Partie.choixModeDeJeu = choixModeDeJeu;
@@ -171,37 +171,37 @@ public class Partie {
 	}
 
 	/**
-	 * @param choixConfig l'index de listConfiguration d��signant une
-	 * configuration sp�cifique
+	 * @param choixConfig l'index de listConfiguration déésignant une
+	 * configuration spécifique
 	 */
 	public static void setChoixConfig(int choixConfig) {
 		Partie.choixConfig = choixConfig;
 	}
 
 	/**
-	 * @param nbPion le nombre de pion pr�sent sur le plateau
+	 * @param nbPion le nombre de pion présent sur le plateau
 	 */
 	public static void setNbPion(int nbPion) {
 		Partie.nbPion = nbPion;
 	}
 
 	/**
-	 * @param equipe le nom de l'�quipe grenouille
+	 * @param equipe le nom de l'équipe grenouille
 	 */
 	public static void setEquipe1(String equipe) {
 		Partie.equipe[0] = equipe;
 	}
 
 	/**
-	 * @param equipe le nom de l'�quipe crapaud
+	 * @param equipe le nom de l'équipe crapaud
 	 */
 	public static void setEquipe2(String equipe) {
 		Partie.equipe[1] = equipe;
 	}
 
 	/**
-	 * R�cup�re la ArrayList contenant toutes les configurations
-	 * qui ont �t� cr�es et celle par d�faut
+	 * Récupère la ArrayList contenant toutes les configurations
+	 * qui ont été crées et celle par défaut
 	 */
 	@SuppressWarnings("unchecked")
 	public static void initConfig() {
@@ -218,7 +218,7 @@ public class Partie {
 	}
 
 	/**
-	 * Sauvegarde en m�moire la ArrayList contenant toutes les configurations
+	 * Sauvegarde en mémoire la ArrayList contenant toutes les configurations
 	 */
 	public static void saveConfig() {
 		try(ObjectOutputStream fichier = new ObjectOutputStream(new FileOutputStream(CHEMIN_FICHIER))) {
@@ -229,7 +229,7 @@ public class Partie {
 	}
 
 	/**
-	 * Fonction appel� lors de la cr�ation d'une configuration
+	 * Fonction appelé lors de la création d'une configuration
 	 * et qui initialise l'attribut bloque de chaque pion
 	 */
 	public static void initBloque() {
@@ -243,7 +243,7 @@ public class Partie {
 	}
 
 	/**
-	 * Fonction appel� lors du chargement d'une configuration
+	 * Fonction appelé lors du chargement d'une configuration
 	 * et qui met dans le tableau batracien toutes les
 	 * instances des pions grenouilles et crapaud
 	 */
@@ -265,21 +265,21 @@ public class Partie {
 	}
 
 	/**
-	 * Associe un pion � une case du plateau
-	 * @param pion, Le pion qui doit �tre associ�
+	 * Associe un pion à une case du plateau
+	 * @param pion, Le pion qui doit être associé
 	 */
 	public static void setCase(Pion pion) {
 		plateau[pion.getLigne()][pion.getColonne()] = pion;
 	}
 
 	/**
-	 * Vérifie si tous les pions d'une équipe sont bloqués
-	 * @param pion les pions à vérifier
-	 * @return true si les pions sont bloqué
+	 * VÃ©rifie si tous les pions d'une Ã©quipe sont bloquÃ©s
+	 * @param pion les pions Ã  vÃ©rifier
+	 * @return true si les pions sont bloquÃ©
 	 */
 	public static boolean victoire(Pion[] pion) {
 		for (int x = 0 ; x < pion.length ; x++) {
-			// Si un pion n'est pas bloqué, alors c'est faux
+			// Si un pion n'est pas bloquÃ©, alors c'est faux
 			if (!pion[x].isBloque()) {
 				return false;
 			}
@@ -288,10 +288,10 @@ public class Partie {
 	}
 
 	/**
-	 * Cette fonction d�place un pion sur le plateau, puis change
-	 * la colonne de celui-ci et enfin, r�initialise l'attribut
-	 * bloque de chaque pion pr�sent sur la ligne du pion d�plac�
-	 * @param pion le pion boug�
+	 * Cette fonction déplace un pion sur le plateau, puis change
+	 * la colonne de celui-ci et enfin, réinitialise l'attribut
+	 * bloque de chaque pion présent sur la ligne du pion déplacé
+	 * @param pion le pion bougé
 	 */
 	public static void movePion(Pion pion) {
 		plateau[pion.getLigne()][pion.getColonne()] = null;
@@ -305,16 +305,16 @@ public class Partie {
 	}
 
 	/**
-	 * Vérifie si toutes les grenouilles sont à droite
-	 * et si tous les crapaud sont à gauche
+	 * VÃ©rifie si toutes les grenouilles sont Ã  droite
+	 * et si tous les crapaud sont Ã  gauche
 	 * @return true si c'est vrai
 	 */
 	public static boolean victoireCasseTete() {
-		int nbPion, // Nombre de pion bien placés
+		int nbPion, // Nombre de pion bien placÃ©s
 		colonne, // Colonne sur laquelle on fait une recherche
 		pionVictoire = batracien[0].length*2, // Nombre total de pion
 		ligne;
-		nbPion = ligne = colonne = 0; // On commence par la colonne la plus à gauche
+		nbPion = ligne = colonne = 0; // On commence par la colonne la plus Ã  gauche
 		// Pour chaque ligne du tableau
 		while (ligne < ligneConf) {
 			if (plateau[ligne][colonne] != null || plateau[ligne][colonne] != null) {
@@ -334,12 +334,12 @@ public class Partie {
 	}
 
 	/**
-	 * V�rifie si un pion dont les coordonn�es sont plac�es en argument
-	 * existe et s'il appartient � l'�quipe dont c'est le tour
-	 * @param equipe 0 sigifie l'�quipe grnouille, 1 l'�quipe crapaud
+	 * Vérifie si un pion dont les coordonnées sont placées en argument
+	 * existe et s'il appartient à l'équipe dont c'est le tour
+	 * @param equipe 0 sigifie l'équipe grnouille, 1 l'équipe crapaud
 	 * @param ligne du potentiel pion
 	 * @param colonne du potentiel pio
-	 * @return true si le pion existe et appartient � la vonne �quipe
+	 * @return true si le pion existe et appartient à la vonne équipe
 	 */
 	public static boolean pionValide(int equipe, int ligne, int colonne) {
 		for (int x = 0 ; x < batracien[0].length ; x++) {
@@ -353,7 +353,7 @@ public class Partie {
 	}
 
 	/**
-	 * Cr�e un String qui repr�sente le plateau de jeu
+	 * Crée un String qui représente le plateau de jeu
 	 * avec les pions et leur type
 	 */
 	public static String afficherJeu() {
@@ -382,12 +382,12 @@ public class Partie {
 	/**
 	 * Lance une partie entre un joueur et
 	 * soit un humain soit une IA
-	 * Leurs demande de nommé leur équipe puis
-	 * à tour de role il vont selectionner
-	 * un pion de leur équipe à déplacer jusqu'à ce que l'une des
-	 * deux équipe soit bloqué
-	 * @param ordinateur détermine si le joueur joue contre un humain
-	 * et si non, le niveau de difficulté de l'IA
+	 * Leurs demande de nommÃ© leur Ã©quipe puis
+	 * Ã  tour de role il vont selectionner
+	 * un pion de leur Ã©quipe Ã  dÃ©placer jusqu'Ã  ce que l'une des
+	 * deux Ã©quipe soit bloquÃ©
+	 * @param ordinateur dÃ©termine si le joueur joue contre un humain
+	 * et si non, le niveau de difficultÃ© de l'IA
 	 */
 	public static int joueurVs(int tourEquipe, int ligne, int colonne) {
 		if (tourEquipe == 0) {
@@ -399,7 +399,7 @@ public class Partie {
 				if (choixAdversaire == 0) {
 					tourEquipe = tourJoueur(tourEquipe, ligne, colonne);
 				} else {
-					// TODO : Yanis tu fous l'IA ici avec un movePion
+					Ordinateur.ChoixOrdinateur(choixAdversaire,plateau);
 					tourEquipe--;
 				}
 			} while(tourEquipe == 1);
@@ -408,14 +408,14 @@ public class Partie {
 	}
 
 	/**
-	 * Effectue un tour en mode joueur vs entité
-	 * ou en mode casse tête
-	 * @param tourEquipe le numéro de l'équipe.
-	 * Si égal à 2, alors c'est un casse tête
+	 * Effectue un tour en mode joueur vs entitÃ©
+	 * ou en mode casse tÃªte
+	 * @param tourEquipe le numÃ©ro de l'Ã©quipe.
+	 * Si Ã©gal Ã  2, alors c'est un casse tÃªte
 	 * @return
 	 */
 	public static int tourJoueur(int tourEquipe, int ligne, int colonne) {
-		// Si le pion existe et qu'il n'est pas bloqué
+		// Si le pion existe et qu'il n'est pas bloquÃ©
 		if (pionValide(tourEquipe, ligne, colonne)) {
 			// On bouge le pion
 			movePion(plateau[ligne][colonne]);
@@ -425,7 +425,7 @@ public class Partie {
 	}
 
 	public static void casseTete(int ligne, int colonne) {
-		// Si la grenouille existe et qu'elle n'est pas bloquée
+		// Si la grenouille existe et qu'elle n'est pas bloquÃ©e
 		if (pionValide(0, ligne, colonne) || pionValide(1, ligne, colonne)) {
 			// On bouge le pion
 			movePion(plateau[ligne][colonne]);
