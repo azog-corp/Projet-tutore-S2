@@ -5,7 +5,6 @@
 package crapouille;
 
 import crapouille.Pion;
-import crapouille.game.Partie;
 
 
 /**
@@ -71,7 +70,27 @@ public class Ordinateur {
 	if (niveauOrdi == 3) {
 	    /* Mettre la ou les fonction de L'ordinateur difficil */
 	} 
-
+ /**
+     * Fonction permettant d'avancer un pion et aussi vérifiant si le pion n'est 
+     * pas bloqué 
+     * @param pion, Le pion qu'on veut bouger
+     * @param  plateauJeu, le plateau du jeu contenant les pions
+     */
+    public static void movePion(Pion pion,Pion[][] plateauJeu) {
+	/* Mets la valeur null dans l'ancienne case où ce situé le pion */
+	plateauJeu[pion.getLigne()][pion.getColonne()] = null;
+	/* vérifie si le pion peut avancé, si oui il l'avance le pion */
+	pion.setColonne(plateauJeu);
+	/* Mets le dans la nouvelle case où doit ce situé le pion */
+	plateauJeu[pion.getLigne()][pion.getColonne()] = pion;
+	/* Boucle parcourant la ligne ou ce situe le pion */
+	for (int x = 0 ; x < pion.getLigne() ; x++) {
+	    /* vérifie sur le tableau si les case posséde un pion dessus */
+	    if (plateauJeu[pion.getLigne()][x] != null) {
+		plateauJeu[pion.getLigne()][x].setBloque(plateauJeu);
+	    }
+	}
+    }
 
     }
 }
