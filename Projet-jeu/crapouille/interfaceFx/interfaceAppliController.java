@@ -343,7 +343,7 @@ public class interfaceAppliController {
     }
 	
     private boolean chercherConfig(String config) {
-	Partie.listConfiguration.length
+    	Partie.listConfiguration.length
     }
     
     private void recupNomEquipe() {
@@ -443,16 +443,24 @@ public class interfaceAppliController {
     	rafraichirConf(Partie.afficherJeu());
     }
     
-    @FXML
-    void showInitialisationConfig() {
-    	initialisationConfig.setVisible(true);
-    	placementConfig.setVisible(false);
-    }
-	
-    private boolean recupType(char choix) {
-        return choix == 'C' || choix == 'c' ? true : false;
-    }
+
+
     
+    /* ------------------------------------------------------
+     * --------------- FONCTION CONFIGURATION --------------- 
+     * ------------------------------------------------------
+     */
+    
+    /*--------------- FONCTION CONFIGURATION: TRAITEMENT DONNEES / AVANCEMENT  ---------------*/
+    
+    /**
+     * Recupere les coordonnees rentre par l'utilisateur lors de la creation 
+     * de la config. Puis verifie leur validite (Type,taille,position...)
+     * Si toutes les donnees sont valides ajoute au plateau le pion demander
+     * par l'utilisateur. Puis actualise le plateau sur l'interface
+     * Pour afficher le changement
+     * @param Click clique de l'utilisateur declanchant l'appel de la fonction
+     */
     @FXML
     void actualiserConfig(MouseEvent Click) {
     	StringBuilder recupCord = new StringBuilder(); 
@@ -466,28 +474,61 @@ public class interfaceAppliController {
     	//TODO verifier char 3 -
     	//TODO verifier char c ou g si tous bon continuer	
     	int colonnePion = Integer.parseInt(recupCo.toString());
-    	
     	colonnePion--;
     	lignePion--;
-    	Pion placementUti = new Pion(lignePion,colonnePion,recupType(tb_cord.getText().charAt(0)));
+    	Pion placementUti = new Pion(lignePion,colonnePion,
+    								recupType(tb_cord.getText().charAt(0)));
     	//TODO SI TOUS TEST VALIDE +1 nb Pion
     	Partie.plateau[lignePion][colonnePion] = placementUti;
     	rafraichirConf(Partie.afficherJeu());
-    	
     	//TODO verifier coordonnees  
     	//TODO si correct modifier plateau + actualiser plateau
     	//TODO msg Box pas correct
-    	
     }
     
-    public void rafraichirConf(String plateauJeu) {
-    	afficherConfig.setText(plateauJeu);
-    }
-    
+    /**
+     * Fonction qui enregistre la configuration lorsque l'utilisateur souhaite
+     * l'enregistrer. (La sauvegarde dans la liste des configuration)
+     * @param Click clique de l'utilisateur declanchant l'appel de la fonction
+     */
     @FXML
     void enregistrerConfig(MouseEvent Click) {
     	Configuration config = new Configuration (Partie.plateau, nomConfig);
     	Partie.listConfiguration.add(config);
     	Partie.saveConfig();
+    }
+	
+    /**
+     * Verifie si le char correspond correspond a un crapaud
+     * Si se n'est pas le cas renvoit false se qui signifie que
+     * le pion est une grenouille. Cette fonction intervient lors
+     * de la creation du pion dans le tableau afin de definir son type
+     * Ainsi que apres toutes les verifications sur l'entree de l'utilisateur
+     * Se qui signifie que le pion a se moment ne pourra etre que C ou G
+     * @param choix char rentre par l'utilisateur qui definie le type du pion
+     */
+    private boolean recupType(char choix) {
+        return choix == 'C' || choix == 'c' ? true : false;
+    }
+    
+    /*--------------- FONCTION CONFIGURATION: TRAITEMENT INTERFACE  ---------------*/
+    
+    /**
+     * Actualise le label affichant le plateau sur l'interface
+     * @param plateauJeu Plateau de la configuration converti en String
+     */
+    public void rafraichirConf(String plateauJeu) {
+    	afficherConfig.setText(plateauJeu);
+    }
+    
+    /**
+     * Lorsque l'utilisateur clique sur valider apres avoir
+     * entree le nom de la configuration ainsi que le nombre de ligne/colonne
+     * affiche la page de placement des pions sur la config en creation
+     */
+    @FXML
+    void showInitialisationConfig() {
+    	initialisationConfig.setVisible(true);
+    	placementConfig.setVisible(false);
     }
 }
