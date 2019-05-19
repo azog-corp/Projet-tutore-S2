@@ -9,9 +9,9 @@ package crapouille.interfaceFx;
 
 import java.time.LocalDate;
 
+import crapouille.Partie;
 import crapouille.Pion;
 import crapouille.configuration.Configuration;
-import crapouille.game.Partie;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

@@ -1,4 +1,4 @@
-package crapouille.game;
+package crapouille;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,31 +8,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import crapouille.Ordinateur;
-import crapouille.Pion;
 import crapouille.configuration.Configuration;
 
 public class Partie {
-
-	/**
-	 * Nombre Ligne max pour les configuraions
-	 */
-	private final static int LIGNE_MAX = 20;
-
-	/**
-	 * Nombre Colonne max pour les configurations
-	 */
-	private final static int COLONNE_MAX = 20;
-
-	/**
-	 * Nombre de ligne de la configuration actuelle
-	 */
-	private static int ligneConf;
-
-	/**
-	 * Nombre de colonne de la configuration actuelle
-	 */
-	private static int colonneConf;
 
 	/** Adversaire choisi par l'utilisateur
 	 * 0 = humain
@@ -54,10 +32,7 @@ public class Partie {
 	 */
 	private static int choixConfig;
 
-	/**
-	 * Nombre de pion present dans la configuration 
-	 */
-	private static int nbPion;
+
 
 	/**
 	 * Nom par défaut de l'équipe Crapaud
@@ -76,14 +51,6 @@ public class Partie {
 	public static String[] equipe = new String[2];
 
 	/**
-	 * Plateau sur lequel sont placés et déplacés
-	 * chaque pion des deux équipes.
-	 * Les dimensions de celui-ci ne sont
-	 * pas necessairement celles de la configuaration
-	 */
-	public static Pion[][] plateau = new Pion[LIGNE_MAX][COLONNE_MAX];
-
-	/**
 	 * ArrayList contenant toutes les configurations créé
 	 * ainsi que la configuration par défaut.
 	 * Cette variable est enregistré lorsque le joueur
@@ -97,13 +64,8 @@ public class Partie {
 	 */
 	public static Configuration currentConfig;
 
-	/**
-	 * Tableau contenant toutes les instances de pions
-	 * présentent sur le plateau.
-	 * La première ligne contient tous les pion grenouilles
-	 * et la seconde tous les crapaud
-	 */
-	public static Pion[][] batracien = new Pion[2][];
+	public static Plateau currentPlateau;
+
 
 	/**
 	 * Chemin du fichier bin dans lequel est enregistré
@@ -123,20 +85,6 @@ public class Partie {
 	 */
 	public static String getNomEquipe2Defaut() {
 		return nomEquipe2Defaut;
-	}
-
-	/**
-	 * @param ligneConf le nombre de lignes de la configuration
-	 */
-	public static void setLigneConf(int ligneConf) {
-		Partie.ligneConf = ligneConf;
-	}
-
-	/**
-	 * @param colonneConf le nombre de colonnes de la configuration
-	 */
-	public static void setColonneConf(int colonneConf) {
-		Partie.colonneConf = colonneConf;
 	}
 
 	/**
@@ -176,13 +124,6 @@ public class Partie {
 	 */
 	public static void setChoixConfig(int choixConfig) {
 		Partie.choixConfig = choixConfig;
-	}
-
-	/**
-	 * @param nbPion le nombre de pion présent sur le plateau
-	 */
-	public static void setNbPion(int nbPion) {
-		Partie.nbPion = nbPion;
 	}
 
 	/**
@@ -228,41 +169,9 @@ public class Partie {
 		}
 	}
 
-	/**
-	 * Fonction appelé lors de la création d'une configuration
-	 * et qui initialise l'attribut bloque de chaque pion
-	 */
-	public static void initBloque() {
-		for (int x = 0 ; x < ligneConf ; x++) {
-			for (int y = 0 ; y < colonneConf ; y++) {
-				if (plateau[x][y] != null) {
-					plateau[x][y].setBloque(plateau);
-				}
-			}
-		}
-	}
 
-	/**
-	 * Fonction appelé lors du chargement d'une configuration
-	 * et qui met dans le tableau batracien toutes les
-	 * instances des pions grenouilles et crapaud
-	 */
-	public static void initBatracien() {
-		batracien = new Pion[2][nbPion];
-		int crapaud = 0,
-				grenouille = 0;
-		for (int x = 0 ; x < ligneConf ; x++) {
-			for (int y = 0 ; y < colonneConf ; y++) {
-				if (plateau[x][y] != null && plateau[x][y].isCrapaud()) {
-					batracien[1][crapaud] = plateau[x][y];
-					crapaud++;
-				} else if (plateau[x][y] != null && !plateau[x][y].isCrapaud()) {
-					batracien[0][grenouille] = plateau[x][y];
-					grenouille++;
-				}
-			}
-		}
-	}
+
+
 
 	/**
 	 * Associe un pion à une case du plateau
