@@ -113,6 +113,70 @@ public class Plateau {
 	}
 	
 	/**
+	 * Vérifie si un pion dont les coordonnées sont placées en argument
+	 * existe et s'il appartient à l'équipe dont c'est le tour
+	 * @param equipe 0 sigifie l'équipe grnouille, 1 l'équipe crapaud
+	 * @param ligne du potentiel pion
+	 * @param colonne du potentiel pio
+	 * @return true si le pion existe et appartient à la vonne équipe
+	 */
+	public boolean pionValide(int equipe, int ligne, int colonne) {
+		for (int x = 0 ; x < this.batracien[0].length ; x++) {
+			if (this.batracien[equipe][x].getLigne() == ligne && 
+					this.batracien[equipe][x].getColonne() == colonne &&
+					!this.plateau[ligne][colonne].isBloque()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * VÃ©rifie si tous les pions d'une Ã©quipe sont bloquÃ©s
+	 * @param equipe 0 pour les grenouille et 1 pour les crapauds
+	 * @return true si les pions sont ploquÃ©
+	 */
+	public boolean victoire(int equipe) {
+		for (int x = 0 ; x < this.batracien[equipe].length ; x++) {
+			// Si un pion n'est pas bloquÃ©, alors c'est faux
+			if (!this.batracien[equipe][x].isBloque()) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * VÃ©rifie si toutes les grenouilles sont Ã  droite
+	 * et si tous les crapaud sont Ã  gauche
+	 * @return true si c'est vrai
+	 */
+	public boolean victoireCasseTete() {
+		int nbPion, // Nombre de pion bien placÃ©s
+		colonne, // Colonne sur laquelle on fait une recherche des grenouille
+		colonneC = this.colonneConf, // Colonne sur laquelle on fait une recherche des crapaud
+		pionVictoire = this.batracien[0].length*2, // Nombre total de pion
+		ligne;
+		nbPion = ligne = colonne = 0; // On commence par la colonne la plus Ã  gauche
+		// Pour chaque ligne du tableau
+		while (ligne < ligneConf) {
+			if (this.plateau[ligne][colonne] != null || this.plateau[ligne][colonne] != null) {
+				if (this.plateau[ligne][colonne] != null && this.plateau[ligne][colonne].isCrapaud()) {
+					nbPion++;
+					colonne++;
+				}
+				if (this.plateau[ligne][colonne] != null && !this.plateau[ligne][colonneC].isCrapaud()) {
+					nbPion++;
+					colonneC--;
+				}
+			} else {
+				ligne++;
+			}
+		}
+		return nbPion == pionVictoire;
+	}
+	
+	/**
 	 * Crée un String qui représente le plateau de jeu
 	 * avec les pions et leur type
 	 */

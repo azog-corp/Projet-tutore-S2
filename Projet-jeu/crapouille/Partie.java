@@ -173,120 +173,11 @@ public class Partie {
 
 
 
-	/**
-	 * Associe un pion à une case du plateau
-	 * @param pion, Le pion qui doit être associé
-	 */
-	public static void setCase(Pion pion) {
-		plateau[pion.getLigne()][pion.getColonne()] = pion;
-	}
 
-	/**
-	 * VÃ©rifie si tous les pions d'une Ã©quipe sont bloquÃ©s
-	 * @param pion les pions Ã  vÃ©rifier
-	 * @return true si les pions sont bloquÃ©
-	 */
-	public static boolean victoire(Pion[] pion) {
-		for (int x = 0 ; x < pion.length ; x++) {
-			// Si un pion n'est pas bloquÃ©, alors c'est faux
-			if (!pion[x].isBloque()) {
-				return false;
-			}
-		}
-		return true;
-	}
 
-	/**
-	 * Cette fonction déplace un pion sur le plateau, puis change
-	 * la colonne de celui-ci et enfin, réinitialise l'attribut
-	 * bloque de chaque pion présent sur la ligne du pion déplacé
-	 * @param pion le pion bougé
-	 */
-	public static void movePion(Pion pion) {
-		plateau[pion.getLigne()][pion.getColonne()] = null;
-		pion.setColonne(plateau);
-		plateau[pion.getLigne()][pion.getColonne()] = pion;
-		for (int x = 0 ; x < ligneConf ; x++) {
-			if (plateau[pion.getLigne()][x] != null) {
-				plateau[pion.getLigne()][x].setBloque(plateau);
-			}
-		}
-	}
 
-	/**
-	 * VÃ©rifie si toutes les grenouilles sont Ã  droite
-	 * et si tous les crapaud sont Ã  gauche
-	 * @return true si c'est vrai
-	 */
-	public static boolean victoireCasseTete() {
-		int nbPion, // Nombre de pion bien placÃ©s
-		colonne, // Colonne sur laquelle on fait une recherche
-		pionVictoire = batracien[0].length*2, // Nombre total de pion
-		ligne;
-		nbPion = ligne = colonne = 0; // On commence par la colonne la plus Ã  gauche
-		// Pour chaque ligne du tableau
-		while (ligne < ligneConf) {
-			if (plateau[ligne][colonne] != null || plateau[ligne][colonne] != null) {
-				if (plateau[ligne][colonne] != null && plateau[ligne][colonne].isCrapaud()) {
-					nbPion++;
-					colonne++;
-				}
-				if (plateau[ligne][colonne] != null && !plateau[ligne][colonneConf].isCrapaud()) {
-					nbPion++;
-					colonneConf--;
-				}
-			} else {
-				ligne++;
-			}
-		}
-		return nbPion == pionVictoire;
-	}
 
-	/**
-	 * Vérifie si un pion dont les coordonnées sont placées en argument
-	 * existe et s'il appartient à l'équipe dont c'est le tour
-	 * @param equipe 0 sigifie l'équipe grnouille, 1 l'équipe crapaud
-	 * @param ligne du potentiel pion
-	 * @param colonne du potentiel pio
-	 * @return true si le pion existe et appartient à la vonne équipe
-	 */
-	public static boolean pionValide(int equipe, int ligne, int colonne) {
-		for (int x = 0 ; x < batracien[0].length ; x++) {
-			if (batracien[equipe][x].getLigne() == ligne && 
-					batracien[equipe][x].getColonne() == colonne &&
-					!plateau[ligne][colonne].isBloque()) {
-				return true;
-			}
-		}
-		return false;
-	}
 
-	/**
-	 * Crée un String qui représente le plateau de jeu
-	 * avec les pions et leur type
-	 */
-	public static String afficherJeu() {
-		StringBuilder plateauString = new StringBuilder();
-		plateauString.append(" |");
-		for (int z = 0 ; z < colonneConf ; z++) {
-			plateauString.append(z+1 + " | ");
-		}
-		for (int x = 0 ; x < ligneConf ; x++) {
-			plateauString.append("\n" + (x+1) + " |");
-			for (int y = 0 ; y < colonneConf ; y++) {
-				if (plateau[x][y] != null) {
-					if (plateau[x][y].isCrapaud()) {
-						plateauString.append("C|");
-					} else if (!plateau[x][y].isCrapaud()) {
-						plateauString.append("G|");
-					}
-				} else {
-					plateauString.append("  |");
-				}
-			}
-		}
-		return plateauString.toString();
-	}
 
 	/**
 	 * Lance une partie entre un joueur et
@@ -308,7 +199,7 @@ public class Partie {
 				if (choixAdversaire == 0) {
 					tourEquipe = tourJoueur(tourEquipe, ligne, colonne);
 				} else {
-					Ordinateur.ChoixOrdinateur(choixAdversaire,plateau);
+					Ordinateur.ChoixOrdinateur(choixAdversaire,currentPlateau);
 					tourEquipe--;
 				}
 			} while(tourEquipe == 1);
@@ -327,7 +218,7 @@ public class Partie {
 		// Si le pion existe et qu'il n'est pas bloquÃ©
 		if (pionValide(tourEquipe, ligne, colonne)) {
 			// On bouge le pion
-			movePion(plateau[ligne][colonne]);
+			movePion(currentPlateau[ligne][colonne]);
 			tourEquipe = tourEquipe == 0 ? 1 : 0;
 		}
 		return tourEquipe;
@@ -337,7 +228,7 @@ public class Partie {
 		// Si la grenouille existe et qu'elle n'est pas bloquÃ©e
 		if (pionValide(0, ligne, colonne) || pionValide(1, ligne, colonne)) {
 			// On bouge le pion
-			movePion(plateau[ligne][colonne]);
+			movePion(currentPlateau[ligne][colonne]);
 		}
 	}
 }
