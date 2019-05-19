@@ -17,8 +17,8 @@ public class Ordinateur {
 
 	private static ArrayList<Pion> pionLibre;
 
-	public static Pion choixOrdi(Pion[][] plateau, Pion[] crapaud, int niveauIA) {
-		initPionNonBloque(crapaud);
+	public static Pion choixOrdi(Plateau plateau, Pion[][] batracien, int niveauIA) {
+		initPionNonBloque(batracien);
 		Pion choixPion = null;
 
 		if (niveauIA == 2) {
@@ -30,10 +30,10 @@ public class Ordinateur {
 		return choixPion;
 	}
 
-	public static void initPionNonBloque(Pion[] crapaud) {
-		for (int x = 0 ; x < crapaud.length ; x++) {
-			if (!crapaud[x].isBloque()) {
-				pionLibre.add(crapaud[x]);
+	public static void initPionNonBloque(Pion[][] crapaud) {
+		for (int x = 0 ; x < crapaud[1].length ; x++) {
+			if (!crapaud[1][x].isBloque()) {
+				pionLibre.add(crapaud[1][x]);
 			}
 		}
 	}

@@ -51,6 +51,10 @@ public class Plateau {
 		this.colonneConf = plateau[0].length;
 	}
 	
+	public Pion[][] getBatracien() {
+		return batracien;
+	}
+
 	/**
 	 * Fonction appelé lors de la création d'une configuration
 	 * et qui initialise l'attribut bloque de chaque pion

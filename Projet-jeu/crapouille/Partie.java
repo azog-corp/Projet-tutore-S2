@@ -168,17 +168,7 @@ public class Partie {
 			e.printStackTrace();
 		}
 	}
-
-
-
-
-
-
-
-
-
-
-
+	
 	/**
 	 * Lance une partie entre un joueur et
 	 * soit un humain soit une IA
@@ -199,7 +189,7 @@ public class Partie {
 				if (choixAdversaire == 0) {
 					tourEquipe = tourJoueur(tourEquipe, ligne, colonne);
 				} else {
-					Ordinateur.ChoixOrdinateur(choixAdversaire,currentPlateau);
+					currentPlateau.movePion(Ordinateur.choixOrdi(currentPlateau, currentPlateau.getBatracien(), choixAdversaire));
 					tourEquipe--;
 				}
 			} while(tourEquipe == 1);
