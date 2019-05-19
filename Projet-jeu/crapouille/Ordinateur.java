@@ -15,8 +15,19 @@ import crapouille.Pion;
  */
 public class Ordinateur {
 
+	/**
+	 * ArrayList contenant tous les pions crapaud qui ne sont pas bloqués
+	 */
 	private static ArrayList<Pion> pionLibre;
 
+	/**
+	 * Fonction principale qui recherche en fonction du niveau de l'IA,
+	 * le pion à déplacer
+	 * @param plateau l'état du plateau de jeu actuel
+	 * @param batracien tableau contenant tous les pions
+	 * @param niveauIA niveau de l'IA
+	 * @return le pion à déplacer
+	 */
 	public static Pion choixOrdi(Plateau plateau, Pion[][] batracien, int niveauIA) {
 		initPionNonBloque(batracien);
 		Pion choixPion = null;
@@ -30,6 +41,10 @@ public class Ordinateur {
 		return choixPion;
 	}
 
+	/**
+	 * Renpli pionLibre avec les pions crapaud non bloqué
+	 * @param crapaud le tableau contenant les pions
+	 */
 	public static void initPionNonBloque(Pion[][] crapaud) {
 		for (int x = 0 ; x < crapaud[1].length ; x++) {
 			if (!crapaud[1][x].isBloque()) {
