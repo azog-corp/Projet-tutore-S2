@@ -38,8 +38,10 @@
         <task id="1" name="Création d'un ordinateur plus complexe" meeting="false" start="2019-05-23" duration="7" complete="0" expand="true"/>
         <task id="2" name="Test de l'application final et réglage bug" meeting="false" start="2019-05-23" duration="6" complete="0" expand="true"/>
         <task id="3" name="Mise à jour de la fonction score" meeting="false" start="2019-05-23" duration="2" complete="0" expand="true"/>
-        <task id="8" name="Finalisation du dossier" meeting="false" start="2019-05-27" duration="5" complete="0" expand="true"/>
-        <task id="9" name="Finalisation du plan projet" meeting="false" start="2019-05-23" duration="3" complete="0" expand="true"/>
+        <task id="8" name="Finalisation du dossier" color="#8cb6ce" meeting="false" start="2019-05-28" duration="4" complete="0" expand="true"/>
+        <task id="9" name="Finalisation du plan projet" meeting="false" start="2019-05-23" duration="3" complete="0" expand="true">
+            <depend id="8" type="2" difference="0" hardness="Strong"/>
+        </task>
     </tasks>
     <resources/>
     <allocations/>
