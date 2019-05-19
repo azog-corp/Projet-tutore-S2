@@ -238,6 +238,7 @@ public class interfaceAppliController {
     	reinitialiser();
     	razPartie();
     	configurationPartie.setVisible(true);
+    	//TODO RAJOUTER AFFICHAGE LABEL
     }
     
     /**
@@ -488,11 +489,13 @@ public class interfaceAppliController {
     		Partie.setChoixAdversaire(0);
     	}
     }
-    
-    //TODO
+
+    //TODO recuperer lentierete du arrys pour lafficher
 //    public String afficherConfigDispo(){
 //    	StringBuilder configs = new StringBuilder();
-//    	//TODO mais necessite taille arrays
+//    	for (int compteur = 0; compteur < Partie.listConfiguration.size(); compteur++) {
+//    		configs.append(Partie.listConfiguration[compteur]);
+//    	}
 //    }
     
     
