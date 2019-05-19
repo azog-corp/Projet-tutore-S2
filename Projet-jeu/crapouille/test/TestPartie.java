@@ -1,6 +1,6 @@
 package crapouille.test;
 
-import crapouille.game.Partie;
+import crapouille.Partie;
 
 public class TestPartie {
 

@@ -9,9 +9,9 @@ package crapouille.interfaceFx;
 
 import java.time.LocalDate;
 
+import crapouille.Partie;
 import crapouille.Pion;
 import crapouille.configuration.Configuration;
-import crapouille.game.Partie;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -182,6 +182,11 @@ public class interfaceAppliController {
     	Platform.exit(); 
     }
     
+    /**
+     * Avant de changer de page lorsque l'utilisateur navigue on fait 
+     * disparaitre toutes les autres pages avant de faire apparaitre celle 
+     * demandee par l'utilisateur
+     */
     @FXML
     void reinitialiser() {
     	menu.setVisible(false);
@@ -192,30 +197,48 @@ public class interfaceAppliController {
     	configuration.setVisible(false);
     }
     
+    /**
+     * Appel la fonction pour faire disparaitre toutes les autres pages
+     * affiche la page qui affiche a l'utilisateur la personne qui
+     * possede le record sur le casse tete
+     * @param Click
+     */
     @FXML
     void showMVP(MouseEvent Click) {
     	reinitialiser();
     	score.setVisible(true);
     }
-    
+    /**
+     * Affiche la page des createurs apres avoir fait disparaitre 
+     * toutes les autres
+     * @param Click
+     */
     @FXML
     void showCreateur(MouseEvent Click) {
     	reinitialiser();
     	createur.setVisible(true);
     }
     
+    /**
+     * Affiche le menu principal de l'application
+     * @param Click
+     */
     @FXML
     void showMenu(MouseEvent Click) {
     	reinitialiser();
-    	razMenu();
     	menu.setVisible(true);
     }
     
+    /**
+     * Affiche la configuration de la partie 
+     * @param Click
+     */
     @FXML
     void showConfigurationPartie(MouseEvent Click) {
     	reinitialiser();
-    	razConfig();
+    	razPartie();
     	configurationPartie.setVisible(true);
+    	//TODO RAJOUTER AFFICHAGE LABEL
     }
     
     /**
@@ -234,15 +257,14 @@ public class interfaceAppliController {
     	showInitialisationConfig();
     }
     
-    @FXML
-    void razMenu() {
-    	tb_nomJ1.setText("");
-    	tb_nomJ2.setText("");
-    	choixConfig.setText("");
-    	chk_casseT.setSelected(false);
-    	chk_vsIA.setSelected(false);
-    }
-    
+    /**
+     * Fonction qui verifie si la case IA est check
+     * Si cest le cas appel la fonction appel la fonction caseIaCheck
+     * Qui fait disparaitre tous les élements liés a l'IA et affiche 
+     * la case pour entrer le nom du deuxieme joueur
+     * Sinon fait linverse fait apparaitre les elements de l'IA 
+     * et fait disparaitre la case du nom pour le J2
+     */
     @FXML
     void verificationCheck() {
     	if (chk_vsIA.isSelected()) {
@@ -251,6 +273,12 @@ public class interfaceAppliController {
     		caseIaPasCheck();
     	}
     }
+    /**
+     * Fpnction qui verifie le mode de jeu selectionnee par lutilisateur
+     * Si celui si est le casse tete appel les fonctions pour faire disparaitre
+     * les elements correspondant a l'IA et la possibilite dentrer un nom de J2
+     * sinon fait linverse
+     */
     @FXML
     void verificationModeJeu() {
     	if (chk_casseT.isSelected()) {
@@ -259,6 +287,11 @@ public class interfaceAppliController {
     		versusConf();
     	}
     }
+    
+    /**
+     * Dans le cas ou l'utilisateur souhaite faire une partie en versus
+     * fait apparaitre l'IA et le J2
+     */
     @FXML
     void versusConf() {
     	chk_vsIA.setVisible(true);
@@ -267,6 +300,9 @@ public class interfaceAppliController {
 		tb_nomJ2.setVisible(true);
     }
     
+    /**
+     * Fonction decoche toutes les cases correspondant a l'IA
+     */
     void razIa() {
     	chk_vsIA.setSelected(false);
     	lvl1.setSelected(false);
@@ -274,6 +310,13 @@ public class interfaceAppliController {
     	lvl3.setSelected(false);
     }
     
+    /**
+     * Lorsque l'utilisateur decide de faire un casse tete
+     * cache les elements de l'IA qui sont donc plus necessaire
+     * cache les elements du J2 qui sont eux aussi devenu non necessaire
+     * remet a zero les elements de l'Ia pour que si l'utilisateur
+     * change d'avis celle si soit remise a defaut
+     */
     @FXML
     void casseTeteConf() {
     	cacherIa();
@@ -283,18 +326,37 @@ public class interfaceAppliController {
 		chk_vsIA.setVisible(false);
     }
     
+    /**
+     * Cache les elements du J2
+     */
     @FXML
     void cacherJ2() {
     	lb_nomJ2.setVisible(false);
 		tb_nomJ2.setVisible(false);
+		tb_nomJ2.setText("");
     }
     
+    /**
+     * Remet tous les éléments de la page configurationPartie par defaut
+     * deselectionne les ccheckbox et lance une fonction qui permet
+     * de remettre la configuration par defaut
+     * (comme les checkbox ne sont pas coche considere que l'utilisateur 
+     * souhaite faire un versus contre une deuxieme joueur
+     */
     @FXML
-    void razConfig() {
+    void razPartie() {
+    	tb_nomJ1.setText("");
+    	tb_nomJ2.setText("");
+    	choixConfig.setText("");
     	chk_vsIA.setSelected(false);
     	chk_casseT.setSelected(false);
     	verificationCheck();
+    	verificationModeJeu();
     }
+    
+    /**
+     * Fonction qui cqche les éléments de l'IA
+     */
     @FXML
     void cacherIa() {
     	lvl1.setVisible(false);
@@ -303,14 +365,10 @@ public class interfaceAppliController {
 		lb_lvlIa.setVisible(false);
     }
     
-    @FXML
-    void montrerIA() {
-    	lvl1.setVisible(true);
-		lvl2.setVisible(true);
-		lvl3.setVisible(true);
-		lb_lvlIa.setVisible(true);
-    }
-    
+    /**
+     * Fonction qui cache tous les elements lies a l'IA et affiche
+     * tous les elements de J2
+     */
     @FXML
     void caseIaPasCheck() {
     	cacherIa();
@@ -321,19 +379,25 @@ public class interfaceAppliController {
     
     @FXML
     void caseIaCheck() {
-    	montrerIA();
+    	lvl1.setVisible(true);
+		lvl2.setVisible(true);
+		lvl3.setVisible(true);
+		lb_lvlIa.setVisible(true);
+		lvl1.setSelected(true);
 		cacherJ2();
     }
     
     @FXML
-    void afficherJeu(MouseEvent Click) {
-    	recupAdversaire();
-    	recupModeJeu();
-    	recupNomEquipe();
-    	recupConfiguration();
-    	reinitialiser();
-    	gameBoard.setVisible(true);
-    	rafraichirJeu(Partie.afficherJeu());
+    void showGameBoard(MouseEvent Click) {
+    	if(chercherConfig()) {
+    		recupAdversaire();
+    		recupModeJeu();
+    		recupNomEquipe();
+    		recupConfiguration();
+    		reinitialiser();
+    		gameBoard.setVisible(true);
+    		rafraichirJeu(Partie.afficherJeu());
+    	}
     	//Lancer chrono
     }
     
@@ -341,18 +405,20 @@ public class interfaceAppliController {
     @FXML
     void actualiserJeu(MouseEvent Click) {
     	//Recuperer et valider coordonees
-    	Partie.movePion(Partie.plateau[ligne][colonne]); //joueur joue nbcoup++
+    	//Partie.movePion(Partie.plateau[ligne][colonne]); //joueur joue nbcoup++
     	//move pion doit changer le tour equipe
-    	if (Partie.tourEquipe == 2 && Partie.getChoixAdversaire() != 0) {
-    		Ordinateur.ChoixOrdinateur();
-    	} //Sinon rien faire et attendre que lautre equipe joue
+    	//if (Partie.tourEquipe == 2 && Partie.getChoixAdversaire() != 0) {
+    	//	Ordinateur.ChoixOrdinateur();
+    	//} //Sinon rien faire et attendre que lautre equipe joue
     	rafraichirJeu(Partie.afficherJeu());
     }
     
     private void recupModeJeu() {
     	if (chk_casseT.isSelected()) {
     		Partie.setChoixModeDeJeu(0);
-    	} else {
+    	} else { 
+    	/* Si le mode casse tete n'est pas selectionne cala signifie 
+    	   que l'utilisateur souhaitre jouer un versus */
     		Partie.setChoixModeDeJeu(1);
     	}
     }
@@ -360,13 +426,22 @@ public class interfaceAppliController {
     private void recupConfiguration() {
     	if (!choixConfig.getText().isEmpty()) {
     		//regarder s'il la configuration existe
-    	} else {
+    	} else { //Sinon choisi la configuration par defaut
     		Partie.setChoixConfig(0);
     	}
     }
 	//TODO
-    private boolean chercherConfig(String config) {
-    	Partie.listConfiguration.length
+    private boolean chercherConfig() {
+    	if (!choixConfig.getText().isEmpty()) {
+    		int config = Integer.parseInt(choixConfig.getText());
+    		if (config < 0) { //TODO  || config > Partie.listConfiguration.length-1
+    			return false;
+    		} else {
+    			return true;
+    		}
+    	} else {
+    		return false;
+    	}
     }
     
     private void recupNomEquipe() {
@@ -414,8 +489,14 @@ public class interfaceAppliController {
     		Partie.setChoixAdversaire(0);
     	}
     }
-    
 
+    //TODO recuperer lentierete du arrys pour lafficher
+//    public String afficherConfigDispo(){
+//    	StringBuilder configs = new StringBuilder();
+//    	for (int compteur = 0; compteur < Partie.listConfiguration.size(); compteur++) {
+//    		configs.append(Partie.listConfiguration[compteur]);
+//    	}
+//    }
     
     
     public void rafraichirJeu(String plateauJeu) {
