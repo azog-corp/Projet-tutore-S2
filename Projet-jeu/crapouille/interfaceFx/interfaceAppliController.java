@@ -452,7 +452,7 @@ public class interfaceAppliController {
 		if (!choixConfig.getText().isEmpty()) {
 			//regarder s'il la configuration existe
 		} else { //Sinon choisi la configuration par defaut
-			Partie.setChoixConfig(0);
+			Partie.currentPlateau = new Plateau(Partie.listConfiguration.get(0).getConfigPlateau());
 		}
 	}
 	//TODO
