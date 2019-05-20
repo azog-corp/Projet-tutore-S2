@@ -56,7 +56,7 @@ public class Partie {
 	 * Cette variable est enregistré lorsque le joueur
 	 * quitte l'application
 	 */
-	public static ArrayList<Configuration> listConfiguration;
+	public static ArrayList<Configuration> listConfiguration = new ArrayList<Configuration>();
 
 	/**
 	 * Configuration sur laquelle la partie en cours
@@ -64,14 +64,19 @@ public class Partie {
 	 */
 	public static Configuration currentConfig;
 
+	/**
+	 * 
+	 */
 	public static Plateau currentPlateau;
+	
+	public static int tourEquipe = 0;
 
 
 	/**
 	 * Chemin du fichier bin dans lequel est enregistré
 	 * la ArryList listConfiguration
 	 */
-	private final static String CHEMIN_FICHIER = "/crapouille/configuration/listeConfiguration.bin";
+	private final static String CHEMIN_FICHIER = "crapouille/configuration/listConfiguration.bin";
 
 	/**
 	 * @return le nom de l'équipe grenouille
@@ -144,7 +149,6 @@ public class Partie {
 	 * Récupère la ArrayList contenant toutes les configurations
 	 * qui ont été crées et celle par défaut
 	 */
-	@SuppressWarnings("unchecked")
 	public static void initConfig() {
 		try(ObjectInputStream fichier = new ObjectInputStream(new FileInputStream(CHEMIN_FICHIER))) {           
 			// lecture de l'objet contenu dans le fichier
@@ -163,62 +167,9 @@ public class Partie {
 	 */
 	public static void saveConfig() {
 		try(ObjectOutputStream fichier = new ObjectOutputStream(new FileOutputStream(CHEMIN_FICHIER))) {
-			fichier.writeObject(listConfiguration); 
+			fichier.writeObject(listConfiguration);
 		}  catch (IOException e) {
 			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * Lance une partie entre un joueur et
-	 * soit un humain soit une IA
-	 * Leurs demande de nommÃ© leur Ã©quipe puis
-	 * Ã  tour de role il vont selectionner
-	 * un pion de leur Ã©quipe Ã  dÃ©placer jusqu'Ã  ce que l'une des
-	 * deux Ã©quipe soit bloquÃ©
-	 * @param ordinateur dÃ©termine si le joueur joue contre un humain
-	 * et si non, le niveau de difficultÃ© de l'IA
-	 */
-	public static int joueurVs(int tourEquipe, int ligne, int colonne) {
-		if (tourEquipe == 0) {
-			do {
-				tourEquipe = tourJoueur(tourEquipe, ligne, colonne);
-			} while(tourEquipe == 0);
-		} else {
-			do {
-				if (choixAdversaire == 0) {
-					tourEquipe = tourJoueur(tourEquipe, ligne, colonne);
-				} else {
-					currentPlateau.movePion(Ordinateur.choixOrdi(currentPlateau, currentPlateau.getBatracien(), choixAdversaire));
-					tourEquipe--;
-				}
-			} while(tourEquipe == 1);
-		}
-		return tourEquipe;
-	}
-
-	/**
-	 * Effectue un tour en mode joueur vs entitÃ©
-	 * ou en mode casse tÃªte
-	 * @param tourEquipe le numÃ©ro de l'Ã©quipe.
-	 * Si Ã©gal Ã  2, alors c'est un casse tÃªte
-	 * @return
-	 */
-	public static int tourJoueur(int tourEquipe, int ligne, int colonne) {
-		// Si le pion existe et qu'il n'est pas bloquÃ©
-		if (pionValide(tourEquipe, ligne, colonne)) {
-			// On bouge le pion
-			movePion(currentPlateau[ligne][colonne]);
-			tourEquipe = tourEquipe == 0 ? 1 : 0;
-		}
-		return tourEquipe;
-	}
-
-	public static void casseTete(int ligne, int colonne) {
-		// Si la grenouille existe et qu'elle n'est pas bloquÃ©e
-		if (pionValide(0, ligne, colonne) || pionValide(1, ligne, colonne)) {
-			// On bouge le pion
-			movePion(currentPlateau[ligne][colonne]);
 		}
 	}
 }
