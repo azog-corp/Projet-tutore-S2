@@ -27,7 +27,7 @@ public class Main extends Application {
 		}
 	}
 	public static void main(String[] args) {
-		Partie.saveConfig();
+		Partie.initConfig();
 		launch(args);
 		Partie.saveConfig();
 	}

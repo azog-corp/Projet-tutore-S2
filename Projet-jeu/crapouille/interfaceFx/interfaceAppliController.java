@@ -611,6 +611,7 @@ public class interfaceAppliController {
 	@FXML
 	void enregistrerConfig(MouseEvent Click) {
 		Configuration config = new Configuration (Partie.currentPlateau.getPlateau(), nomConfig);
+		//TODO a corriger
 		Partie.listConfiguration.add(config);
 	}
 

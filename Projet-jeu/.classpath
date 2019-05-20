@@ -6,7 +6,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JFX"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javaFX11"/>
 	<classpathentry excluding="interface/" kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
