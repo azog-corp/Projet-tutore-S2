@@ -6,11 +6,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import crapouille.configuration.Configuration;
 
 public class Partie {
+	
+	/**
+	 * Lorsque le joueur lance la partie recupere le temps afin de determiner
+	 * le temps mis par le joueur pour resoudre le casse tete
+	 * Le temps est uniquement mesuree sur la config par defaut
+	 */
+	private static LocalDate departPartie;
 
 	/** Adversaire choisi par l'utilisateur
 	 * 0 = humain
@@ -31,8 +39,6 @@ public class Partie {
 	 * Configuration choisie par l'utilisateur
 	 */
 	private static int choixConfig;
-
-
 
 	/**
 	 * Nom par défaut de l'équipe Crapaud
@@ -145,6 +151,14 @@ public class Partie {
 		Partie.equipe[1] = equipe;
 	}
 
+	public LocalDate getDepartPartie() {
+		return departPartie;
+	}
+
+	public static void setDepartPartie(LocalDate debut) {
+		departPartie = debut;
+	}
+
 	/**
 	 * Récupère la ArrayList contenant toutes les configurations
 	 * qui ont été crées et celle par défaut
@@ -180,4 +194,6 @@ public class Partie {
 			currentPlateau.movePion(currentPlateau.getPlateau()[ligne][colonne]);
 		}
 	}
+	
+	
 }
