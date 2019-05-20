@@ -51,6 +51,18 @@ public class Plateau {
 		this.colonneConf = plateau[0].length;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public Pion[][] getPlateau() {
+		return plateau;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public Pion[][] getBatracien() {
 		return batracien;
 	}

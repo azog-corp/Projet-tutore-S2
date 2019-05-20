@@ -53,7 +53,7 @@ public class Ordinateur {
 		}
 	}
 	
-	public static void choixPionIA() {
-		
+	public static Pion choixPionIA() {
+		return null;
 	}
 }
