@@ -74,6 +74,9 @@ public class interfaceAppliController {
 
 	@FXML
 	private Label afficherConfig;
+	
+	@FXML
+	private Label listeConfigDispo;
 
 	@FXML
 	private Button btn_quittermenu;
@@ -240,7 +243,7 @@ public class interfaceAppliController {
 		reinitialiser();
 		razPartie();
 		configurationPartie.setVisible(true);
-		//TODO RAJOUTER AFFICHAGE LABEL
+		listeConfigDispo.setText(afficherConfigDispo());
 	}
 
 	/**
@@ -409,7 +412,7 @@ public class interfaceAppliController {
 		//Recuperer et valider coordonees
 		int ligne = 0,
 				colonne = 0;
-		if ((Partie.tourEquipe == 0 || Partie.tourEquipe == 1) &&  Partie.getChoixAdversaire() == 0) {
+		if ((Partie.tourEquipe == 0 ) || (Partie.tourEquipe == 1 && Partie.getChoixAdversaire() == 0)) {
 			Partie.currentPlateau.movePion(Partie.currentPlateau.getPlateau()[ligne][colonne]);
 		} else {
 			Partie.currentPlateau.movePion(Ordinateur.choixOrdi(Partie.currentPlateau, 
@@ -497,13 +500,17 @@ public class interfaceAppliController {
 		}
 	}
 
-	//TODO recuperer lentierete du arrys pour lafficher
-	//    public String afficherConfigDispo(){
-	//    	StringBuilder configs = new StringBuilder();
-	//    	for (int compteur = 0; compteur < Partie.listConfiguration.size(); compteur++) {
-	//    		configs.append(Partie.listConfiguration[compteur]);
-	//    	}
-	//    }
+
+	    public String afficherConfigDispo(){
+	    	StringBuilder configs = new StringBuilder();
+	    	for (int compteur = 0; compteur < Partie.listConfiguration.size(); compteur++) {
+	    		configs.append(compteur + " - ");
+	    		configs.append(Partie.listConfiguration.get(compteur).getNom());
+	    		configs.append("\n");
+	    	}
+	    	System.out.println(configs.toString());
+	    	return configs.toString();
+	    }
 
 
 	public void rafraichirJeu(String plateauJeu) {
