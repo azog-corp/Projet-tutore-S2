@@ -227,11 +227,41 @@
       </AnchorPane>
       <AnchorPane fx:id="configuration" layoutX="-3.0" layoutY="89.0" prefHeight="520.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
          <children>
+            <AnchorPane fx:id="supprimerConf" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css" />
+            <AnchorPane fx:id="placementConfig" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
+               <children>
+                  <Label layoutX="130.0" layoutY="34.0" text="PLACEMENT PION" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="afficherConfig" layoutX="42.0" layoutY="195.0" text="affichage du jeu" textFill="WHITE" />
+                  <Label layoutX="84.0" layoutY="138.0" text="Coordonees :" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tb_cord" layoutX="239.0" layoutY="138.0" prefHeight="27.0" prefWidth="167.0" />
+                  <Button fx:id="btn_validerConfig" layoutX="171.0" layoutY="447.0" mnemonicParsing="false" onMouseClicked="#enregistrerConfig" stylesheets="@application.css" text="Valider">
+                     <styleClass>
+                        <String fx:value="btnmenu" />
+                        <String fx:value="interactif" />
+                        <String fx:value="priobtn" />
+                     </styleClass>
+                  </Button>
+                  <Button layoutX="422.0" layoutY="139.0" mnemonicParsing="false" onMouseClicked="#actualiserConfig" stylesheets="@application.css" text="Ok">
+                     <styleClass>
+                        <String fx:value="priobtn" />
+                        <String fx:value="interactif" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </AnchorPane>
             <AnchorPane fx:id="initialisationConfig" layoutX="2.0" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
                <children>
                   <Label layoutX="31.0" layoutY="22.0" text="CREATION CONFIGURATION" textAlignment="CENTER" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="35.0" />
+                        <Font name="System Bold" size="34.0" />
                      </font>
                   </Label>
                   <TextField fx:id="tb_nomConf" layoutX="160.0" layoutY="160.0" prefHeight="35.0" prefWidth="201.0" styleClass="mygridStyle" stylesheets="@application.css" />
@@ -292,52 +322,6 @@
                         <String fx:value="priobtn" />
                      </styleClass>
                   </Button>
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="placementConfig" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
-               <children>
-                  <Label layoutX="130.0" layoutY="34.0" text="PLACEMENT PION" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="30.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="afficherConfig" layoutX="42.0" layoutY="195.0" text="affichage du jeu" textFill="WHITE" />
-                  <Label layoutX="84.0" layoutY="138.0" text="Coordonees :" textFill="WHITE">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="tb_cord" layoutX="239.0" layoutY="138.0" prefHeight="27.0" prefWidth="167.0" />
-                  <Button fx:id="btn_validerConfig" layoutX="171.0" layoutY="447.0" mnemonicParsing="false" onMouseClicked="#enregistrerConfig" stylesheets="@application.css" text="Valider">
-                     <styleClass>
-                        <String fx:value="btnmenu" />
-                        <String fx:value="interactif" />
-                        <String fx:value="priobtn" />
-                     </styleClass>
-                  </Button>
-                  <Button layoutX="422.0" layoutY="139.0" mnemonicParsing="false" onMouseClicked="#actualiserConfig" stylesheets="@application.css" text="Ok">
-                     <styleClass>
-                        <String fx:value="priobtn" />
-                        <String fx:value="interactif" />
-                     </styleClass>
-                  </Button>
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="supprimerConf" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
-               <children>
-                  <Label layoutX="37.0" layoutY="30.0" text="SUPPRESSION CONFIGURATION" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="31.0" />
-                     </font>
-                  </Label>
-                  <Button layoutX="164.0" layoutY="420.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="194.0" stylesheets="@application.css" text="Supprimer">
-                     <styleClass>
-                        <String fx:value="interactif" />
-                        <String fx:value="priobtn" />
-                     </styleClass>
-                  </Button>
-                  <TextField layoutX="186.0" layoutY="248.0" />
-                  <Label layoutX="190.0" layoutY="203.0" text="Configuration a supprimer" />
                </children>
             </AnchorPane>
          </children>
