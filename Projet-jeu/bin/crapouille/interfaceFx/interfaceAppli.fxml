@@ -120,18 +120,6 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="gameBoard" layoutY="85.0" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
-         <children>
-            <TextField fx:id="entreeUti" layoutX="11.0" layoutY="472.0" prefHeight="26.0" prefWidth="448.0" />
-            <Label fx:id="gameBoardString" layoutX="246.0" layoutY="252.0" textFill="WHITE" />
-            <Button fx:id="okGameBoard" layoutX="465.0" layoutY="472.0" mnemonicParsing="false" onMouseClicked="#actualiserJeu" prefHeight="25.0" prefWidth="42.0" stylesheets="@application.css" text="Ok">
-               <styleClass>
-                  <String fx:value="btnPlateau" />
-                  <String fx:value="priobtn" />
-               </styleClass>
-            </Button>
-         </children>
-      </AnchorPane>
       <AnchorPane fx:id="configuration" layoutX="-3.0" layoutY="89.0" prefHeight="520.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
          <children>
             <AnchorPane fx:id="initialisationConfig" layoutX="2.0" prefHeight="521.0" prefWidth="529.0" styleClass="AnchorPane" stylesheets="@application.css">
@@ -242,9 +230,21 @@
             <Line endX="100.0" layoutX="259.0" layoutY="93.0" startX="-100.0" />
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="gameBoard" layoutY="85.0" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
+         <children>
+            <TextField fx:id="entreeUti" layoutX="11.0" layoutY="472.0" prefHeight="26.0" prefWidth="448.0" />
+            <Label fx:id="gameBoardString" layoutX="246.0" layoutY="252.0" textFill="WHITE" />
+            <Button fx:id="okGameBoard" layoutX="465.0" layoutY="472.0" mnemonicParsing="false" onMouseClicked="#actualiserJeu" prefHeight="25.0" prefWidth="42.0" stylesheets="@application.css" text="Ok">
+               <styleClass>
+                  <String fx:value="btnPlateau" />
+                  <String fx:value="priobtn" />
+               </styleClass>
+            </Button>
+         </children>
+      </AnchorPane>
       <AnchorPane fx:id="configurationPartie" layoutY="88.0" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
          <children>
-            <Button fx:id="confirmationJouer" layoutX="74.0" layoutY="459.0" mnemonicParsing="false" onMouseClicked="#afficherJeu" prefHeight="30.0" prefWidth="156.0" stylesheets="@application.css" text="Valider">
+            <Button fx:id="confirmationJouer" layoutX="74.0" layoutY="459.0" mnemonicParsing="false" onMouseClicked="#showGameBoard" prefHeight="30.0" prefWidth="156.0" stylesheets="@application.css" text="Valider">
                <styleClass>
                   <String fx:value="priobtn" />
                   <String fx:value="interactif" />
