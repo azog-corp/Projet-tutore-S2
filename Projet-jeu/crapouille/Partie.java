@@ -149,6 +149,7 @@ public class Partie {
 	 * Récupère la ArrayList contenant toutes les configurations
 	 * qui ont été crées et celle par défaut
 	 */
+	@SuppressWarnings("unchecked")
 	public static void initConfig() {
 		try(ObjectInputStream fichier = new ObjectInputStream(new FileInputStream(CHEMIN_FICHIER))) {           
 			// lecture de l'objet contenu dans le fichier
@@ -170,6 +171,13 @@ public class Partie {
 			fichier.writeObject(listConfiguration);
 		}  catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public static void tourEntite(int ligne, int colonne) {
+		if (currentPlateau.pionValide(tourEquipe, ligne, colonne) && 
+				!currentPlateau.getPlateau()[ligne][colonne].isBloque()) {
+			currentPlateau.movePion(currentPlateau.getPlateau()[ligne][colonne]);
 		}
 	}
 }
