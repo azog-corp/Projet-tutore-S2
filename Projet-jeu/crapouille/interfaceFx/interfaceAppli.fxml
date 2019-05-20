@@ -294,23 +294,6 @@
                   </Button>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="supprimerConf" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
-               <children>
-                  <Label layoutX="37.0" layoutY="30.0" text="SUPPRESSION CONFIGURATION" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="31.0" />
-                     </font>
-                  </Label>
-                  <Button layoutX="164.0" layoutY="420.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="194.0" stylesheets="@application.css" text="Supprimer">
-                     <styleClass>
-                        <String fx:value="interactif" />
-                        <String fx:value="priobtn" />
-                     </styleClass>
-                  </Button>
-                  <TextField layoutX="186.0" layoutY="248.0" />
-                  <Label layoutX="190.0" layoutY="203.0" text="Configuration a supprimer" />
-               </children>
-            </AnchorPane>
             <AnchorPane fx:id="placementConfig" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
                <children>
                   <Label layoutX="130.0" layoutY="34.0" text="PLACEMENT PION" textFill="WHITE">
@@ -338,6 +321,23 @@
                         <String fx:value="interactif" />
                      </styleClass>
                   </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="supprimerConf" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
+               <children>
+                  <Label layoutX="37.0" layoutY="30.0" text="SUPPRESSION CONFIGURATION" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="31.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="164.0" layoutY="420.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="194.0" stylesheets="@application.css" text="Supprimer">
+                     <styleClass>
+                        <String fx:value="interactif" />
+                        <String fx:value="priobtn" />
+                     </styleClass>
+                  </Button>
+                  <TextField layoutX="186.0" layoutY="248.0" />
+                  <Label layoutX="190.0" layoutY="203.0" text="Configuration a supprimer" />
                </children>
             </AnchorPane>
          </children>
