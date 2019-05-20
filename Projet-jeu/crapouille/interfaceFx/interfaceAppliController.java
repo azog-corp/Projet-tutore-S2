@@ -30,159 +30,159 @@ import javafx.scene.text.Text;
 public class interfaceAppliController {
 
 	private String nom;
-	
+
 	@FXML
-    private AnchorPane gameBoard;
+	private AnchorPane gameBoard;
 
-    @FXML
-    private AnchorPane backpanel;
+	@FXML
+	private AnchorPane backpanel;
 
-    @FXML
-    private Button btn_jouermenu;
+	@FXML
+	private Button btn_jouermenu;
 
-    @FXML
-    private ImageView btn_createur;
+	@FXML
+	private ImageView btn_createur;
 
-    @FXML
-    private TextField tb_nbColonneConf;
+	@FXML
+	private TextField tb_nbColonneConf;
 
-    @FXML
-    private AnchorPane score;
+	@FXML
+	private AnchorPane score;
 
-    @FXML
-    private ToggleGroup lvlIA;
+	@FXML
+	private ToggleGroup lvlIA;
 
-    @FXML
-    private Button btn_quittermenu;
+	@FXML
+	private Button btn_quittermenu;
 
-    @FXML
-    private AnchorPane createur;
+	@FXML
+	private AnchorPane createur;
 
-    @FXML
-    private Button confirmationJouer;
+	@FXML
+	private Button confirmationJouer;
 
-    @FXML
-    private Label gameBoardString;
+	@FXML
+	private Label gameBoardString;
 
-    @FXML
-    private ImageView btn_quitter;
+	@FXML
+	private ImageView btn_quitter;
 
-    @FXML
-    private Button btn_ajouterConf;
+	@FXML
+	private Button btn_ajouterConf;
 
-    @FXML
-    private TextField choixConfig;
+	@FXML
+	private TextField choixConfig;
 
-    @FXML
-    private AnchorPane placementConfig;
+	@FXML
+	private AnchorPane placementConfig;
 
-    @FXML
-    private Button retourMenu;
+	@FXML
+	private Button retourMenu;
 
-    @FXML
-    private CheckBox chk_vsIA;
+	@FXML
+	private CheckBox chk_vsIA;
 
-    @FXML
-    private Label NOM;
+	@FXML
+	private Label NOM;
 
-    @FXML
-    private AnchorPane choixConf;
+	@FXML
+	private AnchorPane choixConf;
 
-    @FXML
-    private AnchorPane settingsBar;
+	@FXML
+	private AnchorPane settingsBar;
 
-    @FXML
-    private Button btn_aidemenu;
+	@FXML
+	private Button btn_aidemenu;
 
-    @FXML
-    private Label lb_lvlIa;
+	@FXML
+	private Label lb_lvlIa;
 
-    @FXML
-    private Label labelIA;
+	@FXML
+	private Label labelIA;
 
-    @FXML
-    private CheckBox chk_casseT;
+	@FXML
+	private CheckBox chk_casseT;
 
-    @FXML
-    private TextField tb_cord;
+	@FXML
+	private TextField tb_cord;
 
-    @FXML
-    private TextField entreeUti;
+	@FXML
+	private TextField entreeUti;
 
-    @FXML
-    private ImageView btn_configuration;
+	@FXML
+	private ImageView btn_configuration;
 
-    @FXML
-    private AnchorPane supprimerConf;
+	@FXML
+	private AnchorPane supprimerConf;
 
-    @FXML
-    private TextField tb_nomConf;
+	@FXML
+	private TextField tb_nomConf;
 
-    @FXML
-    private AnchorPane initialisationConfig;
+	@FXML
+	private AnchorPane initialisationConfig;
 
-    @FXML
-    private AnchorPane configuration;
+	@FXML
+	private AnchorPane configuration;
 
-    @FXML
-    private Button okGameBoard;
+	@FXML
+	private Button okGameBoard;
 
-    @FXML
-    private TextField tb_nbLigneConf;
+	@FXML
+	private TextField tb_nbLigneConf;
 
-    @FXML
-    private ImageView btn_mvp;
+	@FXML
+	private ImageView btn_mvp;
 
-    @FXML
-    private Button btn_supprimerConf;
+	@FXML
+	private Button btn_supprimerConf;
 
-    @FXML
-    private Button btn_validerTaille;
+	@FXML
+	private Button btn_validerTaille;
 
-    @FXML
-    private Label afficherConfig;
+	@FXML
+	private Label afficherConfig;
 
-    @FXML
-    private RadioButton lvl2;
+	@FXML
+	private RadioButton lvl2;
 
-    @FXML
-    private RadioButton lvl3;
+	@FXML
+	private RadioButton lvl3;
 
-    @FXML
-    private Button btn_validerConfig;
+	@FXML
+	private Button btn_validerConfig;
 
-    @FXML
-    private Label lb_nomJ1;
+	@FXML
+	private Label lb_nomJ1;
 
-    @FXML
-    private TextField tb_nomJ2;
+	@FXML
+	private TextField tb_nomJ2;
 
-    @FXML
-    private ImageView btn_acceuil;
+	@FXML
+	private ImageView btn_acceuil;
 
-    @FXML
-    private Label lb_nomJ2;
+	@FXML
+	private Label lb_nomJ2;
 
-    @FXML
-    private TextField tb_nomJ1;
+	@FXML
+	private TextField tb_nomJ1;
 
-    @FXML
-    private AnchorPane menu;
+	@FXML
+	private AnchorPane menu;
 
-    @FXML
-    private Label listeConfigDispo;
+	@FXML
+	private Label listeConfigDispo;
 
-    @FXML
-    private Label nomMVP;
+	@FXML
+	private Label nomMVP;
 
-    @FXML
-    private Text scoreMVP;
+	@FXML
+	private Text scoreMVP;
 
-    @FXML
-    private AnchorPane configurationPartie;
+	@FXML
+	private AnchorPane configurationPartie;
 
-    @FXML
-    private RadioButton lvl1;
+	@FXML
+	private RadioButton lvl1;
 
 	private String nomConfig;
 
@@ -190,11 +190,11 @@ public class interfaceAppliController {
 	 * --------------- FONCTION NAVIGATION MENU --------------- 
 	 * --------------------------------------------------------
 	 */
-	/**
-	 * Si l'utilisateur clique sur l'un des boutons pour quitter l'application
-	 * Appel cette fonction qui ferme l'application
-	 * @param click
-	 */
+	 /**
+	  * Si l'utilisateur clique sur l'un des boutons pour quitter l'application
+	  * Appel cette fonction qui ferme l'application
+	  * @param click
+	  */
 	@FXML
 	void leave(MouseEvent click) {
 		Platform.exit(); 
@@ -256,7 +256,7 @@ public class interfaceAppliController {
 		reinitialiser();
 		razPartie();
 		configurationPartie.setVisible(true);
-		listeConfigDispo.setText(afficherConfigDispo()); //TODO si pas de config crash donc creer une defaut
+		//listeConfigDispo.setText(afficherConfigDispo()); //TODO si pas de config crash donc creer une defaut
 	}
 
 	/**
@@ -264,13 +264,15 @@ public class interfaceAppliController {
 	 *  presentant le menu qui permet a l'utilisateur
 	 * de choisir entre supprimer et ajouter des configurations
 	 * lorsque celui ci clic sur la section configuration
-	 * TODO creer la page de selection + fonction navigation
 	 * @param Click clic de l'utilisateur declanchant l'appel de la fonction
 	 */
 	@FXML
 	void showConfiguration(MouseEvent Click) {
 		reinitialiser();
 		configuration.setVisible(true);
+		initialisationConfig.setVisible(false);
+		placementConfig.setVisible(false);
+		supprimerConf.setVisible(false);
 		choixConf.setVisible(true);
 	}
 
@@ -410,7 +412,7 @@ public class interfaceAppliController {
 			recupAdversaire();
 			recupModeJeu();
 			recupNomEquipe();
-			recupConfiguration();
+			recupConfigurationPartie();
 			reinitialiser();
 			gameBoard.setVisible(true);
 			rafraichirJeu(Partie.currentPlateau.toString());
@@ -446,7 +448,7 @@ public class interfaceAppliController {
 		}
 	}
 
-	private void recupConfiguration() {
+	private void recupConfigurationPartie() {
 		if (!choixConfig.getText().isEmpty()) {
 			//regarder s'il la configuration existe
 		} else { //Sinon choisi la configuration par defaut
@@ -514,16 +516,16 @@ public class interfaceAppliController {
 	}
 
 
-	    public String afficherConfigDispo(){
-	    	StringBuilder configs = new StringBuilder();
-	    	for (int compteur = 0; compteur < Partie.listConfiguration.size(); compteur++) {
-	    		configs.append(compteur + " - ");
-	    		configs.append(Partie.listConfiguration.get(compteur).getNom());
-	    		configs.append("\n");
-	    	}
-	    	System.out.println(configs.toString());
-	    	return configs.toString();
-	    }
+	public String afficherConfigDispo(){
+		StringBuilder configs = new StringBuilder();
+		for (int compteur = 0; compteur < Partie.listConfiguration.size(); compteur++) {
+			configs.append(compteur + " - ");
+			configs.append(Partie.listConfiguration.get(compteur).getNom());
+			configs.append("\n");
+		}
+		System.out.println(configs.toString());
+		return configs.toString();
+	}
 
 
 	public void rafraichirJeu(String plateauJeu) {
@@ -589,7 +591,7 @@ public class interfaceAppliController {
 			if (nbLigne < 20 && nbColonne < 20) {
 				Pion[][] newPlateau = new Pion[nbLigne][nbColonne];
 				Partie.currentPlateau = new Plateau(newPlateau);
-				recupNom();
+				// TODO recupConf();
 				showCreationConfig(); 
 			} else {
 				//TODO afficher label ne peut pas etre superieur a 20
@@ -631,14 +633,9 @@ public class interfaceAppliController {
 	 * (remplacera donc la configuration par defaut)
 	 * @return nom Le nom de la configuration qui sera cree
 	 */
-	public String recupNom() {
-		if (tb_nomConf.getText() != "") {
-			nom = tb_nomConf.getText();
-		} else {
-			nom = "Defaut";
-		}
-		return nom;
-	}
+	//	public int recupConf() { 
+	//		//TODO
+	//	}
 
 
 
@@ -663,7 +660,7 @@ public class interfaceAppliController {
 		choixConf.setVisible(false);
 		initialisationConfig.setVisible(true);
 	}
-	
+
 	@FXML
 	void showSupprimerConfig(MouseEvent Click) {
 		choixConf.setVisible(false);

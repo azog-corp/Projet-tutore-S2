@@ -212,7 +212,7 @@ public class Plateau {
 						plateauString.append("G|");
 					}
 				} else {
-					plateauString.append("  |");
+					plateauString.append("    |");
 				}
 			}
 		}
