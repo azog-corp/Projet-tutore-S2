@@ -33,3 +33,10 @@ Réunion projet 14/05/2019
 -	Travailler à deux (sur la meme machine)
 -	Il faut arreter de tout faire en CM
 -	Tout discuter en groupe
+
+Résumé de la réunion 17/05/2019
+
+-	Remettre la classe plateau en y mettant toutes les fonctions relatives au déplacement
+-	Mettre des fonctions
+-	Je sais pas quoi écrire
+-	Prochain RDV mercredi 8h30

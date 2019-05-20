@@ -318,11 +318,11 @@ public class interfaceAppliController {
     @FXML
     void actualiserJeu(MouseEvent Click) {
     	//Recuperer et valider coordonees
-    	Partie.movePion(Partie.plateau[ligne][colonne]); //joueur joue nbcoup++
+    	// Partie.movePion(Partie.plateau[ligne][colonne]); //joueur joue nbcoup++
     	//move pion doit changer le tour equipe
-    	if (Partie.tourEquipe == 2 && Partie.getChoixAdversaire() != 0) {
-    		Ordinateur.ChoixOrdinateur();
-    	} //Sinon rien faire et attendre que lautre equipe joue
+    	// if (Partie.tourEquipe == 2 && Partie.getChoixAdversaire() != 0) {
+    		// Ordinateur.ChoixOrdinateur();
+    	// } //Sinon rien faire et attendre que lautre equipe joue
     	rafraichirJeu(Partie.afficherJeu());
     }
     
@@ -342,9 +342,9 @@ public class interfaceAppliController {
     	}
     }
 	
-    private boolean chercherConfig(String config) {
-	Partie.listConfiguration.length
-    }
+    // private boolean chercherConfig(String config) {
+	// Partie.listConfiguration.length
+    // }
     
     private void recupNomEquipe() {
     	if (Partie.getChoixModeDeJeu() == 0 || Partie.getChoixAdversaire() != 0
@@ -486,7 +486,8 @@ public class interfaceAppliController {
     
     @FXML
     void enregistrerConfig(MouseEvent Click) {
-    	Configuration config = new Configuration (Partie.plateau, nomConfig);
+    	Partie.initConfig();
+    	Configuration config = new Configuration (Partie.plateau, "nomConfig");
     	Partie.listConfiguration.add(config);
     	Partie.saveConfig();
     }

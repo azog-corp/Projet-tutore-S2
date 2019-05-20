@@ -89,7 +89,7 @@ public class Partie {
 	 * Cette variable est enregistré lorsque le joueur
 	 * quitte l'application
 	 */
-	public static ArrayList<Configuration> listConfiguration;
+	public static ArrayList<Configuration> listConfiguration = new ArrayList<Configuration>();
 
 	/**
 	 * Configuration sur laquelle la partie en cours
@@ -109,7 +109,7 @@ public class Partie {
 	 * Chemin du fichier bin dans lequel est enregistré
 	 * la ArryList listConfiguration
 	 */
-	private final static String CHEMIN_FICHIER = "/crapouille/configuration/listeConfiguration.bin";
+	private final static String CHEMIN_FICHIER = "crapouille/configuration/listConfiguration.bin";
 
 	/**
 	 * @return le nom de l'équipe grenouille
