@@ -1,16 +1,23 @@
 package crapouille;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
+import java.io.Serializable;
+import java.time.LocalDate;
 
 import crapouille.configuration.Configuration;
 
-public class Partie {
+public class Partie implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5319670181574630732L;
+
+	/**
+	 * Lorsque le joueur lance la partie recupere le temps afin de determiner
+	 * le temps mis par le joueur pour resoudre le casse tete
+	 * Le temps est uniquement mesuree sur la config par defaut
+	 */
+	private static LocalDate departPartie;
 
 	/** Adversaire choisi par l'utilisateur
 	 * 0 = humain
@@ -28,13 +35,6 @@ public class Partie {
 	private static int choixModeDeJeu;
 
 	/**
-	 * Configuration choisie par l'utilisateur
-	 */
-	private static int choixConfig;
-
-
-
-	/**
 	 * Nom par défaut de l'équipe Crapaud
 	 */
 	private static String nomEquipe1Defaut = "Crapaud";
@@ -48,30 +48,16 @@ public class Partie {
 	 * Tableau contenant le nom des deux équipes
 	 * saisies par le ou les joueurs
 	 */
-	public static String[] equipe = new String[2];
+	private static String[] equipe = new String[2];
 
 	/**
-	 * ArrayList contenant toutes les configurations créé
-	 * ainsi que la configuration par défaut.
-	 * Cette variable est enregistré lorsque le joueur
-	 * quitte l'application
+	 * copie d'un plateau de listConfiguration
 	 */
-	public static ArrayList<Configuration> listConfiguration;
-
-	/**
-	 * Configuration sur laquelle la partie en cours
-	 * est joué
-	 */
-	public static Configuration currentConfig;
-
 	public static Plateau currentPlateau;
 
+	private static Plateau configPlateau;
 
-	/**
-	 * Chemin du fichier bin dans lequel est enregistré
-	 * la ArryList listConfiguration
-	 */
-	private final static String CHEMIN_FICHIER = "/crapouille/configuration/listeConfiguration.bin";
+	private static int tourEquipe = 0;
 
 	/**
 	 * @return le nom de l'équipe grenouille
@@ -119,14 +105,6 @@ public class Partie {
 	}
 
 	/**
-	 * @param choixConfig l'index de listConfiguration déésignant une
-	 * configuration spécifique
-	 */
-	public static void setChoixConfig(int choixConfig) {
-		Partie.choixConfig = choixConfig;
-	}
-
-	/**
 	 * @param equipe le nom de l'équipe grenouille
 	 */
 	public static void setEquipe1(String equipe) {
@@ -140,95 +118,49 @@ public class Partie {
 		Partie.equipe[1] = equipe;
 	}
 
-	/**
-	 * Récupère la ArrayList contenant toutes les configurations
-	 * qui ont été crées et celle par défaut
-	 */
-	@SuppressWarnings("unchecked")
-	public static void initConfig() {
-		try(ObjectInputStream fichier = new ObjectInputStream(new FileInputStream(CHEMIN_FICHIER))) {           
-			// lecture de l'objet contenu dans le fichier
-			listConfiguration = (ArrayList<Configuration>) fichier.readObject();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+	public static Plateau getCurrentPlateau() {
+		return currentPlateau;
+	}
+
+	//TODO JEAAAANNE O S'COUR
+	public static void setConfigPlateau(int ligne, int colonne) {
+		Pion[][] config = new Pion[ligne][colonne];
+		configPlateau = new Plateau(config);
+	}
+
+	public static Plateau getConfigPlateau() {
+		return configPlateau;
+	}
+
+	public static void setCasePlateau(Pion pion) {
+		configPlateau.setCase(pion);
+	}
+
+	public LocalDate getDepartPartie() {
+		return departPartie;
+	}
+
+	public static void setDepartPartie(LocalDate debut) {
+		departPartie = debut;
+	}
+
+	public static void loadConfig(int choixConfig) {
+		if (Configuration.listConfiguration.get(choixConfig) != null) {
+			currentPlateau = new Plateau(Configuration.listConfiguration.get(choixConfig).getConfigPlateau());
+			tourEquipe = 0;
 		}
 	}
 
-	/**
-	 * Sauvegarde en mémoire la ArrayList contenant toutes les configurations
-	 */
-	public static void saveConfig() {
-		try(ObjectOutputStream fichier = new ObjectOutputStream(new FileOutputStream(CHEMIN_FICHIER))) {
-			fichier.writeObject(listConfiguration); 
-		}  catch (IOException e) {
-			e.printStackTrace();
+	public static void tourEntite(int ligne, int colonne) {
+		if (choixModeDeJeu == 1) {
+			if (currentPlateau.pionValide(tourEquipe, ligne, colonne)) {
+				currentPlateau.movePion(currentPlateau.getPlateau()[ligne][colonne]);
+				tourEquipe = tourEquipe == 0 ? 1 : 0;
+			}
+		} else if ((currentPlateau.pionValide(0, ligne, colonne) || (currentPlateau.pionValide(0, ligne, colonne)))) {
+			currentPlateau.movePion(currentPlateau.getPlateau()[ligne][colonne]);
 		}
 	}
 
 
-
-
-
-
-
-
-
-
-
-	/**
-	 * Lance une partie entre un joueur et
-	 * soit un humain soit une IA
-	 * Leurs demande de nommÃ© leur Ã©quipe puis
-	 * Ã  tour de role il vont selectionner
-	 * un pion de leur Ã©quipe Ã  dÃ©placer jusqu'Ã  ce que l'une des
-	 * deux Ã©quipe soit bloquÃ©
-	 * @param ordinateur dÃ©termine si le joueur joue contre un humain
-	 * et si non, le niveau de difficultÃ© de l'IA
-	 */
-	public static int joueurVs(int tourEquipe, int ligne, int colonne) {
-		if (tourEquipe == 0) {
-			do {
-				tourEquipe = tourJoueur(tourEquipe, ligne, colonne);
-			} while(tourEquipe == 0);
-		} else {
-			do {
-				if (choixAdversaire == 0) {
-					tourEquipe = tourJoueur(tourEquipe, ligne, colonne);
-				} else {
-					Ordinateur.ChoixOrdinateur(choixAdversaire,currentPlateau);
-					tourEquipe--;
-				}
-			} while(tourEquipe == 1);
-		}
-		return tourEquipe;
-	}
-
-	/**
-	 * Effectue un tour en mode joueur vs entitÃ©
-	 * ou en mode casse tÃªte
-	 * @param tourEquipe le numÃ©ro de l'Ã©quipe.
-	 * Si Ã©gal Ã  2, alors c'est un casse tÃªte
-	 * @return
-	 */
-	public static int tourJoueur(int tourEquipe, int ligne, int colonne) {
-		// Si le pion existe et qu'il n'est pas bloquÃ©
-		if (pionValide(tourEquipe, ligne, colonne)) {
-			// On bouge le pion
-			movePion(currentPlateau[ligne][colonne]);
-			tourEquipe = tourEquipe == 0 ? 1 : 0;
-		}
-		return tourEquipe;
-	}
-
-	public static void casseTete(int ligne, int colonne) {
-		// Si la grenouille existe et qu'elle n'est pas bloquÃ©e
-		if (pionValide(0, ligne, colonne) || pionValide(1, ligne, colonne)) {
-			// On bouge le pion
-			movePion(currentPlateau[ligne][colonne]);
-		}
-	}
 }

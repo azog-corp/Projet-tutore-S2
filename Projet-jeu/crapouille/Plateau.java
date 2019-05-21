@@ -1,6 +1,13 @@
 package crapouille;
 
-public class Plateau {
+import java.io.Serializable;
+
+public class Plateau implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -106406785084186219L;
 
 	/**
 	 * Nombre Ligne max pour les configuraions
@@ -22,6 +29,8 @@ public class Plateau {
 	 */
 	private int colonneConf;
 	
+	private int nbPion = 0;
+	
 	/**
 	 * Tableau contenant toutes les instances de pions
 	 * présentent sur le plateau.
@@ -33,7 +42,7 @@ public class Plateau {
 	/**
 	 * Plateau de taille maximale
 	 */
-	private Pion[][] plateau = new Pion[LIGNE_MAX][COLONNE_MAX];
+	private Pion[][] plateau;
 
 	/**
 	 * Plateau sur lequel sont placés et déplacés
@@ -42,15 +51,41 @@ public class Plateau {
 	 * pas necessairement celles de la configuaration
 	 */
 	public Plateau(Pion[][] plateau) {
-		for (int x = 0 ; x < plateau.length ; x++) {
-			for (int y = 0 ; y < plateau[0].length ; y++) {
-				this.plateau[x][y] = plateau[x][y];
-			}
-		}
+		this.plateau = new Pion[LIGNE_MAX][COLONNE_MAX];
 		this.ligneConf = plateau.length;
 		this.colonneConf = plateau[0].length;
+		for (int x = 0 ; x < this.ligneConf ; x++) {
+			for (int y = 0 ; y < this.colonneConf ; y++) {
+				this.plateau[x][y] = plateau[x][y];
+				if (this.plateau[x][y] != null) {
+					this.nbPion++;
+				}
+			}
+		}
+		System.out.println(this.ligneConf);
+		System.out.println(this.colonneConf);
+		System.out.println(this.plateau.length);
+		System.out.println(this.plateau[0].length);
+		System.out.println(this.nbPion);
+		setBatracien();
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public Pion[][] getPlateau() {
+		return plateau;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Pion[][] getBatracien() {
+		return batracien;
+	}
+
 	/**
 	 * Fonction appelé lors de la création d'une configuration
 	 * et qui initialise l'attribut bloque de chaque pion
@@ -70,17 +105,19 @@ public class Plateau {
 	 * et qui met dans le tableau batracien toutes les
 	 * instances des pions grenouilles et crapaud
 	 */
-	public void setBatracien(int nbPion) {
-		this.batracien = new Pion[2][nbPion];
+	public void setBatracien() {
+		this.batracien = new Pion[2][this.nbPion/2];
 		int crapaud = 0,
 				grenouille = 0;
 		for (int x = 0 ; x < this.ligneConf ; x++) {
 			for (int y = 0 ; y < this.colonneConf ; y++) {
 				if (this.plateau[x][y] != null && this.plateau[x][y].isCrapaud()) {
-					this.batracien[1][crapaud] = this.plateau[x][y];
+					this.batracien[1][crapaud] = new Pion (x, y, true);
+					this.plateau[x][y] = this.batracien[1][crapaud];
 					crapaud++;
 				} else if (this.plateau[x][y] != null && !this.plateau[x][y].isCrapaud()) {
-					this.batracien[0][grenouille] = this.plateau[x][y];
+					this.batracien[0][grenouille] = new Pion (x, y, false);
+					this.plateau[x][y] = this.batracien[0][grenouille];
 					grenouille++;
 				}
 			}
@@ -196,7 +233,7 @@ public class Plateau {
 						plateauString.append("G|");
 					}
 				} else {
-					plateauString.append("  |");
+					plateauString.append("    |");
 				}
 			}
 		}

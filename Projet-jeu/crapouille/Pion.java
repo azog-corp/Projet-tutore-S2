@@ -4,13 +4,18 @@
  */
 package crapouille;
 
+import java.io.Serializable;
 
 /**
  * Class de l'objet Pion
  * @author Azog-corp
  */
-public class Pion {
+public class Pion implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2711928380072215024L;
 	private int ligne,         // indique sur qu'elle ligne ce situe le pion
 	colonne;       // indique sur qu'elle colonne ce situe le pion
 	private boolean crapaud,   // indique si le pîon est un crapaud ou non
