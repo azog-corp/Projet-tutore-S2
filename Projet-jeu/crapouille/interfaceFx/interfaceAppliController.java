@@ -200,6 +200,10 @@ public class interfaceAppliController {
 	private RadioButton lvl1;
 
 	private String nomConfig;
+	
+	@FXML
+	private Label configAdel;
+
 
 	/* --------------------------------------------------------
 	 * --------------- FONCTION NAVIGATION MENU --------------- 
