@@ -453,7 +453,7 @@ public class interfaceAppliController {
 				rafraichirJeu(Partie.getConfigPlateau().toString());
 			}
 		}
-		
+
 	}
 
 	private void recupModeJeu() {
@@ -584,7 +584,7 @@ public class interfaceAppliController {
 			//TODO afficher label ne peut pas etre vide
 		}
 	}
-	
+
 	/**
 	 * Recupere les coordonnees rentre par l'utilisateur lors de la creation 
 	 * de la config. Puis verifie leur validite (Type,taille,position...)
@@ -730,41 +730,17 @@ public class interfaceAppliController {
 		// - G03;09 -> entier entre 0 et 9 se marque 00, 01, ... 09
 		return (coordonneePion.charAt(NOM_PION) == 'G' ||
 				coordonneePion.charAt(NOM_PION) == 'C') &&
-				coordonneePion.charAt(1)
-				coordonneePion.charAt(index)
-				coordonneePion.charAt(DISTINCTION_1) == ';'
-						coordonneePion.charAt(index)
-						coordonneePion.charAt(index);
-	}
-
-	/**
-	 * Détermine si la coordonée de la ligne du pion est 
-	 * bien un entier positif nul
-	 * @param coordonneePion est la coordonné du poin sur le plateau
-	 * @return un booleen égal a vrai si ligne est un entier positif ou nul
-	 */
-	public static boolean ligneEstUnEntier(String coordonneePion) {
-		// Intervalle d'un entier positif ou nul 
-		return coordonneePion.charAt(PREMIER_CHIFFRE_LIGNE) >= '0' && 
-				coordonneePion.charAt(PREMIER_CHIFFRE_LIGNE) <= '9' &&
+				coordonneePion.charAt(DISTINCTION_1) == ';' &&
+				coordonneePion.charAt(PREMIER_CHIFFRE_LIGNE) >= '0' && 
+				coordonneePion.charAt(PREMIER_CHIFFRE_LIGNE) <= '1' &&
 				'0' <= coordonneePion.charAt(DEUXIEME_CHIFFRE_LIGNE) && 
-				coordonneePion.charAt(DEUXIEME_CHIFFRE_LIGNE) <= '9';
-	}
-
-	/**
-	 * Détermine si la coordonée de la colonne du pion est 
-	 * bien un entier positif nul 
-	 * @param coordonneePion est la coordonné du poin sur le plateau
-	 * @return un booleen égal a vrai si ligne est un entier positif ou nul
-	 */
-	public static boolean colonneEstUnEntier(String coordonneePion) {
-		// Intervalle d'un entier positif ou nul 
-		return '0' <= coordonneePion.charAt(PREMIER_CHIFFRE_COLONNE) && 
-				coordonneePion.charAt(PREMIER_CHIFFRE_COLONNE) <= '9' &&
+				coordonneePion.charAt(DEUXIEME_CHIFFRE_LIGNE) <= '9' &&
+				'0' <= coordonneePion.charAt(PREMIER_CHIFFRE_COLONNE) && 
+				coordonneePion.charAt(PREMIER_CHIFFRE_COLONNE) <= '1' &&
 				'0' <= coordonneePion.charAt(DEUXIEME_CHIFFRE_COLONNE) &&
 				coordonneePion.charAt(DEUXIEME_CHIFFRE_COLONNE) <= '9';
 	}
-	
+
 	/**
 	 * Détermine si le coordonée de la ligne du pion est correct  
 	 * avec le contrôle de la gestion d'erreur
