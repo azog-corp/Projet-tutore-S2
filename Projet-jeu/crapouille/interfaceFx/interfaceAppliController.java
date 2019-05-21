@@ -730,7 +730,11 @@ public class interfaceAppliController {
 		// - G03;09 -> entier entre 0 et 9 se marque 00, 01, ... 09
 		return (coordonneePion.charAt(NOM_PION) == 'G' ||
 				coordonneePion.charAt(NOM_PION) == 'C') &&
-				coordonneePion.charAt(DISTINCTION_1) == ';';
+				coordonneePion.charAt(1)
+				coordonneePion.charAt(index)
+				coordonneePion.charAt(DISTINCTION_1) == ';'
+						coordonneePion.charAt(index)
+						coordonneePion.charAt(index);
 	}
 
 	/**
