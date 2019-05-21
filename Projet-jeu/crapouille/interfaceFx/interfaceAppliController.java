@@ -203,6 +203,9 @@ public class interfaceAppliController {
 	
 	@FXML
 	private Label configAdel;
+	
+	@FXML
+	private Button deleteConfig;
 
 
 	/* --------------------------------------------------------
@@ -681,6 +684,7 @@ public class interfaceAppliController {
 
 	@FXML
 	void showSupprimerConfig(MouseEvent Click) {
+		configAdel.setText(afficherConfigDispo());
 		choixConf.setVisible(false);
 		supprimerConf.setVisible(true);
 	}
