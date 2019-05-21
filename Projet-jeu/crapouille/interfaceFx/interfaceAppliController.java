@@ -207,6 +207,7 @@ public class interfaceAppliController {
 	@FXML
 	private Button btn_supprimerConfig;
 	
+	@FXML
 	private TextField tb_idConf;
 
 
@@ -665,7 +666,7 @@ public class interfaceAppliController {
 		}
 	}
 	
-	public void deleteConfig() {
+	public void deleteConfig(MouseEvent Click) {
 		Configuration.listConfiguration.remove(Integer.parseInt(tb_idConf.getText()));
 	}
 
