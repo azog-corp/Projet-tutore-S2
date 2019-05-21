@@ -151,13 +151,25 @@ public class Partie implements Serializable {
 	}
 
 	public static void tourEntite(int ligne, int colonne) {
+		boolean tourFait = false;
 		if (choixModeDeJeu == 1) {
-			if (currentPlateau.pionValide(tourEquipe, ligne, colonne)) {
-				currentPlateau.movePion(currentPlateau.getPlateau()[ligne][colonne]);
+			if (currentPlateau.pionValide(tourEquipe, ligne, colonne) != null) {
+				currentPlateau.movePion(currentPlateau.pionValide(tourEquipe, ligne, colonne));
 				tourEquipe = tourEquipe == 0 ? 1 : 0;
+				tourFait = true;
+				System.out.println("yes");
 			}
-		} else if ((currentPlateau.pionValide(0, ligne, colonne) || (currentPlateau.pionValide(0, ligne, colonne)))) {
-			currentPlateau.movePion(currentPlateau.getPlateau()[ligne][colonne]);
+			if (choixAdversaire != 0 && tourFait) {
+				Ordinateur.choixOrdi(currentPlateau, 
+						currentPlateau.getBatracien(), 
+						choixAdversaire);
+				tourEquipe = tourEquipe == 0 ? 1 : 0;
+				System.out.println("yess");
+			}
+		} else if ((currentPlateau.pionValide(0, ligne, colonne) != null)) {
+			currentPlateau.movePion(currentPlateau.pionValide(0, ligne, colonne));
+		} else if ((currentPlateau.pionValide(0, ligne, colonne) != null)) {
+			currentPlateau.movePion(currentPlateau.pionValide(1, ligne, colonne));
 		}
 	}
 
