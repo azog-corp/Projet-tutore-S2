@@ -470,7 +470,7 @@ public class interfaceAppliController {
 	private void recupConfigurationPartie() {
 		if (!choixConfig.getText().isEmpty()) {
 			//regarder s'il la configuration existe
-			Partie.loadConfig(0);
+			Partie.loadConfig(0); //TODO a changer apres
 		} else { //Sinon choisi la configuration par defaut
 			Partie.loadConfig(0);
 		}
@@ -575,7 +575,7 @@ public class interfaceAppliController {
 			//TODO verifier que il sagit bien de nombre
 			int nbLigne = Integer.parseInt(tb_nbLigneConf.getText());
 			int nbColonne = Integer.parseInt( tb_nbColonneConf.getText());
-			if (nbLigne < 20 && nbColonne < 20 && nbLigne <= 0 && nbColonne <= 0) {
+			if (nbLigne < 20 && nbColonne < 20 && nbLigne > 0 && nbColonne > 0) {
 				Partie.setConfigPlateau(nbLigne, nbColonne);
 				// TODO recupConf();
 				showCreationConfig(); 
