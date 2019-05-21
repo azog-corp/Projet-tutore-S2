@@ -157,15 +157,15 @@ public class Plateau implements Serializable {
 	 * @param colonne du potentiel pio
 	 * @return true si le pion existe et appartient à la vonne équipe
 	 */
-	public boolean pionValide(int equipe, int ligne, int colonne) {
+	public Pion pionValide(int equipe, int ligne, int colonne) {
 		for (int x = 0 ; x < this.batracien[0].length ; x++) {
 			if (this.batracien[equipe][x].getLigne() == ligne && 
 					this.batracien[equipe][x].getColonne() == colonne &&
 					!this.plateau[ligne][colonne].isBloque()) {
-				return true;
+				return this.batracien[equipe][x];
 			}
 		}
-		return false;
+		return null;
 	}
 	
 	/**
