@@ -450,7 +450,8 @@ public class interfaceAppliController {
 				colonnePion--;
 				lignePion--;
 				Partie.tourEntite(lignePion, colonnePion);
-				rafraichirJeu(Partie.getConfigPlateau().toString());
+				System.out.println(Partie.getCurrentPlateau().toString());
+				rafraichirJeu(Partie.getCurrentPlateau().toString());
 			}
 		}
 
@@ -469,6 +470,7 @@ public class interfaceAppliController {
 	private void recupConfigurationPartie() {
 		if (!choixConfig.getText().isEmpty()) {
 			//regarder s'il la configuration existe
+			Partie.loadConfig(0);
 		} else { //Sinon choisi la configuration par defaut
 			Partie.loadConfig(0);
 		}

@@ -42,7 +42,7 @@ public class Plateau implements Serializable {
 	/**
 	 * Plateau de taille maximale
 	 */
-	private Pion[][] plateau = new Pion[LIGNE_MAX][COLONNE_MAX];
+	private Pion[][] plateau;
 
 	/**
 	 * Plateau sur lequel sont placés et déplacés
@@ -51,6 +51,7 @@ public class Plateau implements Serializable {
 	 * pas necessairement celles de la configuaration
 	 */
 	public Plateau(Pion[][] plateau) {
+		this.plateau = new Pion[LIGNE_MAX][COLONNE_MAX];
 		this.ligneConf = plateau.length;
 		this.colonneConf = plateau[0].length;
 		for (int x = 0 ; x < this.ligneConf ; x++) {
@@ -101,16 +102,16 @@ public class Plateau implements Serializable {
 	 * instances des pions grenouilles et crapaud
 	 */
 	public void setBatracien() {
-		this.batracien = new Pion[2][this.nbPion];
+		this.batracien = new Pion[2][this.nbPion/2];
 		int crapaud = 0,
 				grenouille = 0;
 		for (int x = 0 ; x < this.ligneConf ; x++) {
 			for (int y = 0 ; y < this.colonneConf ; y++) {
 				if (this.plateau[x][y] != null && this.plateau[x][y].isCrapaud()) {
-					this.batracien[1][crapaud] = this.plateau[x][y];
+					this.batracien[1][crapaud] = this.plateau[x][y];					System.out.println(this.batracien[1][crapaud].getLigne()+ " " + this.batracien[1][crapaud].getColonne());
 					crapaud++;
 				} else if (this.plateau[x][y] != null && !this.plateau[x][y].isCrapaud()) {
-					this.batracien[0][grenouille] = this.plateau[x][y];
+					this.batracien[0][grenouille] = this.plateau[x][y];					System.out.println(this.batracien[0][crapaud].getLigne()+ " " + this.batracien[0][crapaud].getColonne());
 					grenouille++;
 				}
 			}
