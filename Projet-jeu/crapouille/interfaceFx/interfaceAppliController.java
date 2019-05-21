@@ -205,7 +205,9 @@ public class interfaceAppliController {
 	private Label configAdel;
 	
 	@FXML
-	private Button deleteConfig;
+	private Button btn_supprimerConfig;
+	
+	private TextField tb_idConf;
 
 
 	/* --------------------------------------------------------
@@ -656,6 +658,10 @@ public class interfaceAppliController {
 		} else {
 			nomConfig = tb_nomConf.getText();
 		}
+	}
+	
+	public void deleteConfig() {
+		Configuration.listConfiguration.remove(Integer.parseInt(tb_idConf.getText()));
 	}
 
 
