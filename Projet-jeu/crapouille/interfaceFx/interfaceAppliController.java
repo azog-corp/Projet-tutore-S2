@@ -463,6 +463,11 @@ public class interfaceAppliController {
 				rafraichirJeu(Partie.getCurrentPlateau().toString());
 			}
 		}
+		if (Partie.currentPlateau.victoire(0) || 
+				Partie.currentPlateau.victoire(1) || 
+				Partie.currentPlateau.victoire(1)) {
+			//TODO bravo
+		}
 	}
 
 	private void recupModeJeu() {
