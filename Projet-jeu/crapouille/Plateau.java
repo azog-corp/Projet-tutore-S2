@@ -62,6 +62,10 @@ public class Plateau implements Serializable {
 				}
 			}
 		}
+		System.out.println(this.ligneConf);
+		System.out.println(this.colonneConf);
+		System.out.println(this.plateau.length);
+		System.out.println(this.plateau[0].length);
 		System.out.println(this.nbPion);
 		setBatracien();
 	}
@@ -108,10 +112,12 @@ public class Plateau implements Serializable {
 		for (int x = 0 ; x < this.ligneConf ; x++) {
 			for (int y = 0 ; y < this.colonneConf ; y++) {
 				if (this.plateau[x][y] != null && this.plateau[x][y].isCrapaud()) {
-					this.batracien[1][crapaud] = this.plateau[x][y];
+					this.batracien[1][crapaud] = new Pion (x, y, true);
+					this.plateau[x][y] = this.batracien[1][crapaud];
 					crapaud++;
 				} else if (this.plateau[x][y] != null && !this.plateau[x][y].isCrapaud()) {
-					this.batracien[0][grenouille] = this.plateau[x][y];
+					this.batracien[0][grenouille] = new Pion (x, y, false);
+					this.plateau[x][y] = this.batracien[0][grenouille];
 					grenouille++;
 				}
 			}
