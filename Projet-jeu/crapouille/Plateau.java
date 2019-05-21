@@ -1,6 +1,13 @@
 package crapouille;
 
-public class Plateau {
+import java.io.Serializable;
+
+public class Plateau implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -106406785084186219L;
 
 	/**
 	 * Nombre Ligne max pour les configuraions

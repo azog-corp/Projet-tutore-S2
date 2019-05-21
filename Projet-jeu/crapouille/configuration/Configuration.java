@@ -3,14 +3,20 @@
  */
 package crapouille.configuration;
 
+import java.io.Serializable;
+
 import crapouille.Pion;
 
 /**
  * @author Azog
  *
  */
-public class Configuration {
+public class Configuration implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3678759492095676152L;
 	private Pion[][] configPlateau;
 	private String nom;
 	

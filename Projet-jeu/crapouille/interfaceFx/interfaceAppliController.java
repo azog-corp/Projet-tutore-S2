@@ -425,16 +425,9 @@ public class interfaceAppliController {
 	@FXML
 	void actualiserJeu(MouseEvent Click) {
 		//Recuperer et valider coordonees
-		int ligne = 0,
-				colonne = 0;
-		if ((Partie.tourEquipe == 0 ) || (Partie.tourEquipe == 1 && Partie.getChoixAdversaire() == 0)) {
-			Partie.currentPlateau.movePion(Partie.currentPlateau.getPlateau()[ligne][colonne]);
-		} else {
-			Partie.currentPlateau.movePion(Ordinateur.choixOrdi(Partie.currentPlateau, 
-					Partie.currentPlateau.getBatracien(), 
-					Partie.getChoixAdversaire()));
-		}
-		Partie.tourEquipe = Partie.tourEquipe == 0 ? 1 : 0;
+		int ligne,
+		colonne;
+		Partie.tourEntite(ligne, colonne);
 		rafraichirJeu(Partie.currentPlateau.toString());
 	}
 

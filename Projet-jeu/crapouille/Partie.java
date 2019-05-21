@@ -6,13 +6,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 import crapouille.configuration.Configuration;
 
-public class Partie {
+public class Partie implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5319670181574630732L;
+
 	/**
 	 * Lorsque le joueur lance la partie recupere le temps afin de determiner
 	 * le temps mis par le joueur pour resoudre le casse tete
@@ -36,11 +42,6 @@ public class Partie {
 	private static int choixModeDeJeu;
 
 	/**
-	 * Configuration choisie par l'utilisateur
-	 */
-	private static int choixConfig;
-
-	/**
 	 * Nom par défaut de l'équipe Crapaud
 	 */
 	private static String nomEquipe1Defaut = "Crapaud";
@@ -54,7 +55,7 @@ public class Partie {
 	 * Tableau contenant le nom des deux équipes
 	 * saisies par le ou les joueurs
 	 */
-	public static String[] equipe = new String[2];
+	private static String[] equipe = new String[2];
 
 	/**
 	 * ArrayList contenant toutes les configurations créé
@@ -62,20 +63,20 @@ public class Partie {
 	 * Cette variable est enregistré lorsque le joueur
 	 * quitte l'application
 	 */
-	public static ArrayList<Configuration> listConfiguration = new ArrayList<Configuration>();
+	private static ArrayList<Configuration> listConfiguration = new ArrayList<Configuration>();
 
 	/**
 	 * Configuration sur laquelle la partie en cours
 	 * est joué
 	 */
-	public static Configuration currentConfig;
+	private static Configuration currentConfig;
 
 	/**
-	 * 
+	 * copie d'un plateau de listConfiguration
 	 */
-	public static Plateau currentPlateau;
+	private static Plateau currentPlateau;
 	
-	public static int tourEquipe = 0;
+	private static int tourEquipe = 0;
 
 
 	/**
@@ -130,14 +131,6 @@ public class Partie {
 	}
 
 	/**
-	 * @param choixConfig l'index de listConfiguration déésignant une
-	 * configuration spécifique
-	 */
-	public static void setChoixConfig(int choixConfig) {
-		Partie.choixConfig = choixConfig;
-	}
-
-	/**
 	 * @param equipe le nom de l'équipe grenouille
 	 */
 	public static void setEquipe1(String equipe) {
@@ -188,10 +181,15 @@ public class Partie {
 		}
 	}
 	
+	public static void loadConfig(int choixConfig) {
+		currentPlateau = new Plateau(listConfiguration.get(choixConfig).getConfigPlateau());
+		tourEquipe = 0;
+	}
+	
 	public static void tourEntite(int ligne, int colonne) {
-		if (currentPlateau.pionValide(tourEquipe, ligne, colonne) && 
-				!currentPlateau.getPlateau()[ligne][colonne].isBloque()) {
+		if (currentPlateau.pionValide(tourEquipe, ligne, colonne)) {
 			currentPlateau.movePion(currentPlateau.getPlateau()[ligne][colonne]);
+			tourEquipe = tourEquipe == 0 ? 1 : 0;
 		}
 	}
 	
