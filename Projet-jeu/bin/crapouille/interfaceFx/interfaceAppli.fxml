@@ -330,7 +330,7 @@
                         <Font name="System Bold" size="31.0" />
                      </font>
                   </Label>
-                  <Button layoutX="164.0" layoutY="420.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="194.0" stylesheets="@application.css" text="Supprimer">
+                  <Button fx:id="deleteConfig" layoutX="164.0" layoutY="420.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="194.0" stylesheets="@application.css" text="Supprimer">
                      <styleClass>
                         <String fx:value="interactif" />
                         <String fx:value="priobtn" />
