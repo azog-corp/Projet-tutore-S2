@@ -666,7 +666,7 @@ public class interfaceAppliController {
 		}
 	}
 	
-	public void deleteConfig() {
+	public void deleteConfig(MouseEvent Click) {
 		Configuration.listConfiguration.remove(Integer.parseInt(tb_idConf.getText()));
 	}
 
