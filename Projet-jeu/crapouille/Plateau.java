@@ -108,10 +108,10 @@ public class Plateau implements Serializable {
 		for (int x = 0 ; x < this.ligneConf ; x++) {
 			for (int y = 0 ; y < this.colonneConf ; y++) {
 				if (this.plateau[x][y] != null && this.plateau[x][y].isCrapaud()) {
-					this.batracien[1][crapaud] = this.plateau[x][y];					System.out.println(this.batracien[1][crapaud].getLigne()+ " " + this.batracien[1][crapaud].getColonne());
+					this.batracien[1][crapaud] = this.plateau[x][y];
 					crapaud++;
 				} else if (this.plateau[x][y] != null && !this.plateau[x][y].isCrapaud()) {
-					this.batracien[0][grenouille] = this.plateau[x][y];					System.out.println(this.batracien[0][crapaud].getLigne()+ " " + this.batracien[0][crapaud].getColonne());
+					this.batracien[0][grenouille] = this.plateau[x][y];
 					grenouille++;
 				}
 			}
