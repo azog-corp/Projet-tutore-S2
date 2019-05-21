@@ -70,7 +70,7 @@ public class Partie implements Serializable {
 	 */
 	private static Plateau currentPlateau;
 	
-	private static Pion[][] configPlateau;
+	private static Plateau configPlateau;
 
 	private static int tourEquipe = 0;
 
@@ -144,11 +144,16 @@ public class Partie implements Serializable {
 	}
 
 	public static void setConfigPlateau(int ligne, int colonne) {
-		configPlateau = new Pion[ligne][colonne];
+		Pion[][] config = new Pion[ligne][colonne];
+		configPlateau = new Plateau(config);
+	}
+	
+	public static Plateau getConfigPlateau() {
+		return configPlateau;
 	}
 	
 	public static void setCasePlateau(Pion pion) {
-		configPlateau = new Pion[ligne][colonne];
+		configPlateau.setCase(pion);
 	}
 
 	public LocalDate getDepartPartie() {

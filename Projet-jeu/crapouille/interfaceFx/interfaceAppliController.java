@@ -29,6 +29,21 @@ import javafx.scene.text.Text;
 
 public class interfaceAppliController {
 
+
+	/** initialisation des constantes min/max lignes et colonnes */
+	final static int MIN_LIGNE_PION = 1;
+	final static int MAX_LIGNE_PION = 20;
+	final static int MIN_COLONNE_PION = 1;
+	final static int MAX_COLONNE_PION = 20;
+
+	/** initialisation des constantes du format : XXX;XX */
+	final static int NOM_PION = 0; // position du 1er chiffre de l'entier
+	final static int PREMIER_CHIFFRE_LIGNE = 1; // position du 1er chiffre de l'entier
+	final static int DEUXIEME_CHIFFRE_LIGNE = 2; // position du 2e chiffre de l'entier
+	final static int DISTINCTION_1 = 3; // position du 1er caractère ';' dans le format parcourut
+	final static int PREMIER_CHIFFRE_COLONNE = 4; // position du 1er chiffre de l'entier
+	final static int DEUXIEME_CHIFFRE_COLONNE = 5; // position du 2e chiffre de l'entier
+
 	private String nom;
 
 	@FXML
@@ -190,11 +205,11 @@ public class interfaceAppliController {
 	 * --------------- FONCTION NAVIGATION MENU --------------- 
 	 * --------------------------------------------------------
 	 */
-	 /**
-	  * Si l'utilisateur clique sur l'un des boutons pour quitter l'application
-	  * Appel cette fonction qui ferme l'application
-	  * @param click
-	  */
+	/**
+	 * Si l'utilisateur clique sur l'un des boutons pour quitter l'application
+	 * Appel cette fonction qui ferme l'application
+	 * @param click
+	 */
 	@FXML
 	void leave(MouseEvent click) {
 		Platform.exit(); 
@@ -256,7 +271,7 @@ public class interfaceAppliController {
 		reinitialiser();
 		razPartie();
 		configurationPartie.setVisible(true);
-		//listeConfigDispo.setText(afficherConfigDispo()); //TODO si pas de config crash donc creer une defaut
+		listeConfigDispo.setText(afficherConfigDispo());
 	}
 
 	/**
@@ -424,11 +439,21 @@ public class interfaceAppliController {
 
 	@FXML
 	void actualiserJeu(MouseEvent Click) {
-		//Recuperer et valider coordonees
-		int ligne = 0,
-		colonne = 0;
-		Partie.tourEntite(ligne, colonne);
-		rafraichirJeu(Partie.getCurrentPlateau().toString());
+		if (!entreeUti.getText().isEmpty()) {
+			String cord = entreeUti.getText();
+			System.out.println(formatEstValide(cord));
+			if (cord.length() == 6 && formatEstValide(cord)) {
+				int colonnePion = recupereColonnePion(cord);
+				int lignePion = recupereLignePion(cord);
+				System.out.println(colonnePion);
+				System.out.println(lignePion);
+				colonnePion--;
+				lignePion--;
+				Partie.tourEntite(lignePion, colonnePion);
+				rafraichirJeu(Partie.getConfigPlateau().toString());
+			}
+		}
+		
 	}
 
 	private void recupModeJeu() {
@@ -542,27 +567,22 @@ public class interfaceAppliController {
 	 */
 	@FXML
 	void actualiserConfig(MouseEvent Click) {
-		StringBuilder recupCord = new StringBuilder(); 
-		recupCord.append(tb_cord.getText().charAt(1));
-		recupCord.append(tb_cord.getText().charAt(2));
-		int lignePion = Integer.parseInt(recupCord.toString());
-		StringBuilder recupCo = new StringBuilder(); 
-		recupCo.append(tb_cord.getText().charAt(4));
-		recupCo.append(tb_cord.getText().charAt(5));
-		//TODO Verifier que coordonnees valides ligne et colonne pas superieur et > 0
-		//TODO verifier char 3 -
-		//TODO verifier char c ou g si tous bon continuer	
-		int colonnePion = Integer.parseInt(recupCo.toString());
-		colonnePion--;
-		lignePion--;
-		Pion placementUti = new Pion(lignePion,colonnePion,
-				recupType(tb_cord.getText().charAt(0)));
-		//TODO SI TOUS TEST VALIDE +1 nb Pion
-		Partie.setCasePlateau(placementUti);
-		rafraichirConf(Partie.getCurrentPlateau().toString());
-		//TODO verifier coordonnees  
-		//TODO si correct modifier plateau + actualiser plateau
-		//TODO msg Box pas correct
+		if (!tb_cord.getText().isEmpty()) {
+			String cord = tb_cord.getText();
+			System.out.println(formatEstValide(cord));
+			if (cord.length() == 5 && formatEstValide(cord)) {
+				int colonnePion = recupereColonnePion(cord);
+				int lignePion = recupereLignePion(cord);
+				System.out.println(colonnePion);
+				System.out.println(lignePion);
+				colonnePion--;
+				lignePion--;
+				Pion placementUti = new Pion(lignePion,colonnePion,
+						recupType(tb_cord.getText().charAt(0)));
+				Partie.getCurrentPlateau().setCase(placementUti);
+				rafraichirConf(Partie.getCurrentPlateau().toString());
+			}
+		}
 	}
 
 	/**
@@ -672,4 +692,131 @@ public class interfaceAppliController {
 		placementConfig.setVisible(true);
 		rafraichirConf(Partie.getCurrentPlateau().toString());
 	}
+
+
+
+	/* ------------------------------------------------------
+	 * --------------- FONCTION DE CONTRÔLE D'ERREUR / FORMAT / VALIDITE--------------- 
+	 * ------------------------------------------------------
+	 */
+
+	/*--------------- FONCTION ESTVALIDE  ---------------*/
+
+	/**
+	 * Détermine si les lignes du plateau sont corrects 
+	 * avec le contrôle de la gestion d'erreur
+	 * @param colonnePlateau est le nombre de colonnes pour le plateau 
+	 * @param lignePlateau est le nombre de lignes pour le plateau
+	 * @return un booleen égal a vrai si les lignes et colonnes plateau sont corrects
+	 */
+	public static boolean configPlateauEstValide(int lignePlateau, int colonnePlateau) {
+		// vérification des entier ligne et colonne avec 
+		// la taille max et min d'une ligne et d'une colonne
+		// limité a 20 (pour l'instant)
+		if ((MIN_LIGNE_PION <= lignePlateau || lignePlateau <= MAX_LIGNE_PION) 
+				&& (MIN_COLONNE_PION <= colonnePlateau || colonnePlateau <=MAX_COLONNE_PION) ) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Détermine si le format du coordonné du pion (du type G13;19-08;10 ou C13;19-18;10) 
+	 * est correct
+	 * @param coordonneePion est la coordonné du poin sur le plateau  
+	 * @return un booleen vrai si le formmat est valide
+	 */
+	public static boolean formatEstValide(String coordonneePion) {
+		// Ex: C ou G13;19
+		// Vérification format dans les cas suivants :
+		// - C13;19
+		// - G03;09 -> entier entre 0 et 9 se marque 00, 01, ... 09
+		if (coordonneePion.charAt(NOM_PION) == 'G' || coordonneePion.charAt(NOM_PION) == 'C'
+				&& coordonneePion.charAt(DISTINCTION_1) == ';') {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Détermine si la coordonée de la ligne du pion est 
+	 * bien un entier positif nul
+	 * @param coordonneePion est la coordonné du poin sur le plateau
+	 * @return un booleen égal a vrai si ligne est un entier positif ou nul
+	 */
+	public static boolean ligneEstUnEntier(String coordonneePion) {
+		// Intervalle d'un entier positif ou nul 
+		if (('0' <= coordonneePion.charAt(PREMIER_CHIFFRE_LIGNE) && coordonneePion.charAt(PREMIER_CHIFFRE_LIGNE) <= '9')
+				&& ('0' <= coordonneePion.charAt(DEUXIEME_CHIFFRE_LIGNE) && coordonneePion.charAt(DEUXIEME_CHIFFRE_LIGNE) <= '9')) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Détermine si la coordonée de la colonne du pion est 
+	 * bien un entier positif nul 
+	 * @param coordonneePion est la coordonné du poin sur le plateau
+	 * @return un booleen égal a vrai si ligne est un entier positif ou nul
+	 */
+	public static boolean colonneEstUnEntier(String coordonneePion) {
+		// Intervalle d'un entier positif ou nul 
+		if (('0' <= coordonneePion.charAt(PREMIER_CHIFFRE_COLONNE) && coordonneePion.charAt(PREMIER_CHIFFRE_COLONNE) <= '9')
+				&& ('0' <= coordonneePion.charAt(DEUXIEME_CHIFFRE_COLONNE) && coordonneePion.charAt(DEUXIEME_CHIFFRE_COLONNE) <= '9')) {
+			return true;
+		}
+		return false;
+	}
+	/**
+	 * Détermine si le coordonée de la ligne du pion est correct  
+	 * avec le contrôle de la gestion d'erreur
+	 * @param coordonneePion est le coordonné du poin sur le plateau 
+	 * @return un booleen égal a vrai si la ligne du pion est correct
+	 */
+	public static boolean lignePionEstValide(int lignePion) {
+		// La ligne du pion doit être supérieur à 0 et inférieure ou égal à 20  
+		if (MIN_LIGNE_PION <= lignePion && lignePion <= MAX_LIGNE_PION) { 
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Détermine si la coordonée de la colonne du pion est correct  
+	 * avec le contrôle de la gestion d'erreur
+	 * @param coordonneePion est le coordonné du poin sur le plateau 
+	 * @return un booleen égal a vrai si la colonne du pion est correct
+	 */
+	public static boolean colonnePionEstValide(int colonnePion) {
+		// La ligne du pion doit être supérieur à 0 et inférieure ou égal à 20  
+		if (MIN_COLONNE_PION <= colonnePion && colonnePion <= MAX_COLONNE_PION ) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Récupère le coordonnée de la ligne du pion
+	 * @param coordonneePion est le coordonné du poin sur le plateau 
+	 * @return le coordonné de la ligne du pion
+	 */
+	public static int recupereLignePion(String coordonneePion) {
+		StringBuilder lignePion = new StringBuilder(); // lignePion est le coordonnée de la ligne du pion
+		lignePion.append(coordonneePion.charAt(1));
+		lignePion.append(coordonneePion.charAt(2));
+		return Integer.parseInt(lignePion.toString());
+	}
+
+	/**
+	 * Récupère le coordonnée de la colonne du pion
+	 * @param coordonneePion est le coordonné du poin sur le plateau 
+	 * @return la coordonné de la colonne du pion
+	 */
+	public static int recupereColonnePion(String coordonneePion) {
+		StringBuilder colonnePion = new StringBuilder(); // lignePion est le coordonnée de la ligne du pion
+		colonnePion.append(coordonneePion.charAt(4));
+		colonnePion.append(coordonneePion.charAt(5));
+		return Integer.parseInt(colonnePion.toString());
+	}
+
 }
