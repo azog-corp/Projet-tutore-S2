@@ -330,13 +330,13 @@
                         <Font name="System Bold" size="31.0" />
                      </font>
                   </Label>
-                  <Button fx:id="deleteConfig" layoutX="164.0" layoutY="420.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="194.0" stylesheets="@application.css" text="Supprimer">
+                  <Button fx:id="btn_supprimerConfig" layoutX="165.0" layoutY="420.0" mnemonicParsing="false" onMouseClicked="#deleteConfig" prefHeight="60.0" prefWidth="194.0" stylesheets="@application.css" text="Supprimer">
                      <styleClass>
                         <String fx:value="interactif" />
                         <String fx:value="priobtn" />
                      </styleClass>
                   </Button>
-                  <TextField layoutX="186.0" layoutY="248.0" />
+                  <TextField fx:id="tb_idConf" layoutX="187.0" layoutY="248.0" />
                   <Label fx:id="configAdel" layoutX="190.0" layoutY="203.0" text="Configuration a supprimer" />
                </children>
             </AnchorPane>

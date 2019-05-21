@@ -45,6 +45,7 @@ public class interfaceAppliController {
 	final static int DEUXIEME_CHIFFRE_COLONNE = 5; // position du 2e chiffre de l'entier
 
 	private String nom;
+	private String nomConfig;
 
 	@FXML
 	private AnchorPane gameBoard;
@@ -84,6 +85,9 @@ public class interfaceAppliController {
 
 	@FXML
 	private Button btn_ajouterConf;
+
+	@FXML
+	private TextField tb_idConf;
 
 	@FXML
 	private TextField choixConfig;
@@ -164,6 +168,9 @@ public class interfaceAppliController {
 	private RadioButton lvl3;
 
 	@FXML
+	private Button btn_supprimerConfig;
+
+	@FXML
 	private Button btn_validerConfig;
 
 	@FXML
@@ -180,6 +187,9 @@ public class interfaceAppliController {
 
 	@FXML
 	private TextField tb_nomJ1;
+
+	@FXML
+	private Label configAdel;
 
 	@FXML
 	private AnchorPane menu;
@@ -199,16 +209,7 @@ public class interfaceAppliController {
 	@FXML
 	private RadioButton lvl1;
 
-	private String nomConfig;
-	
-	@FXML
-	private Label configAdel;
-	
-	@FXML
-	private Button btn_supprimerConfig;
-	
-	@FXML
-	private TextField tb_idConf;
+
 
 
 	/* --------------------------------------------------------
@@ -666,8 +667,11 @@ public class interfaceAppliController {
 		}
 	}
 	
-	public void deleteConfig(MouseEvent Click) {
-		Configuration.listConfiguration.remove(Integer.parseInt(tb_idConf.getText()));
+	@FXML
+	void deleteConfig(MouseEvent Click) {
+		int index = Integer.parseInt(tb_idConf.getText());
+		Configuration.listConfiguration.remove(index);
+		System.out.println("Clic");
 	}
 
 
