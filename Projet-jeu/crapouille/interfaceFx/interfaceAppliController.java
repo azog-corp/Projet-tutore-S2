@@ -207,6 +207,7 @@ public class interfaceAppliController {
 	@FXML
 	private Button btn_supprimerConfig;
 	
+	@FXML
 	private TextField tb_idConf;
 
 
