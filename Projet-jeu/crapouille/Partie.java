@@ -54,7 +54,7 @@ public class Partie implements Serializable {
 	 * copie d'un plateau de listConfiguration
 	 */
 	public static Plateau currentPlateau;
-	
+
 	private static Plateau configPlateau;
 
 	private static int tourEquipe = 0;
@@ -122,15 +122,16 @@ public class Partie implements Serializable {
 		return currentPlateau;
 	}
 
+	//TODO JEAAAANNE O S'COUR
 	public static void setConfigPlateau(int ligne, int colonne) {
 		Pion[][] config = new Pion[ligne][colonne];
 		configPlateau = new Plateau(config);
 	}
-	
+
 	public static Plateau getConfigPlateau() {
 		return configPlateau;
 	}
-	
+
 	public static void setCasePlateau(Pion pion) {
 		configPlateau.setCase(pion);
 	}
@@ -151,9 +152,13 @@ public class Partie implements Serializable {
 	}
 
 	public static void tourEntite(int ligne, int colonne) {
-		if (currentPlateau.pionValide(tourEquipe, ligne, colonne)) {
+		if (choixModeDeJeu == 1) {
+			if (currentPlateau.pionValide(tourEquipe, ligne, colonne)) {
+				currentPlateau.movePion(currentPlateau.getPlateau()[ligne][colonne]);
+				tourEquipe = tourEquipe == 0 ? 1 : 0;
+			}
+		} else if ((currentPlateau.pionValide(0, ligne, colonne) || (currentPlateau.pionValide(0, ligne, colonne)))) {
 			currentPlateau.movePion(currentPlateau.getPlateau()[ligne][colonne]);
-			tourEquipe = tourEquipe == 0 ? 1 : 0;
 		}
 	}
 
