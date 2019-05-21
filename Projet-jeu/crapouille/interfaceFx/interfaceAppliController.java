@@ -423,7 +423,7 @@ public class interfaceAppliController {
 
 	@FXML
 	void showGameBoard(MouseEvent Click) {
-		if(chercherConfig()) {
+		if(configValide()) {
 			recupAdversaire();
 			recupModeJeu();
 			recupNomEquipe();
@@ -472,27 +472,24 @@ public class interfaceAppliController {
 			Partie.setChoixModeDeJeu(1);
 		}
 	}
-
+	//RECUPERE LE NUMERO DE LA CONFIG puis set
 	private void recupConfigurationPartie() {
-		if (!choixConfig.getText().isEmpty()) {
-			//regarder s'il la configuration existe
-			Partie.loadConfig(0); //TODO a changer apres
-		} else { //Sinon choisi la configuration par defaut
-			Partie.loadConfig(0);
-		}
+		int nConfig = Integer.parseInt(choixConfig.getText());
+		Partie.loadConfig(nConfig);
 	}
 	//TODO
-	private boolean chercherConfig() {
+	private boolean configValide() {
 		if (!choixConfig.getText().isEmpty()) {
-			int config = Integer.parseInt(choixConfig.getText());
-			if (config < 0) { //TODO  || config > Partie.listConfiguration.length-1
-				return false;
-			} else {
-				return true;
+			String configString = choixConfig.getText();
+			if (configString.charAt(0) >= '0' && configString.charAt(0) <= '9' 
+					&& configString.length() == 1) {
+				int config = Integer.parseInt(choixConfig.getText());
+				if (config >= 0 && config < Configuration.listConfiguration.size()) {
+					return true;
+				}
 			}
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	private void recupNomEquipe() {
@@ -630,9 +627,6 @@ public class interfaceAppliController {
 	 */
 	@FXML
 	void enregistrerConfig(MouseEvent Click) {
-		if (nomConfig.length() == 0) {
-			nomConfig = "Défaut";
-		}
 		Configuration config = new Configuration (Partie.getConfigPlateau().getPlateau(), nomConfig);
 		Configuration.listConfiguration.add(config);
 	}
@@ -656,9 +650,13 @@ public class interfaceAppliController {
 	 * (remplacera donc la configuration par defaut)
 	 * @return nom Le nom de la configuration qui sera cree
 	 */
-	//	public int recupConf() { 
-	//		//TODO
-	//	}
+	public void recupConf() {
+		if (!tb_nomConf.getText().isEmpty()) {
+			nomConfig = "Defaut";
+		} else {
+			nomConfig = tb_nomConf.getText();
+		}
+	}
 
 
 
