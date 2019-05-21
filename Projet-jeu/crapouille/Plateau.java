@@ -29,6 +29,8 @@ public class Plateau implements Serializable {
 	 */
 	private int colonneConf;
 	
+	private int nbPion = 0;
+	
 	/**
 	 * Tableau contenant toutes les instances de pions
 	 * présentent sur le plateau.
@@ -49,13 +51,18 @@ public class Plateau implements Serializable {
 	 * pas necessairement celles de la configuaration
 	 */
 	public Plateau(Pion[][] plateau) {
-		for (int x = 0 ; x < plateau.length ; x++) {
-			for (int y = 0 ; y < plateau[0].length ; y++) {
-				this.plateau[x][y] = plateau[x][y];
-			}
-		}
 		this.ligneConf = plateau.length;
 		this.colonneConf = plateau[0].length;
+		for (int x = 0 ; x < this.ligneConf ; x++) {
+			for (int y = 0 ; y < this.colonneConf ; y++) {
+				this.plateau[x][y] = plateau[x][y];
+				if (this.plateau[x][y] != null) {
+					this.nbPion++;
+				}
+			}
+		}
+		System.out.println(this.nbPion);
+		setBatracien();
 	}
 	
 	/**
@@ -93,8 +100,8 @@ public class Plateau implements Serializable {
 	 * et qui met dans le tableau batracien toutes les
 	 * instances des pions grenouilles et crapaud
 	 */
-	public void setBatracien(int nbPion) {
-		this.batracien = new Pion[2][nbPion];
+	public void setBatracien() {
+		this.batracien = new Pion[2][this.nbPion];
 		int crapaud = 0,
 				grenouille = 0;
 		for (int x = 0 ; x < this.ligneConf ; x++) {

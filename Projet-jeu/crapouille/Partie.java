@@ -1,14 +1,7 @@
 package crapouille;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 import crapouille.configuration.Configuration;
 
@@ -58,27 +51,13 @@ public class Partie implements Serializable {
 	private static String[] equipe = new String[2];
 
 	/**
-	 * ArrayList contenant toutes les configurations créé
-	 * ainsi que la configuration par défaut.
-	 * Cette variable est enregistré lorsque le joueur
-	 * quitte l'application
-	 */
-	public static ArrayList<Configuration> listConfiguration = new ArrayList<Configuration>();
-
-	/**
 	 * copie d'un plateau de listConfiguration
 	 */
-	private static Plateau currentPlateau;
+	public static Plateau currentPlateau;
 	
 	private static Plateau configPlateau;
 
 	private static int tourEquipe = 0;
-
-	/**
-	 * Chemin du fichier bin dans lequel est enregistré
-	 * la ArryList listConfiguration
-	 */
-	private final static String CHEMIN_FICHIER = "crapouille/configuration/listConfiguration.bin";
 
 	/**
 	 * @return le nom de l'équipe grenouille
@@ -164,45 +143,11 @@ public class Partie implements Serializable {
 		departPartie = debut;
 	}
 
-	/**
-	 * Récupère la ArrayList contenant toutes les configurations
-	 * qui ont été crées et celle par défaut
-	 */
-	@SuppressWarnings("unchecked")
-	public static void initConfig() {
-		try(ObjectInputStream fichier = new ObjectInputStream(new FileInputStream(CHEMIN_FICHIER))) {           
-			// lecture de l'objet contenu dans le fichier
-			listConfiguration = (ArrayList<Configuration>) fichier.readObject();
-			currentPlateau = new Plateau(listConfiguration.get(0).getConfigPlateau());
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Sauvegarde en mémoire la ArrayList contenant toutes les configurations
-	 */
-	public static void saveConfig() {
-		try(ObjectOutputStream fichier = new ObjectOutputStream(new FileOutputStream(CHEMIN_FICHIER))) {
-			fichier.writeObject(listConfiguration);
-		}  catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
 	public static void loadConfig(int choixConfig) {
-		if (listConfiguration.get(choixConfig) != null) {
-			currentPlateau = new Plateau(listConfiguration.get(choixConfig).getConfigPlateau());
+		if (Configuration.listConfiguration.get(choixConfig) != null) {
+			currentPlateau = new Plateau(Configuration.listConfiguration.get(choixConfig).getConfigPlateau());
 			tourEquipe = 0;
 		}
-	}
-	
-	public static void createConfig() {
-		
 	}
 
 	public static void tourEntite(int ligne, int colonne) {

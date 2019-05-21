@@ -536,9 +536,9 @@ public class interfaceAppliController {
 
 	public String afficherConfigDispo(){
 		StringBuilder configs = new StringBuilder();
-		for (int compteur = 0; compteur < Partie.listConfiguration.size(); compteur++) {
+		for (int compteur = 0; compteur < Configuration.listConfiguration.size(); compteur++) {
 			configs.append(compteur + " - ");
-			configs.append(Partie.listConfiguration.get(compteur).getNom());
+			configs.append(Configuration.listConfiguration.get(compteur).getNom());
 			configs.append("\n");
 		}
 		System.out.println(configs.toString());
@@ -624,7 +624,7 @@ public class interfaceAppliController {
 	void enregistrerConfig(MouseEvent Click) {
 		Configuration config = new Configuration (Partie.getConfigPlateau().getPlateau(), nomConfig);
 		//TODO a corriger
-		Partie.listConfiguration.add(config);
+		Configuration.listConfiguration.add(config);
 	}
 
 	/**
