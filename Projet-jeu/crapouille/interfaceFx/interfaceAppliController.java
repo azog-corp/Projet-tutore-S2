@@ -600,7 +600,7 @@ public class interfaceAppliController {
 		if (!tb_cord.getText().isEmpty()) {
 			String cord = tb_cord.getText();
 			System.out.println(formatEstValide(cord));
-			if (cord.length() == 5 && formatEstValide(cord)) {
+			if (cord.length() == 6 && formatEstValide(cord)) {
 				int colonnePion = recupereColonnePion(cord);
 				int lignePion = recupereLignePion(cord);
 				System.out.println(colonnePion);
@@ -625,7 +625,6 @@ public class interfaceAppliController {
 	@FXML
 	void enregistrerConfig(MouseEvent Click) {
 		Configuration config = new Configuration (Partie.getConfigPlateau().getPlateau(), nomConfig);
-		//TODO a corriger
 		Configuration.listConfiguration.add(config);
 	}
 
