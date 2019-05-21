@@ -558,34 +558,6 @@ public class interfaceAppliController {
 	/*--------------- FONCTION CONFIGURATION: TRAITEMENT DONNEES / AVANCEMENT  ---------------*/
 
 	/**
-	 * Recupere les coordonnees rentre par l'utilisateur lors de la creation 
-	 * de la config. Puis verifie leur validite (Type,taille,position...)
-	 * Si toutes les donnees sont valides ajoute au plateau le pion demander
-	 * par l'utilisateur. Puis actualise le plateau sur l'interface
-	 * Pour afficher le changement
-	 * @param Click clic de l'utilisateur declanchant l'appel de la fonction
-	 */
-	@FXML
-	void actualiserConfig(MouseEvent Click) {
-		if (!tb_cord.getText().isEmpty()) {
-			String cord = tb_cord.getText();
-			System.out.println(formatEstValide(cord));
-			if (cord.length() == 5 && formatEstValide(cord)) {
-				int colonnePion = recupereColonnePion(cord);
-				int lignePion = recupereLignePion(cord);
-				System.out.println(colonnePion);
-				System.out.println(lignePion);
-				colonnePion--;
-				lignePion--;
-				Pion placementUti = new Pion(lignePion,colonnePion,
-						recupType(tb_cord.getText().charAt(0)));
-				Partie.getCurrentPlateau().setCase(placementUti);
-				rafraichirConf(Partie.getCurrentPlateau().toString());
-			}
-		}
-	}
-
-	/**
 	 * Fonction qui est declenche lorsque l'utilisateur souhaite acceder 
 	 * au plateau pour le placement des pions lors de la creation d'une config
 	 * Celle ci verifie que toutes les donnees rentre par l'utilisateur 
@@ -612,6 +584,34 @@ public class interfaceAppliController {
 			//TODO afficher label ne peut pas etre vide
 		}
 	}
+	
+	/**
+	 * Recupere les coordonnees rentre par l'utilisateur lors de la creation 
+	 * de la config. Puis verifie leur validite (Type,taille,position...)
+	 * Si toutes les donnees sont valides ajoute au plateau le pion demander
+	 * par l'utilisateur. Puis actualise le plateau sur l'interface
+	 * Pour afficher le changement
+	 * @param Click clic de l'utilisateur declanchant l'appel de la fonction
+	 */
+	@FXML
+	void actualiserConfig(MouseEvent Click) {
+		if (!tb_cord.getText().isEmpty()) {
+			String cord = tb_cord.getText();
+			System.out.println(formatEstValide(cord));
+			if (cord.length() == 5 && formatEstValide(cord)) {
+				int colonnePion = recupereColonnePion(cord);
+				int lignePion = recupereLignePion(cord);
+				System.out.println(colonnePion);
+				System.out.println(lignePion);
+				colonnePion--;
+				lignePion--;
+				Pion placementUti = new Pion(lignePion,colonnePion,
+						recupType(tb_cord.getText().charAt(0)));
+				Partie.getConfigPlateau().setCase(placementUti);
+				rafraichirConf(Partie.getConfigPlateau().toString());
+			}
+		}
+	}
 
 	/**
 	 * Fonction qui enregistre la configuration lorsque l'utilisateur souhaite
@@ -622,7 +622,7 @@ public class interfaceAppliController {
 	 */
 	@FXML
 	void enregistrerConfig(MouseEvent Click) {
-		Configuration config = new Configuration (Partie.getCurrentPlateau().getPlateau(), nomConfig);
+		Configuration config = new Configuration (Partie.getConfigPlateau().getPlateau(), nomConfig);
 		//TODO a corriger
 		Partie.listConfiguration.add(config);
 	}
@@ -713,11 +713,8 @@ public class interfaceAppliController {
 		// vérification des entier ligne et colonne avec 
 		// la taille max et min d'une ligne et d'une colonne
 		// limité a 20 (pour l'instant)
-		if ((MIN_LIGNE_PION <= lignePlateau || lignePlateau <= MAX_LIGNE_PION) 
-				&& (MIN_COLONNE_PION <= colonnePlateau || colonnePlateau <=MAX_COLONNE_PION) ) {
-			return true;
-		}
-		return false;
+		return (MIN_LIGNE_PION <= lignePlateau || lignePlateau <= MAX_LIGNE_PION) &&
+				(MIN_COLONNE_PION <= colonnePlateau || colonnePlateau <=MAX_COLONNE_PION);
 	}
 
 	/**
@@ -731,11 +728,9 @@ public class interfaceAppliController {
 		// Vérification format dans les cas suivants :
 		// - C13;19
 		// - G03;09 -> entier entre 0 et 9 se marque 00, 01, ... 09
-		if (coordonneePion.charAt(NOM_PION) == 'G' || coordonneePion.charAt(NOM_PION) == 'C'
-				&& coordonneePion.charAt(DISTINCTION_1) == ';') {
-			return true;
-		}
-		return false;
+		return (coordonneePion.charAt(NOM_PION) == 'G' ||
+				coordonneePion.charAt(NOM_PION) == 'C') &&
+				coordonneePion.charAt(DISTINCTION_1) == ';';
 	}
 
 	/**
@@ -746,11 +741,10 @@ public class interfaceAppliController {
 	 */
 	public static boolean ligneEstUnEntier(String coordonneePion) {
 		// Intervalle d'un entier positif ou nul 
-		if (('0' <= coordonneePion.charAt(PREMIER_CHIFFRE_LIGNE) && coordonneePion.charAt(PREMIER_CHIFFRE_LIGNE) <= '9')
-				&& ('0' <= coordonneePion.charAt(DEUXIEME_CHIFFRE_LIGNE) && coordonneePion.charAt(DEUXIEME_CHIFFRE_LIGNE) <= '9')) {
-			return true;
-		}
-		return false;
+		return coordonneePion.charAt(PREMIER_CHIFFRE_LIGNE) >= '0' && 
+				coordonneePion.charAt(PREMIER_CHIFFRE_LIGNE) <= '9' &&
+				'0' <= coordonneePion.charAt(DEUXIEME_CHIFFRE_LIGNE) && 
+				coordonneePion.charAt(DEUXIEME_CHIFFRE_LIGNE) <= '9';
 	}
 
 	/**
@@ -761,12 +755,12 @@ public class interfaceAppliController {
 	 */
 	public static boolean colonneEstUnEntier(String coordonneePion) {
 		// Intervalle d'un entier positif ou nul 
-		if (('0' <= coordonneePion.charAt(PREMIER_CHIFFRE_COLONNE) && coordonneePion.charAt(PREMIER_CHIFFRE_COLONNE) <= '9')
-				&& ('0' <= coordonneePion.charAt(DEUXIEME_CHIFFRE_COLONNE) && coordonneePion.charAt(DEUXIEME_CHIFFRE_COLONNE) <= '9')) {
-			return true;
-		}
-		return false;
+		return '0' <= coordonneePion.charAt(PREMIER_CHIFFRE_COLONNE) && 
+				coordonneePion.charAt(PREMIER_CHIFFRE_COLONNE) <= '9' &&
+				'0' <= coordonneePion.charAt(DEUXIEME_CHIFFRE_COLONNE) &&
+				coordonneePion.charAt(DEUXIEME_CHIFFRE_COLONNE) <= '9';
 	}
+	
 	/**
 	 * Détermine si le coordonée de la ligne du pion est correct  
 	 * avec le contrôle de la gestion d'erreur
@@ -775,10 +769,7 @@ public class interfaceAppliController {
 	 */
 	public static boolean lignePionEstValide(int lignePion) {
 		// La ligne du pion doit être supérieur à 0 et inférieure ou égal à 20  
-		if (MIN_LIGNE_PION <= lignePion && lignePion <= MAX_LIGNE_PION) { 
-			return true;
-		}
-		return false;
+		return MIN_LIGNE_PION <= lignePion && lignePion < MAX_LIGNE_PION;
 	}
 
 	/**
@@ -789,10 +780,7 @@ public class interfaceAppliController {
 	 */
 	public static boolean colonnePionEstValide(int colonnePion) {
 		// La ligne du pion doit être supérieur à 0 et inférieure ou égal à 20  
-		if (MIN_COLONNE_PION <= colonnePion && colonnePion <= MAX_COLONNE_PION ) {
-			return true;
-		}
-		return false;
+		return MIN_COLONNE_PION <= colonnePion && colonnePion < MAX_COLONNE_PION;
 	}
 
 	/**
