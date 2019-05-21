@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import crapouille.configuration.Configuration;
 
 public class Partie implements Serializable {
-	
+
 	/**
 	 * 
 	 */
@@ -63,21 +63,16 @@ public class Partie implements Serializable {
 	 * Cette variable est enregistré lorsque le joueur
 	 * quitte l'application
 	 */
-	private static ArrayList<Configuration> listConfiguration = new ArrayList<Configuration>();
-
-	/**
-	 * Configuration sur laquelle la partie en cours
-	 * est joué
-	 */
-	private static Configuration currentConfig;
+	public static ArrayList<Configuration> listConfiguration = new ArrayList<Configuration>();
 
 	/**
 	 * copie d'un plateau de listConfiguration
 	 */
 	private static Plateau currentPlateau;
 	
-	private static int tourEquipe = 0;
+	private static Pion[][] configPlateau;
 
+	private static int tourEquipe = 0;
 
 	/**
 	 * Chemin du fichier bin dans lequel est enregistré
@@ -144,6 +139,18 @@ public class Partie implements Serializable {
 		Partie.equipe[1] = equipe;
 	}
 
+	public static Plateau getCurrentPlateau() {
+		return currentPlateau;
+	}
+
+	public static void setConfigPlateau(int ligne, int colonne) {
+		configPlateau = new Pion[ligne][colonne];
+	}
+	
+	public static void setCasePlateau(Pion pion) {
+		configPlateau = new Pion[ligne][colonne];
+	}
+
 	public LocalDate getDepartPartie() {
 		return departPartie;
 	}
@@ -161,6 +168,7 @@ public class Partie implements Serializable {
 		try(ObjectInputStream fichier = new ObjectInputStream(new FileInputStream(CHEMIN_FICHIER))) {           
 			// lecture de l'objet contenu dans le fichier
 			listConfiguration = (ArrayList<Configuration>) fichier.readObject();
+			currentPlateau = new Plateau(listConfiguration.get(0).getConfigPlateau());
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -180,18 +188,24 @@ public class Partie implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void loadConfig(int choixConfig) {
-		currentPlateau = new Plateau(listConfiguration.get(choixConfig).getConfigPlateau());
-		tourEquipe = 0;
+		if (listConfiguration.get(choixConfig) != null) {
+			currentPlateau = new Plateau(listConfiguration.get(choixConfig).getConfigPlateau());
+			tourEquipe = 0;
+		}
 	}
 	
+	public static void createConfig() {
+		
+	}
+
 	public static void tourEntite(int ligne, int colonne) {
 		if (currentPlateau.pionValide(tourEquipe, ligne, colonne)) {
 			currentPlateau.movePion(currentPlateau.getPlateau()[ligne][colonne]);
 			tourEquipe = tourEquipe == 0 ? 1 : 0;
 		}
 	}
-	
-	
+
+
 }

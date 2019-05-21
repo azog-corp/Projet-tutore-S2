@@ -415,7 +415,7 @@ public class interfaceAppliController {
 			recupConfigurationPartie();
 			reinitialiser();
 			gameBoard.setVisible(true);
-			rafraichirJeu(Partie.currentPlateau.toString());
+			rafraichirJeu(Partie.getCurrentPlateau().toString());
 			Partie.setDepartPartie(LocalDate.now());
 		}
 		//Lancer chrono
@@ -425,10 +425,10 @@ public class interfaceAppliController {
 	@FXML
 	void actualiserJeu(MouseEvent Click) {
 		//Recuperer et valider coordonees
-		int ligne,
-		colonne;
+		int ligne = 0,
+		colonne = 0;
 		Partie.tourEntite(ligne, colonne);
-		rafraichirJeu(Partie.currentPlateau.toString());
+		rafraichirJeu(Partie.getCurrentPlateau().toString());
 	}
 
 	private void recupModeJeu() {
@@ -445,7 +445,7 @@ public class interfaceAppliController {
 		if (!choixConfig.getText().isEmpty()) {
 			//regarder s'il la configuration existe
 		} else { //Sinon choisi la configuration par defaut
-			Partie.currentPlateau = new Plateau(Partie.listConfiguration.get(0).getConfigPlateau());
+			Partie.loadConfig(0);
 		}
 	}
 	//TODO
@@ -558,8 +558,8 @@ public class interfaceAppliController {
 		Pion placementUti = new Pion(lignePion,colonnePion,
 				recupType(tb_cord.getText().charAt(0)));
 		//TODO SI TOUS TEST VALIDE +1 nb Pion
-		Partie.currentPlateau.setCase(placementUti);
-		rafraichirConf(Partie.currentPlateau.toString());
+		Partie.setCasePlateau(placementUti);
+		rafraichirConf(Partie.getCurrentPlateau().toString());
 		//TODO verifier coordonnees  
 		//TODO si correct modifier plateau + actualiser plateau
 		//TODO msg Box pas correct
@@ -581,9 +581,8 @@ public class interfaceAppliController {
 			//TODO verifier que il sagit bien de nombre
 			int nbLigne = Integer.parseInt(tb_nbLigneConf.getText());
 			int nbColonne = Integer.parseInt( tb_nbColonneConf.getText());
-			if (nbLigne < 20 && nbColonne < 20) {
-				Pion[][] newPlateau = new Pion[nbLigne][nbColonne];
-				Partie.currentPlateau = new Plateau(newPlateau);
+			if (nbLigne < 20 && nbColonne < 20 && nbLigne <= 0 && nbColonne <= 0) {
+				Partie.setConfigPlateau(nbLigne, nbColonne);
 				// TODO recupConf();
 				showCreationConfig(); 
 			} else {
@@ -603,7 +602,7 @@ public class interfaceAppliController {
 	 */
 	@FXML
 	void enregistrerConfig(MouseEvent Click) {
-		Configuration config = new Configuration (Partie.currentPlateau.getPlateau(), nomConfig);
+		Configuration config = new Configuration (Partie.getCurrentPlateau().getPlateau(), nomConfig);
 		//TODO a corriger
 		Partie.listConfiguration.add(config);
 	}
@@ -671,6 +670,6 @@ public class interfaceAppliController {
 	void showCreationConfig() { 
 		initialisationConfig.setVisible(false);
 		placementConfig.setVisible(true);
-		rafraichirConf(Partie.currentPlateau.toString());
+		rafraichirConf(Partie.getCurrentPlateau().toString());
 	}
 }
