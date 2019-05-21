@@ -454,7 +454,6 @@ public class interfaceAppliController {
 				rafraichirJeu(Partie.getCurrentPlateau().toString());
 			}
 		}
-
 	}
 
 	private void recupModeJeu() {
@@ -624,6 +623,9 @@ public class interfaceAppliController {
 	 */
 	@FXML
 	void enregistrerConfig(MouseEvent Click) {
+		if (nomConfig.length() == 0) {
+			nomConfig = "Défaut";
+		}
 		Configuration config = new Configuration (Partie.getConfigPlateau().getPlateau(), nomConfig);
 		Configuration.listConfiguration.add(config);
 	}
@@ -691,7 +693,7 @@ public class interfaceAppliController {
 	void showCreationConfig() { 
 		initialisationConfig.setVisible(false);
 		placementConfig.setVisible(true);
-		rafraichirConf(Partie.getCurrentPlateau().toString());
+		rafraichirConf(Partie.getConfigPlateau().toString());
 	}
 
 
