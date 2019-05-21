@@ -452,6 +452,12 @@ public class interfaceAppliController {
 				Partie.tourEntite(lignePion, colonnePion);
 				System.out.println(Partie.getCurrentPlateau().toString());
 				rafraichirJeu(Partie.getCurrentPlateau().toString());
+				if (Partie.getChoixAdversaire() != 0) {
+					Ordinateur.choixOrdi(Partie.currentPlateau, 
+							Partie.currentPlateau.getBatracien(), 
+							Partie.getChoixAdversaire());
+					rafraichirJeu(Partie.getCurrentPlateau().toString());
+				}
 			}
 		}
 
@@ -624,6 +630,9 @@ public class interfaceAppliController {
 	 */
 	@FXML
 	void enregistrerConfig(MouseEvent Click) {
+		if (nomConfig.length() == 0) {
+			nomConfig = "Défaut";
+		}
 		Configuration config = new Configuration (Partie.getConfigPlateau().getPlateau(), nomConfig);
 		Configuration.listConfiguration.add(config);
 	}
@@ -691,7 +700,7 @@ public class interfaceAppliController {
 	void showCreationConfig() { 
 		initialisationConfig.setVisible(false);
 		placementConfig.setVisible(true);
-		rafraichirConf(Partie.getCurrentPlateau().toString());
+		rafraichirConf(Partie.getConfigPlateau().toString());
 	}
 
 

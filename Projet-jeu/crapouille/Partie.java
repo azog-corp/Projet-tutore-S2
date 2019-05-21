@@ -23,7 +23,6 @@ public class Partie implements Serializable {
 	 * 0 = humain
 	 * 1 = ia niveau 1
 	 * 2 = ia niveau 2
-	 * 3 = ia niveau 3
 	 */
 	private static int choixAdversaire;
 
