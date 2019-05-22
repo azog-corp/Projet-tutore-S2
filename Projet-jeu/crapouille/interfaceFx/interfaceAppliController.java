@@ -666,7 +666,7 @@ public class interfaceAppliController {
 			nomConfig = tb_nomConf.getText();
 		}
 	}
-	
+
 	@FXML
 	void deleteConfig(MouseEvent Click) {
 		int index = Integer.parseInt(tb_idConf.getText());
