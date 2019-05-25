@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXMLLoader;
 
-public class Main extends Application {
+public class GestionPartieInterface extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {

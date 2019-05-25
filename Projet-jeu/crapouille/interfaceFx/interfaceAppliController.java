@@ -63,6 +63,12 @@ public class interfaceAppliController {
 	private TextField tb_nbColonneConf;
 
 	@FXML
+	private TextField entreeColonne;
+
+	@FXML
+	private AnchorPane defaite;
+
+	@FXML
 	private AnchorPane score;
 
 	@FXML
@@ -79,6 +85,12 @@ public class interfaceAppliController {
 
 	@FXML
 	private Label gameBoardString;
+
+	@FXML
+	private TextField entreeLigne;
+
+	@FXML
+	private AnchorPane jeuEnCours;
 
 	@FXML
 	private ImageView btn_quitter;
@@ -126,9 +138,6 @@ public class interfaceAppliController {
 	private TextField tb_cord;
 
 	@FXML
-	private TextField entreeUti;
-
-	@FXML
 	private ImageView btn_configuration;
 
 	@FXML
@@ -153,6 +162,9 @@ public class interfaceAppliController {
 	private ImageView btn_mvp;
 
 	@FXML
+	private AnchorPane victoire;
+
+	@FXML
 	private Button btn_supprimerConf;
 
 	@FXML
@@ -166,6 +178,9 @@ public class interfaceAppliController {
 
 	@FXML
 	private RadioButton lvl3;
+
+	@FXML
+	private Label lb_nomEquipe;
 
 	@FXML
 	private Button btn_supprimerConfig;
@@ -195,6 +210,9 @@ public class interfaceAppliController {
 	private AnchorPane menu;
 
 	@FXML
+	private Label gameEntreeInvalide;
+
+	@FXML
 	private Label listeConfigDispo;
 
 	@FXML
@@ -208,7 +226,6 @@ public class interfaceAppliController {
 
 	@FXML
 	private RadioButton lvl1;
-
 
 
 
@@ -441,6 +458,8 @@ public class interfaceAppliController {
 			recupConfigurationPartie();
 			reinitialiser();
 			gameBoard.setVisible(true);
+			defaite.setVisible(false);
+			victoire.setVisible(false);
 			rafraichirJeu(Partie.getCurrentPlateau().toString());
 			Partie.setDepartPartie(LocalDate.now());
 		}
@@ -450,9 +469,12 @@ public class interfaceAppliController {
 
 	@FXML
 	void actualiserJeu(MouseEvent Click) {
-		if (!entreeUti.getText().isEmpty()) {
-			String cord = entreeUti.getText();
+		if (!entreeLigne.getText().isEmpty() &&
+			!entreeColonne.getText().isEmpty()) {
+			String ligne = entreeLigne.getText();
+			String colonne = entreeColonne.getText();
 			System.out.println(formatEstValide(cord));
+			//TODO refaire verification + afficher label si non valide
 			if (cord.length() == 6 && formatEstValide(cord)) {
 				int colonnePion = recupereColonnePion(cord);
 				int lignePion = recupereLignePion(cord);
