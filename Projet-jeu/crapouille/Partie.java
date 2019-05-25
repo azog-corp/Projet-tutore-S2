@@ -57,6 +57,16 @@ public class Partie implements Serializable {
 	private static Plateau configPlateau;
 
 	private static int tourEquipe = 0;
+	
+	private static int nbCoups;
+	
+	public static int getNbCoups() {
+		return nbCoups;
+	}
+
+	public static void setNbCoups(int nbCoupsPartie) {
+		nbCoups = nbCoupsPartie;
+	}
 
 	/**
 	 * @return le nom de l'équipe grenouille

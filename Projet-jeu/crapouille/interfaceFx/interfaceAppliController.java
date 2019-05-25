@@ -473,7 +473,15 @@ public class interfaceAppliController {
 		lvl1.setSelected(true);
 		cacherJ2();
 	}
-
+	
+	/**
+	 * Si la config rentré par l'utilisateur est correct
+	 * Si c'est le cas appel des fonction qui récupère :
+	 * L'adversaire voulut, le mode de jeu, les noms des équipes s'il n'y en 
+	 * a pas affecte un nom par défaut, la configuration
+	 * Puis affiche le plateau de jeu
+	 * @param Click
+	 */
 	@FXML
 	void showGameBoard(MouseEvent Click) {
 		if(configValide()) {
@@ -487,14 +495,17 @@ public class interfaceAppliController {
 			defaite.setVisible(false);
 			victoire.setVisible(false);
 			rafraichirJeu(Partie.getCurrentPlateau().toString());
+			//TODO si mode de jeu = casse tete et recuperer le temps a la fin quand victoire
 			Partie.setDepartPartie(LocalDate.now());
 		}
-		//Lancer chrono
 	}
 
-	// TODO tester + changer affichage msg erreur
+	/**
+	 * 
+	 * @param Click
+	 */
 	@FXML
-	void actualiserJeu(MouseEvent Click) {
+	private void actualiserJeu(MouseEvent Click) {
 		if (!entreeLigne.getText().isEmpty() &&
 				!entreeColonne.getText().isEmpty()) {
 			String ligne = entreeLigne.getText();
@@ -509,6 +520,7 @@ public class interfaceAppliController {
 					Partie.tourEntite(lignePion, colonnePion);
 					System.out.println(Partie.getCurrentPlateau().toString());
 					rafraichirJeu(Partie.getCurrentPlateau().toString());
+					Partie.setNbCoups(Partie.getNbCoups()+1); //TODO verif
 				} else {
 					erreurEntreePartie.setVisible(true);
 					erreurEntreePartie.setText(MESSAGE_ERREUR
@@ -803,8 +815,6 @@ public class interfaceAppliController {
 					+"Ne peut pas être vide");
 		}
 	}
-
-
 
 	/*--------------- FONCTION CONFIGURATION: TRAITEMENT INTERFACE  ---------------*/
 
