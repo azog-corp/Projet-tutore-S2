@@ -233,7 +233,7 @@ public class Plateau implements Serializable {
 						plateauString.append("G|");
 					}
 				} else {
-					plateauString.append("    |");
+					plateauString.append("   |");
 				}
 			}
 		}

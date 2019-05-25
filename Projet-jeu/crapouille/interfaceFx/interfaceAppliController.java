@@ -49,11 +49,14 @@ public class interfaceAppliController {
 
 	final static String MESSAGE_ERREUR = "Les informations rentrés sont invalides : ";
 
-	@FXML
+    @FXML
     private AnchorPane gameBoard;
 
     @FXML
     private AnchorPane backpanel;
+
+    @FXML
+    private Label erreurSuppressionConfig;
 
     @FXML
     private Button btn_jouermenu;
@@ -80,7 +83,7 @@ public class interfaceAppliController {
     private Button btn_quittermenu;
 
     @FXML
-    private Label lb_erreurInitConfig;
+    private TextField tb_cordType;
 
     @FXML
     private AnchorPane createur;
@@ -104,10 +107,10 @@ public class interfaceAppliController {
     private ImageView btn_quitter;
 
     @FXML
-    private Button btn_ajouterConf;
+    private TextField tb_idConf;
 
     @FXML
-    private TextField tb_idConf;
+    private Button btn_ajouterConf;
 
     @FXML
     private TextField choixConfig;
@@ -123,6 +126,9 @@ public class interfaceAppliController {
 
     @FXML
     private Label NOM;
+
+    @FXML
+    private Label erreurPlacementPion;
 
     @FXML
     private AnchorPane choixConf;
@@ -167,9 +173,6 @@ public class interfaceAppliController {
     private TextField tb_nbLigneConf;
 
     @FXML
-    private Label lb_pionInvalide;
-
-    @FXML
     private ImageView btn_mvp;
 
     @FXML
@@ -185,13 +188,16 @@ public class interfaceAppliController {
     private Label afficherConfig;
 
     @FXML
+    private Label erreurCreationConfig;
+
+    @FXML
     private RadioButton lvl2;
 
     @FXML
     private RadioButton lvl3;
 
     @FXML
-    private Label lb_nomEquipe;
+    private Label lb_nomEquipeGagnante;
 
     @FXML
     private Button btn_supprimerConfig;
@@ -221,7 +227,7 @@ public class interfaceAppliController {
     private AnchorPane menu;
 
     @FXML
-    private Label gameEntreeInvalide;
+    private Label erreurEntreePartie;
 
     @FXML
     private Button btn_AjouterPion1;
@@ -491,7 +497,7 @@ public class interfaceAppliController {
 			String ligne = entreeLigne.getText();
 			String colonne = entreeColonne.getText();
 			if (verificationLigne(ligne) && verificationColonne(colonne)) {
-				gameEntreeInvalide.setVisible(false);
+				erreurEntreePartie.setVisible(false);
 				int colonnePion = recupereColonnePion(colonne);
 				int lignePion = recupereLignePion(ligne);
 				if (colonneEstValide(colonnePion) && ligneEstValide(lignePion)) {
@@ -501,17 +507,24 @@ public class interfaceAppliController {
 					System.out.println(Partie.getCurrentPlateau().toString());
 					rafraichirJeu(Partie.getCurrentPlateau().toString());
 				} else {
-					gameEntreeInvalide.setVisible(true);
+					erreurEntreePartie.setVisible(true);
+					erreurEntreePartie.setText(MESSAGE_ERREUR
+					+"Nombre trop grand ou trop petit vérifier votre saisie");
 				}
 			} else {
-				gameEntreeInvalide.setVisible(true);
+				erreurEntreePartie.setVisible(true);
+				erreurEntreePartie.setText(MESSAGE_ERREUR
+						+"Ne doit contenir que des chiffres");
 			}
 		} else {
-			gameEntreeInvalide.setVisible(true);
+			erreurEntreePartie.setVisible(true);
+			erreurEntreePartie.setText(MESSAGE_ERREUR
+					+"Ne doit pas être vide");
 		}
 		verifVictoire();
 	}
 
+	//TODO vérifier lequipe et afficher la quelle a gagner lb_nomEquipeGagnante
 	private void verifVictoire() {
 		if (Partie.currentPlateau.victoire(0) || 
 				Partie.currentPlateau.victoire(1) || 
@@ -625,27 +638,34 @@ public class interfaceAppliController {
 	 * au plateau pour le placement des pions lors de la creation d'une config
 	 * Celle ci verifie que toutes les donnees rentre par l'utilisateur 
 	 * sont correct si se n'est pas le cas reste sur la page actuelle
-	 * TODO et lui indique ses erreurs
 	 * @param Click clic de l'utilisateur declanchant l'appel de la fonction
 	 */
 	@FXML
 	void configInitialisation(MouseEvent Click) {
-		if (!tb_nbLigneConf.getText().isEmpty() && !tb_nbColonneConf.getText().isEmpty()) {
-			//TODO verifier que il sagit bien de nombre
-			int nbLigne = Integer.parseInt(tb_nbLigneConf.getText());
-			int nbColonne = Integer.parseInt( tb_nbColonneConf.getText());
-			if (ligneEstValide(nbLigne) && colonneEstValide(nbColonne)) {
-				lb_erreurInitConfig.setVisible(false);
-				Partie.setConfigPlateau(nbLigne, nbColonne);
-				// TODO recupConf();
-				showCreationConfig(); 
+		if (!tb_nbLigneConf.getText().isEmpty() 
+				&& !tb_nbColonneConf.getText().isEmpty()) {
+			if (verificationLigne(tb_nbColonneConf.getText()) 
+					&& verificationLigne(tb_nbColonneConf.getText())) {
+				int nbLigne = Integer.parseInt(tb_nbLigneConf.getText());
+				int nbColonne = Integer.parseInt( tb_nbColonneConf.getText());
+				if (ligneEstValide(nbLigne) && colonneEstValide(nbColonne)) {
+					erreurCreationConfig.setVisible(false);
+					Partie.setConfigPlateau(nbLigne, nbColonne);
+					// TODO recupConf();
+					showCreationConfig(); 
+				} else {
+					erreurCreationConfig.setVisible(true);
+					erreurCreationConfig.setText(MESSAGE_ERREUR 
+							+ "Nombres rentrés invalides trop grand ou trop petit");
+				}
 			} else {
-				lb_erreurInitConfig.setVisible(true);
-				lb_erreurInitConfig.setText(MESSAGE_ERREUR + "Nombres rentrés invalides");
+				erreurCreationConfig.setVisible(true);
+				erreurCreationConfig.setText(MESSAGE_ERREUR 
+						+ "Ne doit contenir que des chiffres");
 			}
 		} else {
-			lb_erreurInitConfig.setVisible(true);
-			lb_erreurInitConfig.setText(MESSAGE_ERREUR + "Ne peut pas être vide");
+			erreurCreationConfig.setVisible(true);
+			erreurCreationConfig.setText(MESSAGE_ERREUR + "Ne peut pas être vide");
 		}
 	}
 
@@ -665,28 +685,36 @@ public class interfaceAppliController {
 			String colonne = tb_cordColonne.getText();
 			String ligne = tb_cordLigne.getText();
 			if (verificationLigne(ligne) && verificationColonne(colonne)) {
-				lb_pionInvalide.setVisible(false);
 				int colonnePion = recupereColonnePion(colonne);
 				int lignePion = recupereLignePion(ligne);
 				colonnePion--;
 				lignePion--;
-				//TODO textfield type + verif
-				Pion placementUti = new Pion(lignePion,colonnePion,
-						recupType(tb_cord.getText().charAt(0))); //TODO quoi faire
-				Partie.getConfigPlateau().setCase(placementUti);
-				rafraichirConf(Partie.getConfigPlateau().toString());
+				if (typeValide(tb_cordType.getText())) {
+					erreurPlacementPion.setVisible(false);
+					Pion placementUti = new Pion(lignePion,colonnePion,
+							recupType(tb_cordType.getText().charAt(0)));
+					Partie.getConfigPlateau().setCase(placementUti);
+					rafraichirConf(Partie.getConfigPlateau().toString());
+				} else {
+					erreurPlacementPion.setVisible(true);
+					erreurPlacementPion.setText(MESSAGE_ERREUR
+							+ "Le type entré n'est pas correct");
+				}
 			} else {
-				lb_pionInvalide.setVisible(true);
-				lb_pionInvalide.setText(MESSAGE_ERREUR + "Nombres rentrés invalides");
+				erreurPlacementPion.setVisible(true);
+				erreurPlacementPion.setText(MESSAGE_ERREUR 
+						+ "Nombres rentrés invalides");
 			}
 		} else {
-			lb_pionInvalide.setVisible(true);
-			lb_pionInvalide.setText(MESSAGE_ERREUR + "Ne peut pas être vide");
+			erreurPlacementPion.setVisible(true);
+			erreurPlacementPion.setText(MESSAGE_ERREUR + "Ne peut pas être vide");
 		}
 	}
 
-	//TODO corriger / trouver une solution de fusion / comment supprimer
+
+	@FXML
 	void supprimerPionConfig(MouseEvent Click) {
+		//TODO corriger / trouver une solution de fusion / comment supprimer
 	}
 
 	/**
@@ -731,9 +759,16 @@ public class interfaceAppliController {
 
 	@FXML
 	void deleteConfig(MouseEvent Click) {
-		int index = Integer.parseInt(tb_idConf.getText());
-		Configuration.listConfiguration.remove(index);
-		System.out.println("Clic");
+		if (!tb_idConf.getText().isEmpty()) {
+			erreurSuppressionConfig.setVisible(false);
+			int index = Integer.parseInt(tb_idConf.getText());
+			Configuration.listConfiguration.remove(index);
+			System.out.println("Clic");
+		} else {
+			erreurSuppressionConfig.setVisible(true);
+			erreurSuppressionConfig.setText(MESSAGE_ERREUR
+				+"Ne peut pas être vide");
+		}
 	}
 
 
@@ -868,6 +903,14 @@ public class interfaceAppliController {
 		colonnePion.append(coordonneePion.charAt(0));
 		colonnePion.append(coordonneePion.charAt(1));
 		return Integer.parseInt(colonnePion.toString());
+	}
+
+	private boolean typeValide(String type) {
+		if (type.length() != 1 || (type.charAt(0) != 'C' || type.charAt(0) != 'G')) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 }
