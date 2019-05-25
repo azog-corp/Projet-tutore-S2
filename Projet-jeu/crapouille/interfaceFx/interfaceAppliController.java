@@ -704,7 +704,7 @@ public class interfaceAppliController {
 				if (ligneEstValide(nbLigne) && colonneEstValide(nbColonne)) {
 					erreurCreationConfig.setVisible(false);
 					Partie.setConfigPlateau(nbLigne, nbColonne);
-					// TODO recupConf(); recupérer le nom pour enregistrer
+					// TODO recupNomConf(); recupérer le nom pour enregistrer
 					showCreationConfig(); 
 				} else {
 					erreurCreationConfig.setVisible(true);
@@ -856,7 +856,8 @@ public class interfaceAppliController {
 	 */
 	public void recupNomConf() {
 		if (!tb_nomConf.getText().isEmpty()) {
-			nomConfig = "Defaut";
+			//TODO pas tester
+			nomConfig = "Configuration n°" + Configuration.listConfiguration.size();
 		} else {
 			nomConfig = tb_nomConf.getText();
 		}
@@ -885,9 +886,15 @@ public class interfaceAppliController {
 		initialisationConfig.setVisible(true);
 	}
 
+	/**Fonction qui affiche la page supprimer config
+	 * et qui affiche toutes les configurations actuellement crées
+	 * @param Click
+	 */
 	@FXML
 	void showSupprimerConfig(MouseEvent Click) {
+		/*Affiche toutes les configurations disponibles*/
 		configAdel.setText(afficherConfigDispo());
+		/* Cache la page de sélection ajouter / supprimer config et affiche supprimer config */
 		choixConf.setVisible(false);
 		supprimerConf.setVisible(true);
 	}
