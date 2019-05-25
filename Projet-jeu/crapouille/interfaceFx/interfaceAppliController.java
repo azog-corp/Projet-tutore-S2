@@ -47,186 +47,202 @@ public class interfaceAppliController {
 	private String nom;
 	private String nomConfig;
 
-	@FXML
-	private AnchorPane gameBoard;
+	final static String MESSAGE_ERREUR = "Les informations rentrés sont invalides : ";
 
 	@FXML
-	private AnchorPane backpanel;
+    private AnchorPane gameBoard;
 
-	@FXML
-	private Button btn_jouermenu;
+    @FXML
+    private AnchorPane backpanel;
 
-	@FXML
-	private ImageView btn_createur;
+    @FXML
+    private Button btn_jouermenu;
 
-	@FXML
-	private TextField tb_nbColonneConf;
+    @FXML
+    private ImageView btn_createur;
 
-	@FXML
-	private TextField entreeColonne;
+    @FXML
+    private TextField entreeColonne;
 
-	@FXML
-	private AnchorPane defaite;
+    @FXML
+    private TextField tb_nbColonneConf;
 
-	@FXML
-	private AnchorPane score;
+    @FXML
+    private AnchorPane defaite;
 
-	@FXML
-	private ToggleGroup lvlIA;
+    @FXML
+    private AnchorPane score;
 
-	@FXML
-	private Button btn_quittermenu;
+    @FXML
+    private ToggleGroup lvlIA;
 
-	@FXML
-	private AnchorPane createur;
+    @FXML
+    private Button btn_quittermenu;
 
-	@FXML
-	private Button confirmationJouer;
+    @FXML
+    private Label lb_erreurInitConfig;
 
-	@FXML
-	private Label gameBoardString;
+    @FXML
+    private AnchorPane createur;
 
-	@FXML
-	private TextField entreeLigne;
+    @FXML
+    private Button confirmationJouer;
 
-	@FXML
-	private AnchorPane jeuEnCours;
+    @FXML
+    private Label gameBoardString;
 
-	@FXML
-	private ImageView btn_quitter;
+    @FXML
+    private TextField entreeLigne;
 
-	@FXML
-	private Button btn_ajouterConf;
+    @FXML
+    private TextField tb_cordColonne;
 
-	@FXML
-	private TextField tb_idConf;
+    @FXML
+    private AnchorPane jeuEnCours;
 
-	@FXML
-	private TextField choixConfig;
+    @FXML
+    private ImageView btn_quitter;
 
-	@FXML
-	private AnchorPane placementConfig;
+    @FXML
+    private Button btn_ajouterConf;
 
-	@FXML
-	private Button retourMenu;
+    @FXML
+    private TextField tb_idConf;
 
-	@FXML
-	private CheckBox chk_vsIA;
+    @FXML
+    private TextField choixConfig;
 
-	@FXML
-	private Label NOM;
+    @FXML
+    private AnchorPane placementConfig;
 
-	@FXML
-	private AnchorPane choixConf;
+    @FXML
+    private Button retourMenu;
 
-	@FXML
-	private AnchorPane settingsBar;
+    @FXML
+    private CheckBox chk_vsIA;
 
-	@FXML
-	private Button btn_aidemenu;
+    @FXML
+    private Label NOM;
 
-	@FXML
-	private Label lb_lvlIa;
+    @FXML
+    private AnchorPane choixConf;
 
-	@FXML
-	private Label labelIA;
+    @FXML
+    private AnchorPane settingsBar;
 
-	@FXML
-	private CheckBox chk_casseT;
+    @FXML
+    private Button btn_aidemenu;
 
-	@FXML
-	private TextField tb_cord;
+    @FXML
+    private Label lb_lvlIa;
 
-	@FXML
-	private ImageView btn_configuration;
+    @FXML
+    private Label labelIA;
 
-	@FXML
-	private AnchorPane supprimerConf;
+    @FXML
+    private CheckBox chk_casseT;
 
-	@FXML
-	private TextField tb_nomConf;
+    @FXML
+    private ImageView btn_configuration;
 
-	@FXML
-	private AnchorPane initialisationConfig;
+    @FXML
+    private AnchorPane supprimerConf;
 
-	@FXML
-	private AnchorPane configuration;
+    @FXML
+    private TextField tb_nomConf;
 
-	@FXML
-	private Button okGameBoard;
+    @FXML
+    private TextField tb_cordLigne;
 
-	@FXML
-	private TextField tb_nbLigneConf;
+    @FXML
+    private AnchorPane initialisationConfig;
 
-	@FXML
-	private ImageView btn_mvp;
+    @FXML
+    private AnchorPane configuration;
 
-	@FXML
-	private AnchorPane victoire;
+    @FXML
+    private Button okGameBoard;
 
-	@FXML
-	private Button btn_supprimerConf;
+    @FXML
+    private TextField tb_nbLigneConf;
 
-	@FXML
-	private Button btn_validerTaille;
+    @FXML
+    private Label lb_pionInvalide;
 
-	@FXML
-	private Label afficherConfig;
+    @FXML
+    private ImageView btn_mvp;
 
-	@FXML
-	private RadioButton lvl2;
+    @FXML
+    private AnchorPane victoire;
 
-	@FXML
-	private RadioButton lvl3;
+    @FXML
+    private Button btn_supprimerConf;
 
-	@FXML
-	private Label lb_nomEquipe;
+    @FXML
+    private Button btn_validerTaille;
 
-	@FXML
-	private Button btn_supprimerConfig;
+    @FXML
+    private Label afficherConfig;
 
-	@FXML
-	private Button btn_validerConfig;
+    @FXML
+    private RadioButton lvl2;
 
-	@FXML
-	private Label lb_nomJ1;
+    @FXML
+    private RadioButton lvl3;
 
-	@FXML
-	private TextField tb_nomJ2;
+    @FXML
+    private Label lb_nomEquipe;
 
-	@FXML
-	private ImageView btn_acceuil;
+    @FXML
+    private Button btn_supprimerConfig;
 
-	@FXML
-	private Label lb_nomJ2;
+    @FXML
+    private Button btn_validerConfig;
 
-	@FXML
-	private TextField tb_nomJ1;
+    @FXML
+    private Label lb_nomJ1;
 
-	@FXML
-	private Label configAdel;
+    @FXML
+    private TextField tb_nomJ2;
 
-	@FXML
-	private AnchorPane menu;
+    @FXML
+    private ImageView btn_acceuil;
 
-	@FXML
-	private Label gameEntreeInvalide;
+    @FXML
+    private Label lb_nomJ2;
 
-	@FXML
-	private Label listeConfigDispo;
+    @FXML
+    private TextField tb_nomJ1;
 
-	@FXML
-	private Label nomMVP;
+    @FXML
+    private Label configAdel;
 
-	@FXML
-	private Text scoreMVP;
+    @FXML
+    private AnchorPane menu;
 
-	@FXML
-	private AnchorPane configurationPartie;
+    @FXML
+    private Label gameEntreeInvalide;
 
-	@FXML
-	private RadioButton lvl1;
+    @FXML
+    private Button btn_AjouterPion1;
 
+    @FXML
+    private Label listeConfigDispo;
+
+    @FXML
+    private Label nomMVP;
+
+    @FXML
+    private Button btn_AjouterPion;
+
+    @FXML
+    private Text scoreMVP;
+
+    @FXML
+    private AnchorPane configurationPartie;
+
+    @FXML
+    private RadioButton lvl1;
 
 
 	/* --------------------------------------------------------
@@ -458,6 +474,7 @@ public class interfaceAppliController {
 			recupConfigurationPartie();
 			reinitialiser();
 			gameBoard.setVisible(true);
+			jeuEnCours.setVisible(true);
 			defaite.setVisible(false);
 			victoire.setVisible(false);
 			rafraichirJeu(Partie.getCurrentPlateau().toString());
@@ -466,31 +483,41 @@ public class interfaceAppliController {
 		//Lancer chrono
 	}
 
-
+	// TODO tester + changer affichage msg erreur
 	@FXML
 	void actualiserJeu(MouseEvent Click) {
 		if (!entreeLigne.getText().isEmpty() &&
-			!entreeColonne.getText().isEmpty()) {
+				!entreeColonne.getText().isEmpty()) {
 			String ligne = entreeLigne.getText();
 			String colonne = entreeColonne.getText();
-			System.out.println(formatEstValide(cord));
-			//TODO refaire verification + afficher label si non valide
-			if (cord.length() == 6 && formatEstValide(cord)) {
-				int colonnePion = recupereColonnePion(cord);
-				int lignePion = recupereLignePion(cord);
-				System.out.println(colonnePion);
-				System.out.println(lignePion);
-				colonnePion--;
-				lignePion--;
-				Partie.tourEntite(lignePion, colonnePion);
-				System.out.println(Partie.getCurrentPlateau().toString());
-				rafraichirJeu(Partie.getCurrentPlateau().toString());
+			if (verificationLigne(ligne) && verificationColonne(colonne)) {
+				gameEntreeInvalide.setVisible(false);
+				int colonnePion = recupereColonnePion(colonne);
+				int lignePion = recupereLignePion(ligne);
+				if (colonneEstValide(colonnePion) && ligneEstValide(lignePion)) {
+					colonnePion--;
+					lignePion--;
+					Partie.tourEntite(lignePion, colonnePion);
+					System.out.println(Partie.getCurrentPlateau().toString());
+					rafraichirJeu(Partie.getCurrentPlateau().toString());
+				} else {
+					gameEntreeInvalide.setVisible(true);
+				}
+			} else {
+				gameEntreeInvalide.setVisible(true);
 			}
+		} else {
+			gameEntreeInvalide.setVisible(true);
 		}
+		verifVictoire();
+	}
+
+	private void verifVictoire() {
 		if (Partie.currentPlateau.victoire(0) || 
 				Partie.currentPlateau.victoire(1) || 
 				Partie.currentPlateau.victoire(1)) {
-			//TODO bravo
+			jeuEnCours.setVisible(false);
+			victoire.setVisible(true);
 		}
 	}
 
@@ -603,21 +630,22 @@ public class interfaceAppliController {
 	 */
 	@FXML
 	void configInitialisation(MouseEvent Click) {
-		boolean test = tb_nbLigneConf.getText().isEmpty();
-		System.out.println(test);
 		if (!tb_nbLigneConf.getText().isEmpty() && !tb_nbColonneConf.getText().isEmpty()) {
 			//TODO verifier que il sagit bien de nombre
 			int nbLigne = Integer.parseInt(tb_nbLigneConf.getText());
 			int nbColonne = Integer.parseInt( tb_nbColonneConf.getText());
-			if (nbLigne < 20 && nbColonne < 20 && nbLigne > 0 && nbColonne > 0) {
+			if (ligneEstValide(nbLigne) && colonneEstValide(nbColonne)) {
+				lb_erreurInitConfig.setVisible(false);
 				Partie.setConfigPlateau(nbLigne, nbColonne);
 				// TODO recupConf();
 				showCreationConfig(); 
 			} else {
-				//TODO afficher label ne peut pas etre superieur a 20
+				lb_erreurInitConfig.setVisible(true);
+				lb_erreurInitConfig.setText(MESSAGE_ERREUR + "Nombres rentrés invalides");
 			}
 		} else {
-			//TODO afficher label ne peut pas etre vide
+			lb_erreurInitConfig.setVisible(true);
+			lb_erreurInitConfig.setText(MESSAGE_ERREUR + "Ne peut pas être vide");
 		}
 	}
 
@@ -630,23 +658,35 @@ public class interfaceAppliController {
 	 * @param Click clic de l'utilisateur declanchant l'appel de la fonction
 	 */
 	@FXML
-	void actualiserConfig(MouseEvent Click) {
-		if (!tb_cord.getText().isEmpty()) {
-			String cord = tb_cord.getText();
-			System.out.println(formatEstValide(cord));
-			if (cord.length() == 6 && formatEstValide(cord)) {
-				int colonnePion = recupereColonnePion(cord);
-				int lignePion = recupereLignePion(cord);
-				System.out.println(colonnePion);
-				System.out.println(lignePion);
+	//TODO corriger
+	void ajoutPionConfig(MouseEvent Click) {
+		if (!tb_cordColonne.getText().isEmpty() 
+				&& !tb_cordLigne.getText().isEmpty()) {
+			String colonne = tb_cordColonne.getText();
+			String ligne = tb_cordLigne.getText();
+			if (verificationLigne(ligne) && verificationColonne(colonne)) {
+				lb_pionInvalide.setVisible(false);
+				int colonnePion = recupereColonnePion(colonne);
+				int lignePion = recupereLignePion(ligne);
 				colonnePion--;
 				lignePion--;
+				//TODO textfield type + verif
 				Pion placementUti = new Pion(lignePion,colonnePion,
-						recupType(tb_cord.getText().charAt(0)));
+						recupType(tb_cord.getText().charAt(0))); //TODO quoi faire
 				Partie.getConfigPlateau().setCase(placementUti);
 				rafraichirConf(Partie.getConfigPlateau().toString());
+			} else {
+				lb_pionInvalide.setVisible(true);
+				lb_pionInvalide.setText(MESSAGE_ERREUR + "Nombres rentrés invalides");
 			}
+		} else {
+			lb_pionInvalide.setVisible(true);
+			lb_pionInvalide.setText(MESSAGE_ERREUR + "Ne peut pas être vide");
 		}
+	}
+
+	//TODO corriger / trouver une solution de fusion / comment supprimer
+	void supprimerPionConfig(MouseEvent Click) {
 	}
 
 	/**
@@ -672,7 +712,7 @@ public class interfaceAppliController {
 	 * @param choix char rentre par l'utilisateur qui definie le type du pion
 	 */
 	private boolean recupType(char choix) {
-		return choix == 'C' || choix == 'c' ? true : false;
+		return choix == 'C' ? true : false;
 	}
 
 	/**
@@ -749,6 +789,26 @@ public class interfaceAppliController {
 
 	/*--------------- FONCTION ESTVALIDE  ---------------*/
 
+	public boolean verificationLigne(String ligne) {
+		for (int compteur = 0; compteur < ligne.length(); compteur ++) {
+			char tester = ligne.charAt(compteur);
+			if (tester < '0' || tester >'9') {
+				return false;
+			}
+		}
+		return true;	
+	}
+
+	public boolean verificationColonne(String colonne) {
+		for (int compteur = 0; compteur < colonne.length(); compteur ++) {
+			char tester = colonne.charAt(compteur);
+			if (tester < '0' || tester >'9') {
+				return false;
+			}
+		}
+		return true;	
+	}
+
 	/**
 	 * Détermine si les lignes du plateau sont corrects 
 	 * avec le contrôle de la gestion d'erreur
@@ -765,36 +825,12 @@ public class interfaceAppliController {
 	}
 
 	/**
-	 * Détermine si le format du coordonné du pion (du type G13;19-08;10 ou C13;19-18;10) 
-	 * est correct
-	 * @param coordonneePion est la coordonné du poin sur le plateau  
-	 * @return un booleen vrai si le formmat est valide
-	 */
-	public static boolean formatEstValide(String coordonneePion) {
-		// Ex: C ou G13;19
-		// Vérification format dans les cas suivants :
-		// - C13;19
-		// - G03;09 -> entier entre 0 et 9 se marque 00, 01, ... 09
-		return (coordonneePion.charAt(NOM_PION) == 'G' ||
-				coordonneePion.charAt(NOM_PION) == 'C') &&
-				coordonneePion.charAt(DISTINCTION_1) == ';' &&
-				coordonneePion.charAt(PREMIER_CHIFFRE_LIGNE) >= '0' && 
-				coordonneePion.charAt(PREMIER_CHIFFRE_LIGNE) <= '1' &&
-				'0' <= coordonneePion.charAt(DEUXIEME_CHIFFRE_LIGNE) && 
-				coordonneePion.charAt(DEUXIEME_CHIFFRE_LIGNE) <= '9' &&
-				'0' <= coordonneePion.charAt(PREMIER_CHIFFRE_COLONNE) && 
-				coordonneePion.charAt(PREMIER_CHIFFRE_COLONNE) <= '1' &&
-				'0' <= coordonneePion.charAt(DEUXIEME_CHIFFRE_COLONNE) &&
-				coordonneePion.charAt(DEUXIEME_CHIFFRE_COLONNE) <= '9';
-	}
-
-	/**
 	 * Détermine si le coordonée de la ligne du pion est correct  
 	 * avec le contrôle de la gestion d'erreur
 	 * @param coordonneePion est le coordonné du poin sur le plateau 
 	 * @return un booleen égal a vrai si la ligne du pion est correct
 	 */
-	public static boolean lignePionEstValide(int lignePion) {
+	public static boolean ligneEstValide(int lignePion) {
 		// La ligne du pion doit être supérieur à 0 et inférieure ou égal à 20  
 		return MIN_LIGNE_PION <= lignePion && lignePion < MAX_LIGNE_PION;
 	}
@@ -805,7 +841,7 @@ public class interfaceAppliController {
 	 * @param coordonneePion est le coordonné du poin sur le plateau 
 	 * @return un booleen égal a vrai si la colonne du pion est correct
 	 */
-	public static boolean colonnePionEstValide(int colonnePion) {
+	public static boolean colonneEstValide(int colonnePion) {
 		// La ligne du pion doit être supérieur à 0 et inférieure ou égal à 20  
 		return MIN_COLONNE_PION <= colonnePion && colonnePion < MAX_COLONNE_PION;
 	}
@@ -817,8 +853,8 @@ public class interfaceAppliController {
 	 */
 	public static int recupereLignePion(String coordonneePion) {
 		StringBuilder lignePion = new StringBuilder(); // lignePion est le coordonnée de la ligne du pion
+		lignePion.append(coordonneePion.charAt(0));
 		lignePion.append(coordonneePion.charAt(1));
-		lignePion.append(coordonneePion.charAt(2));
 		return Integer.parseInt(lignePion.toString());
 	}
 
@@ -829,8 +865,8 @@ public class interfaceAppliController {
 	 */
 	public static int recupereColonnePion(String coordonneePion) {
 		StringBuilder colonnePion = new StringBuilder(); // lignePion est le coordonnée de la ligne du pion
-		colonnePion.append(coordonneePion.charAt(4));
-		colonnePion.append(coordonneePion.charAt(5));
+		colonnePion.append(coordonneePion.charAt(0));
+		colonnePion.append(coordonneePion.charAt(1));
 		return Integer.parseInt(colonnePion.toString());
 	}
 
