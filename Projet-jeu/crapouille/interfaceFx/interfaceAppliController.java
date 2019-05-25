@@ -499,7 +499,7 @@ public class interfaceAppliController {
 				!entreeColonne.getText().isEmpty()) {
 			String ligne = entreeLigne.getText();
 			String colonne = entreeColonne.getText();
-			if (verificationLigne(ligne) && verificationColonne(colonne)) {
+			if (verificationLettre(ligne) && verificationLettre(colonne)) {
 				erreurEntreePartie.setVisible(false);
 				int colonnePion = recupereColonnePion(colonne);
 				int lignePion = recupereLignePion(ligne);
@@ -556,30 +556,27 @@ public class interfaceAppliController {
 		/* On vérifie que la la string n'est pas vide pour ne pas produire d'erreur par la suite */
 		if (!choixConfig.getText().isEmpty()) {
 			String configString = choixConfig.getText();
-			for (int compt = 0; compt < configString.length(); compt++) {
-				if (configString.charAt(compt) < '0' || configString.charAt(compt) > '9') {
+			if(verificationLettre(configString)) {
+				int config = Integer.parseInt(choixConfig.getText());
+				if (config >= 0 && config < Configuration.listConfiguration.size()) {
+					erreurConfigPartie.setVisible(false);
+					return true;
+				} else {
 					erreurConfigPartie.setVisible(true);
 					erreurConfigPartie.setText(MESSAGE_ERREUR
 							+ "Les lettres ne sont pas acceptées");
-					return false;
 				}
-			}
-			int config = Integer.parseInt(choixConfig.getText());
-			if (config >= 0 && config < Configuration.listConfiguration.size()) {
-				erreurConfigPartie.setVisible(false);
-				return true;
 			} else {
 				erreurConfigPartie.setVisible(true);
 				erreurConfigPartie.setText(MESSAGE_ERREUR
 						+ "Le numéro saisi n'est pas valide");
-				return false;
 			}
 		} else {
 			erreurConfigPartie.setVisible(true);
 			erreurConfigPartie.setText(MESSAGE_ERREUR
 					+ "La configuration ne peut pas être vide");
-			return false;
 		}
+		return false;
 	}
 
 	private void recupNomEquipe() {
@@ -663,8 +660,8 @@ public class interfaceAppliController {
 	void configInitialisation(MouseEvent Click) {
 		if (!tb_nbLigneConf.getText().isEmpty() 
 				&& !tb_nbColonneConf.getText().isEmpty()) {
-			if (verificationLigne(tb_nbColonneConf.getText()) 
-					&& verificationLigne(tb_nbColonneConf.getText())) {
+			if (verificationLettre(tb_nbColonneConf.getText()) 
+					&& verificationLettre(tb_nbColonneConf.getText())) {
 				int nbLigne = Integer.parseInt(tb_nbLigneConf.getText());
 				int nbColonne = Integer.parseInt( tb_nbColonneConf.getText());
 				if (ligneEstValide(nbLigne) && colonneEstValide(nbColonne)) {
@@ -675,7 +672,7 @@ public class interfaceAppliController {
 				} else {
 					erreurCreationConfig.setVisible(true);
 					erreurCreationConfig.setText(MESSAGE_ERREUR 
-					+ "Nombres rentrés invalides trop grand ou trop petit");
+							+ "Nombres rentrés invalides trop grand ou trop petit");
 				}
 			} else {
 				erreurCreationConfig.setVisible(true);
@@ -704,7 +701,7 @@ public class interfaceAppliController {
 				&& !tb_cordLigne.getText().isEmpty()) {
 			String colonne = tb_cordColonne.getText();
 			String ligne = tb_cordLigne.getText();
-			if (verificationLigne(ligne) && verificationColonne(colonne)) {
+			if (verificationLettre(ligne) && verificationLettre(colonne)) {
 				int colonnePion = recupereColonnePion(colonne);
 				int lignePion = recupereLignePion(ligne);
 				colonnePion--;
@@ -770,7 +767,7 @@ public class interfaceAppliController {
 	 * (remplacera donc la configuration par defaut)
 	 * @return nom Le nom de la configuration qui sera cree
 	 */
-	public void recupConf() {
+	public void recupNomConf() {
 		if (!tb_nomConf.getText().isEmpty()) {
 			nomConfig = "Defaut";
 		} else {
@@ -779,12 +776,27 @@ public class interfaceAppliController {
 	}
 
 	@FXML
+	//TODO verification
 	void deleteConfig(MouseEvent Click) {
 		if (!tb_idConf.getText().isEmpty()) {
-			erreurSuppressionConfig.setVisible(false);
-			int index = Integer.parseInt(tb_idConf.getText());
-			Configuration.listConfiguration.remove(index);
-			System.out.println("Clic");
+			String idConfig = tb_idConf.getText();
+			if (verificationLettre(idConfig)) {
+				erreurSuppressionConfig.setVisible(false);
+				int index = Integer.parseInt(tb_idConf.getText());
+				if (index >= 0 &&
+						index < Configuration.listConfiguration.size()) {
+					erreurSuppressionConfig.setVisible(false);
+					Configuration.listConfiguration.remove(index);
+				} else {
+					erreurSuppressionConfig.setVisible(true);
+					erreurSuppressionConfig.setText(MESSAGE_ERREUR
+							+"Numéro non valide");
+				}
+			} else {
+				erreurSuppressionConfig.setVisible(true);
+				erreurSuppressionConfig.setText(MESSAGE_ERREUR
+						+"Ne Doit pas contenir de lettre");
+			}
 		} else {
 			erreurSuppressionConfig.setVisible(true);
 			erreurSuppressionConfig.setText(MESSAGE_ERREUR
@@ -845,19 +857,9 @@ public class interfaceAppliController {
 
 	/*--------------- FONCTION ESTVALIDE  ---------------*/
 
-	public boolean verificationLigne(String ligne) {
-		for (int compteur = 0; compteur < ligne.length(); compteur ++) {
-			char tester = ligne.charAt(compteur);
-			if (tester < '0' || tester >'9') {
-				return false;
-			}
-		}
-		return true;	
-	}
-
-	public boolean verificationColonne(String colonne) {
-		for (int compteur = 0; compteur < colonne.length(); compteur ++) {
-			char tester = colonne.charAt(compteur);
+	public boolean verificationLettre(String aVerifier) {
+		for (int compteur = 0; compteur < aVerifier.length(); compteur ++) {
+			char tester = aVerifier.charAt(compteur);
 			if (tester < '0' || tester >'9') {
 				return false;
 			}
