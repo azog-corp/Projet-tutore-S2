@@ -49,206 +49,209 @@ public class interfaceAppliController {
 
 	final static String MESSAGE_ERREUR = "Les informations rentrés sont invalides : ";
 
-    @FXML
-    private AnchorPane gameBoard;
+	@FXML
+	private AnchorPane gameBoard;
 
-    @FXML
-    private AnchorPane backpanel;
+	@FXML
+	private AnchorPane backpanel;
 
-    @FXML
-    private Label erreurSuppressionConfig;
+	@FXML
+	private Label erreurSuppressionConfig;
 
-    @FXML
-    private Button btn_jouermenu;
+	@FXML
+	private Button btn_jouermenu;
 
-    @FXML
-    private ImageView btn_createur;
+	@FXML
+	private ImageView btn_createur;
 
-    @FXML
-    private TextField entreeColonne;
+	@FXML
+	private TextField tb_nbColonneConf;
 
-    @FXML
-    private TextField tb_nbColonneConf;
+	@FXML
+	private TextField entreeColonne;
 
-    @FXML
-    private AnchorPane defaite;
+	@FXML
+	private AnchorPane defaite;
 
-    @FXML
-    private AnchorPane score;
+	@FXML
+	private AnchorPane score;
 
-    @FXML
-    private ToggleGroup lvlIA;
+	@FXML
+	private ToggleGroup lvlIA;
 
-    @FXML
-    private Button btn_quittermenu;
+	@FXML
+	private Button btn_quittermenu;
 
-    @FXML
-    private TextField tb_cordType;
+	@FXML
+	private TextField tb_cordType;
 
-    @FXML
-    private AnchorPane createur;
+	@FXML
+	private AnchorPane createur;
 
-    @FXML
-    private Button confirmationJouer;
+	@FXML
+	private Button confirmationJouer;
 
-    @FXML
-    private Label gameBoardString;
+	@FXML
+	private Label gameBoardString;
 
-    @FXML
-    private TextField entreeLigne;
+	@FXML
+	private TextField tb_cordColonne;
 
-    @FXML
-    private TextField tb_cordColonne;
+	@FXML
+	private TextField entreeLigne;
 
-    @FXML
-    private AnchorPane jeuEnCours;
+	@FXML
+	private AnchorPane jeuEnCours;
 
-    @FXML
-    private ImageView btn_quitter;
+	@FXML
+	private ImageView btn_quitter;
 
-    @FXML
-    private TextField tb_idConf;
+	@FXML
+	private TextField tb_idConf;
 
-    @FXML
-    private Button btn_ajouterConf;
+	@FXML
+	private Button btn_ajouterConf;
 
-    @FXML
-    private TextField choixConfig;
+	@FXML
+	private TextField choixConfig;
 
-    @FXML
-    private AnchorPane placementConfig;
+	@FXML
+	private AnchorPane placementConfig;
 
-    @FXML
-    private Button retourMenu;
+	@FXML
+	private Button retourMenu;
 
-    @FXML
-    private CheckBox chk_vsIA;
+	@FXML
+	private CheckBox chk_vsIA;
 
-    @FXML
-    private Label NOM;
+	@FXML
+	private Label NOM;
 
-    @FXML
-    private Label erreurPlacementPion;
+	@FXML
+	private Label erreurPlacementPion;
 
-    @FXML
-    private AnchorPane choixConf;
+	@FXML
+	private AnchorPane choixConf;
 
-    @FXML
-    private AnchorPane settingsBar;
+	@FXML
+	private AnchorPane settingsBar;
 
-    @FXML
-    private Button btn_aidemenu;
+	@FXML
+	private Button btn_aidemenu;
 
-    @FXML
-    private Label lb_lvlIa;
+	@FXML
+	private Label lb_lvlIa;
 
-    @FXML
-    private Label labelIA;
+	@FXML
+	private Label labelIA;
 
-    @FXML
-    private CheckBox chk_casseT;
+	@FXML
+	private CheckBox chk_casseT;
 
-    @FXML
-    private ImageView btn_configuration;
+	@FXML
+	private ImageView btn_configuration;
 
-    @FXML
-    private AnchorPane supprimerConf;
+	@FXML
+	private AnchorPane supprimerConf;
 
-    @FXML
-    private TextField tb_nomConf;
+	@FXML
+	private TextField tb_nomConf;
 
-    @FXML
-    private TextField tb_cordLigne;
+	@FXML
+	private Label erreurEntreePartie;
 
-    @FXML
-    private AnchorPane initialisationConfig;
+	@FXML
+	private TextField tb_cordLigne;
 
-    @FXML
-    private AnchorPane configuration;
+	@FXML
+	private AnchorPane initialisationConfig;
 
-    @FXML
-    private Button okGameBoard;
+	@FXML
+	private AnchorPane configuration;
 
-    @FXML
-    private TextField tb_nbLigneConf;
+	@FXML
+	private Button okGameBoard;
 
-    @FXML
-    private ImageView btn_mvp;
+	@FXML
+	private TextField tb_nbLigneConf;
 
-    @FXML
-    private AnchorPane victoire;
+	@FXML
+	private ImageView btn_mvp;
 
-    @FXML
-    private Button btn_supprimerConf;
+	@FXML
+	private AnchorPane victoire;
 
-    @FXML
-    private Button btn_validerTaille;
+	@FXML
+	private Button btn_supprimerConf;
 
-    @FXML
-    private Label afficherConfig;
+	@FXML
+	private Button btn_validerTaille;
 
-    @FXML
-    private Label erreurCreationConfig;
+	@FXML
+	private Label afficherConfig;
 
-    @FXML
-    private RadioButton lvl2;
+	@FXML
+	private Label erreurCreationConfig;
 
-    @FXML
-    private RadioButton lvl3;
+	@FXML
+	private Label lb_nomEquipeGagnante;
 
-    @FXML
-    private Label lb_nomEquipeGagnante;
+	@FXML
+	private RadioButton lvl2;
 
-    @FXML
-    private Button btn_supprimerConfig;
+	@FXML
+	private RadioButton lvl3;
 
-    @FXML
-    private Button btn_validerConfig;
+	@FXML
+	private Button btn_supprimerConfig;
 
-    @FXML
-    private Label lb_nomJ1;
+	@FXML
+	private Button btn_validerConfig;
 
-    @FXML
-    private TextField tb_nomJ2;
+	@FXML
+	private Label lb_nomJ1;
 
-    @FXML
-    private ImageView btn_acceuil;
+	@FXML
+	private TextField tb_nomJ2;
 
-    @FXML
-    private Label lb_nomJ2;
+	@FXML
+	private ImageView btn_acceuil;
 
-    @FXML
-    private TextField tb_nomJ1;
+	@FXML
+	private Label configAdel;
 
-    @FXML
-    private Label configAdel;
+	@FXML
+	private Label lb_nomJ2;
 
-    @FXML
-    private AnchorPane menu;
+	@FXML
+	private TextField tb_nomJ1;
 
-    @FXML
-    private Label erreurEntreePartie;
+	@FXML
+	private AnchorPane menu;
 
-    @FXML
-    private Button btn_AjouterPion1;
+	@FXML
+	private Button btn_AjouterPion1;
 
-    @FXML
-    private Label listeConfigDispo;
+	@FXML
+	private Label listeConfigDispo;
 
-    @FXML
-    private Label nomMVP;
+	@FXML
+	private Label nomMVP;
 
-    @FXML
-    private Button btn_AjouterPion;
+	@FXML
+	private Button btn_AjouterPion;
 
-    @FXML
-    private Text scoreMVP;
+	@FXML
+	private Label erreurConfigPartie;
 
-    @FXML
-    private AnchorPane configurationPartie;
+	@FXML
+	private Text scoreMVP;
 
-    @FXML
-    private RadioButton lvl1;
+	@FXML
+	private AnchorPane configurationPartie;
+
+	@FXML
+	private RadioButton lvl1;
 
 
 	/* --------------------------------------------------------
@@ -509,7 +512,7 @@ public class interfaceAppliController {
 				} else {
 					erreurEntreePartie.setVisible(true);
 					erreurEntreePartie.setText(MESSAGE_ERREUR
-					+"Nombre trop grand ou trop petit vérifier votre saisie");
+							+"Nombre trop grand ou trop petit vérifier votre saisie");
 				}
 			} else {
 				erreurEntreePartie.setVisible(true);
@@ -550,17 +553,33 @@ public class interfaceAppliController {
 	}
 	//TODO
 	private boolean configValide() {
+		/* On vérifie que la la string n'est pas vide pour ne pas produire d'erreur par la suite */
 		if (!choixConfig.getText().isEmpty()) {
 			String configString = choixConfig.getText();
-			if (configString.charAt(0) >= '0' && configString.charAt(0) <= '9' 
-					&& configString.length() == 1) {
-				int config = Integer.parseInt(choixConfig.getText());
-				if (config >= 0 && config < Configuration.listConfiguration.size()) {
-					return true;
+			for (int compt = 0; compt < configString.length(); compt++) {
+				if (configString.charAt(compt) < '0' || configString.charAt(compt) > '9') {
+					erreurConfigPartie.setVisible(true);
+					erreurConfigPartie.setText(MESSAGE_ERREUR
+							+ "Les lettres ne sont pas acceptées");
+					return false;
 				}
 			}
+			int config = Integer.parseInt(choixConfig.getText());
+			if (config >= 0 && config < Configuration.listConfiguration.size()) {
+				erreurConfigPartie.setVisible(false);
+				return true;
+			} else {
+				erreurConfigPartie.setVisible(true);
+				erreurConfigPartie.setText(MESSAGE_ERREUR
+						+ "Le numéro saisi n'est pas valide");
+				return false;
+			}
+		} else {
+			erreurConfigPartie.setVisible(true);
+			erreurConfigPartie.setText(MESSAGE_ERREUR
+					+ "La configuration ne peut pas être vide");
+			return false;
 		}
-		return false;
 	}
 
 	private void recupNomEquipe() {
@@ -656,7 +675,7 @@ public class interfaceAppliController {
 				} else {
 					erreurCreationConfig.setVisible(true);
 					erreurCreationConfig.setText(MESSAGE_ERREUR 
-							+ "Nombres rentrés invalides trop grand ou trop petit");
+					+ "Nombres rentrés invalides trop grand ou trop petit");
 				}
 			} else {
 				erreurCreationConfig.setVisible(true);
@@ -665,7 +684,8 @@ public class interfaceAppliController {
 			}
 		} else {
 			erreurCreationConfig.setVisible(true);
-			erreurCreationConfig.setText(MESSAGE_ERREUR + "Ne peut pas être vide");
+			erreurCreationConfig.setText(MESSAGE_ERREUR 
+					+ "Ne peut pas être vide");
 		}
 	}
 
@@ -707,7 +727,8 @@ public class interfaceAppliController {
 			}
 		} else {
 			erreurPlacementPion.setVisible(true);
-			erreurPlacementPion.setText(MESSAGE_ERREUR + "Ne peut pas être vide");
+			erreurPlacementPion.setText(MESSAGE_ERREUR 
+					+ "Ne peut pas être vide");
 		}
 	}
 
@@ -767,7 +788,7 @@ public class interfaceAppliController {
 		} else {
 			erreurSuppressionConfig.setVisible(true);
 			erreurSuppressionConfig.setText(MESSAGE_ERREUR
-				+"Ne peut pas être vide");
+					+"Ne peut pas être vide");
 		}
 	}
 
