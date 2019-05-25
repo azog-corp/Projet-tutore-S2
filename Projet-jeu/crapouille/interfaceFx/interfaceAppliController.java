@@ -2,7 +2,7 @@
  * interfaceAppliController.java
  * Azog-corp 2019, droit d'auteur
  */
-
+//TODO toutes les fonctions sans @FXML a mettre dans partie pour faire moin de ligne
 
 package crapouille.interfaceFx;
 
@@ -790,12 +790,12 @@ public class interfaceAppliController {
 				} else {
 					erreurSuppressionConfig.setVisible(true);
 					erreurSuppressionConfig.setText(MESSAGE_ERREUR
-							+"Numéro non valide");
+							+"Numéro ne correspond a aucune configuration");
 				}
 			} else {
 				erreurSuppressionConfig.setVisible(true);
 				erreurSuppressionConfig.setText(MESSAGE_ERREUR
-						+"Ne Doit pas contenir de lettre");
+						+"Ne doit pas contenir de lettre");
 			}
 		} else {
 			erreurSuppressionConfig.setVisible(true);
