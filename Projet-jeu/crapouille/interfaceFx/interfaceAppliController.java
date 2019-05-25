@@ -388,7 +388,7 @@ public class interfaceAppliController {
 	}
 
 	/**
-	 * Fonction decoche toutes les cases correspondant a l'IA
+	 * Fonction qui décoche toutes les cases correspondant a l'IA
 	 */
 	void razIa() {
 		chk_vsIA.setSelected(false);
@@ -463,7 +463,14 @@ public class interfaceAppliController {
 		lb_nomJ2.setVisible(true);
 		tb_nomJ2.setVisible(true);
 	}
-
+	
+	/**
+	 * Si la case IA est coché
+	 * affiche les différents radio button qui définissent le niveau de l'ordinateur
+	 * et coche par défaut le niveau 1
+	 * Cache aussi les éléments du J2 car ceux ci ne sont plus nécessaires
+	 * dans le cas d'une partie contre un ordi
+	 */
 	@FXML
 	void caseIaCheck() {
 		lvl1.setVisible(true);
@@ -484,16 +491,25 @@ public class interfaceAppliController {
 	 */
 	@FXML
 	void showGameBoard(MouseEvent Click) {
+		/* Vérifie que le numéro de config saisie par l'utilisateur est correct */
 		if(configValide()) {
+			/*Si c'est le cas récupère toutes les informations nécessaires*/
 			recupAdversaire();
 			recupModeJeu();
 			recupNomEquipe();
 			recupConfigurationPartie();
 			reinitialiser();
+			/*Fait apparaitre le plateau de jeu */
 			gameBoard.setVisible(true);
 			jeuEnCours.setVisible(true);
+			/* Fait disparaitre les pages defaite et victoire par précaution
+			 * (ex: si une partie précédente c'est terminé l'interface
+			 * sera sur la page de victoire pour empecher cela on force l'application 
+			 * a revenir a son fonctionnement par défaut soit le plateau de jeu
+			 */
 			defaite.setVisible(false);
 			victoire.setVisible(false);
+			/* Met a jour l'affichage */
 			rafraichirJeu(Partie.getCurrentPlateau().toString());
 			//TODO si mode de jeu = casse tete et recuperer le temps a la fin quand victoire
 			Partie.setDepartPartie(LocalDate.now());
@@ -501,26 +517,35 @@ public class interfaceAppliController {
 	}
 
 	/**
-	 * 
+	 * Lorsque le joueur est entrain de jouer une partie
+	 * vérifie que toutes les entrées de l'utilisateur sont correctes
+	 * Si c'est le cas appel la fonction pour deplacer le pion
+	 * et met a jour l'affichage
 	 * @param Click
 	 */
 	@FXML
 	private void actualiserJeu(MouseEvent Click) {
+		/* Vérifie que les TextField ne sont pas vide pour ne pas produire d'erreur */
 		if (!entreeLigne.getText().isEmpty() &&
-				!entreeColonne.getText().isEmpty()) {
+				!entreeColonne.getText().isEmpty()) { 
+			/* Récupère dans des string la ligne et la colonne entrée par l'utilisateur */
 			String ligne = entreeLigne.getText();
 			String colonne = entreeColonne.getText();
+			/* Vérifie s'il n'y a pas de lettre avant de convertir en int les entrées
+			 * pour ne pas produire d'erreur
+			 */
 			if (verificationLettre(ligne) && verificationLettre(colonne)) {
 				erreurEntreePartie.setVisible(false);
-				int colonnePion = recupereColonnePion(colonne);
-				int lignePion = recupereLignePion(ligne);
+				/*Conversion en int des entrées texte de l'utilisateur */
+				int colonnePion = Integer.parseInt(colonne);
+				int lignePion = Integer.parseInt(ligne);
 				if (colonneEstValide(colonnePion) && ligneEstValide(lignePion)) {
 					colonnePion--;
 					lignePion--;
-					Partie.tourEntite(lignePion, colonnePion);
+					Partie.tourEntite(lignePion, colonnePion); // TODO verif pion correcte deja faite ?
 					System.out.println(Partie.getCurrentPlateau().toString());
 					rafraichirJeu(Partie.getCurrentPlateau().toString());
-					Partie.setNbCoups(Partie.getNbCoups()+1); //TODO verif
+					Partie.setNbCoups(Partie.getNbCoups()+1); //TODO verif casse tt
 				} else {
 					erreurEntreePartie.setVisible(true);
 					erreurEntreePartie.setText(MESSAGE_ERREUR
@@ -679,7 +704,7 @@ public class interfaceAppliController {
 				if (ligneEstValide(nbLigne) && colonneEstValide(nbColonne)) {
 					erreurCreationConfig.setVisible(false);
 					Partie.setConfigPlateau(nbLigne, nbColonne);
-					// TODO recupConf();
+					// TODO recupConf(); recupérer le nom pour enregistrer
 					showCreationConfig(); 
 				} else {
 					erreurCreationConfig.setVisible(true);
@@ -714,8 +739,9 @@ public class interfaceAppliController {
 			String colonne = tb_cordColonne.getText();
 			String ligne = tb_cordLigne.getText();
 			if (verificationLettre(ligne) && verificationLettre(colonne)) {
-				int colonnePion = recupereColonnePion(colonne);
-				int lignePion = recupereLignePion(ligne);
+				//TODO vérifier que marche sans la fonction (jai supprime la fonction recupereLignePion
+				int colonnePion = Integer.parseInt(colonne);
+				int lignePion = Integer.parseInt(ligne);
 				colonnePion--;
 				lignePion--;
 				if (typeValide(tb_cordType.getText())) {
@@ -740,8 +766,57 @@ public class interfaceAppliController {
 					+ "Ne peut pas être vide");
 		}
 	}
+	
+	/**
+	 * Fonction qui supprime une des configurations enregistrées
+	 * -> Si toutes les entrées de l'utilisateur sont correctes
+	 * @param Click
+	 */
+	@FXML
+	//TODO verification
+	void deleteConfig(MouseEvent Click) {
+		/* Vérifie que le textfield n'est pas vide pour ne pas produire d'erreur
+		 * Si c'est le cas affiche un message d'erreur
+		 */
+		if (!tb_idConf.getText().isEmpty()) {
+			String idConfig = tb_idConf.getText();
+			/* Vérifie que tous les caractères de l'information rentrées par l'utilisateur
+			 * sont bien des chiffres
+			 */
+			if (verificationLettre(idConfig)) {
+				/* Converti en int le String correspondant au numéro de la config devant être supprimé */
+				int index = Integer.parseInt(tb_idConf.getText());
+				/*Vérifie que le numéro rentré par l'utilisateur correspond bien 
+				 * a une configuration existante
+				 */
+				if (index >= 0 &&
+						index < Configuration.listConfiguration.size()) {
+					erreurSuppressionConfig.setVisible(false);
+					Configuration.listConfiguration.remove(index);
+	  /* Affichage de message d'erreur si l'une des conditions n'est pas respectée
+	   * Informant l'utilisateur de l'erreur qu'il a commise 
+	   */
+				} else {
+					erreurSuppressionConfig.setVisible(true);
+					erreurSuppressionConfig.setText(MESSAGE_ERREUR
+							+"Numéro ne correspond a aucune configuration");
+				}
+			} else {
+				erreurSuppressionConfig.setVisible(true);
+				erreurSuppressionConfig.setText(MESSAGE_ERREUR
+						+"Ne doit pas contenir de lettre");
+			}
+		} else {
+			erreurSuppressionConfig.setVisible(true);
+			erreurSuppressionConfig.setText(MESSAGE_ERREUR
+					+"Ne peut pas être vide");
+		}
+	}
 
-
+	/** Cette fonction sera executé lorsque que l'utilisateur 
+	 * souhaite supprimer un des piosn qu'il a positionné sur le plateau
+	 * @param Click
+	 */
 	@FXML
 	void supprimerPionConfig(MouseEvent Click) {
 		//TODO corriger / trouver une solution de fusion / comment supprimer
@@ -787,34 +862,6 @@ public class interfaceAppliController {
 		}
 	}
 
-	@FXML
-	//TODO verification
-	void deleteConfig(MouseEvent Click) {
-		if (!tb_idConf.getText().isEmpty()) {
-			String idConfig = tb_idConf.getText();
-			if (verificationLettre(idConfig)) {
-				erreurSuppressionConfig.setVisible(false);
-				int index = Integer.parseInt(tb_idConf.getText());
-				if (index >= 0 &&
-						index < Configuration.listConfiguration.size()) {
-					erreurSuppressionConfig.setVisible(false);
-					Configuration.listConfiguration.remove(index);
-				} else {
-					erreurSuppressionConfig.setVisible(true);
-					erreurSuppressionConfig.setText(MESSAGE_ERREUR
-							+"Numéro ne correspond a aucune configuration");
-				}
-			} else {
-				erreurSuppressionConfig.setVisible(true);
-				erreurSuppressionConfig.setText(MESSAGE_ERREUR
-						+"Ne doit pas contenir de lettre");
-			}
-		} else {
-			erreurSuppressionConfig.setVisible(true);
-			erreurSuppressionConfig.setText(MESSAGE_ERREUR
-					+"Ne peut pas être vide");
-		}
-	}
 
 	/*--------------- FONCTION CONFIGURATION: TRAITEMENT INTERFACE  ---------------*/
 
@@ -866,7 +913,12 @@ public class interfaceAppliController {
 	 */
 
 	/*--------------- FONCTION ESTVALIDE  ---------------*/
-
+	/**
+	 * Fonction qui vérifie si uen chaine de caractère ne contient que des chiffres
+	 * @param aVerifier String a verifier la validité ( pas de nombre)
+	 * @return false si la string aVerifier contient une lettre
+	 * 		   true si la String ne contient aucune lettre
+	 */
 	public boolean verificationLettre(String aVerifier) {
 		for (int compteur = 0; compteur < aVerifier.length(); compteur ++) {
 			char tester = aVerifier.charAt(compteur);
@@ -937,7 +989,7 @@ public class interfaceAppliController {
 		colonnePion.append(coordonneePion.charAt(1));
 		return Integer.parseInt(colonnePion.toString());
 	}
-
+	//TODO a tester jamais reessayer de creer config donc a regarder validité
 	private boolean typeValide(String type) {
 		if (type.length() != 1 || (type.charAt(0) != 'C' || type.charAt(0) != 'G')) {
 			return false;
