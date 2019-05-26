@@ -1,10 +1,10 @@
 package crapouille.test;
 
-import crapouille.Partie;
-
 public class TestPartie {
 
 	public static void main(String[] args) {
-		
+		// TODO Auto-generated method stub
+
 	}
+
 }
