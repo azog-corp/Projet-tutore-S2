@@ -33,7 +33,7 @@ public class Ordinateur {
 		Pion choixPion = null;
 
 		if (niveauIA == 2) {
-			choixPionIA();
+			choixPion = choixPionIA();
 		}
 		if (choixPion == null) {
 			choixPion = pionLibre.get((int) (1 + (Math.random() * (pionLibre.size()-1))));

@@ -54,12 +54,11 @@ public class Partie implements Serializable {
 	 */
 	public static Plateau currentPlateau;
 
-	private static Plateau configPlateau;
 
 	private static int tourEquipe = 0;
-	
+
 	private static int nbCoups;
-	
+
 	public static int getNbCoups() {
 		return nbCoups;
 	}
@@ -131,18 +130,9 @@ public class Partie implements Serializable {
 		return currentPlateau;
 	}
 
-	//TODO JEAAAANNE O S'COUR
-	public static void setConfigPlateau(int ligne, int colonne) {
-		Pion[][] config = new Pion[ligne][colonne];
-		configPlateau = new Plateau(config);
-	}
-
-	public static Plateau getConfigPlateau() {
-		return configPlateau;
-	}
-
-	public static void setCasePlateau(Pion pion) {
-		configPlateau.setCase(pion);
+	public static void setCurrentPlateau(int ligne, int colonne) {
+		Pion[][] plateau = new Pion[ligne][colonne];
+		Partie.currentPlateau = new Plateau(plateau);
 	}
 
 	public LocalDate getDepartPartie() {
@@ -154,10 +144,8 @@ public class Partie implements Serializable {
 	}
 
 	public static void loadConfig(int choixConfig) {
-		if (Configuration.listConfiguration.get(choixConfig) != null) {
-			currentPlateau = new Plateau(Configuration.listConfiguration.get(choixConfig).getConfigPlateau());
-			tourEquipe = 0;
-		}
+		currentPlateau = new Plateau(Configuration.listConfiguration.get(choixConfig).getConfigPlateau());
+		tourEquipe = 0;
 	}
 
 	public static void tourEntite(int ligne, int colonne) {

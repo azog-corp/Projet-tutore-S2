@@ -9,10 +9,8 @@ package crapouille.interfaceFx;
 
 import java.time.LocalDate;
 
-import crapouille.Ordinateur;
 import crapouille.Partie;
 import crapouille.Pion;
-import crapouille.Plateau;
 import crapouille.configuration.Configuration;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -703,7 +701,7 @@ public class interfaceAppliController {
 				int nbColonne = Integer.parseInt( tb_nbColonneConf.getText());
 				if (ligneEstValide(nbLigne) && colonneEstValide(nbColonne)) {
 					erreurCreationConfig.setVisible(false);
-					Partie.setConfigPlateau(nbLigne, nbColonne);
+					Partie.setCurrentPlateau(nbLigne, nbColonne);
 					// TODO recupNomConf(); recupérer le nom pour enregistrer
 					showCreationConfig(); 
 				} else {
@@ -748,8 +746,8 @@ public class interfaceAppliController {
 					erreurPlacementPion.setVisible(false);
 					Pion placementUti = new Pion(lignePion,colonnePion,
 							recupType(tb_cordType.getText().charAt(0)));
-					Partie.getConfigPlateau().setCase(placementUti);
-					rafraichirConf(Partie.getConfigPlateau().toString());
+					Partie.getCurrentPlateau().setCase(placementUti);
+					rafraichirConf(Partie.getCurrentPlateau().toString());
 				} else {
 					erreurPlacementPion.setVisible(true);
 					erreurPlacementPion.setText(MESSAGE_ERREUR
@@ -831,7 +829,7 @@ public class interfaceAppliController {
 	 */
 	@FXML
 	void enregistrerConfig(MouseEvent Click) {
-		Configuration config = new Configuration (Partie.getConfigPlateau().getPlateau(), nomConfig);
+		Configuration config = new Configuration (Partie.getCurrentPlateau().getPlateau(), nomConfig);
 		Configuration.listConfiguration.add(config);
 	}
 
@@ -909,7 +907,7 @@ public class interfaceAppliController {
 	void showCreationConfig() { 
 		initialisationConfig.setVisible(false);
 		placementConfig.setVisible(true);
-		rafraichirConf(Partie.getConfigPlateau().toString());
+		rafraichirConf(Partie.getCurrentPlateau().toString());
 	}
 
 

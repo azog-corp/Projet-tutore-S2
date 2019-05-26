@@ -95,7 +95,7 @@ public class Configuration implements Serializable {
 	}
 	
 	public boolean testNombreEgal() {
-	    Pion[][] aTester = Partie.getConfigPlateau().getPlateau();
+	    Pion[][] aTester = Partie.getCurrentPlateau().getPlateau();
 	    int nbCrapaud = 0;
 	    int nbGrenouille = 0;
 	    for (int x = 0; x < aTester[0].length; x++) {

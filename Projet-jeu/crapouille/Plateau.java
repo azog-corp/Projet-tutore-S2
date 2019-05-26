@@ -56,17 +56,11 @@ public class Plateau implements Serializable {
 		this.colonneConf = plateau[0].length;
 		for (int x = 0 ; x < this.ligneConf ; x++) {
 			for (int y = 0 ; y < this.colonneConf ; y++) {
-				this.plateau[x][y] = plateau[x][y];
 				if (this.plateau[x][y] != null) {
 					this.nbPion++;
 				}
 			}
 		}
-		System.out.println(this.ligneConf);
-		System.out.println(this.colonneConf);
-		System.out.println(this.plateau.length);
-		System.out.println(this.plateau[0].length);
-		System.out.println(this.nbPion);
 		setBatracien();
 	}
 	
