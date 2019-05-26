@@ -135,7 +135,7 @@ public class Plateau implements Serializable {
 	 */
 	public void movePion(Pion pion) {
 		this.plateau[pion.getLigne()][pion.getColonne()] = null;
-		pion.setColonne(this.plateau);
+		pion.setColonne(this.plateau, this.ligneConf);
 		this.plateau[pion.getLigne()][pion.getColonne()] = pion;
 		for (int x = 0 ; x < this.ligneConf ; x++) {
 			if (this.plateau[pion.getLigne()][x] != null) {
@@ -214,7 +214,7 @@ public class Plateau implements Serializable {
 	 */
 	public String toString() {
 		StringBuilder plateauString = new StringBuilder();
-		plateauString.append(" |");
+		plateauString.append("  | ");
 		for (int z = 0 ; z < this.colonneConf ; z++) {
 			plateauString.append(z+1 + " | ");
 		}
@@ -223,9 +223,9 @@ public class Plateau implements Serializable {
 			for (int y = 0 ; y < this.colonneConf ; y++) {
 				if (this.plateau[x][y] != null) {
 					if (this.plateau[x][y].isCrapaud()) {
-						plateauString.append("C|");
+						plateauString.append(" C |");
 					} else if (!this.plateau[x][y].isCrapaud()) {
-						plateauString.append("G|");
+						plateauString.append(" G |");
 					}
 				} else {
 					plateauString.append("   |");

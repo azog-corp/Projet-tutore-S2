@@ -5,32 +5,32 @@ import crapouille.configuration.Configuration;
 
 public class TestPartie {
 
-	private static void testTourEntite() {
-		
+	private static void testMovePion() {
+
 		int ligne,
 		colonne,
 		pionCorrect;
 
-		Partie.setChoixAdversaire(0);
-		Partie.setChoixModeDeJeu(0);
+		Partie.loadConfig(0);
 		System.out.println("\n\nTentative de déplacement de tous les pions\n"
 				+ Partie.getCurrentPlateau().toString());
-		for (int x = 0 ; x < Partie.getCurrentPlateau().getBatracien()[0].length ; x++) {
-			ligne = Partie.getCurrentPlateau().getBatracien()[0][x].getLigne();
-			colonne = Partie.getCurrentPlateau().getBatracien()[0][x].getColonne();
-			if (Partie.tourEntite(ligne, colonne) && Partie.tourEntite(ligne, colonne)) {
-				System.out.println("Pion déplacé");
+		for (int x = 0 ; x < Partie.currentPlateau.getPlateau()[0].length ; x++) {
+			for (int y = 0 ; y < Partie.currentPlateau.getPlateau().length ; y++) {
+				if (Partie.getCurrentPlateau().getPlateau()[y][x] != null) {
+					Partie.getCurrentPlateau().movePion(Partie.getCurrentPlateau().getPlateau()[x][y]);
+					System.out.println("yes");
+					x++;
+				}
 			}
 		}
-		System.out.println(Partie.currentPlateau.toString());
+		System.out.println("\n" + Partie.currentPlateau.toString());
 	}
 
 	public static void main(String[] args) {
 		Configuration.initConfig();
-		Partie.loadConfig(0);
 		System.out.println("----- Test visuel des différentes fonction -----");
 		System.out.println(Partie.getCurrentPlateau().toString());
-		testTourEntite();
+		testMovePion();
 
 	}
 
