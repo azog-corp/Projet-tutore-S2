@@ -143,12 +143,16 @@ public class Partie implements Serializable {
 		departPartie = debut;
 	}
 
+	public static int getTourEquipe() {
+		return tourEquipe;
+	}
+
 	public static void loadConfig(int choixConfig) {
 		currentPlateau = new Plateau(Configuration.listConfiguration.get(choixConfig).getConfigPlateau());
 		tourEquipe = 0;
 	}
 
-	public static void tourEntite(int ligne, int colonne) {
+	public static Boolean tourEntite(int ligne, int colonne) {
 		boolean tourFait = false;
 		System.out.println(tourEquipe);
 		if (choixModeDeJeu == 1) {
@@ -156,7 +160,6 @@ public class Partie implements Serializable {
 				currentPlateau.movePion(currentPlateau.pionValide(tourEquipe, ligne, colonne));
 				tourEquipe = tourEquipe == 0 ? 1 : 0;
 				tourFait = true;
-				System.out.println("yes");
 			}
 			if (choixAdversaire != 0 && tourFait) {
 				Ordinateur.choixOrdi(currentPlateau, 
@@ -165,10 +168,11 @@ public class Partie implements Serializable {
 				tourEquipe = 0;
 				System.out.println("yess");
 			}
-		} else if ((currentPlateau.pionValide(0, ligne, colonne) != null)) {
+		} else if ((choixModeDeJeu == 0 && currentPlateau.pionValide(0, ligne, colonne) != null)) {
 			currentPlateau.movePion(currentPlateau.pionValide(0, ligne, colonne));
-		} else if ((currentPlateau.pionValide(0, ligne, colonne) != null)) {
+		} else if ((choixModeDeJeu == 0 && currentPlateau.pionValide(0, ligne, colonne) != null)) {
 			currentPlateau.movePion(currentPlateau.pionValide(1, ligne, colonne));
 		}
+		return tourFait;
 	}
 }

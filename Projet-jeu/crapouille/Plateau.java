@@ -191,7 +191,7 @@ public class Plateau implements Serializable {
 		nbPion = ligne = colonne = 0; // On commence par la colonne la plus Ã  gauche
 		// Pour chaque ligne du tableau
 		while (ligne < ligneConf) {
-			if (this.plateau[ligne][colonne] != null || this.plateau[ligne][colonne] != null) {
+			if (this.plateau[ligne][colonne] != null) {
 				if (this.plateau[ligne][colonne] != null && this.plateau[ligne][colonne].isCrapaud()) {
 					nbPion++;
 					colonne++;
