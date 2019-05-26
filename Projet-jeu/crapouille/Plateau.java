@@ -33,8 +33,8 @@ public class Plateau implements Serializable {
 	
 	/**
 	 * Tableau contenant toutes les instances de pions
-	 * prÃ©sentent sur le plateau.
-	 * La premiÃ¨re ligne contient tous les pion grenouilles
+	 * présentent sur le plateau.
+	 * La première ligne contient tous les pion grenouilles
 	 * et la seconde tous les crapaud
 	 */
 	private Pion[][] batracien = new Pion[2][];
@@ -45,8 +45,8 @@ public class Plateau implements Serializable {
 	private Pion[][] plateau;
 
 	/**
-	 * Plateau sur lequel sont placÃ©s et dÃ©placÃ©s
-	 * chaque pion des deux Ã©quipes.
+	 * Plateau sur lequel sont placés et déplacés
+	 * chaque pion des deux équipes.
 	 * Les dimensions de celui-ci ne sont
 	 * pas necessairement celles de la configuaration
 	 */
@@ -56,6 +56,7 @@ public class Plateau implements Serializable {
 		this.colonneConf = plateau[0].length;
 		for (int x = 0 ; x < this.ligneConf ; x++) {
 			for (int y = 0 ; y < this.colonneConf ; y++) {
+				this.plateau[x][y] = plateau[x][y];
 				if (this.plateau[x][y] != null) {
 					this.nbPion++;
 				}
@@ -81,7 +82,7 @@ public class Plateau implements Serializable {
 	}
 
 	/**
-	 * Fonction appelÃ© lors de la crÃ©ation d'une configuration
+	 * Fonction appelé lors de la création d'une configuration
 	 * et qui initialise l'attribut bloque de chaque pion
 	 */
 	public void initBloque() {
@@ -95,7 +96,7 @@ public class Plateau implements Serializable {
 	}
 	
 	/**
-	 * Fonction appelÃ© lors du chargement d'une configuration
+	 * Fonction appelé lors du chargement d'une configuration
 	 * et qui met dans le tableau batracien toutes les
 	 * instances des pions grenouilles et crapaud
 	 */
@@ -119,18 +120,18 @@ public class Plateau implements Serializable {
 	}
 	
 	/**
-	 * Associe un pion Ã  une case du plateau
-	 * @param pion, Le pion qui doit Ãªtre associÃ©
+	 * Associe un pion à une case du plateau
+	 * @param pion, Le pion qui doit être associé
 	 */
 	public void setCase(Pion pion) {
 		this.plateau[pion.getLigne()][pion.getColonne()] = pion;
 	}
 	
 	/**
-	 * Cette fonction dÃ©place un pion sur le plateau, puis change
-	 * la colonne de celui-ci et enfin, rÃ©initialise l'attribut
-	 * bloque de chaque pion prÃ©sent sur la ligne du pion dÃ©placÃ©
-	 * @param pion le pion bougÃ©
+	 * Cette fonction déplace un pion sur le plateau, puis change
+	 * la colonne de celui-ci et enfin, réinitialise l'attribut
+	 * bloque de chaque pion présent sur la ligne du pion déplacé
+	 * @param pion le pion bougé
 	 */
 	public void movePion(Pion pion) {
 		this.plateau[pion.getLigne()][pion.getColonne()] = null;
@@ -144,12 +145,12 @@ public class Plateau implements Serializable {
 	}
 	
 	/**
-	 * VÃ©rifie si un pion dont les coordonnÃ©es sont placÃ©es en argument
-	 * existe et s'il appartient Ã  l'Ã©quipe dont c'est le tour
-	 * @param equipe 0 sigifie l'Ã©quipe grnouille, 1 l'Ã©quipe crapaud
+	 * Vérifie si un pion dont les coordonnées sont placées en argument
+	 * existe et s'il appartient à l'équipe dont c'est le tour
+	 * @param equipe 0 sigifie l'équipe grnouille, 1 l'équipe crapaud
 	 * @param ligne du potentiel pion
 	 * @param colonne du potentiel pio
-	 * @return true si le pion existe et appartient Ã  la vonne Ã©quipe
+	 * @return true si le pion existe et appartient à la vonne équipe
 	 */
 	public Pion pionValide(int equipe, int ligne, int colonne) {
 		for (int x = 0 ; x < this.batracien[0].length ; x++) {
@@ -163,13 +164,13 @@ public class Plateau implements Serializable {
 	}
 	
 	/**
-	 * VÃƒÂ©rifie si tous les pions d'une ÃƒÂ©quipe sont bloquÃƒÂ©s
+	 * VÃ©rifie si tous les pions d'une Ã©quipe sont bloquÃ©s
 	 * @param equipe 0 pour les grenouille et 1 pour les crapauds
-	 * @return true si les pions sont ploquÃƒÂ©
+	 * @return true si les pions sont ploquÃ©
 	 */
 	public boolean victoire(int equipe) {
 		for (int x = 0 ; x < this.batracien[equipe].length ; x++) {
-			// Si un pion n'est pas bloquÃƒÂ©, alors c'est faux
+			// Si un pion n'est pas bloquÃ©, alors c'est faux
 			if (!this.batracien[equipe][x].isBloque()) {
 				return false;
 			}
@@ -178,20 +179,20 @@ public class Plateau implements Serializable {
 	}
 	
 	/**
-	 * VÃƒÂ©rifie si toutes les grenouilles sont ÃƒÂ  droite
-	 * et si tous les crapaud sont ÃƒÂ  gauche
+	 * VÃ©rifie si toutes les grenouilles sont Ã  droite
+	 * et si tous les crapaud sont Ã  gauche
 	 * @return true si c'est vrai
 	 */
 	public boolean victoireCasseTete() {
-		int nbPion, // Nombre de pion bien placÃƒÂ©s
+		int nbPion, // Nombre de pion bien placÃ©s
 		colonne, // Colonne sur laquelle on fait une recherche des grenouille
 		colonneC = this.colonneConf, // Colonne sur laquelle on fait une recherche des crapaud
 		pionVictoire = this.batracien[0].length*2, // Nombre total de pion
 		ligne;
-		nbPion = ligne = colonne = 0; // On commence par la colonne la plus ÃƒÂ  gauche
+		nbPion = ligne = colonne = 0; // On commence par la colonne la plus Ã  gauche
 		// Pour chaque ligne du tableau
 		while (ligne < ligneConf) {
-			if (this.plateau[ligne][colonne] != null) {
+			if (this.plateau[ligne][colonne] != null || this.plateau[ligne][colonne] != null) {
 				if (this.plateau[ligne][colonne] != null && this.plateau[ligne][colonne].isCrapaud()) {
 					nbPion++;
 					colonne++;
@@ -208,7 +209,7 @@ public class Plateau implements Serializable {
 	}
 	
 	/**
-	 * CrÃ©e un String qui reprÃ©sente le plateau de jeu
+	 * Crée un String qui représente le plateau de jeu
 	 * avec les pions et leur type
 	 */
 	public String toString() {
