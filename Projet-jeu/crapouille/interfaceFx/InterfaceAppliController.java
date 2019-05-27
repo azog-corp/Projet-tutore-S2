@@ -808,13 +808,16 @@ public class InterfaceAppliController {
 	 */
 	@FXML
 	void enregistrerConfig(MouseEvent Click) {
+		if (Plateau.plateauEstValide(Partie.config)) {
 		Plateau config = new Plateau(Partie.config);
 		Configuration newConfig = new Configuration (config.getPlateau(), nomConfig);
 		Configuration.listConfiguration.add(newConfig);
 		showMsgbox(MSGBOX_TITRE, "Votre confirmation a bien été enregistrée", true);
 		reinitialiser();
 		menu.setVisible(true);
-
+		} else {
+			// TODO Aficher que c'est faux
+		}
 	}
 
 	/**

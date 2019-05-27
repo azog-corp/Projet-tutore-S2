@@ -221,23 +221,25 @@ public class Plateau implements Serializable {
 		boolean noCrapaud = false;
 		boolean noGrenouille = false;
 		int nbCrapaud = 0,
-		nbGrenouille = 0;
+				nbGrenouille = 0;
 		if (plateau.length > 20 || plateau[0].length > 20) {
+			System.out.println("merde1");
 			return false;
-		} else {
-			noCrapaud = noGrenouille = true;
 		}
-		for (int ligne = 0 ; ligne < plateau[0].length ; ligne++) {
+		for (int ligne = 0 ; ligne < plateau.length ; ligne++) {
 			if (noCrapaud || noGrenouille) {
+				System.out.println("merde2");
 				return false;
 			}
-			for (int colonne = 0 ; colonne < plateau.length ; colonne++) {
+			for (int colonne = 0 ; colonne < plateau[0].length ; colonne++) {
+				noCrapaud = noGrenouille = true;
 				if (plateau[ligne][colonne] != null && plateau[ligne][colonne].isCrapaud()) {
 					nbCrapaud++;
-					noCrapaud = true;
-				} else if (plateau[ligne][colonne] != null && !plateau[ligne][colonne].isCrapaud()) {
+					noCrapaud = false;
+				}
+				if (plateau[ligne][colonne] != null && !plateau[ligne][colonne].isCrapaud()) {
 					nbGrenouille++;
-					noGrenouille = true;
+					noGrenouille = false;
 				}
 			}
 		}
