@@ -81,7 +81,8 @@ public class Outils {
 	 * False = Erreur dans les tests le type n'est pas valide
 	 */
 	public static boolean typeValide(String type) {
-		if (type.length() != 1 || (type.charAt(0) != 'C' && type.charAt(0) != 'G')) {
+		if (type.length() != 1 || (type.charAt(0) != 'C' 
+				&& type.charAt(0) != 'G')) {
 			return false;
 		} else {
 			return true;
@@ -123,7 +124,8 @@ public class Outils {
 	 */
 	public static boolean colonneEstValide(int colonnePion) {
 		// La ligne du pion doit être supérieur à 0 et inférieure ou égal à 20  
-		return MIN_COLONNE_PION <= colonnePion && colonnePion < MAX_COLONNE_PION;
+		return MIN_COLONNE_PION <= colonnePion 
+				&& colonnePion < MAX_COLONNE_PION;
 	}	
 	
 	
@@ -146,11 +148,17 @@ public class Outils {
 		// vérification des entier ligne et colonne avec 
 		// la taille max et min d'une ligne et d'une colonne
 		// limité a 20 (pour l'instant)
-		return (MIN_LIGNE_PION <= lignePlateau || lignePlateau <= MAX_LIGNE_PION) &&
-				(MIN_COLONNE_PION <= colonnePlateau || colonnePlateau <=MAX_COLONNE_PION);
+		return (MIN_LIGNE_PION <= lignePlateau 
+				|| lignePlateau <= MAX_LIGNE_PION) &&
+				(MIN_COLONNE_PION <= colonnePlateau 
+				|| colonnePlateau <=MAX_COLONNE_PION);
 	}
 	
-	//TODO vérifier lequipe et afficher la quelle a gagner lb_nomEquipeGagnante
+	/**
+	 * Verifie si l'une des equipes a gagne
+	 * @return true si l'une des equipes a gagne
+	 * 		   false si aucun equipe a gagne et que le jeu peut continuer
+	 */
 	public static boolean verifVictoire() {
 		if (Partie.currentPlateau.victoire(0) || 
 				Partie.currentPlateau.victoire(1) || 
@@ -160,18 +168,26 @@ public class Outils {
 			return false;
 		}
 	}
-
-	public static void placementPion(int lignePion, int colonnePion, boolean recupType) {
-		Pion placementUti = new Pion(lignePion,colonnePion,recupType);
+	
+	/**
+	 * 
+	 * @param lignePion int: ligne ou se trouve le pion a ajouter/ placer
+	 * @param colonnePion int: colonne ou se trouve le pion a ajouter/ placer
+	 * @param recupType boolean: type du pion a placer (Crapaud ou grenouille)
+	 */
+	public static void placementPion(int lignePion, int colonnePion,
+													boolean type) {
+		Pion placementUti = new Pion(lignePion,colonnePion,type);
 		Partie.config[lignePion][colonnePion] = placementUti;
 	}
 	/**
-	 * Enregistre la configuration dans l'arrays qui contient toutes les configuration
-	 * 
+	 * Enregistre la configuration cree par l'utilisateur dans l'arrays 
+	 * qui contient toutes les configurations
 	 */
 	public static void enregistrerArray() {
 		Plateau config = new Plateau(Partie.config);
-		Configuration newConfig = new Configuration (config.getPlateau(),nomConfig);
+		Configuration newConfig = new Configuration (
+							config.getPlateau(),nomConfig);
 		Configuration.listConfiguration.add(newConfig);
 	}
 }

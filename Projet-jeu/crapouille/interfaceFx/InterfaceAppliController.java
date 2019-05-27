@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import crapouille.Outils;
 import crapouille.Partie;
 import crapouille.Pion;
+import crapouille.Plateau;
 import crapouille.configuration.Configuration;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -297,6 +298,7 @@ public class InterfaceAppliController {
 
 	/**
 	 * Affiche le menu principal de l'application
+	 * Et cache toutes les autres pages
 	 * @param Click
 	 */
 	@FXML
@@ -306,7 +308,9 @@ public class InterfaceAppliController {
 	}
 
 	/**
-	 * Affiche la configuration de la partie 
+	 * Affiche la page de la configuration de la partie 
+	 * Reinitialise les elements de la page pour eviter de memoriser
+	 * Si l'utilisateur a deja fait uen partie
 	 * @param Click
 	 */
 	@FXML
@@ -351,10 +355,10 @@ public class InterfaceAppliController {
 		}
 	}
 	/**
-	 * Fpnction qui verifie le mode de jeu selectionnee par lutilisateur
-	 * Si celui si est le casse tete appel les fonctions pour faire disparaitre
-	 * les elements correspondant a l'IA et la possibilite dentrer un nom de J2
-	 * sinon fait linverse
+	 * Fonction qui verifie le mode de jeu selectionnee par l'utilisateur
+	 * Si celui si est casse tete appel les fonctions pour faire disparaitre
+	 * les elements correspondant a l'IA et la possibilitee d'entrer un nom de J2
+	 * sinon fait l'inverse
 	 */
 	@FXML
 	void verificationModeJeu() {
@@ -378,7 +382,7 @@ public class InterfaceAppliController {
 	}
 
 	/**
-	 * Fonction qui décoche toutes les cases correspondant a l'IA
+	 * Fonction qui décoche toutes les radio button correspondant a l'IA
 	 */
 	void razIa() {
 		chk_vsIA.setSelected(false);
@@ -405,6 +409,7 @@ public class InterfaceAppliController {
 
 	/**
 	 * Cache les elements du J2.
+	 * (Label / text Field)
 	 */
 	@FXML
 	void cacherJ2() {
@@ -415,10 +420,10 @@ public class InterfaceAppliController {
 
 	/**
 	 * Remet tous les éléments de la page configurationPartie par defaut
-	 * deselectionne les ccheckbox et lance une fonction qui permet
+	 * deselectionne les checkbox et lance une fonction qui permet
 	 * de remettre la configuration par defaut
 	 * (comme les checkbox ne sont pas coche considere que l'utilisateur 
-	 * souhaite faire un versus contre une deuxieme joueur
+	 * souhaite faire un versus contre un deuxieme joueur
 	 */
 	@FXML
 	void razPartie() {
@@ -433,6 +438,7 @@ public class InterfaceAppliController {
 
 	/**
 	 * Fonction qui cache les éléments de l'IA
+	 * Label et TextField
 	 */
 	@FXML
 	void cacherIa() {
@@ -482,13 +488,13 @@ public class InterfaceAppliController {
 	@FXML
 	void showGameBoard(MouseEvent Click) {
 		/* Vérifie que le numéro de config saisie par l'utilisateur est correct */
-		if(configValide()) {
+		if(configValide()) { //Verfie que tous se que a rentre l'utilisateur est correct
 			/*Si c'est le cas récupère toutes les informations nécessaires*/
-			recupAdversaire();
-			recupModeJeu();
-			recupNomEquipe();
-			recupConfigurationPartie();
-			reinitialiser();
+			recupAdversaire(); //Recupere l'adversaire choisi par l'utilisateur
+			recupModeJeu(); //Recupere le mode de jeu choisi par l'utilisateur
+			recupNomEquipe(); //Recupere les/le nom dequipe choisi par l'utilisateur
+			recupConfigurationPartie(); //Recupere la configuration choisie par l'utilisateur
+			reinitialiser(); // Fait disparaitre toutes les autres pages
 			/*Fait apparaitre le plateau de jeu */
 			gameBoard.setVisible(true);
 			jeuEnCours.setVisible(true);
@@ -537,6 +543,7 @@ public class InterfaceAppliController {
 					Partie.tourEntite(lignePion, colonnePion); // TODO verif pion correcte deja faite ?\
 					Partie.setNbCoups(Partie.getNbCoups()+1); //TODO verif casse tt
 					rafraichirJeu(Partie.getCurrentPlateau().toString());
+		/* Affichage des messages d'erreurs a l'utilisateur pour lui siganler le probleme */
 				} else {
 					showMsgbox(MSGBOX_TITRE, MESSAGE_ERREUR
 							+ MSGBOX_NOMBRE,false);
@@ -551,13 +558,20 @@ public class InterfaceAppliController {
 					+ MSGBOX_VIDE,
 					false);
 		}
-		//TODO enlever défaite
+		/* Verifie que aucun des participants n'a gagne
+		 * Si cest le cas affiche le panneau de victoire
+		 */
+		//TODO mettre le nom de lequipe gagnante
 		if (Outils.verifVictoire()) {
 			jeuEnCours.setVisible(false);
 			victoire.setVisible(true);
 		}
 	}
-
+	
+	/**
+	 * Recupere le mode de jeu celon se que l'utilisateur a selectionnee
+	 * Et le defini dans le fichier Partie
+	 */
 	private void recupModeJeu() {
 		if (chk_casseT.isSelected()) {
 			Partie.setChoixModeDeJeu(0);
@@ -567,22 +581,34 @@ public class InterfaceAppliController {
 			Partie.setChoixModeDeJeu(1);
 		}
 	}
-	//RECUPERE LE NUMERO DE LA CONFIG puis set
+	/**
+	 * Recupere le numero de la config 
+	 * Et charge la configuration correspondant au numero demande
+	 */
 	private void recupConfigurationPartie() {
 		int nConfig = Integer.parseInt(choixConfig.getText());
 		Partie.loadConfig(nConfig);
 	}
 
-	//TODO
+	/**
+	 * Verifie si la configuration entree par lutilisateur dans la page de configurationde partie
+	 * Verifie que le textField contenant le numero n'est pas vide
+	 * Qu'il n'y a pas de lettres et que et le numero existe
+	 * @return true si tous les tests sont correctes'
+	 *         false si un seul test ne passe pas9
+	 */
 	private boolean configValide() {
 		/* On vérifie que la la string n'est pas vide pour ne pas produire d'erreur par la suite */
-		if (!choixConfig.getText().isEmpty()) {
+		if (!choixConfig.getText().isEmpty()) { 
 			String configString = choixConfig.getText();
+			/* Verification qu'il n'y a pas de lettre dans lentree */
 			if(Outils.verificationLettre(configString)) {
 				int config = Integer.parseInt(choixConfig.getText());
+				/* Verification que le numero existe et correspond a uen configuration */
 				if (config >= 0 && config < Configuration.listConfiguration.size()) {
 					erreurConfigPartie.setVisible(false);
 					return true;
+		/** Affichage des differents message d'erreur selon le cas */
 				} else {
 					showMsgbox(MESSAGE_ERREUR, MSGBOX_LETTRE, false);
 				}
@@ -667,17 +693,23 @@ public class InterfaceAppliController {
 	 */
 	@FXML
 	void configInitialisation(MouseEvent Click) {
+		/* Verification que non vide */
 		if (!tb_nbLigneConf.getText().isEmpty() 
-				&& !tb_nbColonneConf.getText().isEmpty()) {
+				&& !tb_nbColonneConf.getText().isEmpty()) { 
+			/* Verification qu'il n'y pas de lettre*/
 			if (Outils.verificationLettre(tb_nbColonneConf.getText()) 
 					&& Outils.verificationLettre(tb_nbColonneConf.getText())) {
+				/* Conversion en int */
 				int nbLigne = Integer.parseInt(tb_nbLigneConf.getText());
 				int nbColonne = Integer.parseInt( tb_nbColonneConf.getText());
+				/* Verification que la ligne est la colonne est valide */
 				if (Outils.ligneEstValide(nbLigne) && Outils.colonneEstValide(nbColonne)) {
 					erreurCreationConfig.setVisible(false);
+					/* Initialise le tableau a la taille choisie par l'uti */
 					Partie.config = new Pion[nbLigne][nbColonne];
 					recupNomConf(); //recupère le nom pour enregistrer
-					showCreationConfig(); 
+					showCreationConfig();  //Affiche la page de creation de config
+		/* Affichage des differentes erreurs */	
 				} else {
 					showMsgbox(MSGBOX_TITRE, MESSAGE_ERREUR 
 							+ MSGBOX_NOMBRE,
@@ -706,22 +738,29 @@ public class InterfaceAppliController {
 	@FXML
 	void ajoutPionConfig(MouseEvent Click) {
 		System.out.println(tb_cordColonne.getText());
+		/* Verification que non vide */
 		if (!tb_cordColonne.getText().isEmpty() 
 				&& !tb_cordLigne.getText().isEmpty()) {
 			String colonne = tb_cordColonne.getText();
 			String ligne = tb_cordLigne.getText();
+			/* Verification qu'il n'y pas de lettre*/
 			if (Outils.verificationLettre(ligne) 
 					&& Outils.verificationLettre(colonne)) {
 				int colonnePion = Integer.parseInt(colonne);
 				int lignePion = Integer.parseInt(ligne);
 				colonnePion--;
 				lignePion--;
+				/* Verification que les coordonnes corresponde bien a une coordonnes
+				 * dans le tableau de jeu
+				 */
 				if (Outils.cordOk(lignePion,colonnePion)) {
+					/* Verification le type entre par l'uti est valide */
 					if (Outils.typeValide(tb_cordType.getText())) {
 						erreurPlacementPion.setVisible(false);
 						Outils.placementPion(lignePion,colonnePion,
 								Outils.recupType(tb_cordType.getText().charAt(0)));
 						rafraichirConf(Partie.configToString());
+		/* Affichage des differentes erreurs */
 					} else {
 						showMsgbox(MSGBOX_TITRE,
 								MESSAGE_ERREUR + MSGBOX_TYPE, false);
@@ -802,6 +841,7 @@ public class InterfaceAppliController {
 	 * Sur la page de placement des pions dans configuration
 	 * @param Click clic de l'utilisateur declanchant l'appel de la fonction
 	 */
+	//TODO commenter
 	@FXML
 	void enregistrerConfig(MouseEvent Click) {
 		if (Plateau.plateauEstValide(Partie.config)) {
@@ -823,11 +863,11 @@ public class InterfaceAppliController {
 	 * (remplacera donc la configuration par defaut)
 	 * @return nom Le nom de la configuration qui sera cree
 	 */
-	//	public int recupConf() { 
-	//		
-	//	}
 	public void recupNomConf() {
 		if (tb_nomConf.getText().isEmpty()) {
+			/* Si lutilisateur na rien rentre definit un format par defaut soit
+			 * Configuration + le numero que prendra la configuration dans letat actuel du systeme
+			 */
 			Outils.nomConfig = "Configuration n°" + Configuration.listConfiguration.size();
 		} else {
 			Outils.nomConfig = tb_nomConf.getText();
@@ -891,7 +931,13 @@ public class InterfaceAppliController {
 	 */
 
 	/*--------------- FONCTION AFFICHAGE ERREUR  ---------------*/
-
+	/**
+	 * Affiche les messages voulu dans des message box a l'utilisateur
+	 * @param titreFenetre Le titre de la messagebox
+	 * @param texteFenetre Le meesage a afficher a l'utilisateur
+	 * @param typeFenetre Le type de la fenetre false pour erreur 
+	 * 											true pour information
+	 */
 	private void showMsgbox(String titreFenetre, String texteFenetre, boolean typeFenetre) {
 		Alert msgUti;
 		if (typeFenetre) {
