@@ -175,12 +175,12 @@ public class Partie implements Serializable {
 	public static String configToString() {
 		StringBuilder configString = new StringBuilder();
 		configString.append("  | ");
-		for (int z = 0 ; z < config.length ; z++) {
+		for (int z = 0 ; z < config[0].length ; z++) {
 			configString.append(z+1 + " | ");
 		}
 		for (int x = 0 ; x < config.length ; x++) {
 			configString.append("\n" + (x+1) + " |");
-			for (int y = 0 ; y < config.length ; y++) {
+			for (int y = 0 ; y < config[0].length ; y++) {
 				if (config[x][y] != null) {
 					if (config[x][y].isCrapaud()) {
 						configString.append(" C |");

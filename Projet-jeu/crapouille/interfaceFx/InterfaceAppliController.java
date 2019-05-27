@@ -557,7 +557,7 @@ public class InterfaceAppliController {
 			victoire.setVisible(true);
 		}
 	}
-	
+
 	private void recupModeJeu() {
 		if (chk_casseT.isSelected()) {
 			Partie.setChoixModeDeJeu(0);
@@ -572,7 +572,7 @@ public class InterfaceAppliController {
 		int nConfig = Integer.parseInt(choixConfig.getText());
 		Partie.loadConfig(nConfig);
 	}
-	
+
 	//TODO
 	private boolean configValide() {
 		/* On vérifie que la la string n'est pas vide pour ne pas produire d'erreur par la suite */
@@ -594,7 +594,7 @@ public class InterfaceAppliController {
 		}
 		return false;
 	}
-		
+
 	//TODO verfier validite MVC
 	private void recupNomEquipe() {
 		if (Partie.getChoixModeDeJeu() == 0 || Partie.getChoixAdversaire() != 0
@@ -720,7 +720,7 @@ public class InterfaceAppliController {
 					if (Outils.typeValide(tb_cordType.getText())) {
 						erreurPlacementPion.setVisible(false);
 						Outils.placementPion(lignePion,colonnePion,
-						Outils.recupType(tb_cordType.getText().charAt(0)));
+								Outils.recupType(tb_cordType.getText().charAt(0)));
 						rafraichirConf(Partie.configToString());
 					} else {
 						showMsgbox(MSGBOX_TITRE,
@@ -804,11 +804,17 @@ public class InterfaceAppliController {
 	 */
 	@FXML
 	void enregistrerConfig(MouseEvent Click) {
-		Outils.enregistrerArray();
-		showMsgbox(MSGBOX_TITRE, "Votre confirmation a bien été enregistrée", true);
-		reinitialiser();
-		menu.setVisible(true);
-
+		if (Plateau.plateauEstValide(Partie.config)) {
+			Plateau config = new Plateau(Partie.config);
+			Configuration newConfig = new Configuration (config.getPlateau(), Outils.nomConfig);
+			Configuration.listConfiguration.add(newConfig);
+			Outils.enregistrerArray();
+			showMsgbox(MSGBOX_TITRE, "Votre confirmation a bien été enregistrée", true);
+			reinitialiser();
+			menu.setVisible(true);
+		} else {
+			// TODO Aficher que c'est faux
+		}
 	}
 
 	/**
