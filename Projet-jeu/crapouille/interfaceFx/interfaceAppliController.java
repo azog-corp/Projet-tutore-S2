@@ -2,17 +2,15 @@
  * interfaceAppliController.java
  * Azog-corp 2019, droit d'auteur
  */
-
+//TODO toutes les fonctions sans @FXML a mettre dans partie pour faire moin de ligne
 
 package crapouille.interfaceFx;
 
 
 import java.time.LocalDate;
 
-import crapouille.Ordinateur;
 import crapouille.Partie;
 import crapouille.Pion;
-import crapouille.Plateau;
 import crapouille.configuration.Configuration;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -45,12 +43,18 @@ public class interfaceAppliController {
 	final static int DEUXIEME_CHIFFRE_COLONNE = 5; // position du 2e chiffre de l'entier
 
 	private String nom;
+	private String nomConfig;
+
+	final static String MESSAGE_ERREUR = "Les informations rentrés sont invalides : ";
 
 	@FXML
 	private AnchorPane gameBoard;
 
 	@FXML
 	private AnchorPane backpanel;
+
+	@FXML
+	private Label erreurSuppressionConfig;
 
 	@FXML
 	private Button btn_jouermenu;
@@ -62,6 +66,12 @@ public class interfaceAppliController {
 	private TextField tb_nbColonneConf;
 
 	@FXML
+	private TextField entreeColonne;
+
+	@FXML
+	private AnchorPane defaite;
+
+	@FXML
 	private AnchorPane score;
 
 	@FXML
@@ -69,6 +79,9 @@ public class interfaceAppliController {
 
 	@FXML
 	private Button btn_quittermenu;
+
+	@FXML
+	private TextField tb_cordType;
 
 	@FXML
 	private AnchorPane createur;
@@ -80,7 +93,19 @@ public class interfaceAppliController {
 	private Label gameBoardString;
 
 	@FXML
+	private TextField tb_cordColonne;
+
+	@FXML
+	private TextField entreeLigne;
+
+	@FXML
+	private AnchorPane jeuEnCours;
+
+	@FXML
 	private ImageView btn_quitter;
+
+	@FXML
+	private TextField tb_idConf;
 
 	@FXML
 	private Button btn_ajouterConf;
@@ -101,6 +126,9 @@ public class interfaceAppliController {
 	private Label NOM;
 
 	@FXML
+	private Label erreurPlacementPion;
+
+	@FXML
 	private AnchorPane choixConf;
 
 	@FXML
@@ -119,12 +147,6 @@ public class interfaceAppliController {
 	private CheckBox chk_casseT;
 
 	@FXML
-	private TextField tb_cord;
-
-	@FXML
-	private TextField entreeUti;
-
-	@FXML
 	private ImageView btn_configuration;
 
 	@FXML
@@ -132,6 +154,12 @@ public class interfaceAppliController {
 
 	@FXML
 	private TextField tb_nomConf;
+
+	@FXML
+	private Label erreurEntreePartie;
+
+	@FXML
+	private TextField tb_cordLigne;
 
 	@FXML
 	private AnchorPane initialisationConfig;
@@ -149,6 +177,9 @@ public class interfaceAppliController {
 	private ImageView btn_mvp;
 
 	@FXML
+	private AnchorPane victoire;
+
+	@FXML
 	private Button btn_supprimerConf;
 
 	@FXML
@@ -158,10 +189,19 @@ public class interfaceAppliController {
 	private Label afficherConfig;
 
 	@FXML
+	private Label erreurCreationConfig;
+
+	@FXML
+	private Label lb_nomEquipeGagnante;
+
+	@FXML
 	private RadioButton lvl2;
 
 	@FXML
 	private RadioButton lvl3;
+
+	@FXML
+	private Button btn_supprimerConfig;
 
 	@FXML
 	private Button btn_validerConfig;
@@ -176,6 +216,9 @@ public class interfaceAppliController {
 	private ImageView btn_acceuil;
 
 	@FXML
+	private Label configAdel;
+
+	@FXML
 	private Label lb_nomJ2;
 
 	@FXML
@@ -185,10 +228,19 @@ public class interfaceAppliController {
 	private AnchorPane menu;
 
 	@FXML
+	private Button btn_AjouterPion1;
+
+	@FXML
 	private Label listeConfigDispo;
 
 	@FXML
 	private Label nomMVP;
+
+	@FXML
+	private Button btn_AjouterPion;
+
+	@FXML
+	private Label erreurConfigPartie;
 
 	@FXML
 	private Text scoreMVP;
@@ -199,7 +251,6 @@ public class interfaceAppliController {
 	@FXML
 	private RadioButton lvl1;
 
-	private String nomConfig;
 
 	/* --------------------------------------------------------
 	 * --------------- FONCTION NAVIGATION MENU --------------- 
@@ -335,7 +386,7 @@ public class interfaceAppliController {
 	}
 
 	/**
-	 * Fonction decoche toutes les cases correspondant a l'IA
+	 * Fonction qui décoche toutes les cases correspondant a l'IA
 	 */
 	void razIa() {
 		chk_vsIA.setSelected(false);
@@ -410,7 +461,14 @@ public class interfaceAppliController {
 		lb_nomJ2.setVisible(true);
 		tb_nomJ2.setVisible(true);
 	}
-
+	
+	/**
+	 * Si la case IA est coché
+	 * affiche les différents radio button qui définissent le niveau de l'ordinateur
+	 * et coche par défaut le niveau 1
+	 * Cache aussi les éléments du J2 car ceux ci ne sont plus nécessaires
+	 * dans le cas d'une partie contre un ordi
+	 */
 	@FXML
 	void caseIaCheck() {
 		lvl1.setVisible(true);
@@ -420,40 +478,98 @@ public class interfaceAppliController {
 		lvl1.setSelected(true);
 		cacherJ2();
 	}
-
+	
+	/**
+	 * Si la config rentré par l'utilisateur est correct
+	 * Si c'est le cas appel des fonction qui récupère :
+	 * L'adversaire voulut, le mode de jeu, les noms des équipes s'il n'y en 
+	 * a pas affecte un nom par défaut, la configuration
+	 * Puis affiche le plateau de jeu
+	 * @param Click
+	 */
 	@FXML
 	void showGameBoard(MouseEvent Click) {
-		if(chercherConfig()) {
+		/* Vérifie que le numéro de config saisie par l'utilisateur est correct */
+		if(configValide()) {
+			/*Si c'est le cas récupère toutes les informations nécessaires*/
 			recupAdversaire();
 			recupModeJeu();
 			recupNomEquipe();
 			recupConfigurationPartie();
 			reinitialiser();
+			/*Fait apparaitre le plateau de jeu */
 			gameBoard.setVisible(true);
+			jeuEnCours.setVisible(true);
+			/* Fait disparaitre les pages defaite et victoire par précaution
+			 * (ex: si une partie précédente c'est terminé l'interface
+			 * sera sur la page de victoire pour empecher cela on force l'application 
+			 * a revenir a son fonctionnement par défaut soit le plateau de jeu
+			 */
+			defaite.setVisible(false);
+			victoire.setVisible(false);
+			/* Met a jour l'affichage */
 			rafraichirJeu(Partie.getCurrentPlateau().toString());
+			//TODO si mode de jeu = casse tete et recuperer le temps a la fin quand victoire
 			Partie.setDepartPartie(LocalDate.now());
 		}
-		//Lancer chrono
 	}
 
-
+	/**
+	 * Lorsque le joueur est entrain de jouer une partie
+	 * vérifie que toutes les entrées de l'utilisateur sont correctes
+	 * Si c'est le cas appel la fonction pour deplacer le pion
+	 * et met a jour l'affichage
+	 * @param Click
+	 */
 	@FXML
-	void actualiserJeu(MouseEvent Click) {
-		if (!entreeUti.getText().isEmpty()) {
-			String cord = entreeUti.getText();
-			System.out.println(formatEstValide(cord));
-			if (cord.length() == 6 && formatEstValide(cord)) {
-				int colonnePion = recupereColonnePion(cord);
-				int lignePion = recupereLignePion(cord);
-				System.out.println(colonnePion);
-				System.out.println(lignePion);
-				colonnePion--;
-				lignePion--;
-				Partie.tourEntite(lignePion, colonnePion);
-				rafraichirJeu(Partie.getConfigPlateau().toString());
+	private void actualiserJeu(MouseEvent Click) {
+		/* Vérifie que les TextField ne sont pas vide pour ne pas produire d'erreur */
+		if (!entreeLigne.getText().isEmpty() &&
+				!entreeColonne.getText().isEmpty()) { 
+			/* Récupère dans des string la ligne et la colonne entrée par l'utilisateur */
+			String ligne = entreeLigne.getText();
+			String colonne = entreeColonne.getText();
+			/* Vérifie s'il n'y a pas de lettre avant de convertir en int les entrées
+			 * pour ne pas produire d'erreur
+			 */
+			if (verificationLettre(ligne) && verificationLettre(colonne)) {
+				erreurEntreePartie.setVisible(false);
+				/*Conversion en int des entrées texte de l'utilisateur */
+				int colonnePion = Integer.parseInt(colonne);
+				int lignePion = Integer.parseInt(ligne);
+				if (colonneEstValide(colonnePion) && ligneEstValide(lignePion)) {
+					colonnePion--;
+					lignePion--;
+					Partie.tourEntite(lignePion, colonnePion); // TODO verif pion correcte deja faite ?
+					System.out.println(Partie.getCurrentPlateau().toString());
+					rafraichirJeu(Partie.getCurrentPlateau().toString());
+					Partie.setNbCoups(Partie.getNbCoups()+1); //TODO verif casse tt
+				} else {
+					erreurEntreePartie.setVisible(true);
+					erreurEntreePartie.setText(MESSAGE_ERREUR
+							+"Nombre trop grand ou trop petit vérifier votre saisie");
+				}
+			} else {
+				erreurEntreePartie.setVisible(true);
+				erreurEntreePartie.setText(MESSAGE_ERREUR
+						+"Ne doit contenir que des chiffres");
 			}
+		} else {
+			erreurEntreePartie.setVisible(true);
+			erreurEntreePartie.setText(MESSAGE_ERREUR
+					+"Ne doit pas être vide");
 		}
-		
+		verifVictoire();
+	}
+
+	//TODO vérifier lequipe et afficher la quelle a gagner lb_nomEquipeGagnante
+	private void verifVictoire() {
+		if (Partie.currentPlateau.victoire(0) || 
+				Partie.currentPlateau.victoire(1) || 
+				Partie.currentPlateau.victoire(1)) {
+			jeuEnCours.setVisible(false);
+			victoire.setVisible(true);
+		}
 	}
 
 	private void recupModeJeu() {
@@ -465,26 +581,37 @@ public class interfaceAppliController {
 			Partie.setChoixModeDeJeu(1);
 		}
 	}
-
+	//RECUPERE LE NUMERO DE LA CONFIG puis set
 	private void recupConfigurationPartie() {
-		if (!choixConfig.getText().isEmpty()) {
-			//regarder s'il la configuration existe
-		} else { //Sinon choisi la configuration par defaut
-			Partie.loadConfig(0);
-		}
+		int nConfig = Integer.parseInt(choixConfig.getText());
+		Partie.loadConfig(nConfig);
 	}
 	//TODO
-	private boolean chercherConfig() {
+	private boolean configValide() {
+		/* On vérifie que la la string n'est pas vide pour ne pas produire d'erreur par la suite */
 		if (!choixConfig.getText().isEmpty()) {
-			int config = Integer.parseInt(choixConfig.getText());
-			if (config < 0) { //TODO  || config > Partie.listConfiguration.length-1
-				return false;
+			String configString = choixConfig.getText();
+			if(verificationLettre(configString)) {
+				int config = Integer.parseInt(choixConfig.getText());
+				if (config >= 0 && config < Configuration.listConfiguration.size()) {
+					erreurConfigPartie.setVisible(false);
+					return true;
+				} else {
+					erreurConfigPartie.setVisible(true);
+					erreurConfigPartie.setText(MESSAGE_ERREUR
+							+ "Les lettres ne sont pas acceptées");
+				}
 			} else {
-				return true;
+				erreurConfigPartie.setVisible(true);
+				erreurConfigPartie.setText(MESSAGE_ERREUR
+						+ "Le numéro saisi n'est pas valide");
 			}
 		} else {
-			return false;
+			erreurConfigPartie.setVisible(true);
+			erreurConfigPartie.setText(MESSAGE_ERREUR
+					+ "La configuration ne peut pas être vide");
 		}
+		return false;
 	}
 
 	private void recupNomEquipe() {
@@ -536,9 +663,9 @@ public class interfaceAppliController {
 
 	public String afficherConfigDispo(){
 		StringBuilder configs = new StringBuilder();
-		for (int compteur = 0; compteur < Partie.listConfiguration.size(); compteur++) {
+		for (int compteur = 0; compteur < Configuration.listConfiguration.size(); compteur++) {
 			configs.append(compteur + " - ");
-			configs.append(Partie.listConfiguration.get(compteur).getNom());
+			configs.append(Configuration.listConfiguration.get(compteur).getNom());
 			configs.append("\n");
 		}
 		System.out.println(configs.toString());
@@ -558,6 +685,43 @@ public class interfaceAppliController {
 	/*--------------- FONCTION CONFIGURATION: TRAITEMENT DONNEES / AVANCEMENT  ---------------*/
 
 	/**
+	 * Fonction qui est declenche lorsque l'utilisateur souhaite acceder 
+	 * au plateau pour le placement des pions lors de la creation d'une config
+	 * Celle ci verifie que toutes les donnees rentre par l'utilisateur 
+	 * sont correct si se n'est pas le cas reste sur la page actuelle
+	 * @param Click clic de l'utilisateur declanchant l'appel de la fonction
+	 */
+	@FXML
+	void configInitialisation(MouseEvent Click) {
+		if (!tb_nbLigneConf.getText().isEmpty() 
+				&& !tb_nbColonneConf.getText().isEmpty()) {
+			if (verificationLettre(tb_nbColonneConf.getText()) 
+					&& verificationLettre(tb_nbColonneConf.getText())) {
+				int nbLigne = Integer.parseInt(tb_nbLigneConf.getText());
+				int nbColonne = Integer.parseInt( tb_nbColonneConf.getText());
+				if (ligneEstValide(nbLigne) && colonneEstValide(nbColonne)) {
+					erreurCreationConfig.setVisible(false);
+					Partie.setCurrentPlateau(nbLigne, nbColonne);
+					// TODO recupNomConf(); recupérer le nom pour enregistrer
+					showCreationConfig(); 
+				} else {
+					erreurCreationConfig.setVisible(true);
+					erreurCreationConfig.setText(MESSAGE_ERREUR 
+							+ "Nombres rentrés invalides trop grand ou trop petit");
+				}
+			} else {
+				erreurCreationConfig.setVisible(true);
+				erreurCreationConfig.setText(MESSAGE_ERREUR 
+						+ "Ne doit contenir que des chiffres");
+			}
+		} else {
+			erreurCreationConfig.setVisible(true);
+			erreurCreationConfig.setText(MESSAGE_ERREUR 
+					+ "Ne peut pas être vide");
+		}
+	}
+
+	/**
 	 * Recupere les coordonnees rentre par l'utilisateur lors de la creation 
 	 * de la config. Puis verifie leur validite (Type,taille,position...)
 	 * Si toutes les donnees sont valides ajoute au plateau le pion demander
@@ -566,51 +730,94 @@ public class interfaceAppliController {
 	 * @param Click clic de l'utilisateur declanchant l'appel de la fonction
 	 */
 	@FXML
-	void actualiserConfig(MouseEvent Click) {
-		if (!tb_cord.getText().isEmpty()) {
-			String cord = tb_cord.getText();
-			System.out.println(formatEstValide(cord));
-			if (cord.length() == 5 && formatEstValide(cord)) {
-				int colonnePion = recupereColonnePion(cord);
-				int lignePion = recupereLignePion(cord);
-				System.out.println(colonnePion);
-				System.out.println(lignePion);
+	//TODO corriger
+	void ajoutPionConfig(MouseEvent Click) {
+		if (!tb_cordColonne.getText().isEmpty() 
+				&& !tb_cordLigne.getText().isEmpty()) {
+			String colonne = tb_cordColonne.getText();
+			String ligne = tb_cordLigne.getText();
+			if (verificationLettre(ligne) && verificationLettre(colonne)) {
+				//TODO vérifier que marche sans la fonction (jai supprime la fonction recupereLignePion
+				int colonnePion = Integer.parseInt(colonne);
+				int lignePion = Integer.parseInt(ligne);
 				colonnePion--;
 				lignePion--;
-				Pion placementUti = new Pion(lignePion,colonnePion,
-						recupType(tb_cord.getText().charAt(0)));
-				Partie.getCurrentPlateau().setCase(placementUti);
-				rafraichirConf(Partie.getCurrentPlateau().toString());
+				if (typeValide(tb_cordType.getText())) {
+					erreurPlacementPion.setVisible(false);
+					Pion placementUti = new Pion(lignePion,colonnePion,
+							recupType(tb_cordType.getText().charAt(0)));
+					Partie.getCurrentPlateau().setCase(placementUti);
+					rafraichirConf(Partie.getCurrentPlateau().toString());
+				} else {
+					erreurPlacementPion.setVisible(true);
+					erreurPlacementPion.setText(MESSAGE_ERREUR
+							+ "Le type entré n'est pas correct");
+				}
+			} else {
+				erreurPlacementPion.setVisible(true);
+				erreurPlacementPion.setText(MESSAGE_ERREUR 
+						+ "Nombres rentrés invalides");
 			}
+		} else {
+			erreurPlacementPion.setVisible(true);
+			erreurPlacementPion.setText(MESSAGE_ERREUR 
+					+ "Ne peut pas être vide");
+		}
+	}
+	
+	/**
+	 * Fonction qui supprime une des configurations enregistrées
+	 * -> Si toutes les entrées de l'utilisateur sont correctes
+	 * @param Click
+	 */
+	@FXML
+	//TODO verification
+	void deleteConfig(MouseEvent Click) {
+		/* Vérifie que le textfield n'est pas vide pour ne pas produire d'erreur
+		 * Si c'est le cas affiche un message d'erreur
+		 */
+		if (!tb_idConf.getText().isEmpty()) {
+			String idConfig = tb_idConf.getText();
+			/* Vérifie que tous les caractères de l'information rentrées par l'utilisateur
+			 * sont bien des chiffres
+			 */
+			if (verificationLettre(idConfig)) {
+				/* Converti en int le String correspondant au numéro de la config devant être supprimé */
+				int index = Integer.parseInt(tb_idConf.getText());
+				/*Vérifie que le numéro rentré par l'utilisateur correspond bien 
+				 * a une configuration existante
+				 */
+				if (index >= 0 &&
+						index < Configuration.listConfiguration.size()) {
+					erreurSuppressionConfig.setVisible(false);
+					Configuration.listConfiguration.remove(index);
+	  /* Affichage de message d'erreur si l'une des conditions n'est pas respectée
+	   * Informant l'utilisateur de l'erreur qu'il a commise 
+	   */
+				} else {
+					erreurSuppressionConfig.setVisible(true);
+					erreurSuppressionConfig.setText(MESSAGE_ERREUR
+							+"Numéro ne correspond a aucune configuration");
+				}
+			} else {
+				erreurSuppressionConfig.setVisible(true);
+				erreurSuppressionConfig.setText(MESSAGE_ERREUR
+						+"Ne doit pas contenir de lettre");
+			}
+		} else {
+			erreurSuppressionConfig.setVisible(true);
+			erreurSuppressionConfig.setText(MESSAGE_ERREUR
+					+"Ne peut pas être vide");
 		}
 	}
 
-	/**
-	 * Fonction qui est declenche lorsque l'utilisateur souhaite acceder 
-	 * au plateau pour le placement des pions lors de la creation d'une config
-	 * Celle ci verifie que toutes les donnees rentre par l'utilisateur 
-	 * sont correct si se n'est pas le cas reste sur la page actuelle
-	 * TODO et lui indique ses erreurs
-	 * @param Click clic de l'utilisateur declanchant l'appel de la fonction
+	/** Cette fonction sera executé lorsque que l'utilisateur 
+	 * souhaite supprimer un des piosn qu'il a positionné sur le plateau
+	 * @param Click
 	 */
 	@FXML
-	void configInitialisation(MouseEvent Click) {
-		boolean test = tb_nbLigneConf.getText().isEmpty();
-		System.out.println(test);
-		if (!tb_nbLigneConf.getText().isEmpty() && !tb_nbColonneConf.getText().isEmpty()) {
-			//TODO verifier que il sagit bien de nombre
-			int nbLigne = Integer.parseInt(tb_nbLigneConf.getText());
-			int nbColonne = Integer.parseInt( tb_nbColonneConf.getText());
-			if (nbLigne < 20 && nbColonne < 20 && nbLigne <= 0 && nbColonne <= 0) {
-				Partie.setConfigPlateau(nbLigne, nbColonne);
-				// TODO recupConf();
-				showCreationConfig(); 
-			} else {
-				//TODO afficher label ne peut pas etre superieur a 20
-			}
-		} else {
-			//TODO afficher label ne peut pas etre vide
-		}
+	void supprimerPionConfig(MouseEvent Click) {
+		//TODO corriger / trouver une solution de fusion / comment supprimer
 	}
 
 	/**
@@ -623,8 +830,7 @@ public class interfaceAppliController {
 	@FXML
 	void enregistrerConfig(MouseEvent Click) {
 		Configuration config = new Configuration (Partie.getCurrentPlateau().getPlateau(), nomConfig);
-		//TODO a corriger
-		Partie.listConfiguration.add(config);
+		Configuration.listConfiguration.add(config);
 	}
 
 	/**
@@ -637,7 +843,7 @@ public class interfaceAppliController {
 	 * @param choix char rentre par l'utilisateur qui definie le type du pion
 	 */
 	private boolean recupType(char choix) {
-		return choix == 'C' || choix == 'c' ? true : false;
+		return choix == 'C' ? true : false;
 	}
 
 	/**
@@ -649,7 +855,14 @@ public class interfaceAppliController {
 	//	public int recupConf() { 
 	//		
 	//	}
-
+	public void recupNomConf() {
+		if (!tb_nomConf.getText().isEmpty()) {
+			//TODO pas tester
+			nomConfig = "Configuration n°" + Configuration.listConfiguration.size();
+		} else {
+			nomConfig = tb_nomConf.getText();
+		}
+	}
 
 
 	/*--------------- FONCTION CONFIGURATION: TRAITEMENT INTERFACE  ---------------*/
@@ -674,8 +887,15 @@ public class interfaceAppliController {
 		initialisationConfig.setVisible(true);
 	}
 
+	/**Fonction qui affiche la page supprimer config
+	 * et qui affiche toutes les configurations actuellement crées
+	 * @param Click
+	 */
 	@FXML
 	void showSupprimerConfig(MouseEvent Click) {
+		/*Affiche toutes les configurations disponibles*/
+		configAdel.setText(afficherConfigDispo());
+		/* Cache la page de sélection ajouter / supprimer config et affiche supprimer config */
 		choixConf.setVisible(false);
 		supprimerConf.setVisible(true);
 	}
@@ -701,6 +921,21 @@ public class interfaceAppliController {
 	 */
 
 	/*--------------- FONCTION ESTVALIDE  ---------------*/
+	/**
+	 * Fonction qui vérifie si uen chaine de caractère ne contient que des chiffres
+	 * @param aVerifier String a verifier la validité ( pas de nombre)
+	 * @return false si la string aVerifier contient une lettre
+	 * 		   true si la String ne contient aucune lettre
+	 */
+	public boolean verificationLettre(String aVerifier) {
+		for (int compteur = 0; compteur < aVerifier.length(); compteur ++) {
+			char tester = aVerifier.charAt(compteur);
+			if (tester < '0' || tester >'9') {
+				return false;
+			}
+		}
+		return true;	
+	}
 
 	/**
 	 * Détermine si les lignes du plateau sont corrects 
@@ -713,72 +948,19 @@ public class interfaceAppliController {
 		// vérification des entier ligne et colonne avec 
 		// la taille max et min d'une ligne et d'une colonne
 		// limité a 20 (pour l'instant)
-		if ((MIN_LIGNE_PION <= lignePlateau || lignePlateau <= MAX_LIGNE_PION) 
-				&& (MIN_COLONNE_PION <= colonnePlateau || colonnePlateau <=MAX_COLONNE_PION) ) {
-			return true;
-		}
-		return false;
+		return (MIN_LIGNE_PION <= lignePlateau || lignePlateau <= MAX_LIGNE_PION) &&
+				(MIN_COLONNE_PION <= colonnePlateau || colonnePlateau <=MAX_COLONNE_PION);
 	}
 
-	/**
-	 * Détermine si le format du coordonné du pion (du type G13;19-08;10 ou C13;19-18;10) 
-	 * est correct
-	 * @param coordonneePion est la coordonné du poin sur le plateau  
-	 * @return un booleen vrai si le formmat est valide
-	 */
-	public static boolean formatEstValide(String coordonneePion) {
-		// Ex: C ou G13;19
-		// Vérification format dans les cas suivants :
-		// - C13;19
-		// - G03;09 -> entier entre 0 et 9 se marque 00, 01, ... 09
-		if (coordonneePion.charAt(NOM_PION) == 'G' || coordonneePion.charAt(NOM_PION) == 'C'
-				&& coordonneePion.charAt(DISTINCTION_1) == ';') {
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Détermine si la coordonée de la ligne du pion est 
-	 * bien un entier positif nul
-	 * @param coordonneePion est la coordonné du poin sur le plateau
-	 * @return un booleen égal a vrai si ligne est un entier positif ou nul
-	 */
-	public static boolean ligneEstUnEntier(String coordonneePion) {
-		// Intervalle d'un entier positif ou nul 
-		if (('0' <= coordonneePion.charAt(PREMIER_CHIFFRE_LIGNE) && coordonneePion.charAt(PREMIER_CHIFFRE_LIGNE) <= '9')
-				&& ('0' <= coordonneePion.charAt(DEUXIEME_CHIFFRE_LIGNE) && coordonneePion.charAt(DEUXIEME_CHIFFRE_LIGNE) <= '9')) {
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Détermine si la coordonée de la colonne du pion est 
-	 * bien un entier positif nul 
-	 * @param coordonneePion est la coordonné du poin sur le plateau
-	 * @return un booleen égal a vrai si ligne est un entier positif ou nul
-	 */
-	public static boolean colonneEstUnEntier(String coordonneePion) {
-		// Intervalle d'un entier positif ou nul 
-		if (('0' <= coordonneePion.charAt(PREMIER_CHIFFRE_COLONNE) && coordonneePion.charAt(PREMIER_CHIFFRE_COLONNE) <= '9')
-				&& ('0' <= coordonneePion.charAt(DEUXIEME_CHIFFRE_COLONNE) && coordonneePion.charAt(DEUXIEME_CHIFFRE_COLONNE) <= '9')) {
-			return true;
-		}
-		return false;
-	}
 	/**
 	 * Détermine si le coordonée de la ligne du pion est correct  
 	 * avec le contrôle de la gestion d'erreur
 	 * @param coordonneePion est le coordonné du poin sur le plateau 
 	 * @return un booleen égal a vrai si la ligne du pion est correct
 	 */
-	public static boolean lignePionEstValide(int lignePion) {
+	public static boolean ligneEstValide(int lignePion) {
 		// La ligne du pion doit être supérieur à 0 et inférieure ou égal à 20  
-		if (MIN_LIGNE_PION <= lignePion && lignePion <= MAX_LIGNE_PION) { 
-			return true;
-		}
-		return false;
+		return MIN_LIGNE_PION <= lignePion && lignePion < MAX_LIGNE_PION;
 	}
 
 	/**
@@ -787,12 +969,9 @@ public class interfaceAppliController {
 	 * @param coordonneePion est le coordonné du poin sur le plateau 
 	 * @return un booleen égal a vrai si la colonne du pion est correct
 	 */
-	public static boolean colonnePionEstValide(int colonnePion) {
+	public static boolean colonneEstValide(int colonnePion) {
 		// La ligne du pion doit être supérieur à 0 et inférieure ou égal à 20  
-		if (MIN_COLONNE_PION <= colonnePion && colonnePion <= MAX_COLONNE_PION ) {
-			return true;
-		}
-		return false;
+		return MIN_COLONNE_PION <= colonnePion && colonnePion < MAX_COLONNE_PION;
 	}
 
 	/**
@@ -802,8 +981,8 @@ public class interfaceAppliController {
 	 */
 	public static int recupereLignePion(String coordonneePion) {
 		StringBuilder lignePion = new StringBuilder(); // lignePion est le coordonnée de la ligne du pion
+		lignePion.append(coordonneePion.charAt(0));
 		lignePion.append(coordonneePion.charAt(1));
-		lignePion.append(coordonneePion.charAt(2));
 		return Integer.parseInt(lignePion.toString());
 	}
 
@@ -814,9 +993,17 @@ public class interfaceAppliController {
 	 */
 	public static int recupereColonnePion(String coordonneePion) {
 		StringBuilder colonnePion = new StringBuilder(); // lignePion est le coordonnée de la ligne du pion
-		colonnePion.append(coordonneePion.charAt(4));
-		colonnePion.append(coordonneePion.charAt(5));
+		colonnePion.append(coordonneePion.charAt(0));
+		colonnePion.append(coordonneePion.charAt(1));
 		return Integer.parseInt(colonnePion.toString());
+	}
+	//TODO a tester jamais reessayer de creer config donc a regarder validité
+	private boolean typeValide(String type) {
+		if (type.length() != 1 || (type.charAt(0) != 'C' || type.charAt(0) != 'G')) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 }

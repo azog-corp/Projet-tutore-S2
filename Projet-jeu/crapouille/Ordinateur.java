@@ -18,7 +18,7 @@ public class Ordinateur {
 	/**
 	 * ArrayList contenant tous les pions crapaud qui ne sont pas bloqués
 	 */
-	private static ArrayList<Pion> pionLibre;
+	private static ArrayList<Pion> pionLibre = new ArrayList<Pion>();
 
 	/**
 	 * Fonction principale qui recherche en fonction du niveau de l'IA,
@@ -33,11 +33,12 @@ public class Ordinateur {
 		Pion choixPion = null;
 
 		if (niveauIA == 2) {
-			choixPionIA();
+			choixPion = choixPionIA();
 		}
 		if (choixPion == null) {
-			choixPion = pionLibre.get((int) (1 + (Math.random() * (pionLibre.size()))));
+			choixPion = pionLibre.get((int) (1 + (Math.random() * (pionLibre.size()-1))));
 		}
+		Partie.currentPlateau.movePion(choixPion);
 		return choixPion;
 	}
 

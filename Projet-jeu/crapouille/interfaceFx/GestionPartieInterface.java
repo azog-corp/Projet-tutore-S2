@@ -1,8 +1,6 @@
 package crapouille.interfaceFx;
 
-
-
-import crapouille.Partie;
+import crapouille.configuration.Configuration;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -10,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXMLLoader;
 
-public class Main extends Application {
+public class GestionPartieInterface extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -27,8 +25,8 @@ public class Main extends Application {
 		}
 	}
 	public static void main(String[] args) {
-		Partie.initConfig();
+		Configuration.initConfig();
 		launch(args);
-		Partie.saveConfig();
+		Configuration.saveConfig();
 	}
 }

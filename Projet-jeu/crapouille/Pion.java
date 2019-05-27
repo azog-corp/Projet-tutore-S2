@@ -60,15 +60,15 @@ public class Pion implements Serializable {
 	 * @param ligne, L'ligne ou ce situe le pion
 	 * @param plateau, tableau contenant des Pions
 	 */
-	public void setColonne(Pion[][] plateau) {
+	public void setColonne(Pion[][] plateau, int ligneConf) {
 		if (this.bloque) {
 			System.out.println("Le pion est bloqué");
 		}
 		// Si le pion est une grenouille est que la première case de droite est vide
-		if (!crapaud && this.colonne < plateau[0].length-1 && plateau[this.ligne][this.colonne+1] == null) {
+		if (!crapaud && this.colonne < ligneConf-1 && plateau[this.ligne][this.colonne+1] == null) {
 			this.colonne = colonne+1;
 			// Si le pion est une grenouille est que la deuxième case de droite est vide
-		} else if (!crapaud && this.colonne < plateau[0].length-2 && plateau[this.ligne][this.colonne+1].crapaud &&
+		} else if (!crapaud && this.colonne < ligneConf-2 && plateau[this.ligne][this.colonne+1].crapaud &&
 				plateau[this.ligne][this.colonne+2] == null) {
 			this.colonne = colonne+2;
 			// Si le pion est un crapaud est que la première case de gauche est vide

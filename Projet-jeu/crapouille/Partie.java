@@ -1,14 +1,7 @@
 package crapouille;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 import crapouille.configuration.Configuration;
 
@@ -30,7 +23,6 @@ public class Partie implements Serializable {
 	 * 0 = humain
 	 * 1 = ia niveau 1
 	 * 2 = ia niveau 2
-	 * 3 = ia niveau 3
 	 */
 	private static int choixAdversaire;
 
@@ -58,27 +50,22 @@ public class Partie implements Serializable {
 	private static String[] equipe = new String[2];
 
 	/**
-	 * ArrayList contenant toutes les configurations créé
-	 * ainsi que la configuration par défaut.
-	 * Cette variable est enregistré lorsque le joueur
-	 * quitte l'application
-	 */
-	public static ArrayList<Configuration> listConfiguration = new ArrayList<Configuration>();
-
-	/**
 	 * copie d'un plateau de listConfiguration
 	 */
-	private static Plateau currentPlateau;
-	
-	private static Plateau configPlateau;
+	public static Plateau currentPlateau;
+
 
 	private static int tourEquipe = 0;
 
-	/**
-	 * Chemin du fichier bin dans lequel est enregistré
-	 * la ArryList listConfiguration
-	 */
-	private final static String CHEMIN_FICHIER = "crapouille/configuration/listConfiguration.bin";
+	private static int nbCoups;
+
+	public static int getNbCoups() {
+		return nbCoups;
+	}
+
+	public static void setNbCoups(int nbCoupsPartie) {
+		nbCoups = nbCoupsPartie;
+	}
 
 	/**
 	 * @return le nom de l'équipe grenouille
@@ -143,17 +130,9 @@ public class Partie implements Serializable {
 		return currentPlateau;
 	}
 
-	public static void setConfigPlateau(int ligne, int colonne) {
-		Pion[][] config = new Pion[ligne][colonne];
-		configPlateau = new Plateau(config);
-	}
-	
-	public static Plateau getConfigPlateau() {
-		return configPlateau;
-	}
-	
-	public static void setCasePlateau(Pion pion) {
-		configPlateau.setCase(pion);
+	public static void setCurrentPlateau(int ligne, int colonne) {
+		Pion[][] plateau = new Pion[ligne][colonne];
+		Partie.currentPlateau = new Plateau(plateau);
 	}
 
 	public LocalDate getDepartPartie() {
@@ -164,53 +143,36 @@ public class Partie implements Serializable {
 		departPartie = debut;
 	}
 
-	/**
-	 * Récupère la ArrayList contenant toutes les configurations
-	 * qui ont été crées et celle par défaut
-	 */
-	@SuppressWarnings("unchecked")
-	public static void initConfig() {
-		try(ObjectInputStream fichier = new ObjectInputStream(new FileInputStream(CHEMIN_FICHIER))) {           
-			// lecture de l'objet contenu dans le fichier
-			listConfiguration = (ArrayList<Configuration>) fichier.readObject();
-			currentPlateau = new Plateau(listConfiguration.get(0).getConfigPlateau());
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Sauvegarde en mémoire la ArrayList contenant toutes les configurations
-	 */
-	public static void saveConfig() {
-		try(ObjectOutputStream fichier = new ObjectOutputStream(new FileOutputStream(CHEMIN_FICHIER))) {
-			fichier.writeObject(listConfiguration);
-		}  catch (IOException e) {
-			e.printStackTrace();
-		}
+	public static int getTourEquipe() {
+		return tourEquipe;
 	}
 
 	public static void loadConfig(int choixConfig) {
-		if (listConfiguration.get(choixConfig) != null) {
-			currentPlateau = new Plateau(listConfiguration.get(choixConfig).getConfigPlateau());
-			tourEquipe = 0;
+		currentPlateau = new Plateau(Configuration.listConfiguration.get(choixConfig).getConfigPlateau());
+		tourEquipe = 0;
+	}
+
+	public static Boolean tourEntite(int ligne, int colonne) {
+		boolean tourFait = false;
+		System.out.println(tourEquipe);
+		if (choixModeDeJeu == 1) {
+			if (currentPlateau.pionValide(tourEquipe, ligne, colonne) != null) {
+				currentPlateau.movePion(currentPlateau.pionValide(tourEquipe, ligne, colonne));
+				tourEquipe = tourEquipe == 0 ? 1 : 0;
+				tourFait = true;
+			}
+			if (choixAdversaire != 0 && tourFait) {
+				Ordinateur.choixOrdi(currentPlateau, 
+						currentPlateau.getBatracien(), 
+						choixAdversaire);
+				tourEquipe = 0;
+				System.out.println("yess");
+			}
+		} else if ((choixModeDeJeu == 0 && currentPlateau.pionValide(0, ligne, colonne) != null)) {
+			currentPlateau.movePion(currentPlateau.pionValide(0, ligne, colonne));
+		} else if ((choixModeDeJeu == 0 && currentPlateau.pionValide(0, ligne, colonne) != null)) {
+			currentPlateau.movePion(currentPlateau.pionValide(1, ligne, colonne));
 		}
+		return tourFait;
 	}
-	
-	public static void createConfig() {
-		
-	}
-
-	public static void tourEntite(int ligne, int colonne) {
-		if (currentPlateau.pionValide(tourEquipe, ligne, colonne)) {
-			currentPlateau.movePion(currentPlateau.getPlateau()[ligne][colonne]);
-			tourEquipe = tourEquipe == 0 ? 1 : 0;
-		}
-	}
-
-
 }
