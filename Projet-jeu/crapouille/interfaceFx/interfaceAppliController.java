@@ -402,7 +402,7 @@ public class interfaceAppliController {
 	 * remet a zero les elements de l'Ia pour que si l'utilisateur
 	 * change d'avis celle si soit remise a defaut
 	 */
-	@FXML
+	@FXML 
 	void casseTeteConf() {
 		cacherIa();
 		cacherJ2();
@@ -852,6 +852,9 @@ public class interfaceAppliController {
 	 * (remplacera donc la configuration par defaut)
 	 * @return nom Le nom de la configuration qui sera cree
 	 */
+	//	public int recupConf() { 
+	//		
+	//	}
 	public void recupNomConf() {
 		if (!tb_nomConf.getText().isEmpty()) {
 			//TODO pas tester
