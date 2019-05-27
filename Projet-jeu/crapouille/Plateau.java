@@ -18,7 +18,7 @@ public class Plateau implements Serializable {
 	 * Nombre Colonne max pour les configurations
 	 */
 	private final static int COLONNE_MAX = 20;
-	
+
 	/**
 	 * Nombre de ligne de la configuration actuelle
 	 */
@@ -28,9 +28,9 @@ public class Plateau implements Serializable {
 	 * Nombre de colonne de la configuration actuelle
 	 */
 	private int colonneConf;
-	
+
 	private int nbPion = 0;
-	
+
 	/**
 	 * Tableau contenant toutes les instances de pions
 	 * présentent sur le plateau.
@@ -38,7 +38,7 @@ public class Plateau implements Serializable {
 	 * et la seconde tous les crapaud
 	 */
 	private Pion[][] batracien = new Pion[2][];
-	
+
 	/**
 	 * Plateau de taille maximale
 	 */
@@ -54,7 +54,7 @@ public class Plateau implements Serializable {
 		this.ligneConf = plateau.length;
 		this.colonneConf = plateau[0].length;
 		this.plateau = new Pion[this.ligneConf][this.colonneConf];
-		
+
 		for (int x = 0 ; x < this.ligneConf ; x++) {
 			for (int y = 0 ; y < this.colonneConf ; y++) {
 				this.plateau[x][y] = plateau[x][y];
@@ -65,7 +65,7 @@ public class Plateau implements Serializable {
 		}
 		setBatracien();
 	}
-	
+
 	/**
 	 * 
 	 * @return
@@ -73,7 +73,7 @@ public class Plateau implements Serializable {
 	public Pion[][] getPlateau() {
 		return plateau;
 	}
-	
+
 	/**
 	 * 
 	 * @return
@@ -95,7 +95,7 @@ public class Plateau implements Serializable {
 			}
 		}
 	}
-	
+
 	/**
 	 * Fonction appelé lors du chargement d'une configuration
 	 * et qui met dans le tableau batracien toutes les
@@ -119,7 +119,7 @@ public class Plateau implements Serializable {
 			}
 		}
 	}
-	
+
 	/**
 	 * Associe un pion à une case du plateau
 	 * @param pion, Le pion qui doit être associé
@@ -127,7 +127,7 @@ public class Plateau implements Serializable {
 	public void setCase(Pion pion) {
 		this.plateau[pion.getLigne()][pion.getColonne()] = pion;
 	}
-	
+
 	/**
 	 * Cette fonction déplace un pion sur le plateau, puis change
 	 * la colonne de celui-ci et enfin, réinitialise l'attribut
@@ -144,7 +144,7 @@ public class Plateau implements Serializable {
 			}
 		}
 	}
-	
+
 	/**
 	 * Vérifie si un pion dont les coordonnées sont placées en argument
 	 * existe et s'il appartient à l'équipe dont c'est le tour
@@ -163,7 +163,7 @@ public class Plateau implements Serializable {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * VÃ©rifie si tous les pions d'une Ã©quipe sont bloquÃ©s
 	 * @param equipe 0 pour les grenouille et 1 pour les crapauds
@@ -178,7 +178,7 @@ public class Plateau implements Serializable {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * VÃ©rifie si toutes les grenouilles sont Ã  droite
 	 * et si tous les crapaud sont Ã  gauche
@@ -208,7 +208,42 @@ public class Plateau implements Serializable {
 		}
 		return nbPion == pionVictoire;
 	}
-	
+
+	/**
+	 * Fonction qui vérifie la validité d'un plateau de pion qui est déterminé par :
+	 * - Le nombre de ligne et de colonne doit être inférieur à 20
+	 * - Il doit il y avoir au moins un pion de chaque type sur chaque ligne
+	 * - Il doit y avoir autant de crapaud que de grenouille
+	 * @param plateau à vérifier
+	 * @return true si toute les conditions sont valides
+	 */
+	public static boolean plateauEstValide(Pion[][] plateau) {
+		boolean noCrapaud = false;
+		boolean noGrenouille = false;
+		int nbCrapaud = 0,
+		nbGrenouille = 0;
+		if (plateau.length > 20 || plateau[0].length > 20) {
+			return false;
+		} else {
+			noCrapaud = noGrenouille = true;
+		}
+		for (int ligne = 0 ; ligne < plateau[0].length ; ligne++) {
+			if (noCrapaud || noGrenouille) {
+				return false;
+			}
+			for (int colonne = 0 ; colonne < plateau.length ; colonne++) {
+				if (plateau[ligne][colonne] != null && plateau[ligne][colonne].isCrapaud()) {
+					nbCrapaud++;
+					noCrapaud = true;
+				} else if (plateau[ligne][colonne] != null && !plateau[ligne][colonne].isCrapaud()) {
+					nbGrenouille++;
+					noGrenouille = true;
+				}
+			}
+		}
+		return nbCrapaud == nbGrenouille;
+	}
+
 	/**
 	 * Crée un String qui représente le plateau de jeu
 	 * avec les pions et leur type
