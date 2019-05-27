@@ -231,8 +231,8 @@ public class Plateau implements Serializable {
 				System.out.println("merde2");
 				return false;
 			}
+			noCrapaud = noGrenouille = true;
 			for (int colonne = 0 ; colonne < plateau[0].length ; colonne++) {
-				noCrapaud = noGrenouille = true;
 				if (plateau[ligne][colonne] != null && plateau[ligne][colonne].isCrapaud()) {
 					nbCrapaud++;
 					noCrapaud = false;
