@@ -7,9 +7,7 @@ import crapouille.configuration.Configuration;
 
 public class Partie implements Serializable {
 
-	/**
-	 * 
-	 */
+	/** ID de la serialisation */
 	private static final long serialVersionUID = 5319670181574630732L;
 
 	/**
@@ -22,7 +20,6 @@ public class Partie implements Serializable {
 	/** Adversaire choisi par l'utilisateur
 	 * 0 = humain
 	 * 1 = ia niveau 1
-	 * 2 = ia niveau 2
 	 */
 	private static int choixAdversaire;
 
@@ -50,19 +47,36 @@ public class Partie implements Serializable {
 	private static String[] equipe = new String[2];
 
 	/**
-	 * copie d'un plateau de listConfiguration
+	 * Copie d'un plateau de listConfiguration
+	 * et sur lequel se joue une partie.
+	 * Sert égalemen à la création de configuration.
 	 */
 	public static Plateau currentPlateau;
 
-
+	/**
+	 * Indique l'équipe de laquelle c'est le tour:
+	 * 0 : grenouille
+	 * 1 : Crapaud
+	 */
 	private static int tourEquipe = 0;
-
+	
+	/**
+	 * Indique le nombre de coup réalisé
+	 * pour terminer un casse tête
+	 */
 	private static int nbCoups;
 
+	/**
+	 * @return Le nombre de coup effectué
+	 */
 	public static int getNbCoups() {
 		return nbCoups;
 	}
 
+	/**
+	 * Modifie nbCoup
+	 * @param nbCoupsPartie la nouvelle valeur de nbCoups
+	 */
 	public static void setNbCoups(int nbCoupsPartie) {
 		nbCoups = nbCoupsPartie;
 	}
@@ -82,6 +96,7 @@ public class Partie implements Serializable {
 	}
 
 	/**
+	 * Modifie la nature de l'adversaire
 	 * @param choixAdversaire l'entitÃ© contre laquelle
 	 * le joueur veut faire une partie :
 	 * - 0 pour un humain
@@ -99,6 +114,7 @@ public class Partie implements Serializable {
 	}
 
 	/**
+	 * Change le mode de jeu
 	 * @param choixModeDeJeu 0 pour joueur versus et 1 pour casse tÃªte
 	 */
 	public static void setChoixModeDeJeu(int choixModeDeJeu) {
@@ -126,32 +142,51 @@ public class Partie implements Serializable {
 		Partie.equipe[1] = equipe;
 	}
 
+	/**
+	 * @return le plateau en cours
+	 */
 	public static Plateau getCurrentPlateau() {
 		return currentPlateau;
 	}
 
-	public static void setCurrentPlateau(int ligne, int colonne) {
-		Pion[][] plateau = new Pion[ligne][colonne];
-		Partie.currentPlateau = new Plateau(plateau);
-	}
-
+	/**
+	 * @return le temps
+	 */
 	public LocalDate getDepartPartie() {
 		return departPartie;
 	}
 
+	/**
+	 * @param debut la nouvelle valeur de departPartie
+	 */
 	public static void setDepartPartie(LocalDate debut) {
 		departPartie = debut;
 	}
 
+	/**
+	 * @return le numéro de l'équipe qui joue
+	 */
 	public static int getTourEquipe() {
 		return tourEquipe;
 	}
 
+	/**
+	 * Initialise le plateau avec une des configuration existatantes
+	 * et met tourEquipe à 0
+	 * @param choixConfig l'indice de la config à initialiser
+	 */
 	public static void loadConfig(int choixConfig) {
 		currentPlateau = new Plateau(Configuration.listConfiguration.get(choixConfig).getConfigPlateau());
 		tourEquipe = 0;
 	}
 
+	/**
+	 * Bouge un pion en fonction du tour de l'adversaire ou du mode
+	 * de jeu tout en vérifiant que le pion existe
+	 * @param ligne du pion à vérifié et déplacé
+	 * @param colonne du pion à vérifié et déplacé
+	 * @return true si un pion à été déplacé
+	 */
 	public static Boolean tourEntite(int ligne, int colonne) {
 		boolean tourFait = false;
 		System.out.println(tourEquipe);

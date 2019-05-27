@@ -89,7 +89,7 @@ public class Plateau implements Serializable {
 		for (int x = 0 ; x < this.ligneConf ; x++) {
 			for (int y = 0 ; y < this.colonneConf ; y++) {
 				if (this.plateau[x][y] != null) {
-					this.plateau[x][y].setBloque(plateau);
+					this.plateau[x][y].setBloque(plateau, this.colonneConf);
 				}
 			}
 		}
@@ -135,11 +135,11 @@ public class Plateau implements Serializable {
 	 */
 	public void movePion(Pion pion) {
 		this.plateau[pion.getLigne()][pion.getColonne()] = null;
-		pion.setColonne(this.plateau, this.ligneConf);
+		pion.setColonne(this.plateau, this.colonneConf);
 		this.plateau[pion.getLigne()][pion.getColonne()] = pion;
 		for (int x = 0 ; x < this.ligneConf ; x++) {
 			if (this.plateau[pion.getLigne()][x] != null) {
-				this.plateau[pion.getLigne()][x].setBloque(this.plateau);
+				this.plateau[pion.getLigne()][x].setBloque(this.plateau, this.colonneConf);
 			}
 		}
 	}

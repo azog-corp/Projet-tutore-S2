@@ -10,7 +10,8 @@ import crapouille.Pion;
 
 
 /**
- * Class onjet de l'ordinateur permettant de gÃ©rer toute ces manipulations
+ * Class contenant des fonctions de recherche de pion
+ * par l'ordianateur
  * @author Arzcop
  */
 public class Ordinateur {
@@ -36,6 +37,7 @@ public class Ordinateur {
 			choixPion = choixPionIA();
 		}
 		if (choixPion == null) {
+			/* choixPion devient un pion random parmis les pion déplaçable */
 			choixPion = pionLibre.get((int) (1 + (Math.random() * (pionLibre.size()-1))));
 		}
 		Partie.currentPlateau.movePion(choixPion);
@@ -54,6 +56,11 @@ public class Ordinateur {
 		}
 	}
 	
+	/**
+	 * Fonction qui recherche les déplacement qui
+	 * assure la victoire à l'ordinateur.
+	 * @return le pion à déplacer
+	 */
 	public static Pion choixPionIA() {
 		return null;
 	}
