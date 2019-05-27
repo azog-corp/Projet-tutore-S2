@@ -46,6 +46,13 @@ public class InterfaceAppliController {
 	final static int DEUXIEME_CHIFFRE_COLONNE = 5; // position du 2e chiffre de l'entier
 
 	final static String MSGBOX_TITRE = "Crapauds & Grenouilles";
+	final static String MSGBOX_TYPE = "Type non valide";
+	final static String MSGBOX_LETTRE = "Les lettres ne sont pas acceptées";
+	final static String MSGBOX_NOMBRE = "Nombre trop grand ou trop petit vérifier votre saisie";
+	final static String MSGBOX_VIDE = "Ne doit pas être vide";
+	final static String MSBOX_CONFIG = "La configuration ne peut pas être vide";
+	
+	
 	private String nom;
 	private String nomConfig;
 
@@ -711,17 +718,17 @@ public class InterfaceAppliController {
 					showCreationConfig(); 
 				} else {
 					showMsgbox(MSGBOX_TITRE, MESSAGE_ERREUR 
-							+ "Nombre non valide: Trop petit ou trop grand",
+							+ MSGBOX_NOMBRE,
 							false);
 				}
 			} else {
 				showMsgbox(MSGBOX_TITRE,MESSAGE_ERREUR 
-						+ "Ne doit contenir que des chiffres",
+						+ MSGBOX_LETTRE,
 						false);
 			}
 		} else {
 			showMsgbox(MSGBOX_TITRE,
-					MESSAGE_ERREUR + "Ne peut pas être vide",
+					MESSAGE_ERREUR + MSGBOX_VIDE,
 					false);
 		}
 	}
@@ -756,22 +763,21 @@ public class InterfaceAppliController {
 						rafraichirConf(Partie.configToString());
 					} else {
 						showMsgbox(MSGBOX_TITRE,
-								MESSAGE_ERREUR + "Type non valide", false);
+								MESSAGE_ERREUR + MSGBOX_TYPE, false);
 					}
 				} else {
 					showMsgbox(MSGBOX_TITRE,
-							MESSAGE_ERREUR 
-							+ "Nombre non valide: Trop petit ou trop grand",
+							MESSAGE_ERREUR + MSGBOX_NOMBRE,
 							false);
 				}
 			} else {
 				showMsgbox(MSGBOX_TITRE,
-						MESSAGE_ERREUR + "Ne peut pas contenir des lettres",
+						MESSAGE_ERREUR + MSGBOX_LETTRE,
 						false);
 			}
 		} else {
 			showMsgbox(MSGBOX_TITRE,
-					MESSAGE_ERREUR + "Ne peut pas être vide",
+					MESSAGE_ERREUR + MSGBOX_VIDE,
 					false);
 		}
 	}

@@ -51,9 +51,10 @@ public class Plateau implements Serializable {
 	 * pas necessairement celles de la configuaration
 	 */
 	public Plateau(Pion[][] plateau) {
-		this.plateau = new Pion[LIGNE_MAX][COLONNE_MAX];
 		this.ligneConf = plateau.length;
 		this.colonneConf = plateau[0].length;
+		this.plateau = new Pion[this.ligneConf][this.colonneConf];
+		
 		for (int x = 0 ; x < this.ligneConf ; x++) {
 			for (int y = 0 ; y < this.colonneConf ; y++) {
 				this.plateau[x][y] = plateau[x][y];
