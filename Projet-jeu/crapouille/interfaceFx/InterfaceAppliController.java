@@ -931,7 +931,13 @@ public class InterfaceAppliController {
 	 */
 
 	/*--------------- FONCTION AFFICHAGE ERREUR  ---------------*/
-	//TODO COMMENTER
+	/**
+	 * Affiche les messages voulu dans des message box a l'utilisateur
+	 * @param titreFenetre Le titre de la messagebox
+	 * @param texteFenetre Le meesage a afficher a l'utilisateur
+	 * @param typeFenetre Le type de la fenetre false pour erreur 
+	 * 											true pour information
+	 */
 	private void showMsgbox(String titreFenetre, String texteFenetre, boolean typeFenetre) {
 		Alert msgUti;
 		if (typeFenetre) {
