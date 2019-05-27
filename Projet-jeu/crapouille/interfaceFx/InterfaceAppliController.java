@@ -12,7 +12,6 @@ import java.time.LocalDate;
 import crapouille.Outils;
 import crapouille.Partie;
 import crapouille.Pion;
-import crapouille.Plateau;
 import crapouille.configuration.Configuration;
 import javafx.application.Platform;
 import javafx.fxml.FXML;

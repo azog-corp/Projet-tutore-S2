@@ -1,7 +1,6 @@
 package crapouille;
 
 import crapouille.configuration.Configuration;
-import crapouille.interfaceFx.InterfaceAppliController;
 
 public class Outils {
 	/** initialisation des constantes min/max lignes et colonnes */
@@ -32,6 +31,11 @@ public class Outils {
 		return choix == 'C' ? true : false;
 	}
 	
+	/**
+	 * Recupere toutes les configs disponible et les renvoi sous forme
+	 * de String pour etre afficher dans un label sur linterface
+	 * @return La liste des configs et leur numero en String
+	 */
 	public static String afficherConfigDispo(){
 		StringBuilder configs = new StringBuilder();
 		for (int compteur = 0; compteur < Configuration.listConfiguration.size(); compteur++) {
@@ -39,7 +43,6 @@ public class Outils {
 			configs.append(Configuration.listConfiguration.get(compteur).getNom());
 			configs.append("\n");
 		}
-		System.out.println(configs.toString());
 		return configs.toString();
 	}
 	
@@ -70,7 +73,13 @@ public class Outils {
 	
 	/*--------------- FONCTION ESTVALIDE  ---------------*/
 
-	//TODO a tester jamais reessayer de creer config donc a regarder validité
+	/**
+	 * Verifie si le type entree par l'utilisateur est valide
+	 * @param type Type entree par l'utilisateur
+	 * @return un boolean definissant si le type est valide
+	 * true = Type valide
+	 * False = Erreur dans les tests le type n'est pas valide
+	 */
 	public static boolean typeValide(String type) {
 		if (type.length() != 1 || (type.charAt(0) != 'C' && type.charAt(0) != 'G')) {
 			return false;
