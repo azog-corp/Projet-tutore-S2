@@ -1,6 +1,7 @@
 package crapouille;
 
 import crapouille.configuration.Configuration;
+import crapouille.interfaceFx.InterfaceAppliController;
 
 public class Outils {
 	/** initialisation des constantes min/max lignes et colonnes */
@@ -16,6 +17,7 @@ public class Outils {
 	final static int DISTINCTION_1 = 3; // position du 1er caractère ';' dans le format parcourut
 	final static int PREMIER_CHIFFRE_COLONNE = 4; // position du 1er chiffre de l'entier
 	final static int DEUXIEME_CHIFFRE_COLONNE = 5; // position du 2e chiffre de l'entier
+	public static String nomConfig;
 
 	/**
 	 * Verifie si le char correspond correspond a un crapaud
@@ -148,6 +150,20 @@ public class Outils {
 		} else {
 			return false;
 		}
+	}
+
+	public static void placementPion(int lignePion, int colonnePion, boolean recupType) {
+		Pion placementUti = new Pion(lignePion,colonnePion,recupType);
+		Partie.config[lignePion][colonnePion] = placementUti;
+	}
+	/**
+	 * Enregistre la configuration dans l'arrays qui contient toutes les configuration
+	 * 
+	 */
+	public static void enregistrerArray() {
+		Plateau config = new Plateau(Partie.config);
+		Configuration newConfig = new Configuration (config.getPlateau(),nomConfig);
+		Configuration.listConfiguration.add(newConfig);
 	}
 }
 	

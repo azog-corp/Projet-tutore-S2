@@ -37,7 +37,6 @@ public class InterfaceAppliController {
 	final static String MSGBOX_VIDE = "Ne doit pas être vide";
 	final static String MSBOX_CONFIG = "La configuration ne peut pas être vide";
 
-	private String nomConfig;
 
 	final static String MESSAGE_ERREUR = "Les informations rentrés sont invalides : ";
 
@@ -536,9 +535,9 @@ public class InterfaceAppliController {
 						&& Outils.ligneEstValide(lignePion)) {
 					colonnePion--;
 					lignePion--;
-					Partie.tourEntite(lignePion, colonnePion); // TODO verif pion correcte deja faite ?
-					rafraichirJeu(Partie.getCurrentPlateau().toString());
+					Partie.tourEntite(lignePion, colonnePion); // TODO verif pion correcte deja faite ?\
 					Partie.setNbCoups(Partie.getNbCoups()+1); //TODO verif casse tt
+					rafraichirJeu(Partie.getCurrentPlateau().toString());
 				} else {
 					showMsgbox(MSGBOX_TITRE, MESSAGE_ERREUR
 							+ MSGBOX_NOMBRE,false);
@@ -586,23 +585,18 @@ public class InterfaceAppliController {
 					erreurConfigPartie.setVisible(false);
 					return true;
 				} else {
-					erreurConfigPartie.setVisible(true);
-					erreurConfigPartie.setText(MESSAGE_ERREUR
-							+ "Les lettres ne sont pas acceptées");
+					showMsgbox(MESSAGE_ERREUR, MSGBOX_LETTRE, false);
 				}
 			} else {
-				erreurConfigPartie.setVisible(true);
-				erreurConfigPartie.setText(MESSAGE_ERREUR
-						+ "Le numéro saisi n'est pas valide");
+				showMsgbox(MESSAGE_ERREUR, MSGBOX_NOMBRE, false);
 			}
 		} else {
-			erreurConfigPartie.setVisible(true);
-			erreurConfigPartie.setText(MESSAGE_ERREUR
-					+ "La configuration ne peut pas être vide");
+			showMsgbox(MESSAGE_ERREUR, MSGBOX_VIDE, false);
 		}
 		return false;
 	}
-
+		
+	//TODO verfier validite MVC
 	private void recupNomEquipe() {
 		if (Partie.getChoixModeDeJeu() == 0 || Partie.getChoixAdversaire() != 0
 				&& Partie.getChoixModeDeJeu() == 1) {
@@ -648,6 +642,12 @@ public class InterfaceAppliController {
 			Partie.setChoixAdversaire(0);
 		}
 	}
+	/**
+	 * Met a jour le label affichant le plateau de jeu
+	 * Apres action de l'utilisateur
+	 * @param plateauJeu contient le nouveau tableau de jeu sous la forme
+	 * dun String
+	 */
 	public void rafraichirJeu(String plateauJeu) {
 		gameBoardString.setText(plateauJeu);
 	}
@@ -705,7 +705,6 @@ public class InterfaceAppliController {
 	 * @param Click clic de l'utilisateur declanchant l'appel de la fonction
 	 */
 	@FXML
-	//TODO corriger
 	void ajoutPionConfig(MouseEvent Click) {
 		System.out.println(tb_cordColonne.getText());
 		if (!tb_cordColonne.getText().isEmpty() 
@@ -714,7 +713,6 @@ public class InterfaceAppliController {
 			String ligne = tb_cordLigne.getText();
 			if (Outils.verificationLettre(ligne) 
 					&& Outils.verificationLettre(colonne)) {
-				//TODO vérifier que marche sans la fonction (jai supprime la fonction recupereLignePion
 				int colonnePion = Integer.parseInt(colonne);
 				int lignePion = Integer.parseInt(ligne);
 				colonnePion--;
@@ -722,9 +720,8 @@ public class InterfaceAppliController {
 				if (Outils.cordOk(lignePion,colonnePion)) {
 					if (Outils.typeValide(tb_cordType.getText())) {
 						erreurPlacementPion.setVisible(false);
-						Pion placementUti = new Pion(lignePion,colonnePion,
-							Outils.recupType(tb_cordType.getText().charAt(0)));
-						Partie.config[lignePion][colonnePion] = placementUti;
+						Outils.placementPion(lignePion,colonnePion,
+						Outils.recupType(tb_cordType.getText().charAt(0)));
 						rafraichirConf(Partie.configToString());
 					} else {
 						showMsgbox(MSGBOX_TITRE,
@@ -812,6 +809,7 @@ public class InterfaceAppliController {
 		Plateau config = new Plateau(Partie.config);
 		Configuration newConfig = new Configuration (config.getPlateau(), nomConfig);
 		Configuration.listConfiguration.add(newConfig);
+		Outils.enregistrerArray();
 		showMsgbox(MSGBOX_TITRE, "Votre confirmation a bien été enregistrée", true);
 		reinitialiser();
 		menu.setVisible(true);
@@ -831,9 +829,9 @@ public class InterfaceAppliController {
 	//	}
 	public void recupNomConf() {
 		if (tb_nomConf.getText().isEmpty()) {
-			nomConfig = "Configuration n°" + Configuration.listConfiguration.size();
+			Outils.nomConfig = "Configuration n°" + Configuration.listConfiguration.size();
 		} else {
-			nomConfig = tb_nomConf.getText();
+			Outils.nomConfig = tb_nomConf.getText();
 		}
 	}
 
