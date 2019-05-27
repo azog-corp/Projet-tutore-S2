@@ -24,7 +24,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="backpanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="519.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crapouille.interfaceFx.interfaceAppliController">
+<AnchorPane fx:id="backpanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="519.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crapouille.interfaceFx.InterfaceAppliController">
    <children>
       <AnchorPane fx:id="score" layoutY="85.0" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
          <children>
@@ -156,81 +156,6 @@
                </styleClass>
             </Button>
             <Line endX="100.0" layoutX="259.0" layoutY="93.0" startX="-100.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="gameBoard" layoutY="85.0" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
-         <children>
-            <AnchorPane fx:id="jeuEnCours" prefHeight="519.0" prefWidth="521.0" styleClass="AnchorPane" stylesheets="@application.css">
-               <children>
-                  <Label fx:id="gameBoardString" layoutX="221.0" layoutY="156.0" prefHeight="17.0" prefWidth="80.0" textFill="WHITE" />
-                  <Button fx:id="okGameBoard" layoutX="417.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#actualiserJeu" prefHeight="25.0" prefWidth="42.0" stylesheets="@application.css" text="Ok">
-                     <styleClass>
-                        <String fx:value="btnPlateau" />
-                        <String fx:value="priobtn" />
-                     </styleClass>
-                  </Button>
-                  <Label fx:id="erreurEntreePartie" layoutY="493.0" prefHeight="25.0" prefWidth="521.0" textAlignment="CENTER" textFill="#f83737" />
-                  <Label layoutX="113.0" layoutY="469.0" text="Ligne : " textFill="WHITE">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="261.0" layoutY="469.0" text="Colonne : " textFill="WHITE">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="entreeLigne" layoutX="164.0" layoutY="467.0" prefHeight="26.0" prefWidth="76.0" />
-                  <TextField fx:id="entreeColonne" layoutX="326.0" layoutY="466.0" prefHeight="26.0" prefWidth="76.0" />
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="defaite" prefHeight="519.0" prefWidth="521.0" styleClass="AnchorPane" stylesheets="@application.css">
-               <children>
-                  <Label layoutX="113.0" layoutY="141.0" text="DEFAITE" textFill="#ff3d3d">
-                     <font>
-                        <Font name="System Bold" size="75.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="165.0" layoutY="224.0" text="Vous avez perdu" textFill="#ff6262">
-                     <font>
-                        <Font name="System Bold Italic" size="25.0" />
-                     </font>
-                  </Label>
-                  <Button layoutX="171.0" layoutY="432.0" mnemonicParsing="false" stylesheets="@application.css" text="Retour menu">
-                     <styleClass>
-                        <String fx:value="interactif" />
-                        <String fx:value="priobtn" />
-                        <String fx:value="btnmenu" />
-                     </styleClass>
-                  </Button>
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="victoire" layoutY="1.0" prefHeight="519.0" prefWidth="521.0" styleClass="AnchorPane" stylesheets="@application.css">
-               <children>
-                  <Label layoutX="95.0" layoutY="118.0" text="VICTOIRE" textFill="#1eff00">
-                     <font>
-                        <Font name="System Bold" size="75.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="168.0" layoutY="212.0" text="Bien joué à l'équipe" textFill="#8eff6f">
-                     <font>
-                        <Font name="System Bold Italic" size="20.0" />
-                     </font>
-                  </Label>
-                  <Button layoutX="172.0" layoutY="436.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="167.0" stylesheets="@application.css" text="Retour menu">
-                     <styleClass>
-                        <String fx:value="interactif" />
-                        <String fx:value="priobtn" />
-                        <String fx:value="btnmenu" />
-                     </styleClass>
-                  </Button>
-                  <Label fx:id="lb_nomEquipeGagnante" layoutX="179.0" layoutY="268.0" style="-fx-border-color: eda678;" text="Nom équipe" textFill="#eda678">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="configurationPartie" layoutY="88.0" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
@@ -445,6 +370,81 @@
                      </font>
                   </Label>
                   <Label fx:id="erreurSuppressionConfig" layoutX="14.0" layoutY="395.0" prefHeight="17.0" prefWidth="496.0" textAlignment="CENTER" textFill="#f83333" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="gameBoard" layoutY="85.0" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
+         <children>
+            <AnchorPane fx:id="defaite" prefHeight="519.0" prefWidth="521.0" styleClass="AnchorPane" stylesheets="@application.css">
+               <children>
+                  <Label layoutX="113.0" layoutY="141.0" text="DEFAITE" textFill="#ff3d3d">
+                     <font>
+                        <Font name="System Bold" size="75.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="165.0" layoutY="224.0" text="Vous avez perdu" textFill="#ff6262">
+                     <font>
+                        <Font name="System Bold Italic" size="25.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="171.0" layoutY="432.0" mnemonicParsing="false" stylesheets="@application.css" text="Retour menu">
+                     <styleClass>
+                        <String fx:value="interactif" />
+                        <String fx:value="priobtn" />
+                        <String fx:value="btnmenu" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="victoire" layoutY="1.0" prefHeight="519.0" prefWidth="521.0" styleClass="AnchorPane" stylesheets="@application.css">
+               <children>
+                  <Label layoutX="95.0" layoutY="118.0" text="VICTOIRE" textFill="#1eff00">
+                     <font>
+                        <Font name="System Bold" size="75.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="168.0" layoutY="212.0" text="Bien joué à l'équipe" textFill="#8eff6f">
+                     <font>
+                        <Font name="System Bold Italic" size="20.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="172.0" layoutY="436.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="167.0" stylesheets="@application.css" text="Retour menu">
+                     <styleClass>
+                        <String fx:value="interactif" />
+                        <String fx:value="priobtn" />
+                        <String fx:value="btnmenu" />
+                     </styleClass>
+                  </Button>
+                  <Label fx:id="lb_nomEquipeGagnante" layoutX="179.0" layoutY="268.0" style="-fx-border-color: eda678;" text="Nom équipe" textFill="#eda678">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="jeuEnCours" prefHeight="519.0" prefWidth="521.0" styleClass="AnchorPane" stylesheets="@application.css">
+               <children>
+                  <Label fx:id="gameBoardString" layoutX="136.0" layoutY="132.0" prefHeight="229.0" prefWidth="308.0" textFill="WHITE" />
+                  <Button fx:id="okGameBoard" layoutX="417.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#actualiserJeu" prefHeight="25.0" prefWidth="42.0" stylesheets="@application.css" text="Ok">
+                     <styleClass>
+                        <String fx:value="btnPlateau" />
+                        <String fx:value="priobtn" />
+                     </styleClass>
+                  </Button>
+                  <Label fx:id="erreurEntreePartie" layoutY="493.0" prefHeight="25.0" prefWidth="521.0" textAlignment="CENTER" textFill="#f83737" />
+                  <Label layoutX="113.0" layoutY="469.0" text="Ligne : " textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="261.0" layoutY="469.0" text="Colonne : " textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="entreeLigne" layoutX="164.0" layoutY="467.0" prefHeight="26.0" prefWidth="76.0" />
+                  <TextField fx:id="entreeColonne" layoutX="326.0" layoutY="466.0" prefHeight="26.0" prefWidth="76.0" />
                </children>
             </AnchorPane>
          </children>

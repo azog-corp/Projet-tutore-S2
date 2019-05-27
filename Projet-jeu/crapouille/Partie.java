@@ -52,6 +52,8 @@ public class Partie implements Serializable {
 	 * Sert égalemen à la création de configuration.
 	 */
 	public static Plateau currentPlateau;
+	
+	public static Pion[][] config;
 
 	/**
 	 * Indique l'équipe de laquelle c'est le tour:
@@ -168,6 +170,29 @@ public class Partie implements Serializable {
 	 */
 	public static int getTourEquipe() {
 		return tourEquipe;
+	}
+	
+	public static String configToString() {
+		StringBuilder configString = new StringBuilder();
+		configString.append("  | ");
+		for (int z = 0 ; z < config.length ; z++) {
+			configString.append(z+1 + " | ");
+		}
+		for (int x = 0 ; x < config.length ; x++) {
+			configString.append("\n" + (x+1) + " |");
+			for (int y = 0 ; y < config.length ; y++) {
+				if (config[x][y] != null) {
+					if (config[x][y].isCrapaud()) {
+						configString.append(" C |");
+					} else if (!config[x][y].isCrapaud()) {
+						configString.append(" G |");
+					}
+				} else {
+					configString.append("   |");
+				}
+			}
+		}
+		return configString.toString();
 	}
 
 	/**

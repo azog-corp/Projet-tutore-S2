@@ -11,9 +11,12 @@ import java.time.LocalDate;
 
 import crapouille.Partie;
 import crapouille.Pion;
+import crapouille.Plateau;
 import crapouille.configuration.Configuration;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -25,7 +28,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
-public class interfaceAppliController {
+public class InterfaceAppliController {
 
 
 	/** initialisation des constantes min/max lignes et colonnes */
@@ -42,6 +45,7 @@ public class interfaceAppliController {
 	final static int PREMIER_CHIFFRE_COLONNE = 4; // position du 1er chiffre de l'entier
 	final static int DEUXIEME_CHIFFRE_COLONNE = 5; // position du 2e chiffre de l'entier
 
+	final static String MSGBOX_TITRE = "Crapauds & Grenouilles";
 	private String nom;
 	private String nomConfig;
 
@@ -412,7 +416,7 @@ public class interfaceAppliController {
 	}
 
 	/**
-	 * Cache les elements du J2
+	 * Cache les elements du J2.
 	 */
 	@FXML
 	void cacherJ2() {
@@ -461,7 +465,7 @@ public class interfaceAppliController {
 		lb_nomJ2.setVisible(true);
 		tb_nomJ2.setVisible(true);
 	}
-	
+
 	/**
 	 * Si la case IA est coché
 	 * affiche les différents radio button qui définissent le niveau de l'ordinateur
@@ -478,7 +482,7 @@ public class interfaceAppliController {
 		lvl1.setSelected(true);
 		cacherJ2();
 	}
-	
+
 	/**
 	 * Si la config rentré par l'utilisateur est correct
 	 * Si c'est le cas appel des fonction qui récupère :
@@ -545,20 +549,21 @@ public class interfaceAppliController {
 					rafraichirJeu(Partie.getCurrentPlateau().toString());
 					Partie.setNbCoups(Partie.getNbCoups()+1); //TODO verif casse tt
 				} else {
-					erreurEntreePartie.setVisible(true);
-					erreurEntreePartie.setText(MESSAGE_ERREUR
-							+"Nombre trop grand ou trop petit vérifier votre saisie");
+					showMsgbox(MSGBOX_TITRE, MESSAGE_ERREUR
+							+ "Nombre trop grand ou trop petit vérifier votre saisie",
+							false);
 				}
 			} else {
-				erreurEntreePartie.setVisible(true);
-				erreurEntreePartie.setText(MESSAGE_ERREUR
-						+"Ne doit contenir que des chiffres");
+				showMsgbox(MSGBOX_TITRE,MESSAGE_ERREUR
+						+"Ne doit contenir que des chiffres",
+						false);
 			}
 		} else {
-			erreurEntreePartie.setVisible(true);
-			erreurEntreePartie.setText(MESSAGE_ERREUR
-					+"Ne doit pas être vide");
+			showMsgbox(MSGBOX_TITRE,MESSAGE_ERREUR
+					+"Ne doit pas être vide",
+					false);
 		}
+		//TODO enlever défaite
 		verifVictoire();
 	}
 
@@ -701,23 +706,23 @@ public class interfaceAppliController {
 				int nbColonne = Integer.parseInt( tb_nbColonneConf.getText());
 				if (ligneEstValide(nbLigne) && colonneEstValide(nbColonne)) {
 					erreurCreationConfig.setVisible(false);
-					Partie.setCurrentPlateau(nbLigne, nbColonne);
-					// TODO recupNomConf(); recupérer le nom pour enregistrer
+					Partie.config = new Pion[nbLigne][nbColonne];
+					recupNomConf(); //recupère le nom pour enregistrer
 					showCreationConfig(); 
 				} else {
-					erreurCreationConfig.setVisible(true);
-					erreurCreationConfig.setText(MESSAGE_ERREUR 
-							+ "Nombres rentrés invalides trop grand ou trop petit");
+					showMsgbox(MSGBOX_TITRE, MESSAGE_ERREUR 
+							+ "Nombre non valide: Trop petit ou trop grand",
+							false);
 				}
 			} else {
-				erreurCreationConfig.setVisible(true);
-				erreurCreationConfig.setText(MESSAGE_ERREUR 
-						+ "Ne doit contenir que des chiffres");
+				showMsgbox(MSGBOX_TITRE,MESSAGE_ERREUR 
+						+ "Ne doit contenir que des chiffres",
+						false);
 			}
 		} else {
-			erreurCreationConfig.setVisible(true);
-			erreurCreationConfig.setText(MESSAGE_ERREUR 
-					+ "Ne peut pas être vide");
+			showMsgbox(MSGBOX_TITRE,
+					MESSAGE_ERREUR + "Ne peut pas être vide",
+					false);
 		}
 	}
 
@@ -742,29 +747,35 @@ public class interfaceAppliController {
 				int lignePion = Integer.parseInt(ligne);
 				colonnePion--;
 				lignePion--;
-				if (typeValide(tb_cordType.getText())) {
-					erreurPlacementPion.setVisible(false);
-					Pion placementUti = new Pion(lignePion,colonnePion,
-							recupType(tb_cordType.getText().charAt(0)));
-					Partie.getCurrentPlateau().setCase(placementUti);
-					rafraichirConf(Partie.getCurrentPlateau().toString());
+				if (cordOk(lignePion,colonnePion)) {
+					if (typeValide(tb_cordType.getText())) {
+						erreurPlacementPion.setVisible(false);
+						Pion placementUti = new Pion(lignePion,colonnePion,
+								recupType(tb_cordType.getText().charAt(0)));
+						Partie.config[lignePion][colonnePion] = placementUti;
+						rafraichirConf(Partie.configToString());
+					} else {
+						showMsgbox(MSGBOX_TITRE,
+								MESSAGE_ERREUR + "Type non valide", false);
+					}
 				} else {
-					erreurPlacementPion.setVisible(true);
-					erreurPlacementPion.setText(MESSAGE_ERREUR
-							+ "Le type entré n'est pas correct");
+					showMsgbox(MSGBOX_TITRE,
+							MESSAGE_ERREUR 
+							+ "Nombre non valide: Trop petit ou trop grand",
+							false);
 				}
 			} else {
-				erreurPlacementPion.setVisible(true);
-				erreurPlacementPion.setText(MESSAGE_ERREUR 
-						+ "Nombres rentrés invalides");
+				showMsgbox(MSGBOX_TITRE,
+						MESSAGE_ERREUR + "Ne peut pas contenir des lettres",
+						false);
 			}
 		} else {
-			erreurPlacementPion.setVisible(true);
-			erreurPlacementPion.setText(MESSAGE_ERREUR 
-					+ "Ne peut pas être vide");
+			showMsgbox(MSGBOX_TITRE,
+					MESSAGE_ERREUR + "Ne peut pas être vide",
+					false);
 		}
 	}
-	
+
 	/**
 	 * Fonction qui supprime une des configurations enregistrées
 	 * -> Si toutes les entrées de l'utilisateur sont correctes
@@ -791,23 +802,23 @@ public class interfaceAppliController {
 						index < Configuration.listConfiguration.size()) {
 					erreurSuppressionConfig.setVisible(false);
 					Configuration.listConfiguration.remove(index);
-	  /* Affichage de message d'erreur si l'une des conditions n'est pas respectée
-	   * Informant l'utilisateur de l'erreur qu'il a commise 
-	   */
+					/* Affichage de message d'erreur si l'une des conditions n'est pas respectée
+					 * Informant l'utilisateur de l'erreur qu'il a commise 
+					 */
 				} else {
-					erreurSuppressionConfig.setVisible(true);
-					erreurSuppressionConfig.setText(MESSAGE_ERREUR
-							+"Numéro ne correspond a aucune configuration");
+					showMsgbox(MSGBOX_TITRE, MESSAGE_ERREUR
+							+"Numéro ne correspond a aucune configuration",
+							false);
 				}
 			} else {
-				erreurSuppressionConfig.setVisible(true);
-				erreurSuppressionConfig.setText(MESSAGE_ERREUR
-						+"Ne doit pas contenir de lettre");
+				showMsgbox(MSGBOX_TITRE, 
+						MESSAGE_ERREUR + "Ne doit pas contenir de lettre",
+						false);
 			}
 		} else {
-			erreurSuppressionConfig.setVisible(true);
-			erreurSuppressionConfig.setText(MESSAGE_ERREUR
-					+"Ne peut pas être vide");
+			showMsgbox(MSGBOX_TITRE,
+					MESSAGE_ERREUR + "Ne peut pas être vide", false);
+
 		}
 	}
 
@@ -829,8 +840,13 @@ public class interfaceAppliController {
 	 */
 	@FXML
 	void enregistrerConfig(MouseEvent Click) {
-		Configuration config = new Configuration (Partie.getCurrentPlateau().getPlateau(), nomConfig);
-		Configuration.listConfiguration.add(config);
+		Plateau config = new Plateau(Partie.config);
+		Configuration newConfig = new Configuration (config.getPlateau(), nomConfig);
+		Configuration.listConfiguration.add(newConfig);
+		showMsgbox(MSGBOX_TITRE, "Votre confirmation a bien été enregistrée", true);
+		reinitialiser();
+		menu.setVisible(true);
+
 	}
 
 	/**
@@ -856,7 +872,7 @@ public class interfaceAppliController {
 	//		
 	//	}
 	public void recupNomConf() {
-		if (!tb_nomConf.getText().isEmpty()) {
+		if (tb_nomConf.getText().isEmpty()) {
 			//TODO pas tester
 			nomConfig = "Configuration n°" + Configuration.listConfiguration.size();
 		} else {
@@ -910,7 +926,7 @@ public class interfaceAppliController {
 	void showCreationConfig() { 
 		initialisationConfig.setVisible(false);
 		placementConfig.setVisible(true);
-		rafraichirConf(Partie.getCurrentPlateau().toString());
+		rafraichirConf(Partie.configToString());
 	}
 
 
@@ -919,6 +935,20 @@ public class interfaceAppliController {
 	 * --------------- FONCTION DE CONTRÔLE D'ERREUR / FORMAT / VALIDITE--------------- 
 	 * ------------------------------------------------------
 	 */
+
+	/*--------------- FONCTION AFFICHAGE ERREUR  ---------------*/
+
+	private void showMsgbox(String titreFenetre, String texteFenetre, boolean typeFenetre) {
+		Alert msgUti;
+		if (typeFenetre) {
+			msgUti = new Alert(AlertType.INFORMATION);
+		} else {
+			msgUti = new Alert(AlertType.ERROR);
+		}
+		msgUti.setTitle(titreFenetre);
+		msgUti.setContentText(texteFenetre);
+		msgUti.showAndWait();
+	}
 
 	/*--------------- FONCTION ESTVALIDE  ---------------*/
 	/**
@@ -930,7 +960,7 @@ public class interfaceAppliController {
 	public boolean verificationLettre(String aVerifier) {
 		for (int compteur = 0; compteur < aVerifier.length(); compteur ++) {
 			char tester = aVerifier.charAt(compteur);
-			if (tester < '0' || tester >'9') {
+			if (tester < '0' || tester > '9') {
 				return false;
 			}
 		}
@@ -999,11 +1029,18 @@ public class interfaceAppliController {
 	}
 	//TODO a tester jamais reessayer de creer config donc a regarder validité
 	private boolean typeValide(String type) {
-		if (type.length() != 1 || (type.charAt(0) != 'C' || type.charAt(0) != 'G')) {
+		if (type.length() != 1 || (type.charAt(0) != 'C' && type.charAt(0) != 'G')) {
 			return false;
 		} else {
 			return true;
 		}
+	}
+	//TODO tester
+	//Normalement pas besoin tester - car caractere non valide
+	private boolean cordOk(int ligne, int colonne) {
+		return ligne < Partie.config.length && 
+				colonne < Partie.config[0].length &&
+				ligne >= 0 && colonne >= 0;
 	}
 
 }
