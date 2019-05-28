@@ -52,7 +52,7 @@ public class Partie implements Serializable {
 	 * Sert égalemen à la création de configuration.
 	 */
 	public static Plateau currentPlateau;
-	
+
 	public static Pion[][] config;
 
 	/**
@@ -61,7 +61,7 @@ public class Partie implements Serializable {
 	 * 1 : Crapaud
 	 */
 	private static int tourEquipe = 0;
-	
+
 	/**
 	 * Indique le nombre de coup réalisé
 	 * pour terminer un casse tête
@@ -171,7 +171,7 @@ public class Partie implements Serializable {
 	public static int getTourEquipe() {
 		return tourEquipe;
 	}
-	
+
 	public static String configToString() {
 		StringBuilder configString = new StringBuilder();
 		configString.append("  | ");
@@ -214,7 +214,6 @@ public class Partie implements Serializable {
 	 */
 	public static Boolean tourEntite(int ligne, int colonne) {
 		boolean tourFait = false;
-		System.out.println(tourEquipe);
 		if (choixModeDeJeu == 1) {
 			if (currentPlateau.pionValide(tourEquipe, ligne, colonne) != null) {
 				currentPlateau.movePion(currentPlateau.pionValide(tourEquipe, ligne, colonne));
@@ -226,13 +225,14 @@ public class Partie implements Serializable {
 						currentPlateau.getBatracien(), 
 						choixAdversaire);
 				tourEquipe = 0;
-				System.out.println("yess");
 			}
-		} else if ((choixModeDeJeu == 0 && currentPlateau.pionValide(0, ligne, colonne) != null)) {
-			currentPlateau.movePion(currentPlateau.pionValide(0, ligne, colonne));
-		} else if ((choixModeDeJeu == 0 && currentPlateau.pionValide(0, ligne, colonne) != null)) {
-			currentPlateau.movePion(currentPlateau.pionValide(1, ligne, colonne));
+		} else { 
+			if ((choixModeDeJeu == 0 && currentPlateau.pionValide(0, ligne, colonne) != null)) {
+				currentPlateau.movePion(currentPlateau.pionValide(0, ligne, colonne));
+			}
+			if ((choixModeDeJeu == 0 && currentPlateau.pionValide(0, ligne, colonne) != null)) {
+				currentPlateau.movePion(currentPlateau.pionValide(1, ligne, colonne));
+			}
+			return tourFait;
 		}
-		return tourFait;
 	}
-}
