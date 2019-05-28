@@ -22,6 +22,7 @@ public class TestOutils {
 		}
 		System.out.println(nbTestOk + " sur " + aTesterChar.length + " tests");
 	}
+<<<<<<< HEAD
 
 	/**
 	 * Fonction test de EstValide
@@ -98,5 +99,9 @@ public class TestOutils {
 		//TODO c'est quoi  ce bordel inchallah
 
 
+=======
+	public static void main(String[] args) {
+		//TODO c'est quoi  ce bordel inchallah
+>>>>>>> parent of 319e4cd... testOutils
 	}
 }
