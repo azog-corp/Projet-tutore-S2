@@ -64,6 +64,7 @@ public class Plateau implements Serializable {
 			}
 		}
 		setBatracien();
+		initBloque();
 	}
 
 	/**
@@ -243,7 +244,7 @@ public class Plateau implements Serializable {
 				}
 			}
 		}
-		return nbCrapaud == nbGrenouille;
+		return nbCrapaud == nbGrenouille && nbCrapaud > 0;
 	}
 
 	/**
