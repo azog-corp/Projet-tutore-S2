@@ -59,7 +59,10 @@ public class Outils {
 	}
 
 	
-
+	/**
+	 * Attribut le nom du joueur 1
+	 * @param nomJ1 Nom du joueur entre par l'utilisateur
+	 */
 	public static void attribuerNomJ1(String nomJ1) {
 		if (estNonVide(nomJ1)) {
 			Partie.setEquipe1(nomJ1);
@@ -67,7 +70,11 @@ public class Outils {
 			Partie.setEquipe1(Partie.getNomEquipe1Defaut());
 		}
 	}
-
+	
+	/**
+	 * Attribut le nom du joueur 2
+	 * @param nomJ2 Nom du joueur entre par l'utilisateur
+	 */
 	public static void attribuerNomJ2(String nomJ2) {
 		if (estNonVide(nomJ2)) {
 			Partie.setEquipe2(nomJ2);
@@ -75,7 +82,6 @@ public class Outils {
 			Partie.setEquipe2(Partie.getNomEquipe2Defaut());
 		}
 	}
-
 
 	/**
 	 * Recupere toutes les configs disponible et les renvoi sous forme
@@ -91,7 +97,6 @@ public class Outils {
 		}
 		return configs.toString();
 	}
-
 
 	/**
 	 * Récupère le coordonnée de la ligne du pion
@@ -159,7 +164,8 @@ public class Outils {
 	 */
 	public static boolean ligneEstValide(int lignePion) {
 		// La ligne du pion doit être supérieur à 0 et inférieure ou égal à 20  
-		return MIN_LIGNE_PION < lignePion && lignePion <= MAX_LIGNE_PION;
+		return MIN_LIGNE_PION <= lignePion 
+				&& lignePion <= Partie.currentPlateau.getPlateau().length;
 	}
 
 	/**
@@ -170,38 +176,18 @@ public class Outils {
 	 */
 	public static boolean colonneEstValide(int colonnePion) {
 		// La ligne du pion doit être supérieur à 0 et inférieure ou égal à 20  
-		return MIN_COLONNE_PION < colonnePion 
-				&& colonnePion <= MAX_COLONNE_PION;
+		return MIN_COLONNE_PION <= colonnePion 
+		&& colonnePion <= Partie.currentPlateau.getPlateau()[0].length;
 	}	
 
-
-
 	/**
-	 * Verifie que el nombre rentree par l'uti 
-	 * est une nombre correspondant a 
+	 * Verifie que le nombre rentree par l'uti 
+	 * est une nombre correspondant a un pion valide
 	 */
 	public static boolean cordOk(int ligne, int colonne) {
 		return ligne < Partie.config.length && 
 				colonne < Partie.config[0].length &&
 				ligne >= 0 && colonne >= 0;
-	}
-
-	/**
-	 * Détermine si les lignes du plateau sont corrects 
-	 * avec le contrôle de la gestion d'erreur
-	 * @param colonnePlateau est le nombre de colonnes pour le plateau 
-	 * @param lignePlateau est le nombre de lignes pour le plateau
-	 * @return un booleen égal a vrai si les lignes et colonnes plateau sont corrects
-	 */
-	public static boolean configPlateauEstValide(int lignePlateau, int colonnePlateau) {
-		/* vérification des entier ligne et colonne avec 
-		 * la taille max et min d'une ligne et d'une colonne
-		 * limité a 20 (pour l'instant)
-		 */
-		return (MIN_LIGNE_TABLEAU <= lignePlateau 
-				|| lignePlateau <= MAX_LIGNE_TABLEAU) &&
-				(MIN_COLONNE_TABLEAU <= colonnePlateau 
-				|| colonnePlateau <=MAX_COLONNE_TABLEAU);
 	}
 
 	/**
@@ -276,11 +262,11 @@ public class Outils {
 				/* Verification que les coordonnes corresponde bien a une coordonnes
 				 * dans le tableau de jeu
 				 */
-				if (Outils.cordOk(lignePion,colonnePion)) {
+				if (cordOk(lignePion,colonnePion)) {
 					/* Verification le type entre par l'uti est valide */
-					if (Outils.typeValide(type)) {
-						Outils.placementPion(lignePion,colonnePion,
-								Outils.recupType(type.charAt(0)));
+					if (typeValide(type)) {
+						placementPion(lignePion,colonnePion,
+								recupType(type.charAt(0)));
 						return true;
 						/* Affichage des differentes erreurs */
 					} else {
@@ -313,7 +299,7 @@ public class Outils {
 		/* On vérifie que la la string n'est pas vide pour ne pas produire d'erreur par la suite */
 		if (estNonVide(choixConf)) { 
 			/* Verification qu'il n'y a pas de lettre dans lentree */
-			if(Outils.verificationLettre(choixConf)) {
+			if(verificationLettre(choixConf)) {
 				int config = Integer.parseInt(choixConf);
 				/* Verification que le numero existe et correspond a uen configuration */
 				if (configExiste(config)) {
@@ -343,15 +329,14 @@ public class Outils {
 			/* Vérifie s'il n'y a pas de lettre avant de convertir en int les entrées
 			 * pour ne pas produire d'erreur
 			 */
-			if (Outils.verificationLettre(ligne) 
-					&& Outils.verificationLettre(colonne)) {
+			if (verificationLettre(ligne) 
+					&& verificationLettre(colonne)) {
 				/*Conversion en int des entrées texte de l'utilisateur */
 				int colonnePion = Integer.parseInt(colonne);
 				int lignePion = Integer.parseInt(ligne);
-				if (Outils.colonneEstValide(colonnePion) 
-						&& Outils.ligneEstValide(lignePion)) {
+				if (ligneEstValide(lignePion) && colonneEstValide(colonnePion)) {
 					/* Decremente de 1 car les numeros rentres et afficher sur le plateau 
-					 * sont augmenter de 1 pour corerspondre a une bonne notation de 
+					 * sont augmenter de 1 pour correspondre a une bonne notation de 
 					 * (de 1 a 20 et non de 0 a 19) plus confortable pour l'utilisateur
 					 */
 					colonnePion--;
@@ -388,6 +373,7 @@ public class Outils {
 		Pion placementUti = new Pion(lignePion,colonnePion,type);
 		Partie.config[lignePion][colonnePion] = placementUti;
 	}
+	
 	/**
 	 * Enregistre la configuration cree par l'utilisateur dans l'arrays 
 	 * qui contient toutes les configurations
@@ -405,7 +391,7 @@ public class Outils {
 		Configuration newConfig = new Configuration (
 				config.getPlateau(), Outils.nomConfig);
 		Configuration.listConfiguration.add(newConfig);
-		Outils.enregistrerArray();
+		enregistrerArray();
 	}
 
 	public static boolean supprimerConf(String idConfig) {
@@ -460,7 +446,7 @@ public class Outils {
 				/* Verification que les coordonnes corresponde bien a une coordonnes
 				 * dans le tableau de jeu
 				 */
-				if (Outils.cordOk(lignePion,colonnePion)) {
+				if (cordOk(lignePion,colonnePion)) {
 					/* Verification le type entre par l'uti est valide */
 						Partie.config[lignePion][colonnePion] = null;
 						return true;

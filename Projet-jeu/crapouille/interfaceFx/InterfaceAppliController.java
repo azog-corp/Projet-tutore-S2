@@ -324,7 +324,7 @@ public class InterfaceAppliController {
 
 	@FXML
 	/**
-	 * Textfield contenant la leigne sur laquelle le joueur
+	 * Textfield contenant la ligne sur laquelle le joueur
 	 * Entre le numero de la ligne sur laquelle il souhaite
 	 * Ajouter un pion
 	 */
@@ -333,53 +333,112 @@ public class InterfaceAppliController {
 	@FXML
 	/**
 	 * Bouton page placement des pions
-	 * 
+	 * Lorsque l'utilisateur clique dessu verifie que tous est valide
+	 * et enregsitre la configuration
 	 */
 	private Button btn_validerConfig;
 
 	@FXML
+	/**
+	 * Button page placement pion
+	 * Appel les fonctions pour verifier que les entrees de l'utilisateur sont correctes
+	 * Si correctes ajoute le pion au plateau sinon en informe lutilisateur
+	 */
 	private Button btn_AjouterPion;
 
 	@FXML
+	/**
+	 * Textfield contenant la ligne sur laquelle le joueur
+	 * Entre le numero de la ligne sur laquelle il souhaite
+	 * Ajouter un pion
+	 */
 	private TextField tb_cordColonne;
 
 	@FXML
+	/**
+	 * Button page placement pion
+	 * Appel les fonctions pour verifier que les entrees de l'utilisateur sont correctes
+	 * Si correctes supprime le pion du plateau sinon en informe lutilisateur
+	 */
 	private Button btn_SupprimerPion;
 
 	@FXML
+	/**
+	 * Textfield contenant le type du pion que 
+	 *  le joueur souhaite ajouter
+	 */
 	private TextField tb_cordType;
 
 	@FXML
+	/**
+	 * Page pour supprimer une config
+	 */
 	private AnchorPane supprimerConf;
 
 	@FXML
+	/**
+	 * Button declanchant la suppression d'une config 
+	 * si les entrees de l'utilisateur sont correctes
+	 */
 	private Button btn_supprimerConfig;
 
 	@FXML
+	/**
+	 * Id de la config a supprimer
+	 * Que l'uti rentre dans le textfield
+	 */
 	private TextField tb_idConf;
 
 	@FXML
+	/**
+	 * Liste des configurations possibles a la suppressions
+	 */
 	private Label configAdel;
 
 	@FXML
+	/**
+	 * AnchorPane contenant toutes les pages correspodant
+	 * A une partie en cours 
+	 */
 	private AnchorPane gameBoard;
 
 	@FXML
+	/**
+	 * NON  UTILISE
+	 * Page affiche lorsque l'utilisateur perd
+	 */
 	private AnchorPane defaite;
 
 	@FXML
+	/**
+	 * Page pour afficher lequipe remportant la partie
+	 */
 	private AnchorPane victoire;
 
 	@FXML
+	/**
+	 * Label contenant le nom de lequipe remportant la partie
+	 */
 	private Label lb_nomEquipeGagnante;
 
 	@FXML
+	/**
+	 * Page d'affichage du jeu lorsque l'utilisateur joue
+	 */
 	private AnchorPane jeuEnCours;
 
 	@FXML
+	/**
+	 * Label contenant le plateau de jeu en cours 
+	 */
 	private Label gameBoardString;
 
 	@FXML
+	/**
+	 * Bouton sur la page de jeu
+	 * lorsque l'utilisateur clic dessus verifie les donnees
+	 * Etmet a jour le tableau si correct
+	 */
 	private Button okGameBoard;
 
 	@FXML
@@ -681,7 +740,6 @@ public class InterfaceAppliController {
 			/* Verifie que aucun des participants n'a gagne
 			 * Si cest le cas affiche le panneau de victoire
 			 */
-			//TODO mettre le nom de lequipe gagnante
 			if (Outils.verifVictoire()) {
 				afficherGagnant();
 				jeuEnCours.setVisible(false);
@@ -698,6 +756,9 @@ public class InterfaceAppliController {
 				+ Partie.getEquipe(Partie.getTourEquipe()));
 	}
 	
+	/**
+	 * Affiche le nom du gagnant lorsque le jeu se termine
+	 */
 	public void afficherGagnant() {
 		if (Partie.currentPlateau.victoire(0)) {
 			lb_nomEquipeGagnante.setText(Partie.getEquipe(0));
@@ -721,6 +782,10 @@ public class InterfaceAppliController {
 	}
 
 	//TODO verifier validite MVC
+	/**
+	 * Recupere le nom des equipes et appel les fonctions 
+	 * qui les attribues
+	 */
 	private void recupNomEquipe() {
 		if (Partie.getChoixModeDeJeu() == 0 || Partie.getChoixAdversaire() != 0
 				&& Partie.getChoixModeDeJeu() == 1) {
