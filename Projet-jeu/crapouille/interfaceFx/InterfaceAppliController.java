@@ -156,32 +156,61 @@ public class InterfaceAppliController {
 
 	@FXML
 	/**
-	 * Label affichant 
+	 * Label affichant le choix a l'utilisateur
+	 * "Chosir difficultee IA"
 	 */
 	private Label lb_lvlIa;
 
 	@FXML
+	/**
+	 * Titre de section page configurationPartie
+	 */
 	private Label labelIA;
 
 	@FXML
+	/**
+	 * Indication page configurationPartie
+	 * Invitant l'utilisateur a rentrer un nom d'equipe
+	 */
 	private Label lb_nomJ1;
 
 	@FXML
+	/**
+	 * Indication page configurationPartie
+	 * Invitant l'utilisateur a rentrer un nom d'equipe
+	 */
 	private Label lb_nomJ2;
 
 	@FXML
+	/**
+	 * Check Box definissant si le joueur veut jouer contre l'IA
+	 * Si elle est cochee fait apparaitre les elements de l'IA
+	 */
 	private CheckBox chk_vsIA;
 
 	@FXML
+	/**
+	 * RadioButton Si coche l'utilisateur souhaite jouer contre IA lvl1
+	 */
 	private RadioButton lvl1;
 
 	@FXML
+	/**
+	 * Group contenant tous les radio buttons des IA
+	 * pour permettre de n'avoir qu'un seul bouton coche
+	 */
 	private ToggleGroup lvlIA;
 
 	@FXML
+	/**
+	 * RadioButton Si coche l'utilisateur souhaite jouer contre IA lvl2
+	 */
 	private RadioButton lvl2;
 
 	@FXML
+	/**
+	 * RadioButton Si coche l'utilisateur souhaite jouer contre IA lvl3
+	 */
 	private RadioButton lvl3;
 
 	@FXML
