@@ -542,7 +542,8 @@ public class InterfaceAppliController {
 						&& Outils.ligneEstValide(lignePion)) {
 					colonnePion--;
 					lignePion--;
-					Partie.tourEntite(lignePion, colonnePion); 
+					Partie.tourEntite(lignePion, colonnePion);
+					afficherNomEquipe();
 					//TODO Partie.setNbCoups(Partie.getNbCoups()+1);
 					rafraichirJeu(Partie.getCurrentPlateau().toString());
 		/* Affichage des messages d'erreurs a l'utilisateur pour lui siganler le probleme */
@@ -568,6 +569,12 @@ public class InterfaceAppliController {
 			jeuEnCours.setVisible(false);
 			victoire.setVisible(true);
 		}
+	}
+	
+	//TODO
+	public void afficherNomEquipe() {
+		String nomEquipe[] = Partie.getEquipe();
+		tourDe.setText("Tour de l'équipe : " + nomEquipe[Partie.getTourEquipe()]);
 	}
 	
 	/**
