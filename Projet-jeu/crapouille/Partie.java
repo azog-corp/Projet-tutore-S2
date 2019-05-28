@@ -237,8 +237,6 @@ public class Partie implements Serializable {
 				tourFait = true;
 			}
 			if (choixAdversaire != 0 && tourFait) {
-				void wait(long timeeout, int nanos);
-				wait(500);
 				Ordinateur.choixOrdi(currentPlateau, 
 						currentPlateau.getBatracien(), 
 						choixAdversaire);
