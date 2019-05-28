@@ -215,8 +215,9 @@ public class Partie implements Serializable {
 	 * @param ligne du pion à vérifié et déplacé
 	 * @param colonne du pion à vérifié et déplacé
 	 * @return true si un pion à été déplacé
+	 * @throws InterruptedException 
 	 */
-	public static Boolean tourEntite(int ligne, int colonne) {
+	public static Boolean tourEntite(int ligne, int colonne) throws InterruptedException {
 		boolean tourFait = false;
 		if (choixModeDeJeu == 1) {
 			if (currentPlateau.pionValide(tourEquipe, ligne, colonne) != null) {
@@ -225,7 +226,7 @@ public class Partie implements Serializable {
 				tourFait = true;
 			}
 			if (choixAdversaire != 0 && tourFait) {
-				sleep(500);
+				Thread.sleep(2000); //TODO vérifier
 				Ordinateur.choixOrdi(currentPlateau, 
 						currentPlateau.getBatracien(), 
 						choixAdversaire);
