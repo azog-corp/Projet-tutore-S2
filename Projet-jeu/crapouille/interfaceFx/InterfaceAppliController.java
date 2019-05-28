@@ -685,8 +685,6 @@ public class InterfaceAppliController {
 		}
 	}
 
-
-
 	/**
 	 * Fonction qui enregistre la configuration lorsque l'utilisateur souhaite
 	 * l'enregistrer. (La sauvegarde dans la liste des configuration)
@@ -803,6 +801,4 @@ public class InterfaceAppliController {
 		msgUti.setContentText(texteFenetre);
 		msgUti.showAndWait();
 	}
-
-
 }

@@ -7,7 +7,7 @@ public class Outils {
 	/** initialisation des constantes min/max lignes et colonnes */
 	final static int MIN_LIGNE_PION = 1;
 	final static int MAX_LIGNE_PION = 20;
-	final static int MIN_COLONNE_PION = 1;
+	final static int MIN_COLONNE_PION = 3;
 	final static int MAX_COLONNE_PION = 20;
 
 	/** initialisation des constantes du format : XXX;XX */
@@ -281,6 +281,9 @@ public class Outils {
 				InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
 						MESSAGE_ERREUR + MSGBOX_LETTRE, false);
 			}
+		} else {
+			InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
+					MESSAGE_ERREUR + MSGBOX_VIDE, false);
 		}
 		return false;
 	}
