@@ -22,7 +22,7 @@ public class TestOutils {
 		}
 		System.out.println(nbTestOk + " sur " + aTesterChar.length + " tests");
 	}
-
+	
 	/**
 	 * Fonction test de EstValide
 	 * Test uniquement la bonne recuperation
@@ -87,7 +87,6 @@ public class TestOutils {
 		System.out.println("il y a " + nbTestOk + " test réussie sur 8");
 	}
 
-	
 	public static void main(String[] args) {
 		testEstValide();
 		testVerificationLettre();
