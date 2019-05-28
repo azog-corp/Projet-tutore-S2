@@ -143,6 +143,10 @@ public class Partie implements Serializable {
 	public static void setEquipe2(String equipe) {
 		Partie.equipe[1] = equipe;
 	}
+	
+	public static String[] getEquipe() {
+		return equipe;
+	}
 
 	/**
 	 * @return le plateau en cours
@@ -221,6 +225,7 @@ public class Partie implements Serializable {
 				tourFait = true;
 			}
 			if (choixAdversaire != 0 && tourFait) {
+				sleep(500);
 				Ordinateur.choixOrdi(currentPlateau, 
 						currentPlateau.getBatracien(), 
 						choixAdversaire);
