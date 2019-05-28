@@ -124,12 +124,23 @@ public class Pion implements Serializable {
 	public boolean isBloque() {
 		return bloque;
 	}
+	
+	/**
+	 * Fonction qui vérifie si deux pions sont égaux
+	 * @param pion le pion a vérifier
+	 * @return true s'ils sont égaux
+	 */
+	public boolean equals(Pion pion) {
+		return this.ligne == pion.getLigne() &&
+				this.colonne == pion.getColonne() &&
+				this.crapaud == pion.isCrapaud() &&
+				this.bloque == pion.isBloque();
+	}
 
 	/**
 	 * Renvoie une représentation sous forme de chaîne de l'objet d'un Pion
 	 * @return un string représentant un Pion avec c'est coordonée
 	 */
-	@Override
 	public String toString() {
 		return "Pion(" + ligne + "," + colonne + ")";
 	}
