@@ -144,8 +144,8 @@ public class Partie implements Serializable {
 		Partie.equipe[1] = equipe;
 	}
 	
-	public static String[] getEquipe() {
-		return equipe;
+	public static String getEquipe(int tour) {
+		return equipe[tour];
 	}
 
 	/**
