@@ -186,20 +186,24 @@ public class Plateau implements Serializable {
 	 * @return true si c'est vrai
 	 */
 	public boolean victoireCasseTete() {
+		if (!victoire(0) && !victoire(1)) {
+			return false;
+		}
 		int nbPion, // Nombre de pion bien plac√©s
 		colonne, // Colonne sur laquelle on fait une recherche des grenouille
-		colonneC = this.colonneConf, // Colonne sur laquelle on fait une recherche des crapaud
+		colonneC = this.colonneConf-1, // Colonne sur laquelle on fait une recherche des crapaud
 		pionVictoire = this.batracien[0].length*2, // Nombre total de pion
 		ligne;
 		nbPion = ligne = colonne = 0; // On commence par la colonne la plus √  gauche
 		// Pour chaque ligne du tableau
-		while (ligne < ligneConf) {
-			if (this.plateau[ligne][colonne] != null || this.plateau[ligne][colonne] != null) {
+		while (ligne < this.ligneConf) {
+			System.out.println(ligne);
+			if (this.plateau[ligne][colonne] != null || this.plateau[ligne][colonneC] != null) {
 				if (this.plateau[ligne][colonne] != null && this.plateau[ligne][colonne].isCrapaud()) {
 					nbPion++;
 					colonne++;
 				}
-				if (this.plateau[ligne][colonne] != null && !this.plateau[ligne][colonneC].isCrapaud()) {
+				if (this.plateau[ligne][colonneC] != null && !this.plateau[ligne][colonneC].isCrapaud()) {
 					nbPion++;
 					colonneC--;
 				}

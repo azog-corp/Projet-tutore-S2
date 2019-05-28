@@ -30,7 +30,7 @@ public class Outils {
 	public static boolean recupType(char choix) {
 		return choix == 'C' ? true : false;
 	}
-	
+
 	/**
 	 * Recupere toutes les configs disponible et les renvoi sous forme
 	 * de String pour etre afficher dans un label sur linterface
@@ -45,8 +45,8 @@ public class Outils {
 		}
 		return configs.toString();
 	}
-	
-	
+
+
 	/**
 	 * Récupère le coordonnée de la ligne du pion
 	 * @param coordonneePion est le coordonné du poin sur le plateau 
@@ -70,7 +70,7 @@ public class Outils {
 		colonnePion.append(coordonneePion.charAt(1));
 		return Integer.parseInt(colonnePion.toString());
 	}
-	
+
 	/*--------------- FONCTION ESTVALIDE  ---------------*/
 
 	/**
@@ -88,7 +88,7 @@ public class Outils {
 			return true;
 		}
 	}
-	
+
 	/**
 	 * Fonction qui vérifie si uen chaine de caractère ne contient que des chiffres
 	 * @param aVerifier String a verifier la validité ( pas de nombre)
@@ -104,7 +104,7 @@ public class Outils {
 		}
 		return true;	
 	}
-	
+
 	/**
 	 * Détermine si le coordonée de la ligne du pion est correct  
 	 * avec le contrôle de la gestion d'erreur
@@ -127,8 +127,8 @@ public class Outils {
 		return MIN_COLONNE_PION <= colonnePion 
 				&& colonnePion < MAX_COLONNE_PION;
 	}	
-	
-	
+
+
 	//TODO tester
 	//Normalement pas besoin tester - car caractere non valide
 	public static boolean cordOk(int ligne, int colonne) {
@@ -136,7 +136,7 @@ public class Outils {
 				colonne < Partie.config[0].length &&
 				ligne >= 0 && colonne >= 0;
 	}
-	
+
 	/**
 	 * Détermine si les lignes du plateau sont corrects 
 	 * avec le contrôle de la gestion d'erreur
@@ -153,21 +153,24 @@ public class Outils {
 				(MIN_COLONNE_PION <= colonnePlateau 
 				|| colonnePlateau <=MAX_COLONNE_PION);
 	}
-	
+
 	/**
 	 * Verifie si l'une des equipes a gagne
 	 * @return true si l'une des equipes a gagne
 	 * 		   false si aucun equipe a gagne et que le jeu peut continuer
 	 */
 	public static boolean verifVictoire() {
-		if (Partie.currentPlateau.victoire(0) || 
-				Partie.currentPlateau.victoire(1)){
+		if (Partie.getChoixModeDeJeu() == 1 &&
+				Partie.currentPlateau.victoire(0) ||
+				Partie.currentPlateau.victoire(1)) {
 			return true;
-		} else {
-			return false;
+		} else if (Partie.getChoixModeDeJeu() == 1 &&
+				Partie.currentPlateau.victoireCasseTete()) {
+			return true;
 		}
+		return false;
 	}
-	
+
 	/**
 	 * 
 	 * @param lignePion int: ligne ou se trouve le pion a ajouter/ placer
@@ -175,7 +178,7 @@ public class Outils {
 	 * @param recupType boolean: type du pion a placer (Crapaud ou grenouille)
 	 */
 	public static void placementPion(int lignePion, int colonnePion,
-													boolean type) {
+			boolean type) {
 		Pion placementUti = new Pion(lignePion,colonnePion,type);
 		Partie.config[lignePion][colonnePion] = placementUti;
 	}
@@ -186,10 +189,10 @@ public class Outils {
 	public static void enregistrerArray() {
 		Plateau config = new Plateau(Partie.config);
 		Configuration newConfig = new Configuration (
-							config.getPlateau(),nomConfig);
+				config.getPlateau(),nomConfig);
 		Configuration.listConfiguration.add(newConfig);
 	}
-	
+
 	public static void sauvegarder() {
 		Plateau config = new Plateau(Partie.config);
 		/* Sauvegarde la configuration */
@@ -199,5 +202,5 @@ public class Outils {
 	}
 
 }
-	
-	
+
+

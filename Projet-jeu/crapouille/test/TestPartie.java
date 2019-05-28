@@ -166,12 +166,38 @@ public class TestPartie {
 			System.out.println("L'équipe crapauds est bien gagnante");
 		}
 	}
+	
+	private static void testVictoireCasseTete() {
+		Pion[][] plateauTest1 = {
+				{pionGrenouille1, null, pionCrapaud1},
+				{pionGrenouille2, null, pionCrapaud2}
+		};
+		Plateau testPlateau1 = new Plateau(plateauTest1);
+		System.out.println("Test du boolean victoireCasseTete sur un plateau non gagnant\n" 
+				+ testPlateau1.toString());
+		if (!testPlateau1.victoireCasseTete()) {
+			System.out.println("La configuration n'est pas gagnante");
+			continuer();
+		}
+		
+		Pion[][] plateauTest2 = {
+				{pionGrenouille1, pionCrapaud1, null},
+				{pionGrenouille2, pionCrapaud2, null}
+		};
+		Plateau testPlateau2 = new Plateau(plateauTest2);
+		System.out.println("Test du boolean victoire sur un plateau gagnant pour les grenouilles\n" 
+				+ testPlateau2.toString());
+		if (testPlateau2.victoireCasseTete()) {
+			System.out.println("Le casse tete n'est pas gagné");
+			continuer();
+		}
+	}
 
 	public static void main(String[] args) {
 		System.out.println("----- Test visuel des différentes fonction -----");
 		// testMovePion();
 		// testPionValide();
 		// testVictoire();
-		// testVictoireCasseTete();
+		testVictoireCasseTete();
 	}
 }
