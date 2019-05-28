@@ -4,9 +4,8 @@ import crapouille.Outils;
 
 public class TestOutils {
 
-
-	/** 
-	 * Fonction test de recupType
+	
+	/** Fonction test de recupType
 	 * Test uniquement la bonne recuperation
 	 * Car les differents des cas d'erreurs sont toujours geres
 	 * Avant l'appel de cette fonction
@@ -15,7 +14,7 @@ public class TestOutils {
 		final char[] aTesterChar = {'C', 'G'};
 		final boolean[] recupTypeAttendu = {true, false};
 		int nbTestOk = 0;
-
+		
 		for(int i = 0; i < aTesterChar.length; i++) {
 			if (Outils.recupType(aTesterChar[i]) == recupTypeAttendu[i]) {
 				nbTestOk++;
@@ -23,6 +22,7 @@ public class TestOutils {
 		}
 		System.out.println(nbTestOk + " sur " + aTesterChar.length + " tests");
 	}
+<<<<<<< HEAD
 
 	/**
 	 * Fonction test de EstValide
@@ -94,5 +94,9 @@ public class TestOutils {
 		testVerificationLettre ();
 		 testLigneEstValide ();
 
+=======
+	public static void main(String[] args) {
+		//TODO c'est quoi  ce bordel inchallah
+>>>>>>> parent of 319e4cd... testOutils
 	}
 }
