@@ -442,12 +442,24 @@ public class InterfaceAppliController {
 	private Button okGameBoard;
 
 	@FXML
+	/**
+	 * TextField qui contient la ligne
+	 * du pion que l'utilisateur veut deplacer
+	 */
 	private TextField entreeLigne;
 
 	@FXML
+	/**
+	 * TextField qui contient la colonne
+	 * du pion que l'utilisateur veut deplacer
+	 */
 	private TextField entreeColonne;
 
 	@FXML
+	/**
+	 * Label affichant le nom de lequipe 
+	 * qui doit jouer
+	 */
 	private Label tourDe;
 
 
@@ -781,10 +793,9 @@ public class InterfaceAppliController {
 		}
 	}
 
-	//TODO verifier validite MVC
 	/**
 	 * Recupere le nom des equipes et appel les fonctions 
-	 * qui les attribues
+	 * definissent les attributs dans Partie
 	 */
 	private void recupNomEquipe() {
 		if (Partie.getChoixModeDeJeu() == 0 || Partie.getChoixAdversaire() != 0
