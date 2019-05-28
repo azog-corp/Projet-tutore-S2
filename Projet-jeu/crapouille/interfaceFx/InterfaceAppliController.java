@@ -557,30 +557,14 @@ public class InterfaceAppliController {
 		Partie.loadConfig(nConfig);
 	}
 
-	//TODO verfier validite MVC
+	//TODO verifier validite MVC
 	private void recupNomEquipe() {
 		if (Partie.getChoixModeDeJeu() == 0 || Partie.getChoixAdversaire() != 0
 				&& Partie.getChoixModeDeJeu() == 1) {
-			attribuerNomJ1();
+			Outils.attribuerNomJ1(tb_nomJ1.getText());
 		} else {
-			attribuerNomJ1();
-			attribuerNomJ2();
-		}
-	}
-
-	private void attribuerNomJ1() {
-		if (tb_nomJ1.getText().isEmpty()) {
-			Partie.setEquipe1(Partie.getNomEquipe1Defaut());
-		} else {
-			Partie.setEquipe1(tb_nomJ1.getText());
-		}
-	}
-
-	private void attribuerNomJ2() {
-		if (tb_nomJ2.getText().isEmpty()) {
-			Partie.setEquipe2(Partie.getNomEquipe2Defaut());
-		} else {
-			Partie.setEquipe2(tb_nomJ2.getText());
+			Outils.attribuerNomJ1(tb_nomJ1.getText());
+			Outils.attribuerNomJ2(tb_nomJ2.getText());
 		}
 	}
 

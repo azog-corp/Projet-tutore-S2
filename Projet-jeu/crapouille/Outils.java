@@ -43,6 +43,24 @@ public class Outils {
 	public static boolean recupType(char choix) {
 		return choix == 'C' ? true : false;
 	}
+	
+
+	public static void attribuerNomJ1(String nomJ1) {
+		if (estNonVide(nomJ1)) {
+			Partie.setEquipe1(Partie.getNomEquipe1Defaut());
+		} else {
+			Partie.setEquipe1(nomJ1);
+		}
+	}
+
+	public static void attribuerNomJ2(String nomJ2) {
+		if (estNonVide(nomJ2)) {
+			Partie.setEquipe2(Partie.getNomEquipe2Defaut());
+		} else {
+			Partie.setEquipe2(nomJ2);
+		}
+	}
+
 
 	/**
 	 * Recupere toutes les configs disponible et les renvoi sous forme
@@ -183,6 +201,7 @@ public class Outils {
 		}
 		return false;
 	}
+	
 	public static boolean estNonVide(String aVerifier) {
 		if (aVerifier.equals("")) {
 			return true;
