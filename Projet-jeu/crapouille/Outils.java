@@ -7,8 +7,14 @@ public class Outils {
 	/** initialisation des constantes min/max lignes et colonnes */
 	final static int MIN_LIGNE_PION = 1;
 	final static int MAX_LIGNE_PION = 20;
-	final static int MIN_COLONNE_PION = 3;
+	final static int MIN_COLONNE_PION = 1;
 	final static int MAX_COLONNE_PION = 20;
+	
+	/** initialisation des constantes min/max lignes et colonnes */
+	final static int MIN_LIGNE_TABLEAU = 1;
+	final static int MAX_LIGNE_TABLEAU = 20;
+	final static int MIN_COLONNE_TABLEAU = 3;
+	final static int MAX_COLONNE_TABLEAU = 20;
 
 	/** initialisation des constantes du format : XXX;XX */
 	final static int NOM_PION = 0; // position du 1er chiffre de l'entier
@@ -169,8 +175,11 @@ public class Outils {
 	}	
 
 
-	//TODO tester
-	//Normalement pas besoin tester - car caractere non valide
+
+	/**
+	 * Verifie que el nombre rentree par l'uti 
+	 * est une nombre correspondant a 
+	 */
 	public static boolean cordOk(int ligne, int colonne) {
 		return ligne < Partie.config.length && 
 				colonne < Partie.config[0].length &&
@@ -185,13 +194,14 @@ public class Outils {
 	 * @return un booleen égal a vrai si les lignes et colonnes plateau sont corrects
 	 */
 	public static boolean configPlateauEstValide(int lignePlateau, int colonnePlateau) {
-		// vérification des entier ligne et colonne avec 
-		// la taille max et min d'une ligne et d'une colonne
-		// limité a 20 (pour l'instant)
-		return (MIN_LIGNE_PION <= lignePlateau 
-				|| lignePlateau <= MAX_LIGNE_PION) &&
-				(MIN_COLONNE_PION <= colonnePlateau 
-				|| colonnePlateau <=MAX_COLONNE_PION);
+		/* vérification des entier ligne et colonne avec 
+		 * la taille max et min d'une ligne et d'une colonne
+		 * limité a 20 (pour l'instant)
+		 */
+		return (MIN_LIGNE_TABLEAU <= lignePlateau 
+				|| lignePlateau <= MAX_LIGNE_TABLEAU) &&
+				(MIN_COLONNE_TABLEAU <= colonnePlateau 
+				|| colonnePlateau <=MAX_COLONNE_TABLEAU);
 	}
 
 	/**
@@ -248,8 +258,6 @@ public class Outils {
 		}
 		return false;
 	}
-
-
 
 	public static boolean placementPion(String ligne,String colonne,String type) {
 		if (estNonVide(ligne) && estNonVide(colonne) && estNonVide(type)) {
@@ -418,17 +426,17 @@ public class Outils {
 				} else {
 					InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
 							MESSAGE_ERREUR
-							+"Numéro ne correspond a aucune configuration",
+							+ MSGBOX_NONVALIDE_CONF,
 							false);
 				}
 			} else {
 				InterfaceAppliController.showMsgbox(MSGBOX_TITRE, 
-						MESSAGE_ERREUR + "Ne doit pas contenir de lettre",
+						MESSAGE_ERREUR + MSGBOX_LETTRE,
 						false);
 			}
 		} else {
 			InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
-					MESSAGE_ERREUR + "Ne peut pas être vide", false);
+					MESSAGE_ERREUR + MSGBOX_VIDE, false);
 
 		}
 		return false;
