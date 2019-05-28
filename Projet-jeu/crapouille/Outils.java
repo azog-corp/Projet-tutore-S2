@@ -159,7 +159,8 @@ public class Outils {
 	 */
 	public static boolean ligneEstValide(int lignePion) {
 		// La ligne du pion doit être supérieur à 0 et inférieure ou égal à 20  
-		return MIN_LIGNE_PION < lignePion && lignePion <= MAX_LIGNE_PION;
+		return MIN_LIGNE_PION <= lignePion 
+				&& lignePion <= Partie.currentPlateau.getPlateau().length;
 	}
 
 	/**
@@ -170,15 +171,13 @@ public class Outils {
 	 */
 	public static boolean colonneEstValide(int colonnePion) {
 		// La ligne du pion doit être supérieur à 0 et inférieure ou égal à 20  
-		return MIN_COLONNE_PION < colonnePion 
-				&& colonnePion <= MAX_COLONNE_PION;
+		return MIN_COLONNE_PION <= colonnePion 
+		&& colonnePion <= Partie.currentPlateau.getPlateau()[0].length;
 	}	
 
-
-
 	/**
-	 * Verifie que el nombre rentree par l'uti 
-	 * est une nombre correspondant a 
+	 * Verifie que le nombre rentree par l'uti 
+	 * est une nombre correspondant a un pion valide
 	 */
 	public static boolean cordOk(int ligne, int colonne) {
 		return ligne < Partie.config.length && 
@@ -194,14 +193,14 @@ public class Outils {
 	 * @return un booleen égal a vrai si les lignes et colonnes plateau sont corrects
 	 */
 	public static boolean configPlateauEstValide(int lignePlateau, int colonnePlateau) {
-		/* vérification des entier ligne et colonne avec 
+		/* vérification des entiers ligne et colonne avec 
 		 * la taille max et min d'une ligne et d'une colonne
 		 * limité a 20 (pour l'instant)
 		 */
 		return (MIN_LIGNE_TABLEAU <= lignePlateau 
 				|| lignePlateau <= MAX_LIGNE_TABLEAU) &&
 				(MIN_COLONNE_TABLEAU <= colonnePlateau 
-				|| colonnePlateau <=MAX_COLONNE_TABLEAU);
+				|| colonnePlateau <= MAX_COLONNE_TABLEAU);
 	}
 
 	/**
@@ -276,11 +275,11 @@ public class Outils {
 				/* Verification que les coordonnes corresponde bien a une coordonnes
 				 * dans le tableau de jeu
 				 */
-				if (Outils.cordOk(lignePion,colonnePion)) {
+				if (cordOk(lignePion,colonnePion)) {
 					/* Verification le type entre par l'uti est valide */
-					if (Outils.typeValide(type)) {
-						Outils.placementPion(lignePion,colonnePion,
-								Outils.recupType(type.charAt(0)));
+					if (typeValide(type)) {
+						placementPion(lignePion,colonnePion,
+								recupType(type.charAt(0)));
 						return true;
 						/* Affichage des differentes erreurs */
 					} else {
@@ -313,7 +312,7 @@ public class Outils {
 		/* On vérifie que la la string n'est pas vide pour ne pas produire d'erreur par la suite */
 		if (estNonVide(choixConf)) { 
 			/* Verification qu'il n'y a pas de lettre dans lentree */
-			if(Outils.verificationLettre(choixConf)) {
+			if(verificationLettre(choixConf)) {
 				int config = Integer.parseInt(choixConf);
 				/* Verification que le numero existe et correspond a uen configuration */
 				if (configExiste(config)) {
@@ -343,15 +342,14 @@ public class Outils {
 			/* Vérifie s'il n'y a pas de lettre avant de convertir en int les entrées
 			 * pour ne pas produire d'erreur
 			 */
-			if (Outils.verificationLettre(ligne) 
-					&& Outils.verificationLettre(colonne)) {
+			if (verificationLettre(ligne) 
+					&& verificationLettre(colonne)) {
 				/*Conversion en int des entrées texte de l'utilisateur */
 				int colonnePion = Integer.parseInt(colonne);
 				int lignePion = Integer.parseInt(ligne);
-				if (Outils.colonneEstValide(colonnePion) 
-						&& Outils.ligneEstValide(lignePion)) {
+				if (ligneEstValide(lignePion) && colonneEstValide(colonnePion)) {
 					/* Decremente de 1 car les numeros rentres et afficher sur le plateau 
-					 * sont augmenter de 1 pour corerspondre a une bonne notation de 
+					 * sont augmenter de 1 pour correspondre a une bonne notation de 
 					 * (de 1 a 20 et non de 0 a 19) plus confortable pour l'utilisateur
 					 */
 					colonnePion--;
@@ -405,7 +403,7 @@ public class Outils {
 		Configuration newConfig = new Configuration (
 				config.getPlateau(), Outils.nomConfig);
 		Configuration.listConfiguration.add(newConfig);
-		Outils.enregistrerArray();
+		enregistrerArray();
 	}
 
 	public static boolean supprimerConf(String idConfig) {
@@ -460,7 +458,7 @@ public class Outils {
 				/* Verification que les coordonnes corresponde bien a une coordonnes
 				 * dans le tableau de jeu
 				 */
-				if (Outils.cordOk(lignePion,colonnePion)) {
+				if (cordOk(lignePion,colonnePion)) {
 					/* Verification le type entre par l'uti est valide */
 						Partie.config[lignePion][colonnePion] = null;
 						return true;
