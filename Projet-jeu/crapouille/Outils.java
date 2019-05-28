@@ -59,7 +59,10 @@ public class Outils {
 	}
 
 	
-
+	/**
+	 * Attribut le nom du joueur 1
+	 * @param nomJ1 Nom du joueur entre par l'utilisateur
+	 */
 	public static void attribuerNomJ1(String nomJ1) {
 		if (estNonVide(nomJ1)) {
 			Partie.setEquipe1(nomJ1);
@@ -67,7 +70,11 @@ public class Outils {
 			Partie.setEquipe1(Partie.getNomEquipe1Defaut());
 		}
 	}
-
+	
+	/**
+	 * Attribut le nom du joueur 2
+	 * @param nomJ2 Nom du joueur entre par l'utilisateur
+	 */
 	public static void attribuerNomJ2(String nomJ2) {
 		if (estNonVide(nomJ2)) {
 			Partie.setEquipe2(nomJ2);
@@ -75,7 +82,6 @@ public class Outils {
 			Partie.setEquipe2(Partie.getNomEquipe2Defaut());
 		}
 	}
-
 
 	/**
 	 * Recupere toutes les configs disponible et les renvoi sous forme
@@ -91,7 +97,6 @@ public class Outils {
 		}
 		return configs.toString();
 	}
-
 
 	/**
 	 * Récupère le coordonnée de la ligne du pion
@@ -183,24 +188,6 @@ public class Outils {
 		return ligne < Partie.config.length && 
 				colonne < Partie.config[0].length &&
 				ligne >= 0 && colonne >= 0;
-	}
-
-	/**
-	 * Détermine si les lignes du plateau sont corrects 
-	 * avec le contrôle de la gestion d'erreur
-	 * @param colonnePlateau est le nombre de colonnes pour le plateau 
-	 * @param lignePlateau est le nombre de lignes pour le plateau
-	 * @return un booleen égal a vrai si les lignes et colonnes plateau sont corrects
-	 */
-	public static boolean configPlateauEstValide(int lignePlateau, int colonnePlateau) {
-		/* vérification des entiers ligne et colonne avec 
-		 * la taille max et min d'une ligne et d'une colonne
-		 * limité a 20 (pour l'instant)
-		 */
-		return (MIN_LIGNE_TABLEAU <= lignePlateau 
-				|| lignePlateau <= MAX_LIGNE_TABLEAU) &&
-				(MIN_COLONNE_TABLEAU <= colonnePlateau 
-				|| colonnePlateau <= MAX_COLONNE_TABLEAU);
 	}
 
 	/**
@@ -386,6 +373,7 @@ public class Outils {
 		Pion placementUti = new Pion(lignePion,colonnePion,type);
 		Partie.config[lignePion][colonnePion] = placementUti;
 	}
+	
 	/**
 	 * Enregistre la configuration cree par l'utilisateur dans l'arrays 
 	 * qui contient toutes les configurations
