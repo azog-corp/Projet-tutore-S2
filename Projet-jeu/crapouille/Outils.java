@@ -136,7 +136,7 @@ public class Outils {
 	}
 
 	/**
-	 * Fonction qui vérifie si uen chaine de caractère ne contient que des chiffres
+	 * Fonction qui vérifie si une chaine de caractère ne contient que des chiffres
 	 * @param aVerifier String a verifier la validité ( pas de nombre)
 	 * @return false si la string aVerifier contient une lettre
 	 * 		   true si la String ne contient aucune lettre
@@ -148,7 +148,8 @@ public class Outils {
 				return false;
 			}
 		}
-		return true;	
+		return true;
+			
 	}
 
 	/**

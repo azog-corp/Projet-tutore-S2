@@ -88,10 +88,11 @@ public class TestOutils {
 		System.out.println("il y a " + nbTestOk + " test réussie sur 8");
 	}
 
-
+	
 	public static void main(String[] args) {
 		testEstValide();
 		testVerificationLettre ();
-		testLigneEstValide ();
+		 testLigneEstValide ();
+
 	}
 }
