@@ -1,6 +1,7 @@
 package crapouille;
 
 import crapouille.configuration.Configuration;
+import crapouille.interfaceFx.InterfaceAppliController;
 
 public class Outils {
 	/** initialisation des constantes min/max lignes et colonnes */
@@ -17,6 +18,18 @@ public class Outils {
 	final static int PREMIER_CHIFFRE_COLONNE = 4; // position du 1er chiffre de l'entier
 	final static int DEUXIEME_CHIFFRE_COLONNE = 5; // position du 2e chiffre de l'entier
 	public static String nomConfig;
+
+	final static String MSGBOX_TITRE = "Crapauds & Grenouilles";
+	final static String MSGBOX_TYPE = "Type non valide";
+	final static String MSGBOX_LETTRE = "Les lettres ne sont pas acceptées";
+	final static String MSGBOX_NOMBRE = "Nombre trop grand ou trop petit vérifier votre saisie";
+	final static String MSGBOX_VIDE = "Ne doit pas être vide";
+	final static String MSBOX_CONFIG = "La configuration ne peut pas être vide";
+	final static String MSGBOX_ENREGISTREE = "Votre confirmation a bien été enregistrée";
+	final static String MSGBOX_NONVALIDE_CONF = "La configuration que vous avez crée n'est pas valide";
+
+
+	final static String MESSAGE_ERREUR = "Les informations rentrés sont invalides : ";
 
 	/**
 	 * Verifie si le char correspond correspond a un crapaud
@@ -170,37 +183,130 @@ public class Outils {
 		}
 		return false;
 	}
-
-	/**
-	 * 
-	 * @param lignePion int: ligne ou se trouve le pion a ajouter/ placer
-	 * @param colonnePion int: colonne ou se trouve le pion a ajouter/ placer
-	 * @param recupType boolean: type du pion a placer (Crapaud ou grenouille)
-	 */
-	public static void placementPion(int lignePion, int colonnePion,
-			boolean type) {
-		Pion placementUti = new Pion(lignePion,colonnePion,type);
-		Partie.config[lignePion][colonnePion] = placementUti;
-	}
-	/**
-	 * Enregistre la configuration cree par l'utilisateur dans l'arrays 
-	 * qui contient toutes les configurations
-	 */
-	public static void enregistrerArray() {
-		Plateau config = new Plateau(Partie.config);
-		Configuration newConfig = new Configuration (
-				config.getPlateau(),nomConfig);
-		Configuration.listConfiguration.add(newConfig);
+	public static boolean estVide(String aVerifier) {
+		if (aVerifier.equals("")) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
-	public static void sauvegarder() {
-		Plateau config = new Plateau(Partie.config);
-		/* Sauvegarde la configuration */
-		Configuration newConfig = new Configuration (config.getPlateau(), Outils.nomConfig);
-		Configuration.listConfiguration.add(newConfig);
-		Outils.enregistrerArray();
+	public static boolean verifTextLettre(String ligne, String colonne) {
+		if (Outils.verificationLettre(colonne) 
+				&& Outils.verificationLettre(ligne)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
-}
+	public static boolean verifIntOk(int nbLigne, int nbColonne) {
+		/* Verification que la ligne est la colonne est valide */
+		if (Outils.ligneEstValide(nbLigne) 
+				&& Outils.colonneEstValide(nbColonne)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public static boolean verifConfigIni(String ligne, String colonne) {
+		if(estVide(ligne) && estVide(colonne)) {
+			if (verifTextLettre(ligne, colonne)) {
+				/* Conversion en int */
+				int nbLigne = Integer.parseInt(ligne);
+				int nbColonne = Integer.parseInt(colonne);
+				if (verifIntOk(nbLigne, nbColonne)) {
+					/* Initialise le tableau a la taille choisie par l'uti */
+					Partie.config = new Pion[nbLigne][nbColonne];
+					return true;
+				} else {
+					InterfaceAppliController.showMsgbox(MSGBOX_TITRE, MESSAGE_ERREUR 
+							+ MSGBOX_NOMBRE,
+							false);
+				}
+			} else {
+				InterfaceAppliController.showMsgbox(MSGBOX_TITRE,MESSAGE_ERREUR 
+						+ MSGBOX_LETTRE,
+						false);
+			}
+		} else {
+			InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
+					MESSAGE_ERREUR + MSGBOX_VIDE,false);
+		}
+		return false;
+	}
+
+
+
+		public static boolean verifPlacementPion(String ligne,String colonne,String type) {
+			if (estVide(ligne) && estVide(colonne) && estVide(type)) {
+				/* Verification qu'il n'y pas de lettre*/
+				if (verifTextLettre(ligne, colonne)) {
+					int colonnePion = Integer.parseInt(colonne);
+					int lignePion = Integer.parseInt(ligne);
+					colonnePion--;
+					lignePion--;
+					/* Verification que les coordonnes corresponde bien a une coordonnes
+					 * dans le tableau de jeu
+					 */
+					if (Outils.cordOk(lignePion,colonnePion)) {
+						/* Verification le type entre par l'uti est valide */
+						if (Outils.typeValide(type)) {
+							Outils.placementPion(lignePion,colonnePion,
+									Outils.recupType(type.charAt(0)));
+							return true;
+							/* Affichage des differentes erreurs */
+						} else {
+							InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
+									MESSAGE_ERREUR + MSGBOX_TYPE, false);
+						}
+					} else {
+						InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
+								MESSAGE_ERREUR + MSGBOX_NOMBRE, false);
+					}
+				} else {
+					InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
+							MESSAGE_ERREUR + MSGBOX_LETTRE, false);
+				}
+			}
+			return false;
+		}
+
+
+
+
+
+		/**
+		 * 
+		 * @param lignePion int: ligne ou se trouve le pion a ajouter/ placer
+		 * @param colonnePion int: colonne ou se trouve le pion a ajouter/ placer
+		 * @param recupType boolean: type du pion a placer (Crapaud ou grenouille)
+		 */
+		public static void placementPion(int lignePion, int colonnePion,
+				boolean type) {
+			Pion placementUti = new Pion(lignePion,colonnePion,type);
+			Partie.config[lignePion][colonnePion] = placementUti;
+		}
+		/**
+		 * Enregistre la configuration cree par l'utilisateur dans l'arrays 
+		 * qui contient toutes les configurations
+		 */
+		public static void enregistrerArray() {
+			Plateau config = new Plateau(Partie.config);
+			Configuration newConfig = new Configuration (
+					config.getPlateau(),nomConfig);
+			Configuration.listConfiguration.add(newConfig);
+		}
+
+		public static void sauvegarder() {
+			Plateau config = new Plateau(Partie.config);
+			/* Sauvegarde la configuration */
+			Configuration newConfig = new Configuration (config.getPlateau(), Outils.nomConfig);
+			Configuration.listConfiguration.add(newConfig);
+			Outils.enregistrerArray();
+		}
+
+	}
 
 

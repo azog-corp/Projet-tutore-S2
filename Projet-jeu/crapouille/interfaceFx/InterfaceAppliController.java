@@ -43,94 +43,55 @@ public class InterfaceAppliController {
 	final static String MESSAGE_ERREUR = "Les informations rentrés sont invalides : ";
 
 	@FXML
-	private AnchorPane gameBoard;
-
-	@FXML
 	private AnchorPane backpanel;
-
-	@FXML
-	private Label erreurSuppressionConfig;
-
-	@FXML
-	private Button btn_jouermenu;
-
-	@FXML
-	private ImageView btn_createur;
-
-	@FXML
-	private TextField tb_nbColonneConf;
-
-	@FXML
-	private TextField entreeColonne;
-
-	@FXML
-	private AnchorPane defaite;
 
 	@FXML
 	private AnchorPane score;
 
 	@FXML
-	private ToggleGroup lvlIA;
+	private Label nomMVP;
 
 	@FXML
-	private Button btn_quittermenu;
-
-	@FXML
-	private TextField tb_cordType;
-
-	@FXML
-	private AnchorPane createur;
-
-	@FXML
-	private Button confirmationJouer;
-
-	@FXML
-	private Label gameBoardString;
-
-	@FXML
-	private TextField tb_cordColonne;
-
-	@FXML
-	private TextField entreeLigne;
-
-	@FXML
-	private AnchorPane jeuEnCours;
-
-	@FXML
-	private ImageView btn_quitter;
-
-	@FXML
-	private TextField tb_idConf;
-
-	@FXML
-	private Button btn_ajouterConf;
-
-	@FXML
-	private TextField choixConfig;
-
-	@FXML
-	private AnchorPane placementConfig;
-
-	@FXML
-	private Button retourMenu;
-
-	@FXML
-	private CheckBox chk_vsIA;
-
-	@FXML
-	private Label NOM;
-
-	@FXML
-	private Label erreurPlacementPion;
-
-	@FXML
-	private AnchorPane choixConf;
+	private Text scoreMVP;
 
 	@FXML
 	private AnchorPane settingsBar;
 
 	@FXML
+	private ImageView btn_createur;
+
+	@FXML
+	private ImageView btn_acceuil;
+
+	@FXML
+	private ImageView btn_quitter;
+
+	@FXML
+	private ImageView btn_mvp;
+
+	@FXML
+	private ImageView btn_configuration;
+
+	@FXML
+	private AnchorPane createur;
+
+	@FXML
+	private AnchorPane menu;
+
+	@FXML
+	private Button btn_jouermenu;
+
+	@FXML
 	private Button btn_aidemenu;
+
+	@FXML
+	private Button btn_quittermenu;
+
+	@FXML
+	private AnchorPane configurationPartie;
+
+	@FXML
+	private Button confirmationJouer;
 
 	@FXML
 	private Label lb_lvlIa;
@@ -139,55 +100,19 @@ public class InterfaceAppliController {
 	private Label labelIA;
 
 	@FXML
-	private CheckBox chk_casseT;
+	private Label lb_nomJ1;
 
 	@FXML
-	private ImageView btn_configuration;
+	private Label lb_nomJ2;
 
 	@FXML
-	private AnchorPane supprimerConf;
+	private CheckBox chk_vsIA;
 
 	@FXML
-	private TextField tb_nomConf;
+	private RadioButton lvl1;
 
 	@FXML
-	private Label erreurEntreePartie;
-
-	@FXML
-	private TextField tb_cordLigne;
-
-	@FXML
-	private AnchorPane initialisationConfig;
-
-	@FXML
-	private AnchorPane configuration;
-
-	@FXML
-	private Button okGameBoard;
-
-	@FXML
-	private TextField tb_nbLigneConf;
-
-	@FXML
-	private ImageView btn_mvp;
-
-	@FXML
-	private AnchorPane victoire;
-
-	@FXML
-	private Button btn_supprimerConf;
-
-	@FXML
-	private Button btn_validerTaille;
-
-	@FXML
-	private Label afficherConfig;
-
-	@FXML
-	private Label erreurCreationConfig;
-
-	@FXML
-	private Label lb_nomEquipeGagnante;
+	private ToggleGroup lvlIA;
 
 	@FXML
 	private RadioButton lvl2;
@@ -196,55 +121,118 @@ public class InterfaceAppliController {
 	private RadioButton lvl3;
 
 	@FXML
-	private Button btn_supprimerConfig;
-
-	@FXML
-	private Button btn_validerConfig;
-
-	@FXML
-	private Label lb_nomJ1;
-
-	@FXML
 	private TextField tb_nomJ2;
-
-	@FXML
-	private ImageView btn_acceuil;
-
-	@FXML
-	private Label configAdel;
-
-	@FXML
-	private Label lb_nomJ2;
 
 	@FXML
 	private TextField tb_nomJ1;
 
 	@FXML
-	private AnchorPane menu;
+	private Button retourMenu;
 
 	@FXML
-	private Button btn_AjouterPion1;
+	private CheckBox chk_casseT;
+
+	@FXML
+	private TextField choixConfig;
 
 	@FXML
 	private Label listeConfigDispo;
 
 	@FXML
-	private Label nomMVP;
+	private AnchorPane configuration;
+
+	@FXML
+	private AnchorPane initialisationConfig;
+
+	@FXML
+	private TextField tb_nomConf;
+
+	@FXML
+	private TextField tb_nbLigneConf;
+
+	@FXML
+	private Button btn_validerTaille;
+
+	@FXML
+	private TextField tb_nbColonneConf;
+
+	@FXML
+	private Label NOM;
+
+	@FXML
+	private AnchorPane choixConf;
+
+	@FXML
+	private Button btn_ajouterConf;
+
+	@FXML
+	private Button btn_supprimerConf;
+
+	@FXML
+	private AnchorPane placementConfig;
+
+	@FXML
+	private Label afficherConfig;
+
+	@FXML
+	private TextField tb_cordLigne;
+
+	@FXML
+	private Button btn_validerConfig;
 
 	@FXML
 	private Button btn_AjouterPion;
 
 	@FXML
-	private Label erreurConfigPartie;
+	private TextField tb_cordColonne;
 
 	@FXML
-	private Text scoreMVP;
+	private Button btn_AjouterPion1;
 
 	@FXML
-	private AnchorPane configurationPartie;
+	private TextField tb_cordType;
 
 	@FXML
-	private RadioButton lvl1;
+	private AnchorPane supprimerConf;
+
+	@FXML
+	private Button btn_supprimerConfig;
+
+	@FXML
+	private TextField tb_idConf;
+
+	@FXML
+	private Label configAdel;
+
+	@FXML
+	private AnchorPane gameBoard;
+
+	@FXML
+	private AnchorPane defaite;
+
+	@FXML
+	private AnchorPane victoire;
+
+	@FXML
+	private Label lb_nomEquipeGagnante;
+
+	@FXML
+	private AnchorPane jeuEnCours;
+
+	@FXML
+	private Label gameBoardString;
+
+	@FXML
+	private Button okGameBoard;
+
+	@FXML
+	private TextField entreeLigne;
+
+	@FXML
+	private TextField entreeColonne;
+
+	@FXML
+	private Label tourDe;
 
 
 	/* --------------------------------------------------------
@@ -546,7 +534,7 @@ public class InterfaceAppliController {
 					afficherNomEquipe();
 					//TODO Partie.setNbCoups(Partie.getNbCoups()+1);
 					rafraichirJeu(Partie.getCurrentPlateau().toString());
-		/* Affichage des messages d'erreurs a l'utilisateur pour lui siganler le probleme */
+					/* Affichage des messages d'erreurs a l'utilisateur pour lui siganler le probleme */
 				} else {
 					showMsgbox(MSGBOX_TITRE, MESSAGE_ERREUR
 							+ MSGBOX_NOMBRE,false);
@@ -570,13 +558,13 @@ public class InterfaceAppliController {
 			victoire.setVisible(true);
 		}
 	}
-	
+
 	//TODO
 	public void afficherNomEquipe() {
 		String nomEquipe[] = Partie.getEquipe();
 		tourDe.setText("Tour de l'équipe : " + nomEquipe[Partie.getTourEquipe()]);
 	}
-	
+
 	/**
 	 * Recupere le mode de jeu celon se que l'utilisateur a selectionnee
 	 * Et le defini dans le fichier Partie
@@ -615,9 +603,8 @@ public class InterfaceAppliController {
 				int config = Integer.parseInt(choixConfig.getText());
 				/* Verification que le numero existe et correspond a uen configuration */
 				if (config >= 0 && config < Configuration.listConfiguration.size()) {
-					erreurConfigPartie.setVisible(false);
 					return true;
-		/** Affichage des differents message d'erreur selon le cas */
+					/** Affichage des differents message d'erreur selon le cas */
 				} else {
 					showMsgbox(MESSAGE_ERREUR, MSGBOX_LETTRE, false);
 				}
@@ -692,7 +679,7 @@ public class InterfaceAppliController {
 	 */
 
 	/*--------------- FONCTION CONFIGURATION: TRAITEMENT DONNEES / AVANCEMENT  ---------------*/
-	
+
 	/** Remet a zero tous les elements de la page de creation
 	 * de configuration a 0
 	 */
@@ -701,7 +688,7 @@ public class InterfaceAppliController {
 		tb_nbLigneConf.setText("");
 		tb_nomConf.setText("");
 	}
-	
+
 	/**
 	 * Fonction qui est declenche lorsque l'utilisateur souhaite acceder 
 	 * au plateau pour le placement des pions lors de la creation d'une config
@@ -714,33 +701,15 @@ public class InterfaceAppliController {
 		/* Verification que non vide */
 		if (!tb_nbLigneConf.getText().isEmpty() 
 				&& !tb_nbColonneConf.getText().isEmpty()) { 
-			/* Verification qu'il n'y pas de lettre*/
-			if (Outils.verificationLettre(tb_nbColonneConf.getText()) 
-					&& Outils.verificationLettre(tb_nbColonneConf.getText())) {
-				/* Conversion en int */
-				int nbLigne = Integer.parseInt(tb_nbLigneConf.getText());
-				int nbColonne = Integer.parseInt( tb_nbColonneConf.getText());
-				/* Verification que la ligne est la colonne est valide */
-				if (Outils.ligneEstValide(nbLigne) 
-						&& Outils.colonneEstValide(nbColonne)) {
-					erreurCreationConfig.setVisible(false);
-					/* Initialise le tableau a la taille choisie par l'uti */
-					Partie.config = new Pion[nbLigne][nbColonne];
-					recupNomConf(); //recupère le nom pour enregistrer
-					razConfig();
-					showCreationConfig();  //Affiche la page de creation de config
-		/* Affichage des differentes erreurs */	
-				} else {
-					showMsgbox(MSGBOX_TITRE, MESSAGE_ERREUR 
-							+ MSGBOX_NOMBRE,
-							false);
-				}
-			} else {
-				showMsgbox(MSGBOX_TITRE,MESSAGE_ERREUR 
-						+ MSGBOX_LETTRE,
-						false);
+			if (Outils.verifConfigIni(tb_nbLigneConf.getText(),
+					tb_nbColonneConf.getText())) {
+				recupNomConf(); //recupère le nom pour enregistrer
+				razConfig();
+				/* Affiche la page de creation de config */
+				showCreationConfig();  
 			}
 		} else {
+			/* Affichage erreur a l'uti */	
 			showMsgbox(MSGBOX_TITRE,
 					MESSAGE_ERREUR + MSGBOX_VIDE,
 					false);
@@ -757,46 +726,12 @@ public class InterfaceAppliController {
 	 */
 	@FXML
 	void ajoutPionConfig(MouseEvent Click) {
-		System.out.println(tb_cordColonne.getText());
-		/* Verification que non vide */
-		if (!tb_cordColonne.getText().isEmpty() 
-				&& !tb_cordLigne.getText().isEmpty()) {
-			String colonne = tb_cordColonne.getText();
-			String ligne = tb_cordLigne.getText();
-			/* Verification qu'il n'y pas de lettre*/
-			if (Outils.verificationLettre(ligne) 
-					&& Outils.verificationLettre(colonne)) {
-				int colonnePion = Integer.parseInt(colonne);
-				int lignePion = Integer.parseInt(ligne);
-				colonnePion--;
-				lignePion--;
-				/* Verification que les coordonnes corresponde bien a une coordonnes
-				 * dans le tableau de jeu
-				 */
-				if (Outils.cordOk(lignePion,colonnePion)) {
-					/* Verification le type entre par l'uti est valide */
-					if (Outils.typeValide(tb_cordType.getText())) {
-						erreurPlacementPion.setVisible(false);
-						Outils.placementPion(lignePion,colonnePion,
-								Outils.recupType(tb_cordType.getText().charAt(0)));
-						rafraichirConf(Partie.configToString());
-		/* Affichage des differentes erreurs */
-					} else {
-						showMsgbox(MSGBOX_TITRE,
-								MESSAGE_ERREUR + MSGBOX_TYPE, false);
-					}
-				} else {
-					showMsgbox(MSGBOX_TITRE,
-							MESSAGE_ERREUR + MSGBOX_NOMBRE, false);
-				}
-			} else {
-				showMsgbox(MSGBOX_TITRE,
-						MESSAGE_ERREUR + MSGBOX_LETTRE, false);
-			}
-		} else {
-			showMsgbox(MSGBOX_TITRE,
-					MESSAGE_ERREUR + MSGBOX_VIDE,false);
-		}
+		String colonne = tb_cordColonne.getText();
+		String ligne = tb_cordLigne.getText();
+		String type = tb_cordType.getText();
+		if(Outils.verifPlacementPion(ligne,colonne,type)) {
+			rafraichirConf(Partie.configToString());
+		}	
 	}
 
 	/**
@@ -823,7 +758,6 @@ public class InterfaceAppliController {
 				 */
 				if (index >= 0 &&
 						index < Configuration.listConfiguration.size()) {
-					erreurSuppressionConfig.setVisible(false);
 					Configuration.listConfiguration.remove(index);
 					/* Affichage de message d'erreur si l'une des conditions n'est pas respectée
 					 * Informant l'utilisateur de l'erreur qu'il a commise 
@@ -960,7 +894,7 @@ public class InterfaceAppliController {
 	 * @param typeFenetre Le type de la fenetre false pour erreur 
 	 * 											true pour information
 	 */
-	private void showMsgbox(String titreFenetre, String texteFenetre, boolean typeFenetre) {
+	public static void showMsgbox(String titreFenetre, String texteFenetre, boolean typeFenetre) {
 		Alert msgUti;
 		if (typeFenetre) {
 			msgUti = new Alert(AlertType.INFORMATION);
