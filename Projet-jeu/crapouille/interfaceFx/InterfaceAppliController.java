@@ -33,9 +33,11 @@ public class InterfaceAppliController {
 	final static String MSGBOX_TITRE = "Crapauds & Grenouilles";
 	final static String MSGBOX_TYPE = "Type non valide";
 	final static String MSGBOX_LETTRE = "Les lettres ne sont pas acceptées";
-	final static String MSGBOX_NOMBRE = "Nombre trop grand ou trop petit vérifier votre saisie";
+	final static String MSGBOX_NOMBRE = "Nombre trop grand ou trop petit vérifier votre saisieMSG";
 	final static String MSGBOX_VIDE = "Ne doit pas être vide";
 	final static String MSBOX_CONFIG = "La configuration ne peut pas être vide";
+	final static String MSGBOX_ENREGISTREE = "Votre confirmation a bien été enregistrée";
+	final static String MSGBOX_NONVALIDE_CONF = "La configuration que vous avez crée n'est pas valide";
 
 
 	final static String MESSAGE_ERREUR = "Les informations rentrés sont invalides : ";
@@ -477,6 +479,7 @@ public class InterfaceAppliController {
 		cacherJ2();
 	}
 
+
 	/**
 	 * Si la config rentré par l'utilisateur est correct
 	 * Si c'est le cas appel des fonction qui récupère :
@@ -488,7 +491,7 @@ public class InterfaceAppliController {
 	@FXML
 	void showGameBoard(MouseEvent Click) {
 		/* Vérifie que le numéro de config saisie par l'utilisateur est correct */
-		if(configValide()) { //Verfie que tous se que a rentre l'utilisateur est correct
+		if(configValide()) { //Verifie que tous se que a rentre l'utilisateur est correct
 			/*Si c'est le cas récupère toutes les informations nécessaires*/
 			recupAdversaire(); //Recupere l'adversaire choisi par l'utilisateur
 			recupModeJeu(); //Recupere le mode de jeu choisi par l'utilisateur
@@ -532,7 +535,6 @@ public class InterfaceAppliController {
 			 */
 			if (Outils.verificationLettre(ligne) 
 					&& Outils.verificationLettre(colonne)) {
-				erreurEntreePartie.setVisible(false);
 				/*Conversion en int des entrées texte de l'utilisateur */
 				int colonnePion = Integer.parseInt(colonne);
 				int lignePion = Integer.parseInt(ligne);
@@ -540,8 +542,8 @@ public class InterfaceAppliController {
 						&& Outils.ligneEstValide(lignePion)) {
 					colonnePion--;
 					lignePion--;
-					Partie.tourEntite(lignePion, colonnePion); // TODO verif pion correcte deja faite ?\
-					Partie.setNbCoups(Partie.getNbCoups()+1); //TODO verif casse tt
+					Partie.tourEntite(lignePion, colonnePion); 
+					//TODO Partie.setNbCoups(Partie.getNbCoups()+1);
 					rafraichirJeu(Partie.getCurrentPlateau().toString());
 		/* Affichage des messages d'erreurs a l'utilisateur pour lui siganler le probleme */
 				} else {
@@ -683,7 +685,16 @@ public class InterfaceAppliController {
 	 */
 
 	/*--------------- FONCTION CONFIGURATION: TRAITEMENT DONNEES / AVANCEMENT  ---------------*/
-
+	
+	/** Remet a zero tous les elements de la page de creation
+	 * de configuration a 0
+	 */
+	private void razConfig() {
+		tb_nbColonneConf.setText("");
+		tb_nbLigneConf.setText("");
+		tb_nomConf.setText("");
+	}
+	
 	/**
 	 * Fonction qui est declenche lorsque l'utilisateur souhaite acceder 
 	 * au plateau pour le placement des pions lors de la creation d'une config
@@ -703,11 +714,13 @@ public class InterfaceAppliController {
 				int nbLigne = Integer.parseInt(tb_nbLigneConf.getText());
 				int nbColonne = Integer.parseInt( tb_nbColonneConf.getText());
 				/* Verification que la ligne est la colonne est valide */
-				if (Outils.ligneEstValide(nbLigne) && Outils.colonneEstValide(nbColonne)) {
+				if (Outils.ligneEstValide(nbLigne) 
+						&& Outils.colonneEstValide(nbColonne)) {
 					erreurCreationConfig.setVisible(false);
 					/* Initialise le tableau a la taille choisie par l'uti */
 					Partie.config = new Pion[nbLigne][nbColonne];
 					recupNomConf(); //recupère le nom pour enregistrer
+					razConfig();
 					showCreationConfig();  //Affiche la page de creation de config
 		/* Affichage des differentes erreurs */	
 				} else {
@@ -844,16 +857,18 @@ public class InterfaceAppliController {
 	//TODO commenter
 	@FXML
 	void enregistrerConfig(MouseEvent Click) {
+		/* Vérifie que bon nombre de pion crapaud = grenouille
+		 * au moin 1 pion de chaque  sur ligne
+		 */
 		if (Plateau.plateauEstValide(Partie.config)) {
-			Plateau config = new Plateau(Partie.config);
-			Configuration newConfig = new Configuration (config.getPlateau(), Outils.nomConfig);
-			Configuration.listConfiguration.add(newConfig);
-			Outils.enregistrerArray();
-			showMsgbox(MSGBOX_TITRE, "Votre confirmation a bien été enregistrée", true);
+			Outils.sauvegarder();
+			/* Indique a l'utilisateur que sa config a bien ete enregistree */
+			showMsgbox(MSGBOX_TITRE, MSGBOX_ENREGISTREE, true);
 			reinitialiser();
+			/* Retourne au menu*/
 			menu.setVisible(true);
 		} else {
-			// TODO Aficher que c'est faux
+			showMsgbox(MSGBOX_TITRE, MSGBOX_NONVALIDE_CONF, false);
 		}
 	}
 

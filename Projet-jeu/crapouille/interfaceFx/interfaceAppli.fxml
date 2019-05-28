@@ -1,30 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.paint.*?>
-<?import java.net.*?>
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="backpanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="519.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crapouille.interfaceFx.InterfaceAppliController">
+<AnchorPane fx:id="backpanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="519.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crapouille.interfaceFx.InterfaceAppliController">
    <children>
       <AnchorPane fx:id="score" layoutY="85.0" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
          <children>
@@ -215,7 +206,6 @@
                <font>
                   <Font size="8.0" />
                </font></Label>
-            <Label fx:id="erreurConfigPartie" layoutX="72.0" layoutY="427.0" prefHeight="17.0" prefWidth="384.0" textAlignment="CENTER" textFill="#ff3a3a" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="configuration" layoutX="-3.0" layoutY="89.0" prefHeight="520.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
@@ -263,7 +253,6 @@
                         <Font name="System Italic" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="erreurCreationConfig" layoutX="67.0" layoutY="413.0" prefHeight="17.0" prefWidth="399.0" textAlignment="CENTER" textFill="#f52b2b" visible="false" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="choixConf" prefHeight="521.0" prefWidth="519.0" styleClass="AnchorPane" stylesheets="@application.css">
@@ -332,7 +321,6 @@
                         <String fx:value="interactif" />
                      </styleClass>
                   </Button>
-                  <Label fx:id="erreurPlacementPion" layoutX="33.0" layoutY="185.0" prefHeight="17.0" prefWidth="457.0" textAlignment="CENTER" textFill="#ff3030" />
                   <Label layoutX="131.0" layoutY="124.0" text="Type : " textFill="WHITE">
                      <font>
                         <Font size="17.0" />
@@ -369,7 +357,6 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="erreurSuppressionConfig" layoutX="14.0" layoutY="395.0" prefHeight="17.0" prefWidth="496.0" textAlignment="CENTER" textFill="#f83333" />
                </children>
             </AnchorPane>
          </children>
@@ -404,7 +391,7 @@
                         <Font name="System Bold" size="75.0" />
                      </font>
                   </Label>
-                  <Label layoutX="168.0" layoutY="212.0" text="Bien joué à l'équipe" textFill="#8eff6f">
+                  <Label layoutX="168.0" layoutY="212.0" text="Bien joué à" textFill="#8eff6f">
                      <font>
                         <Font name="System Bold Italic" size="20.0" />
                      </font>
@@ -425,14 +412,16 @@
             </AnchorPane>
             <AnchorPane fx:id="jeuEnCours" prefHeight="519.0" prefWidth="521.0" styleClass="AnchorPane" stylesheets="@application.css">
                <children>
-                  <Label fx:id="gameBoardString" layoutX="136.0" layoutY="132.0" prefHeight="229.0" prefWidth="308.0" textFill="WHITE" />
+                  <Label fx:id="gameBoardString" layoutX="77.0" layoutY="115.0" prefHeight="288.0" prefWidth="399.0" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="12.0" />
+                     </font></Label>
                   <Button fx:id="okGameBoard" layoutX="417.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#actualiserJeu" prefHeight="25.0" prefWidth="42.0" stylesheets="@application.css" text="Ok">
                      <styleClass>
                         <String fx:value="btnPlateau" />
                         <String fx:value="priobtn" />
                      </styleClass>
                   </Button>
-                  <Label fx:id="erreurEntreePartie" layoutY="493.0" prefHeight="25.0" prefWidth="521.0" textAlignment="CENTER" textFill="#f83737" />
                   <Label layoutX="113.0" layoutY="469.0" text="Ligne : " textFill="WHITE">
                      <font>
                         <Font size="14.0" />
@@ -445,6 +434,11 @@
                   </Label>
                   <TextField fx:id="entreeLigne" layoutX="164.0" layoutY="467.0" prefHeight="26.0" prefWidth="76.0" />
                   <TextField fx:id="entreeColonne" layoutX="326.0" layoutY="466.0" prefHeight="26.0" prefWidth="76.0" />
+                  <Label fx:id="tourDe" layoutX="31.0" layoutY="30.0" text="TOUR DE L'EQUIPE : " textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </children>

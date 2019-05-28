@@ -233,6 +233,7 @@ public class Partie implements Serializable {
 			if ((choixModeDeJeu == 0 && currentPlateau.pionValide(0, ligne, colonne) != null)) {
 				currentPlateau.movePion(currentPlateau.pionValide(1, ligne, colonne));
 			}
-			return tourFait;
 		}
+		return tourFait;
 	}
+}

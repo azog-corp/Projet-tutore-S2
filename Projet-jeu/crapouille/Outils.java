@@ -161,8 +161,7 @@ public class Outils {
 	 */
 	public static boolean verifVictoire() {
 		if (Partie.currentPlateau.victoire(0) || 
-				Partie.currentPlateau.victoire(1) || 
-				Partie.currentPlateau.victoire(1)) {
+				Partie.currentPlateau.victoire(1)){
 			return true;
 		} else {
 			return false;
@@ -190,6 +189,15 @@ public class Outils {
 							config.getPlateau(),nomConfig);
 		Configuration.listConfiguration.add(newConfig);
 	}
+	
+	public static void sauvegarder() {
+		Plateau config = new Plateau(Partie.config);
+		/* Sauvegarde la configuration */
+		Configuration newConfig = new Configuration (config.getPlateau(), Outils.nomConfig);
+		Configuration.listConfiguration.add(newConfig);
+		Outils.enregistrerArray();
+	}
+
 }
 	
 	
