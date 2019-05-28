@@ -21,7 +21,7 @@ public class Outils {
 
 	final static String MSGBOX_TITRE = "Crapauds & Grenouilles";
 	final static String MSGBOX_TYPE = "Type non valide";
-	final static String MSGBOX_LETTRE = "Les lettres ne sont pas acceptées";
+	final static String MSGBOX_LETTRE = "Les lettres / Symboles ne sont pas acceptées";
 	final static String MSGBOX_NOMBRE = "Nombre trop grand ou trop petit vérifier votre saisie";
 	final static String MSGBOX_VIDE = "Ne doit pas être vide";
 	final static String MSBOX_CONFIG = "La configuration ne peut pas être vide";
@@ -220,7 +220,7 @@ public class Outils {
 	}
 
 
-	public static boolean verifConfigIni(String ligne, String colonne) {
+	public static boolean configIni(String ligne, String colonne) {
 		if(estNonVide(ligne) && estNonVide(colonne)) {
 			if (Outils.verificationLettre(colonne) 
 					&& Outils.verificationLettre(ligne)) {
@@ -303,10 +303,10 @@ public class Outils {
 					return true;
 					/** Affichage des differents message d'erreur selon le cas */
 				} else {
-					InterfaceAppliController.showMsgbox(MESSAGE_ERREUR, MSGBOX_LETTRE, false);
+					InterfaceAppliController.showMsgbox(MESSAGE_ERREUR, MSGBOX_NOMBRE, false);
 				}
 			} else {
-				InterfaceAppliController.showMsgbox(MESSAGE_ERREUR, MSGBOX_NOMBRE, false);
+				InterfaceAppliController.showMsgbox(MESSAGE_ERREUR, MSGBOX_LETTRE, false);
 			}
 		} else {
 			InterfaceAppliController.showMsgbox(MESSAGE_ERREUR, MSGBOX_VIDE, false);

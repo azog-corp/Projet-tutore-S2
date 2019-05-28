@@ -617,7 +617,7 @@ public class InterfaceAppliController {
 		/* Verification que non vide */
 		if (!tb_nbLigneConf.getText().isEmpty() 
 				&& !tb_nbColonneConf.getText().isEmpty()) { 
-			if (Outils.verifConfigIni(tb_nbLigneConf.getText(),
+			if (Outils.configIni(tb_nbLigneConf.getText(),
 					tb_nbColonneConf.getText())) {
 				recupNomConf(); //recupère le nom pour enregistrer
 				razConfig();
