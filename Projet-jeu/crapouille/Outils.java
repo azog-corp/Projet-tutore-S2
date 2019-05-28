@@ -159,7 +159,7 @@ public class Outils {
 	 */
 	public static boolean ligneEstValide(int lignePion) {
 		// La ligne du pion doit être supérieur à 0 et inférieure ou égal à 20  
-		return MIN_LIGNE_PION <= lignePion && lignePion < MAX_LIGNE_PION;
+		return MIN_LIGNE_PION < lignePion && lignePion <= MAX_LIGNE_PION;
 	}
 
 	/**
@@ -170,8 +170,8 @@ public class Outils {
 	 */
 	public static boolean colonneEstValide(int colonnePion) {
 		// La ligne du pion doit être supérieur à 0 et inférieure ou égal à 20  
-		return MIN_COLONNE_PION <= colonnePion 
-				&& colonnePion < MAX_COLONNE_PION;
+		return MIN_COLONNE_PION < colonnePion 
+				&& colonnePion <= MAX_COLONNE_PION;
 	}	
 
 
@@ -221,6 +221,12 @@ public class Outils {
 		return false;
 	}
 	
+	/**
+	 * Fonction qui verifie qu'un String
+	 * n'est as vide
+	 * @param aVerifier chaine de char a verfier
+	 * @return
+	 */
 	public static boolean estNonVide(String aVerifier) {
 		if (aVerifier.equals("")) {
 			return false;
