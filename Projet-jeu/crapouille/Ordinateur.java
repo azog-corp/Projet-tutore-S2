@@ -1,4 +1,4 @@
-/**
+/*
  * Ordinateur.java
  * Azcop 2019, droit d'auteur
  */
