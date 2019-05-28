@@ -126,9 +126,52 @@ public class TestPartie {
 		}
 	}
 
+	/**
+	 * Fonction qui test le boolean victoire sur un plateau
+	 * non gagnant et plateau gagnant pour chaque équipe
+	 */
+	private static void testVictoire() {
+		Pion[][] plateauTest1 = {
+				{pionGrenouille1, null, pionCrapaud1},
+				{pionGrenouille2, null, pionCrapaud2}
+		};
+		Plateau testPlateau1 = new Plateau(plateauTest1);
+		System.out.println("Test du boolean victoire sur un plateau non gagnant\n" 
+				+ testPlateau1.toString());
+		if (!testPlateau1.victoire(0) && !testPlateau1.victoire(1)) {
+			System.out.println("Le plateau n'est pas gagnant");
+			continuer();
+		}
+		
+		Pion[][] plateauTest2 = {
+				{pionGrenouille1, pionCrapaud1, null},
+				{pionGrenouille2, pionCrapaud2, null}
+		};
+		Plateau testPlateau2 = new Plateau(plateauTest2);
+		System.out.println("Test du boolean victoire sur un plateau gagnant pour les grenouilles\n" 
+				+ testPlateau2.toString());
+		if (testPlateau2.victoire(1)) {
+			System.out.println("L'équipe grenouille est bien gagnante");
+			continuer();
+		}
+		
+		Pion[][] plateauTest3 = {
+				{null, pionCrapaud1, pionGrenouille1},
+				{null, pionCrapaud2, pionGrenouille2}
+		};
+		Plateau testPlateau3 = new Plateau(plateauTest3);
+		System.out.println("Test du boolean victoire sur un plateau gagnant pour les crapauds\n" 
+				+ testPlateau3.toString());
+		if (testPlateau3.victoire(0)) {
+			System.out.println("L'équipe crapauds est bien gagnante");
+		}
+	}
+
 	public static void main(String[] args) {
 		System.out.println("----- Test visuel des différentes fonction -----");
 		// testMovePion();
-		testPionValide();
+		// testPionValide();
+		// testVictoire();
+		// testVictoireCasseTete();
 	}
 }
