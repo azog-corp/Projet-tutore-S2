@@ -756,6 +756,9 @@ public class InterfaceAppliController {
 				+ Partie.getEquipe(Partie.getTourEquipe()));
 	}
 	
+	/**
+	 * Affiche le nom du gagnant lorsque le jeu se termine
+	 */
 	public void afficherGagnant() {
 		if (Partie.currentPlateau.victoire(0)) {
 			lb_nomEquipeGagnante.setText(Partie.getEquipe(0));
@@ -779,6 +782,10 @@ public class InterfaceAppliController {
 	}
 
 	//TODO verifier validite MVC
+	/**
+	 * Recupere le nom des equipes et appel les fonctions 
+	 * qui les attribues
+	 */
 	private void recupNomEquipe() {
 		if (Partie.getChoixModeDeJeu() == 0 || Partie.getChoixAdversaire() != 0
 				&& Partie.getChoixModeDeJeu() == 1) {
