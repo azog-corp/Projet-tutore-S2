@@ -43,57 +43,121 @@ public class InterfaceAppliController {
 	final static String MESSAGE_ERREUR = "Les informations rentrés sont invalides : ";
 
 	@FXML
+	/** Fond de l'appli qui ontient toutes 
+	 * les autres pages de l'application
+	 */
 	private AnchorPane backpanel;
 
 	@FXML
+	/** Page d'affichage des scores*/
 	private AnchorPane score;
 
 	@FXML
+	/** Affiche le nom du meilleur joueur 
+	 * Page MVP
+	 */
 	private Label nomMVP;
 
 	@FXML
+	/** Meilleur score obtenu
+	 * Page MVP
+	 */
 	private Text scoreMVP;
 
 	@FXML
+	/**
+	 * Contient les boutons pour naviguer entre les pages
+	 * (Barre contenant les icones)
+	 */
 	private AnchorPane settingsBar;
 
 	@FXML
+	/**
+	 * Image pour naviguer vers la page createur
+	 * Page Settings Bar icone Utilisateur
+	 */
 	private ImageView btn_createur;
 
 	@FXML
+	/**
+	 * Image pour naviguer vers le menu principal
+	 * Page Settings Bar icone Play
+	 */
 	private ImageView btn_acceuil;
 
 	@FXML
+	/**
+	 * Image pour quitter l'application
+	 * Page Settings Bar icone Croix
+	 */
 	private ImageView btn_quitter;
 
 	@FXML
+	/**
+	 * Image pour naviguer vers la page MVP
+	 * Page Settings Bar icone personne
+	 */
 	private ImageView btn_mvp;
 
 	@FXML
+	/**
+	 * Image pour naviguer vers la page de choix pour les configurations
+	 * Page Settings Bar de roue dentee
+	 */
 	private ImageView btn_configuration;
 
 	@FXML
+	/**
+	 * Page contenant les informations sur les createurs
+	 */
 	private AnchorPane createur;
 
 	@FXML
+	/**
+	 * Menu principal et premiere page du jeu
+	 */
 	private AnchorPane menu;
 
 	@FXML
+	/**
+	 * Bouton sur le menu Principal
+	 * Permettant a l'utilisateur de naviguer vers 
+	 * la page configurationPartie
+	 */
 	private Button btn_jouermenu;
 
 	@FXML
+	/**
+	 * Bouton sur le menu Principal
+	 * Permettant d'afficher des aides
+	 */
 	private Button btn_aidemenu;
 
 	@FXML
+	/**
+	 * Bouton sur le menu Principal
+	 * Pour quitter l'application
+	 */
 	private Button btn_quittermenu;
 
 	@FXML
+	/**
+	 * Page permettant a l'utilisateur de parametrer sa partie
+	 */
 	private AnchorPane configurationPartie;
 
 	@FXML
+	/**
+	 * Page Configuration Partie
+	 * Lorsque l'utilisateur clique sur ce bouton verifie toutes ses entrees
+	 * et appel la fonction affichant le plateau de jeu
+	 */
 	private Button confirmationJouer;
 
 	@FXML
+	/**
+	 * Label affichant 
+	 */
 	private Label lb_lvlIa;
 
 	@FXML
