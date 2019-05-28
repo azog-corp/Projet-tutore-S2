@@ -387,7 +387,7 @@ public class Outils {
 		Outils.enregistrerArray();
 	}
 
-	public static void supprimerConf(String idConfig) {
+	public static boolean supprimerConf(String idConfig) {
 		/* Vérifie que le textfield n'est pas vide pour ne pas produire d'erreur
 		 * Si c'est le cas affiche un message d'erreur
 		 */
@@ -404,6 +404,7 @@ public class Outils {
 				if (index >= 0 &&
 						index < Configuration.listConfiguration.size()) {
 					Configuration.listConfiguration.remove(index);
+					return true;
 					/* Affichage de message d'erreur si l'une des conditions n'est pas respectée
 					 * Informant l'utilisateur de l'erreur qu'il a commise 
 					 */
@@ -422,6 +423,7 @@ public class Outils {
 					MESSAGE_ERREUR + "Ne peut pas être vide", false);
 
 		}
+		return false;
 		
 	}
 

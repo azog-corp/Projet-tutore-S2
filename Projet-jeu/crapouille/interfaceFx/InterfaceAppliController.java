@@ -36,8 +36,8 @@ public class InterfaceAppliController {
 	final static String MSGBOX_NOMBRE = "Nombre trop grand ou trop petit vérifier votre saisieMSG";
 	final static String MSGBOX_VIDE = "Ne doit pas être vide";
 	final static String MSBOX_CONFIG = "La configuration ne peut pas être vide";
-	final static String MSGBOX_ENREGISTREE = "Votre confirmation a bien été enregistrée";
-	final static String MSGBOX_NONVALIDE_CONF = "La configuration que vous avez crée n'est pas valide";
+	final static String MSGBOX_ENREGISTREE = "Votre modification a bien été enregistrée";
+	final static String MSGBOX_NONVALIDE_CONF = "La configuration que vous avez entree n'est pas valide";
 
 
 	final static String MESSAGE_ERREUR = "Les informations rentrés sont invalides : ";
@@ -498,6 +498,7 @@ public class InterfaceAppliController {
 			victoire.setVisible(false);
 			/* Met a jour l'affichage */
 			rafraichirJeu(Partie.getCurrentPlateau().toString());
+			afficherNomEquipe();
 			//TODO si mode de jeu = casse tete et recuperer le temps a la fin quand victoire
 			Partie.setDepartPartie(LocalDate.now());
 		}
@@ -531,8 +532,7 @@ public class InterfaceAppliController {
 
 	//TODO
 	public void afficherNomEquipe() {
-		String nomEquipe[] = Partie.getEquipe();
-		tourDe.setText("Tour de l'équipe : " + nomEquipe[Partie.getTourEquipe()]);
+		//tourDe.setText("Tour de l'équipe : " + Partie.getEquipe([Partie.getTourEquipe()]);
 	}
 
 	/**
@@ -658,7 +658,14 @@ public class InterfaceAppliController {
 	@FXML
 	//TODO verification
 	void deleteConfig(MouseEvent Click) {
-		Outils.supprimerConf(tb_idConf.getText());
+		if(Outils.supprimerConf(tb_idConf.getText())) {
+			showMsgbox(MSGBOX_TITRE, MSGBOX_ENREGISTREE, true);
+			/* Retourne au menu*/
+			reinitialiser();
+			menu.setVisible(true);
+		} else {
+			showMsgbox(MSGBOX_TITRE, MSGBOX_NONVALIDE_CONF, false);
+		}
 	}
 
 	/** Cette fonction sera executé lorsque que l'utilisateur 
