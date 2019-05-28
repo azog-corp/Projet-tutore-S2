@@ -1,4 +1,7 @@
-
+/*
+ * 
+ * 
+ */
 package crapouille;
 
 import java.io.Serializable;
@@ -6,6 +9,11 @@ import java.time.LocalDate;
 
 import crapouille.configuration.Configuration;
 
+/**
+ * A compléter.
+ * @author Maël
+ *
+ */
 public class Partie implements Serializable {
 
 	/** ID de la serialisation */

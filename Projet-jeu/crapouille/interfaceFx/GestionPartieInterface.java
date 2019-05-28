@@ -41,7 +41,9 @@ public class GestionPartieInterface extends Application {
 							).getResource(CHEMIN));
 			Scene scene = new Scene(root, HAUTEUR, LARGEUR);
 			scene.getStylesheets().add(
-			getClass().getResource(CHEMIN).toExternalForm());
+					getClass().getResource(
+							CHEMIN)
+					.toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
 			primaryStage.show();

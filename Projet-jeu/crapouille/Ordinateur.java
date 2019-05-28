@@ -6,9 +6,6 @@ package crapouille;
 
 import java.util.ArrayList;
 
-import crapouille.Pion;
-
-
 /**
  * Class contenant des fonctions de recherche de pion
  * par l'ordianateur.
@@ -29,7 +26,8 @@ public class Ordinateur {
 	 * @param niveauIA niveau de l'IA
 	 * @return le pion à déplacer
 	 */
-	public static Pion choixOrdi(Plateau plateau, Pion[][] batracien, int niveauIA) {
+	public static Pion choixOrdi(final Plateau plateau,
+			final Pion[][] batracien, final int niveauIA) {
 		initPionNonBloque(batracien);
 		Pion choixPion = null;
 
@@ -37,19 +35,24 @@ public class Ordinateur {
 			choixPion = choixPionIA();
 		}
 		if (choixPion == null) {
-			/* choixPion devient un pion random parmis les pion déplaçable */
-			choixPion = pionLibre.get((int) (1 + (Math.random() * (pionLibre.size()-1))));
+			/* choixPion devient un pion
+			 * random parmis les pion déplaçable */
+			choixPion = pionLibre.get((int)
+					(1 + (Math.random()
+							* (pionLibre.size(
+									) - 1)
+							)));
 		}
 		Partie.currentPlateau.movePion(choixPion);
 		return choixPion;
 	}
 
 	/**
-	 * Renpli pionLibre avec les pions crapaud non bloqué
+	 * Renpli pionLibre avec les pions crapaud non bloqué.
 	 * @param crapaud le tableau contenant les pions
 	 */
-	public static void initPionNonBloque(Pion[][] crapaud) {
-		for (int x = 0 ; x < crapaud[1].length ; x++) {
+	public static void initPionNonBloque(final Pion[][] crapaud) {
+		for (int x = 0; x < crapaud[1].length; x++) {
 			if (!crapaud[1][x].isBloque()) {
 				pionLibre.add(crapaud[1][x]);
 			}

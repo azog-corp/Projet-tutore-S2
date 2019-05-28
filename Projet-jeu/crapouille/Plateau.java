@@ -1,7 +1,16 @@
+/*
+ * Plateau.java
+ * Azog-corp 2019, droit d'auteur
+ */
 package crapouille;
 
 import java.io.Serializable;
 
+/**
+ * A compléter.
+ * @author Maël
+ *
+ */
 public class Plateau implements Serializable {
 
 	/**
