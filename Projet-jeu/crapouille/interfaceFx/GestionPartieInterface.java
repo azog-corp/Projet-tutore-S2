@@ -17,6 +17,13 @@ import javafx.fxml.FXMLLoader;
  *
  */
 public class GestionPartieInterface extends Application {
+
+	/**
+	 * Chemin des ressources.
+	 */
+	private static final String CHEMIN = "/crapouille/"
+			+ "interfaceFx/application.css";
+
 	/**
 	 * Dimension de l'interface.
 	 */
@@ -29,9 +36,9 @@ public class GestionPartieInterface extends Application {
 	public void start(final Stage primaryStage) {
 		try {
 			primaryStage.initStyle(StageStyle.UNDECORATED);
-			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("/crapouille/interfaceFx/application.css"));
+			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource(CHEMIN));
 			Scene scene = new Scene(root, HAUTEUR, LARGEUR);
-			scene.getStylesheets().add(getClass().getResource("/crapouille/interfaceFx/application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource(CHEMIN).toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
 			primaryStage.show();

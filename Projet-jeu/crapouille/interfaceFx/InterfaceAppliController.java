@@ -2,7 +2,6 @@
  * interfaceAppliController.java
  * Azog-corp 2019, droit d'auteur
  */
-//TODO toutes les fonctions sans @FXML a mettre dans partie pour faire moin de ligne
 
 package crapouille.interfaceFx;
 
@@ -215,50 +214,94 @@ public class InterfaceAppliController {
 
 	@FXML
 	/**
-	 * TextBox 
+	 * TextField dans lequel l'utilisateur rentre le nom J2
 	 */
 	private TextField tb_nomJ2;
 
 	@FXML
+	/**
+	 * TextField dans lequel l'utilisateur rentre le nom J1
+	 */
 	private TextField tb_nomJ1;
 
 	@FXML
+	/**
+	 * Bouton pour revenir au menu
+	 */
 	private Button retourMenu;
 
 	@FXML
+	/**
+	 * CheckBox si coche le joueur souhaite faire un casse tete
+	 * Sinon souhaite faire un versus
+	 */
 	private CheckBox chk_casseT;
 
 	@FXML
+	/**
+	 * Text Field contient la configuration choisie par l'utilisateur
+	 */
 	private TextField choixConfig;
 
 	@FXML
+	/**
+	 * Label affichant les configs disponible a l'utilisateur
+	 */
 	private Label listeConfigDispo;
 
 	@FXML
+	/**
+	 * Anchor pane conteanntr tous les autres anchor pane
+	 * Permettant d'ajouter / supprimer une config
+	 */
 	private AnchorPane configuration;
 
 	@FXML
+	/**
+	 *Page permettant l'initialisation de la creation d'une nouvelle config
+	 */
 	private AnchorPane initialisationConfig;
 
 	@FXML
+	/**
+	 * TextField recuperant le nom de la configuration que veut creer l'utilisateur
+	 */
 	private TextField tb_nomConf;
 
 	@FXML
+	/**
+	 * TextField recuperant le nombre de ligne de 
+	 * la configuration que veut creer l'utilisateur
+	 */
 	private TextField tb_nbLigneConf;
 
 	@FXML
+	/**
+	 * Bouton permettant d'appeller toutes les fonctions de verification
+	 * ainsi que de les fonctiosn pour passer a la page de palcement des 
+	 * pions
+	 */
 	private Button btn_validerTaille;
 
 	@FXML
+
+	/**
+	 * TextField recuperant le nombre de colonne de 
+	 * la configuration que veut creer l'utilisateur
+	 */
 	private TextField tb_nbColonneConf;
 
 	@FXML
-	private Label NOM;
-
-	@FXML
+	/**
+	 * Page d'acceuil de configuration permettant de choisir
+	 * Entre supprimer et ajouteyr config
+	 */
 	private AnchorPane choixConf;
 
 	@FXML
+	/**
+	 *
+	 */
 	private Button btn_ajouterConf;
 
 	@FXML
@@ -283,7 +326,7 @@ public class InterfaceAppliController {
 	private TextField tb_cordColonne;
 
 	@FXML
-	private Button btn_AjouterPion1;
+	private Button btn_SupprimerPion;
 
 	@FXML
 	private TextField tb_cordType;
