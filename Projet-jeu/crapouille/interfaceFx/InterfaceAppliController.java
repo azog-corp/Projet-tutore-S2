@@ -317,12 +317,24 @@ public class InterfaceAppliController {
 	private AnchorPane placementConfig;
 
 	@FXML
+	/**
+	 * Affiche la config en cours de creation a l'utilisateur 
+	 */
 	private Label afficherConfig;
 
 	@FXML
+	/**
+	 * Textfield contenant la leigne sur laquelle le joueur
+	 * Entre le numero de la ligne sur laquelle il souhaite
+	 * Ajouter un pion
+	 */
 	private TextField tb_cordLigne;
 
 	@FXML
+	/**
+	 * Bouton page placement des pions
+	 * 
+	 */
 	private Button btn_validerConfig;
 
 	@FXML
