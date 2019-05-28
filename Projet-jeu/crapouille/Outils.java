@@ -103,7 +103,7 @@ public class Outils {
 	}
 
 	/**
-	 * Fonction qui vérifie si uen chaine de caractère ne contient que des chiffres
+	 * Fonction qui vérifie si une chaine de caractère ne contient que des chiffres
 	 * @param aVerifier String a verifier la validité ( pas de nombre)
 	 * @return false si la string aVerifier contient une lettre
 	 * 		   true si la String ne contient aucune lettre
@@ -115,7 +115,8 @@ public class Outils {
 				return false;
 			}
 		}
-		return true;	
+		return true;
+			
 	}
 
 	/**
@@ -126,7 +127,7 @@ public class Outils {
 	 */
 	public static boolean ligneEstValide(int lignePion) {
 		// La ligne du pion doit être supérieur à 0 et inférieure ou égal à 20  
-		return MIN_LIGNE_PION <= lignePion && lignePion < MAX_LIGNE_PION;
+		return MIN_LIGNE_PION < lignePion && lignePion <= MAX_LIGNE_PION;
 	}
 
 	/**
@@ -137,8 +138,8 @@ public class Outils {
 	 */
 	public static boolean colonneEstValide(int colonnePion) {
 		// La ligne du pion doit être supérieur à 0 et inférieure ou égal à 20  
-		return MIN_COLONNE_PION <= colonnePion 
-				&& colonnePion < MAX_COLONNE_PION;
+		return MIN_COLONNE_PION < colonnePion 
+				&& colonnePion <= MAX_COLONNE_PION;
 	}	
 
 
