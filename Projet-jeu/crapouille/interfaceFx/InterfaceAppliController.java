@@ -484,7 +484,7 @@ public class InterfaceAppliController {
 			recupAdversaire(); //Recupere l'adversaire choisi par l'utilisateur
 			recupModeJeu(); //Recupere le mode de jeu choisi par l'utilisateur
 			recupNomEquipe(); //Recupere les/le nom dequipe choisi par l'utilisateur
-			recupConfigurationPartie(); //Recupere la configuration choisie par l'utilisateur
+			Outils.recupConfigurationPartie(Integer.parseInt(choixConfig.getText())); //Recupere la configuration choisie par l'utilisateur
 			reinitialiser(); // Fait disparaitre toutes les autres pages
 			/*Fait apparaitre le plateau de jeu */
 			gameBoard.setVisible(true);
@@ -547,14 +547,6 @@ public class InterfaceAppliController {
     	   que l'utilisateur souhaitre jouer un versus */
 			Partie.setChoixModeDeJeu(1);
 		}
-	}
-	/**
-	 * Recupere le numero de la config 
-	 * Et charge la configuration correspondant au numero demande
-	 */
-	private void recupConfigurationPartie() {
-		int nConfig = Integer.parseInt(choixConfig.getText());
-		Partie.loadConfig(nConfig);
 	}
 
 	//TODO verifier validite MVC

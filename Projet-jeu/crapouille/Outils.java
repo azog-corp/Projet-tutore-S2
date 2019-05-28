@@ -44,6 +44,15 @@ public class Outils {
 		return choix == 'C' ? true : false;
 	}
 	
+	/**
+	 * Recupere le numero de la config 
+	 * Et charge la configuration correspondant au numero demande
+	 */
+	public static void recupConfigurationPartie(int choixConfig) {
+		Partie.loadConfig(choixConfig);
+	}
+
+	
 
 	public static void attribuerNomJ1(String nomJ1) {
 		if (estNonVide(nomJ1)) {
@@ -204,9 +213,9 @@ public class Outils {
 	
 	public static boolean estNonVide(String aVerifier) {
 		if (aVerifier.equals("")) {
-			return true;
-		} else {
 			return false;
+		} else {
+			return true;
 		}
 	}
 
