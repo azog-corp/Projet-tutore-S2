@@ -1,3 +1,7 @@
+/*
+ * TestOutils.java 
+ * Azog-corp 2019, droit d'auteur
+ */
 package crapouille.test;
 
 import crapouille.Outils;
@@ -74,7 +78,7 @@ public class TestOutils {
 	 */
 	private static void testLigneEstValide () {
 		final int[] aTesterLigne = {0,-1,5,10,31,40,3,20};
-		final boolean[] recupAttendu = {false,false,true,true,false,false,true,true};
+		final boolean[] recupAttendu = {false,false,true,true,false,false,true,false};
 		int nbTestOk = 0;
 
 		for(int i = 0; i < aTesterLigne.length; i++) {
@@ -95,45 +99,48 @@ public class TestOutils {
 	 */
 	private static void testColonneEstValide () {
 		final int[] aTesterColonne = {0,-1,5,10,31,40,3,20};
-		final boolean[] recupAttendu = {false,false,true,true,false,false,true,true};
+		final boolean[] recupAttendu = {false,false,true,true,false,false,true,false};
 		int nbTestOk = 0;
 
 		for(int i = 0; i < aTesterColonne.length; i++) {
 			/* Vérifie si la ligne est valide et compare avec le tableau résultat */
 			if (Outils.colonneEstValide(aTesterColonne[i]) == recupAttendu[i] ) {
 				nbTestOk++;
+
 			}
 		}
 
 		System.out.println("il y a " + nbTestOk + " test réussie sur 8");
 	}
-	
+
+
+
 	/**
-	 * Fonction test de configPlateauEstValide
-	 * Test uniquement la bonne recuperation
-	 * Car les differents des cas d'erreurs sont toujours geres
-	 * Avant l'appel de cette fonction
+	 * Fonction test de EstNonVide
+	 * Test uniquement si la fonction n'est pas
+	 * vide
 	 */
-	private void TestconfigPlateauEstValide () {
-		final int[] aTesterLigne = {0,20,2,6,31,-1,2};
-		final int[] aTesterColonne = {0,20,2,9,31,2,-1};
-		final boolean[] recupAttendu = {true,true,true,true,false,false,false};
+	private static void testEstNonVide () {
+		final String[] aTesterString = {"","t"," A"};
+		final boolean[] recupAttendu = {false,true,true};
 		int nbTestOk = 0;
-		
-		for(int i = 0; i < aTesterColonne.length; i++) {
+
+		for(int i = 0; i < aTesterString.length; i++) {
 			/* Vérifie si la ligne et les colone sont valide et compare avec le tableau résultat */
-			if (Outils.configPlateauEstValide(aTesterLigne[i],aTesterColonne[i]) == recupAttendu[i] ) {
+			if (Outils.estNonVide(aTesterString[i]) == recupAttendu[i] ) {
 				nbTestOk++;
 			}
 		}
 
-		System.out.println("il y a " + nbTestOk + " test réussie sur 8");
-		
+		System.out.println("il y a " + nbTestOk + " test réussie sur 3");
+
 	}
+
 	public static void main(String[] args) {
 		testEstValide();
 		testVerificationLettre ();
-		 testLigneEstValide ();
-		 testColonneEstValide ();
+		testLigneEstValide ();
+		testColonneEstValide ();
+		testEstNonVide ();
 	}
 }

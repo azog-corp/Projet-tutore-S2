@@ -52,7 +52,7 @@ public class Outils {
 	
 	/**
 	 * Recupere le numero de la config 
-	 * Et charge la configuration correspondant au numero demande
+	 * et charge la configuration correspondant au numero demande
 	 */
 	public static void recupConfigurationPartie(int choixConfig) {
 		Partie.loadConfig(choixConfig);
@@ -221,7 +221,12 @@ public class Outils {
 		}
 	}
 
-
+    /**
+     * Fonction permettant de configurer un tableau
+     * @param ligne, ligne du tableau
+     * @param colonne, colonne du tableau
+     * @return un boolean indiquant si la configuration à été crée
+     */
 	public static boolean configIni(String ligne, String colonne) {
 		if(estNonVide(ligne) && estNonVide(colonne)) {
 			if (Outils.verificationLettre(colonne) 
@@ -251,6 +256,13 @@ public class Outils {
 		return false;
 	}
 
+	/**
+     * Fonction permettant de configurer un tableau
+     * @param ligne, ligne du tableau
+     * @param colonne, colonne du tableau
+     * @param type, type du pion (crapaud et grenouille)
+     * @return un boolean indiquant si le pion à été bien placé
+     */
 	public static boolean placementPion(String ligne,String colonne,String type) {
 		if (estNonVide(ligne) && estNonVide(colonne) && estNonVide(type)) {
 			/* Verification qu'il n'y pas de lettre*/
@@ -320,10 +332,20 @@ public class Outils {
 		return false;
 	}
 
+	/**
+	 *  Vérifie si la configuration existe 
+	 * @return un boolean qui indique si cette configuration existe
+	 */
 	private static boolean configExiste(int config) {
 		return config >= 0 && config < Configuration.listConfiguration.size();
 	}
-
+	
+	/**
+     * Fonction permettant d'actualiser un plateau
+     * @param ligne, ligne du tableau
+     * @param colonne, colonne du tableau
+     * @return un boolean indiquant si le plateau à bien été actualisé
+     */
 	public static boolean actualisationPlateau(String ligne, String colonne) {
 		if (estNonVide(ligne) && estNonVide(colonne)) { 
 			/* Vérifie s'il n'y a pas de lettre avant de convertir en int les entrées
@@ -363,7 +385,7 @@ public class Outils {
 	}
 
 	/**
-	 * 
+	 * TODO Je vois pas ce que fait cette fonction
 	 * @param lignePion int: ligne ou se trouve le pion a ajouter/ placer
 	 * @param colonnePion int: colonne ou se trouve le pion a ajouter/ placer
 	 * @param recupType boolean: type du pion a placer (Crapaud ou grenouille)
@@ -385,7 +407,8 @@ public class Outils {
 		Configuration.listConfiguration.add(newConfig);
 	}
 
-	public static void sauvegarder() {
+	/**
+	 public static void sauvegarder() {
 		Plateau config = new Plateau(Partie.config);
 		/* Sauvegarde la configuration */
 		Configuration newConfig = new Configuration (
@@ -394,6 +417,11 @@ public class Outils {
 		enregistrerArray();
 	}
 
+    /*
+     * Fonction permettant de supprimer une configuration
+     * @param idConfig, IdConfig
+     * @return un boolean qui indique si la configuratuon à été supprimé ou non
+     */
 	public static boolean supprimerConf(String idConfig) {
 		/* Vérifie que le textfield n'est pas vide pour ne pas produire d'erreur
 		 * Si c'est le cas affiche un message d'erreur
@@ -435,6 +463,12 @@ public class Outils {
 		
 	}
 
+	/*
+     * Fonction permettant de supprimer un pion
+     * @param ligne, ligne du pion
+     * @param colonne, colonne du pion
+     * @return un boolean qui indique si le pion à été supprimé ou non
+     */
 	public static boolean suppressionPion(String ligne, String colonne) {
 		if (estNonVide(ligne) && estNonVide(colonne)) {
 			/* Verification qu'il n'y pas de lettre*/
