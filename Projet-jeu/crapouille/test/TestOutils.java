@@ -24,6 +24,7 @@ public class TestOutils {
 	}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/**
 	 * Fonction test de EstValide
@@ -103,5 +104,9 @@ public class TestOutils {
 	public static void main(String[] args) {
 		//TODO c'est quoi  ce bordel inchallah
 >>>>>>> parent of 319e4cd... testOutils
+=======
+	public static void main(String[] args) {
+		//TODO c'est quoi  ce bordel inchallah
+>>>>>>> parent of 15c4027... Update TestOutils.java
 	}
 }
