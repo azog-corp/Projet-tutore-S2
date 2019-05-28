@@ -37,9 +37,62 @@ public class InterfaceAppliController {
 	final static String MSBOX_CONFIG = "La configuration ne peut pas être vide";
 	final static String MSGBOX_ENREGISTREE = "Votre modification a bien été enregistrée";
 	final static String MSGBOX_NONVALIDE_CONF = "La configuration que vous avez entree n'est pas valide";
-
-
 	final static String MESSAGE_ERREUR = "Les informations rentrés sont invalides : ";
+	
+	final static String REGLE_DU_JEU = "LES RÈGLES DU JEU : COMMENT JOUER "
+			+ "AU JEU DES GRENOUILLES ET DES CRAPAUDS ?\n"
+			+ "Comment se déroule une partie ?\n"
+			+ "L'objectif de notre jeu est de bloquer les pions de son adversaire, " 
+			+ "sur toutes les lignes présentent sur le plateaux de jeu.\n"
+			+ "Le plateau :\n"
+			+ "Un plateau est composé de n-lignes et de n-colonnes, " 
+			+ "dans notre application, "
+			+ "le nombres de lignes et de colonnes seront limitées à 20."
+			+ "Il sera possible pour le joueur de créer, sauvegarder, modifier" 
+			+ "ou supprimer une configuration."
+			+ "La configuration permet au joueur de choisir le placement des "
+			+ "différents pions sur le plateau."
+			+ "Il faut savoir, la configuration qui la choisit sera possible " 
+			+ "d'être joué en mode :\n"
+			+ "    - Joueur Vs Joueur\n"
+			+ "    - Casse-tête\n"
+			+ "    - Joueur Vs Ordinateur\n"
+			+ "Les pions qui peuvent être choisi pour ce jeu sont :\n"
+			+ "    - Grenouille\n"
+			+ "    - Crapaud\n"
+			+ "Déroulement d'une partie de grenouilles et crapauds :\n"
+			+ " - Pour une partie de Joueur Vs Joueur." 
+			+ "Le nombre de joueur pour ce mode de jeu est limité à 2, "
+			+ "chaque joueur joue à tour de rôle et a la possibilité "
+			+ "de créer le nom de son équipe."
+			+ "Il faut savoir que ce sera toujours les grenouilles qui commenceront et "
+			+ "ensuite c'est au tour des crapauds de jouer."
+			+ "Chaque tour, le joueur concerné doit choisir un pion à déplacer."
+			+ "La partie s'arrête quand un joueur de l'équipe des grenouilles et des "
+			+ "crapauds ne peut plus effectuer le déplacement d'un pion sur au moins une "
+			+ "ligne du plateau."
+			+ "Lors de la fin de la partie une fenêtre VICTOIRE s'affiche "
+			+ "avec le nom de l'équipe gagnante.\n"
+			+ " - Pour une partie de Casse-tête\n"
+			+ "Le nombre de joueur pour ce mode de jeu est limité à 1, "
+			+ "le joueur peut déplacer les deux équipes, "
+			+ "c'est-à-dire les grenouilles et crapauds.\n"
+			+ "Il a la possibilité de déplacer une grenouille ou un crapaud "
+			+ "selon la situation souhaitée et peut créer le nom de son équipe.\n"
+			+ "On gagne quand le joueur arrive à amener toutes les grenouilles à droite " 
+			+ "et tous les crapauds à gauche du plateau.\n"
+			+ "A la fin de la partie la fenêtre VICTOIRE s'affiche.\n"
+			+ " - Pour une partie de Joueur Vs Ordinateur\n"
+			+ "Le nombre de joueur pour ce mode de jeu est limité à 1, "
+			+ "le joueur joue à tour de rôle avec l'ordinateur.\n"
+			+ "La possibilité de créer un nom de d'équipe est toujours possible.\n"
+			+ "Le déroulement de la partie de Joueur Vs Ordinateur se déroule dans le "
+			+ "même sens que le mode Joueur Vs Joueur, "
+			+ "c'est-à-dire que le joueur commence, "
+			+ "puis c'est au tour de l'ordinateur et ainsi de suite.\n"
+			+ "Enfin, pour gagner la partie, il suffit de bloquer les pions de l'ordinateur "  
+			+ "sur chaque lignes du plateau.\n"
+			+ "Bien sûr, à la fin de la partie la fenêtre VICTOIRE s'affichera.";
 
 	@FXML
 	/** Fond de l'appli qui ontient toutes 
@@ -503,6 +556,16 @@ public class InterfaceAppliController {
 		reinitialiser();
 		score.setVisible(true);
 	}
+	/**
+	 * Affiche les regles
+	 * @param Click 
+	 */
+	@FXML
+	void showRegle(MouseEvent Click) {
+		System.out.println("Click");
+		showMsgbox(MSGBOX_TITRE, REGLE_DU_JEU, true);
+	}
+	
 	/**
 	 * Affiche la page des createurs apres avoir fait disparaitre 
 	 * toutes les autres
