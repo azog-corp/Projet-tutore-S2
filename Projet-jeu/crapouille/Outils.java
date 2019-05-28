@@ -259,8 +259,6 @@ public class Outils {
 		return false;
 	}
 
-
-
 	public static boolean placementPion(String ligne,String colonne,String type) {
 		if (estNonVide(ligne) && estNonVide(colonne) && estNonVide(type)) {
 			/* Verification qu'il n'y pas de lettre*/
@@ -428,17 +426,17 @@ public class Outils {
 				} else {
 					InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
 							MESSAGE_ERREUR
-							+"Numéro ne correspond a aucune configuration",
+							+ MSGBOX_NONVALIDE_CONF,
 							false);
 				}
 			} else {
 				InterfaceAppliController.showMsgbox(MSGBOX_TITRE, 
-						MESSAGE_ERREUR + "Ne doit pas contenir de lettre",
+						MESSAGE_ERREUR + MSGBOX_LETTRE,
 						false);
 			}
 		} else {
 			InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
-					MESSAGE_ERREUR + "Ne peut pas être vide", false);
+					MESSAGE_ERREUR + MSGBOX_VIDE, false);
 
 		}
 		return false;

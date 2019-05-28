@@ -526,6 +526,7 @@ public class InterfaceAppliController {
 			 */
 			//TODO mettre le nom de lequipe gagnante
 			if (Outils.verifVictoire()) {
+				afficherGagnant();
 				jeuEnCours.setVisible(false);
 				victoire.setVisible(true);
 			}
@@ -538,6 +539,14 @@ public class InterfaceAppliController {
 	public void afficherNomEquipe() {
 		tourDe.setText("Tour de l'équipe : " 
 				+ Partie.getEquipe(Partie.getTourEquipe()));
+	}
+	
+	public void afficherGagnant() {
+		if (Partie.currentPlateau.victoire(0)) {
+			lb_nomEquipeGagnante.setText(Partie.getEquipe(0));
+		} else {
+			lb_nomEquipeGagnante.setText(Partie.getEquipe(1));
+		}
 	}
 
 	/**
