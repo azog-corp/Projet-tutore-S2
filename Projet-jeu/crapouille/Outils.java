@@ -1,6 +1,7 @@
 package crapouille;
 
 import crapouille.configuration.Configuration;
+import crapouille.interfaceFx.InterfaceAppliController;
 
 public class Outils {
 	/** initialisation des constantes min/max lignes et colonnes */
@@ -17,6 +18,18 @@ public class Outils {
 	final static int PREMIER_CHIFFRE_COLONNE = 4; // position du 1er chiffre de l'entier
 	final static int DEUXIEME_CHIFFRE_COLONNE = 5; // position du 2e chiffre de l'entier
 	public static String nomConfig;
+
+	final static String MSGBOX_TITRE = "Crapauds & Grenouilles";
+	final static String MSGBOX_TYPE = "Type non valide";
+	final static String MSGBOX_LETTRE = "Les lettres ne sont pas acceptées";
+	final static String MSGBOX_NOMBRE = "Nombre trop grand ou trop petit vérifier votre saisie";
+	final static String MSGBOX_VIDE = "Ne doit pas être vide";
+	final static String MSBOX_CONFIG = "La configuration ne peut pas être vide";
+	final static String MSGBOX_ENREGISTREE = "Votre confirmation a bien été enregistrée";
+	final static String MSGBOX_NONVALIDE_CONF = "La configuration que vous avez crée n'est pas valide";
+
+
+	final static String MESSAGE_ERREUR = "Les informations rentrés sont invalides : ";
 
 	/**
 	 * Verifie si le char correspond correspond a un crapaud
@@ -170,6 +183,151 @@ public class Outils {
 		}
 		return false;
 	}
+	public static boolean estNonVide(String aVerifier) {
+		if (aVerifier.equals("")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+
+	public static boolean verifConfigIni(String ligne, String colonne) {
+		if(estNonVide(ligne) && estNonVide(colonne)) {
+			if (Outils.verificationLettre(colonne) 
+					&& Outils.verificationLettre(ligne)) {
+				/* Conversion en int */
+				int nbLigne = Integer.parseInt(ligne);
+				int nbColonne = Integer.parseInt(colonne);
+				if (Outils.ligneEstValide(nbLigne) 
+						&& Outils.colonneEstValide(nbColonne)) {
+					/* Initialise le tableau a la taille choisie par l'uti */
+					Partie.config = new Pion[nbLigne][nbColonne];
+					return true;
+				} else {
+					InterfaceAppliController.showMsgbox(MSGBOX_TITRE, MESSAGE_ERREUR 
+							+ MSGBOX_NOMBRE,
+							false);
+				}
+			} else {
+				InterfaceAppliController.showMsgbox(MSGBOX_TITRE,MESSAGE_ERREUR 
+						+ MSGBOX_LETTRE,
+						false);
+			}
+		} else {
+			InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
+					MESSAGE_ERREUR + MSGBOX_VIDE,false);
+		}
+		return false;
+	}
+
+
+
+	public static boolean verifPlacementPion(String ligne,String colonne,String type) {
+		if (estNonVide(ligne) && estNonVide(colonne) && estNonVide(type)) {
+			/* Verification qu'il n'y pas de lettre*/
+			if (verificationLettre(ligne) && verificationLettre(colonne)) {
+				int colonnePion = Integer.parseInt(colonne);
+				int lignePion = Integer.parseInt(ligne);
+				colonnePion--;
+				lignePion--;
+				/* Verification que les coordonnes corresponde bien a une coordonnes
+				 * dans le tableau de jeu
+				 */
+				if (Outils.cordOk(lignePion,colonnePion)) {
+					/* Verification le type entre par l'uti est valide */
+					if (Outils.typeValide(type)) {
+						Outils.placementPion(lignePion,colonnePion,
+								Outils.recupType(type.charAt(0)));
+						return true;
+						/* Affichage des differentes erreurs */
+					} else {
+						InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
+								MESSAGE_ERREUR + MSGBOX_TYPE, false);
+					}
+				} else {
+					InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
+							MESSAGE_ERREUR + MSGBOX_NOMBRE, false);
+				}
+			} else {
+				InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
+						MESSAGE_ERREUR + MSGBOX_LETTRE, false);
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Verifie si la configuration entree par lutilisateur dans la page de configuration de partie
+	 * Verifie que le textField contenant le numero n'est pas vide
+	 * Qu'il n'y a pas de lettres et que et le numero existe
+	 * @return true si tous les tests sont correctes'
+	 *         false si un seul test ne passe pas9
+	 */
+	public static boolean configValide(String choixConf) {
+		/* On vérifie que la la string n'est pas vide pour ne pas produire d'erreur par la suite */
+		if (estNonVide(choixConf)) { 
+			/* Verification qu'il n'y a pas de lettre dans lentree */
+			if(Outils.verificationLettre(choixConf)) {
+				int config = Integer.parseInt(choixConf);
+				/* Verification que le numero existe et correspond a uen configuration */
+				if (configExiste(config)) {
+					return true;
+					/** Affichage des differents message d'erreur selon le cas */
+				} else {
+					InterfaceAppliController.showMsgbox(MESSAGE_ERREUR, MSGBOX_LETTRE, false);
+				}
+			} else {
+				InterfaceAppliController.showMsgbox(MESSAGE_ERREUR, MSGBOX_NOMBRE, false);
+			}
+		} else {
+			InterfaceAppliController.showMsgbox(MESSAGE_ERREUR, MSGBOX_VIDE, false);
+		}
+		return false;
+	}
+
+	private static boolean configExiste(int config) {
+		return config >= 0 && config < Configuration.listConfiguration.size();
+	}
+
+	public static boolean actualisationPlateau(String ligne, String colonne) {
+		if (estNonVide(ligne) && estNonVide(colonne)) { 
+			/* Vérifie s'il n'y a pas de lettre avant de convertir en int les entrées
+			 * pour ne pas produire d'erreur
+			 */
+			if (Outils.verificationLettre(ligne) 
+					&& Outils.verificationLettre(colonne)) {
+				/*Conversion en int des entrées texte de l'utilisateur */
+				int colonnePion = Integer.parseInt(colonne);
+				int lignePion = Integer.parseInt(ligne);
+				if (Outils.colonneEstValide(colonnePion) 
+						&& Outils.ligneEstValide(lignePion)) {
+					/* Decremente de 1 car les numeros rentres et afficher sur le plateau 
+					 * sont augmenter de 1 pour corerspondre a une bonne notation de 
+					 * (de 1 a 20 et non de 0 a 19) plus confortable pour l'utilisateur
+					 */
+					colonnePion--;
+					lignePion--;
+					/* Si toutes les entrees sont correctes lance le tour du joueur */
+					Partie.tourEntite(lignePion, colonnePion);
+					return true;
+					/* Affichage des messages d'erreurs a l'utilisateur pour lui siganler le probleme */
+				} else {
+					InterfaceAppliController.showMsgbox(MSGBOX_TITRE, MESSAGE_ERREUR
+							+ MSGBOX_NOMBRE,false);
+				}
+			} else {
+				InterfaceAppliController.showMsgbox(MSGBOX_TITRE,MESSAGE_ERREUR
+						+MSGBOX_LETTRE,
+						false);
+			}
+		} else {
+			InterfaceAppliController.showMsgbox(MSGBOX_TITRE,MESSAGE_ERREUR
+					+ MSGBOX_VIDE,
+					false);
+		}
+		return false;
+	}
 
 	/**
 	 * 
@@ -199,6 +357,44 @@ public class Outils {
 		Configuration newConfig = new Configuration (config.getPlateau(), Outils.nomConfig);
 		Configuration.listConfiguration.add(newConfig);
 		Outils.enregistrerArray();
+	}
+
+	public static void supprimerConf(String idConfig) {
+		/* Vérifie que le textfield n'est pas vide pour ne pas produire d'erreur
+		 * Si c'est le cas affiche un message d'erreur
+		 */
+		if (estNonVide(idConfig)) {
+			/* Vérifie que tous les caractères de l'information rentrées par l'utilisateur
+			 * sont bien des chiffres
+			 */
+			if (Outils.verificationLettre(idConfig)) {
+				/* Converti en int le String correspondant au numéro de la config devant être supprimé */
+				int index = Integer.parseInt(idConfig);
+				/*Vérifie que le numéro rentré par l'utilisateur correspond bien 
+				 * a une configuration existante
+				 */
+				if (index >= 0 &&
+						index < Configuration.listConfiguration.size()) {
+					Configuration.listConfiguration.remove(index);
+					/* Affichage de message d'erreur si l'une des conditions n'est pas respectée
+					 * Informant l'utilisateur de l'erreur qu'il a commise 
+					 */
+				} else {
+					InterfaceAppliController.showMsgbox(MSGBOX_TITRE, MESSAGE_ERREUR
+							+"Numéro ne correspond a aucune configuration",
+							false);
+				}
+			} else {
+				InterfaceAppliController.showMsgbox(MSGBOX_TITRE, 
+						MESSAGE_ERREUR + "Ne doit pas contenir de lettre",
+						false);
+			}
+		} else {
+			InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
+					MESSAGE_ERREUR + "Ne peut pas être vide", false);
+
+		}
+		
 	}
 
 }
