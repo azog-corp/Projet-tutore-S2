@@ -214,12 +214,10 @@ public class Plateau implements Serializable {
 		int nbCrapaud = 0,
 				nbGrenouille = 0;
 		if (plateau.length > 20 || plateau[0].length > 20) {
-			System.out.println("merde1");
 			return false;
 		}
 		for (int ligne = 0 ; ligne < plateau.length ; ligne++) {
 			if (noCrapaud || noGrenouille) {
-				System.out.println("merde2");
 				return false;
 			}
 			noCrapaud = noGrenouille = true;
