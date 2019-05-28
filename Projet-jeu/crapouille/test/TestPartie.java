@@ -18,6 +18,22 @@ public class TestPartie {
 		entree.nextLine();
 	}
 
+	/**
+	 * Fonction testant movePion de la classe partie
+	 * La première baterie de test fait bouger sur un
+	 * plateau tous les pions y étant présent ce qui
+	 * permet de vérifier le setColonne ainsi que le
+	 * setBloque de la classe pion puisque ce sont des
+	 * fonctions appelées par cette methode.
+	 * 
+	 * La deuxième baterrie de test appelle movePion
+	 * sur des pions bloqués pour vérifier que le
+	 * pion ne bouge pas et que le programme ne plante
+	 * pas
+	 * 
+	 * On considère que 
+	 * 
+	 */
 	private static void testMovePion() {
 		Pion[][] plateauTest1 = {
 				{pionGrenouille1, null, pionCrapaud1},
@@ -28,7 +44,7 @@ public class TestPartie {
 		int nbTestOK = 0;
 		for (int x = 0 ; x < 2 ; x++) {
 			System.out.println("Déplacement du pion " 
-		+ testPlateau1.getBatracien()[0][x].toString());
+					+ testPlateau1.getBatracien()[0][x].toString());
 			lastColonne = testPlateau1.getBatracien()[0][x].getColonne();
 			testPlateau1.movePion(testPlateau1.getBatracien()[0][x]);
 			if (lastColonne != testPlateau1.getBatracien()[0][x].getColonne()) {
@@ -37,7 +53,7 @@ public class TestPartie {
 			System.out.println(testPlateau1.toString() + "\n");
 			lastColonne = testPlateau1.getBatracien()[1][x].getColonne();
 			System.out.println("Déplacement du pion " 
-			+ testPlateau1.getBatracien()[1][x].toString());
+					+ testPlateau1.getBatracien()[1][x].toString());
 			testPlateau1.movePion(testPlateau1.getBatracien()[1][x]);
 			if (lastColonne != testPlateau1.getBatracien()[1][x].getColonne()) {
 				nbTestOK++;
@@ -57,7 +73,7 @@ public class TestPartie {
 		nbTestOK = 0;
 		for (int x = 0 ; x <= 1 ; x++) {
 			System.out.println("Tentative de déplacement du pion bloqué " 
-		+ testPlateau2.getBatracien()[0][x].toString());
+					+ testPlateau2.getBatracien()[0][x].toString());
 			lastColonne = testPlateau2.getBatracien()[0][x].getColonne();
 			testPlateau2.movePion(testPlateau2.getBatracien()[0][x]);
 			if (lastColonne == testPlateau2.getBatracien()[0][x].getColonne()) {
@@ -66,7 +82,7 @@ public class TestPartie {
 			System.out.println(testPlateau2.toString() + "\n");
 			lastColonne = testPlateau2.getBatracien()[1][x].getColonne();
 			System.out.println("Tentative de déplacement du pion bloqué " 
-			+ testPlateau2.getBatracien()[1][x].toString());
+					+ testPlateau2.getBatracien()[1][x].toString());
 			testPlateau2.movePion(testPlateau2.getBatracien()[1][x]);
 			if (lastColonne == testPlateau2.getBatracien()[1][x].getColonne()) {
 				nbTestOK++;
@@ -80,13 +96,39 @@ public class TestPartie {
 
 	}
 
-	private static void testSetColonne() {
-
+	/**
+	 * Test de la fonction pionValide qui vérifie
+	 * si un pion existe et qui retourne le pion
+	 * si c'est le cas et null si ça ne l'est pas
+	 */
+	private static void testPionValide() {
+		Pion[][] plateauTest = {
+				{pionGrenouille1, null, pionCrapaud1},
+				{pionGrenouille2, null, pionCrapaud2}
+		};
+		Plateau testPlateau = new Plateau(plateauTest);
+		System.out.println("Test de pionValide sur des pions supposés valides\n" 
+				+ testPlateau.toString());
+		if (testPlateau.pionValide(0, 0, 0).equals(pionGrenouille1) &&
+				testPlateau.pionValide(0, 1, 0).equals(pionGrenouille2) &&
+				testPlateau.pionValide(1, 0, 2).equals(pionCrapaud1) &&
+				testPlateau.pionValide(1, 1, 2).equals(pionCrapaud2)) {
+			System.out.println("Les 4 pions existe");
+			continuer();
+		}
+		System.out.println("Test de pionValide sur des pions supposés non-valide\n" 
+				+ testPlateau.toString());
+		if (testPlateau.pionValide(0, 0, 1) == null &&
+				testPlateau.pionValide(0, 1, 1) == null &&
+				testPlateau.pionValide(1, 0, 1) == null &&
+				testPlateau.pionValide(1, 1, 1) == null) {
+			System.out.println("Les deux cases du millieu sont vides");
+		}
 	}
 
 	public static void main(String[] args) {
 		System.out.println("----- Test visuel des différentes fonction -----");
-		testMovePion();
-		testSetColonne();
+		// testMovePion();
+		testPionValide();
 	}
 }
