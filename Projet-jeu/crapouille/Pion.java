@@ -62,6 +62,7 @@ public class Pion implements Serializable {
 	public void setColonne(Pion[][] plateau, int colonneConf) {
 		if (this.bloque) {
 			System.out.println("Le pion est bloqué");
+			return;
 		}
 		/* Si le pion est une grenouille est que la première case de droite est vide */
 		if (!crapaud && this.colonne < colonneConf-1 && plateau[this.ligne][this.colonne+1] == null) {
