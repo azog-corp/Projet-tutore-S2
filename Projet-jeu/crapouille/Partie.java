@@ -1,3 +1,7 @@
+/*
+ * 
+ * 
+ */
 package crapouille;
 
 import java.io.Serializable;
@@ -5,13 +9,19 @@ import java.time.LocalDate;
 
 import crapouille.configuration.Configuration;
 
+/**
+ * A compléter.
+ * @author Maël
+ *
+ */
 public class Partie implements Serializable {
 
 	/** ID de la serialisation */
 	private static final long serialVersionUID = 5319670181574630732L;
 
 	/**
-	 * Lorsque le joueur lance la partie recupere le temps afin de determiner
+	 * Lorsque le joueur lance la partie
+	 * recupere le temps afin de determiner
 	 * le temps mis par le joueur pour resoudre le casse tete
 	 * Le temps est uniquement mesuree sur la config par defaut
 	 */
@@ -144,8 +154,8 @@ public class Partie implements Serializable {
 		Partie.equipe[1] = equipe;
 	}
 	
-	public static String[] getEquipe() {
-		return equipe;
+	public static String getEquipe(int tour) {
+		return equipe[tour];
 	}
 
 	/**

@@ -8,10 +8,10 @@ public class TestPartie {
 
 	private static Scanner entree = new Scanner(System.in);
 
-	private static Pion pionGrenouille1 = new Pion(0, 0, false);
-	private static Pion pionGrenouille2 = new Pion(1, 0, false);
-	private static Pion pionCrapaud1 = new Pion(0, 2, true);
-	private static Pion pionCrapaud2 = new Pion(1, 2, true);
+	private static Pion pionGrenouille1 = new Pion(0, 2, false);
+	private static Pion pionGrenouille2 = new Pion(1, 2, false);
+	private static Pion pionCrapaud1 = new Pion(0, 0, true);
+	private static Pion pionCrapaud2 = new Pion(1, 0, true);
 
 	public static void continuer() {
 		System.out.println("\nAppuyer sur entrée pour continuer");
@@ -167,6 +167,9 @@ public class TestPartie {
 		}
 	}
 	
+	/**
+	 * Fonction qui teste la fonction victoire casse tete
+	 */
 	private static void testVictoireCasseTete() {
 		Pion[][] plateauTest1 = {
 				{pionGrenouille1, null, pionCrapaud1},
@@ -187,17 +190,30 @@ public class TestPartie {
 		Plateau testPlateau2 = new Plateau(plateauTest2);
 		System.out.println("Test du boolean victoire sur un plateau gagnant pour les grenouilles\n" 
 				+ testPlateau2.toString());
-		if (testPlateau2.victoireCasseTete()) {
+		if (!testPlateau2.victoireCasseTete()) {
 			System.out.println("Le casse tete n'est pas gagné");
+			continuer();
+		}
+		
+		Pion[][] plateauTest3 = {
+				{pionCrapaud1, null, pionGrenouille1},
+				{pionCrapaud2, null, pionGrenouille2}
+		};
+		Plateau testPlateau3 = new Plateau(plateauTest3);
+		System.out.println("Test du boolean victoireCasseTete sur un plateau gagnant\n" 
+				+ testPlateau3.toString());
+		if (testPlateau3.victoireCasseTete()) {
+			System.out.println("Le casse tête est gagné");
 			continuer();
 		}
 	}
 
 	public static void main(String[] args) {
 		System.out.println("----- Test visuel des différentes fonction -----");
-		// testMovePion();
-		// testPionValide();
-		// testVictoire();
+		continuer();
+		testMovePion();
+		testPionValide();
+		testVictoire();
 		testVictoireCasseTete();
 	}
 }

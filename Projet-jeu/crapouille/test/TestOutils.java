@@ -55,7 +55,7 @@ public class TestOutils {
 		final String[] aTesterString = {"1234","e234","EArT6","ERTEZ"};
 		final boolean[] recupAttendu = {true,false,false,false};
 		int nbTestOk = 0;
-		
+
 		for(int i = 0; i < aTesterString.length; i++) {
 			/* Vérifie si le String est valide et compare avec le tableau résultat */
 			if (Outils.verificationLettre(aTesterString[i]) == recupAttendu[i] ) {
@@ -65,7 +65,7 @@ public class TestOutils {
 
 		System.out.println("il y a " + nbTestOk + " test réussie sur 4");
 	}
-	
+
 	/**
 	 * Fonction test de verificationLettre
 	 * Test uniquement la bonne recuperation
@@ -93,5 +93,6 @@ public class TestOutils {
 		testEstValide();
 		testVerificationLettre ();
 		 testLigneEstValide ();
+
 	}
 }

@@ -1,23 +1,22 @@
+/*
+ * Plateau.java
+ * Azog-corp 2019, droit d'auteur
+ */
 package crapouille;
 
 import java.io.Serializable;
 
+/**
+ * A compléter.
+ * @author Maël
+ *
+ */
 public class Plateau implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -106406785084186219L;
-
-	/**
-	 * Nombre Ligne max pour les configuraions
-	 */
-	private final static int LIGNE_MAX = 20;
-
-	/**
-	 * Nombre Colonne max pour les configurations
-	 */
-	private final static int COLONNE_MAX = 20;
 
 	/**
 	 * Nombre de ligne de la configuration actuelle
@@ -183,35 +182,31 @@ public class Plateau implements Serializable {
 	/**
 	 * VÃ©rifie si toutes les grenouilles sont Ã  droite
 	 * et si tous les crapaud sont Ã  gauche
+	 * 
+	 * La vérification ce fait dans le tableau batracien
+	 * car les pions y sont ajouté ligne par ligne et par
+	 * conséquent, le pion suivant un autre et soit sur la
+	 * même ligne soit sur la ligne suivante
 	 * @return true si c'est vrai
 	 */
 	public boolean victoireCasseTete() {
-		if (!victoire(0) && !victoire(1)) {
+		if (!victoire(0) || !victoire(1)) {
 			return false;
 		}
-		int nbPion, // Nombre de pion bien placÃ©s
-		colonne, // Colonne sur laquelle on fait une recherche des grenouille
-		colonneC = this.colonneConf-1, // Colonne sur laquelle on fait une recherche des crapaud
-		pionVictoire = this.batracien[0].length*2, // Nombre total de pion
-		ligne;
-		nbPion = ligne = colonne = 0; // On commence par la colonne la plus Ã  gauche
-		// Pour chaque ligne du tableau
-		while (ligne < this.ligneConf) {
-			System.out.println(ligne);
-			if (this.plateau[ligne][colonne] != null || this.plateau[ligne][colonneC] != null) {
-				if (this.plateau[ligne][colonne] != null && this.plateau[ligne][colonne].isCrapaud()) {
-					nbPion++;
-					colonne++;
-				}
-				if (this.plateau[ligne][colonneC] != null && !this.plateau[ligne][colonneC].isCrapaud()) {
-					nbPion++;
-					colonneC--;
-				}
-			} else {
-				ligne++;
+		int bonPion = 0;
+		for (int x = 0 ; x < this.batracien[0].length ; x++) {
+			if (this.batracien[0][x].getColonne() == this.colonneConf-1 || 
+					this.batracien[0][x].getColonne() == 
+					this.batracien[0][x-1].getColonne()-1) {
+				bonPion++;
+			}
+			if (this.batracien[1][x].getColonne() == 0 || 
+					this.batracien[1][x].getColonne() == 
+					this.batracien[1][x-1].getColonne()+1) {
+				bonPion++;
 			}
 		}
-		return nbPion == pionVictoire;
+		return bonPion == this.nbPion;
 	}
 
 	/**
@@ -228,12 +223,10 @@ public class Plateau implements Serializable {
 		int nbCrapaud = 0,
 				nbGrenouille = 0;
 		if (plateau.length > 20 || plateau[0].length > 20) {
-			System.out.println("merde1");
 			return false;
 		}
 		for (int ligne = 0 ; ligne < plateau.length ; ligne++) {
 			if (noCrapaud || noGrenouille) {
-				System.out.println("merde2");
 				return false;
 			}
 			noCrapaud = noGrenouille = true;

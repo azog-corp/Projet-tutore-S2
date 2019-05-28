@@ -1,3 +1,7 @@
+/*
+ * GestionPartieInterface.java
+ * Azcop 2019, droit d'auteur
+ */
 package crapouille.interfaceFx;
 
 import crapouille.configuration.Configuration;
@@ -7,24 +11,52 @@ import javafx.stage.StageStyle;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXMLLoader;
-
+/**
+ * A compléter.
+ * @author Azog
+ *
+ */
 public class GestionPartieInterface extends Application {
-	
+
+	/**
+	 * Chemin des ressources.
+	 */
+	private static final String CHEMIN = "/crapouille/"
+			+ "interfaceFx/application.css";
+
+	/**
+	 * Dimension de l'interface.
+	 */
+	private static final int HAUTEUR = 519,
+			LARGEUR = 606;
+	/**
+	 * test.
+	 */
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(final Stage primaryStage) {
 		try {
 			primaryStage.initStyle(StageStyle.UNDECORATED);
-			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("/crapouille/interfaceFx/interfaceAppli.fxml"));
-			Scene scene = new Scene(root,519,606);
-			scene.getStylesheets().add(getClass().getResource("/crapouille/interfaceFx/application.css").toExternalForm());
+			AnchorPane root = (AnchorPane)
+					FXMLLoader.load(getClass(
+							).getResource(CHEMIN));
+			Scene scene = new Scene(root, HAUTEUR, LARGEUR);
+			scene.getStylesheets().add(
+					getClass().getResource(
+							CHEMIN)
+					.toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
 			primaryStage.show();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	public static void main(String[] args) {
+
+	/**
+	 * Main principal.
+	 * @param args non utilisés
+	 */
+	public static void main(final String[] args) {
 		Configuration.initConfig();
 		launch(args);
 		Configuration.saveConfig();

@@ -36,8 +36,8 @@ public class InterfaceAppliController {
 	final static String MSGBOX_NOMBRE = "Nombre trop grand ou trop petit vérifier votre saisieMSG";
 	final static String MSGBOX_VIDE = "Ne doit pas être vide";
 	final static String MSBOX_CONFIG = "La configuration ne peut pas être vide";
-	final static String MSGBOX_ENREGISTREE = "Votre confirmation a bien été enregistrée";
-	final static String MSGBOX_NONVALIDE_CONF = "La configuration que vous avez crée n'est pas valide";
+	final static String MSGBOX_ENREGISTREE = "Votre modification a bien été enregistrée";
+	final static String MSGBOX_NONVALIDE_CONF = "La configuration que vous avez entree n'est pas valide";
 
 
 	final static String MESSAGE_ERREUR = "Les informations rentrés sont invalides : ";
@@ -479,12 +479,13 @@ public class InterfaceAppliController {
 	@FXML
 	void showGameBoard(MouseEvent Click) {
 		/* Vérifie que le numéro de config saisie par l'utilisateur est correct */
-		if(configValide()) { //Verifie que tous se que a rentre l'utilisateur est correct
+		if(Outils.configValide(choixConfig.getText())) { //Verifie que tous se que a rentre l'utilisateur est correct
 			/*Si c'est le cas récupère toutes les informations nécessaires*/
 			recupAdversaire(); //Recupere l'adversaire choisi par l'utilisateur
 			recupModeJeu(); //Recupere le mode de jeu choisi par l'utilisateur
 			recupNomEquipe(); //Recupere les/le nom dequipe choisi par l'utilisateur
-			recupConfigurationPartie(); //Recupere la configuration choisie par l'utilisateur
+			Outils.recupConfigurationPartie(Integer.parseInt(
+											choixConfig.getText())); //Recupere la configuration choisie par l'utilisateur
 			reinitialiser(); // Fait disparaitre toutes les autres pages
 			/*Fait apparaitre le plateau de jeu */
 			gameBoard.setVisible(true);
@@ -498,6 +499,7 @@ public class InterfaceAppliController {
 			victoire.setVisible(false);
 			/* Met a jour l'affichage */
 			rafraichirJeu(Partie.getCurrentPlateau().toString());
+			afficherNomEquipe();
 			//TODO si mode de jeu = casse tete et recuperer le temps a la fin quand victoire
 			Partie.setDepartPartie(LocalDate.now());
 		}
@@ -513,56 +515,38 @@ public class InterfaceAppliController {
 	@FXML
 	private void actualiserJeu(MouseEvent Click) {
 		/* Vérifie que les TextField ne sont pas vide pour ne pas produire d'erreur */
-		if (!entreeLigne.getText().isEmpty() &&
-				!entreeColonne.getText().isEmpty()) { 
-			/* Récupère dans des string la ligne et la colonne entrée par l'utilisateur */
-			String ligne = entreeLigne.getText();
-			String colonne = entreeColonne.getText();
-			/* Vérifie s'il n'y a pas de lettre avant de convertir en int les entrées
-			 * pour ne pas produire d'erreur
+		if (Outils.actualisationPlateau(entreeLigne.getText(),
+				entreeColonne.getText())) {
+			afficherNomEquipe();
+			//TODO Partie.setNbCoups(Partie.getNbCoups()+1);
+			rafraichirJeu(Partie.getCurrentPlateau().toString());
+
+			/* Verifie que aucun des participants n'a gagne
+			 * Si cest le cas affiche le panneau de victoire
 			 */
-			if (Outils.verificationLettre(ligne) 
-					&& Outils.verificationLettre(colonne)) {
-				/*Conversion en int des entrées texte de l'utilisateur */
-				int colonnePion = Integer.parseInt(colonne);
-				int lignePion = Integer.parseInt(ligne);
-				if (Outils.colonneEstValide(colonnePion) 
-						&& Outils.ligneEstValide(lignePion)) {
-					colonnePion--;
-					lignePion--;
-					Partie.tourEntite(lignePion, colonnePion);
-					afficherNomEquipe();
-					//TODO Partie.setNbCoups(Partie.getNbCoups()+1);
-					rafraichirJeu(Partie.getCurrentPlateau().toString());
-					/* Affichage des messages d'erreurs a l'utilisateur pour lui siganler le probleme */
-				} else {
-					showMsgbox(MSGBOX_TITRE, MESSAGE_ERREUR
-							+ MSGBOX_NOMBRE,false);
-				}
-			} else {
-				showMsgbox(MSGBOX_TITRE,MESSAGE_ERREUR
-						+MSGBOX_LETTRE,
-						false);
+			//TODO mettre le nom de lequipe gagnante
+			if (Outils.verifVictoire()) {
+				afficherGagnant();
+				jeuEnCours.setVisible(false);
+				victoire.setVisible(true);
 			}
-		} else {
-			showMsgbox(MSGBOX_TITRE,MESSAGE_ERREUR
-					+ MSGBOX_VIDE,
-					false);
-		}
-		/* Verifie que aucun des participants n'a gagne
-		 * Si cest le cas affiche le panneau de victoire
-		 */
-		//TODO mettre le nom de lequipe gagnante
-		if (Outils.verifVictoire()) {
-			jeuEnCours.setVisible(false);
-			victoire.setVisible(true);
 		}
 	}
 
-	//TODO
+	/**
+	 * Affiche le nom de l'equipe qui doit jouer sur le plateau de jeu
+	 */
 	public void afficherNomEquipe() {
-		String nomEquipe[] = Partie.getEquipe();
-		tourDe.setText("Tour de l'équipe : " + nomEquipe[Partie.getTourEquipe()]);
+		tourDe.setText("Tour de l'équipe : " 
+				+ Partie.getEquipe(Partie.getTourEquipe()));
+	}
+	
+	public void afficherGagnant() {
+		if (Partie.currentPlateau.victoire(0)) {
+			lb_nomEquipeGagnante.setText(Partie.getEquipe(0));
+		} else {
+			lb_nomEquipeGagnante.setText(Partie.getEquipe(1));
+		}
 	}
 
 	/**
@@ -578,69 +562,15 @@ public class InterfaceAppliController {
 			Partie.setChoixModeDeJeu(1);
 		}
 	}
-	/**
-	 * Recupere le numero de la config 
-	 * Et charge la configuration correspondant au numero demande
-	 */
-	private void recupConfigurationPartie() {
-		int nConfig = Integer.parseInt(choixConfig.getText());
-		Partie.loadConfig(nConfig);
-	}
 
-	/**
-	 * Verifie si la configuration entree par lutilisateur dans la page de configurationde partie
-	 * Verifie que le textField contenant le numero n'est pas vide
-	 * Qu'il n'y a pas de lettres et que et le numero existe
-	 * @return true si tous les tests sont correctes'
-	 *         false si un seul test ne passe pas9
-	 */
-	private boolean configValide() {
-		/* On vérifie que la la string n'est pas vide pour ne pas produire d'erreur par la suite */
-		if (!choixConfig.getText().isEmpty()) { 
-			String configString = choixConfig.getText();
-			/* Verification qu'il n'y a pas de lettre dans lentree */
-			if(Outils.verificationLettre(configString)) {
-				int config = Integer.parseInt(choixConfig.getText());
-				/* Verification que le numero existe et correspond a uen configuration */
-				if (config >= 0 && config < Configuration.listConfiguration.size()) {
-					return true;
-					/** Affichage des differents message d'erreur selon le cas */
-				} else {
-					showMsgbox(MESSAGE_ERREUR, MSGBOX_LETTRE, false);
-				}
-			} else {
-				showMsgbox(MESSAGE_ERREUR, MSGBOX_NOMBRE, false);
-			}
-		} else {
-			showMsgbox(MESSAGE_ERREUR, MSGBOX_VIDE, false);
-		}
-		return false;
-	}
-
-	//TODO verfier validite MVC
+	//TODO verifier validite MVC
 	private void recupNomEquipe() {
 		if (Partie.getChoixModeDeJeu() == 0 || Partie.getChoixAdversaire() != 0
 				&& Partie.getChoixModeDeJeu() == 1) {
-			attribuerNomJ1();
+			Outils.attribuerNomJ1(tb_nomJ1.getText());
 		} else {
-			attribuerNomJ1();
-			attribuerNomJ2();
-		}
-	}
-
-	private void attribuerNomJ1() {
-		if (tb_nomJ1.getText().isEmpty()) {
-			Partie.setEquipe1(Partie.getNomEquipe1Defaut());
-		} else {
-			Partie.setEquipe1(tb_nomJ1.getText());
-		}
-	}
-
-	private void attribuerNomJ2() {
-		if (tb_nomJ2.getText().isEmpty()) {
-			Partie.setEquipe2(Partie.getNomEquipe2Defaut());
-		} else {
-			Partie.setEquipe2(tb_nomJ2.getText());
+			Outils.attribuerNomJ1(tb_nomJ1.getText());
+			Outils.attribuerNomJ2(tb_nomJ2.getText());
 		}
 	}
 
@@ -701,7 +631,7 @@ public class InterfaceAppliController {
 		/* Verification que non vide */
 		if (!tb_nbLigneConf.getText().isEmpty() 
 				&& !tb_nbColonneConf.getText().isEmpty()) { 
-			if (Outils.verifConfigIni(tb_nbLigneConf.getText(),
+			if (Outils.configIni(tb_nbLigneConf.getText(),
 					tb_nbColonneConf.getText())) {
 				recupNomConf(); //recupère le nom pour enregistrer
 				razConfig();
@@ -729,7 +659,20 @@ public class InterfaceAppliController {
 		String colonne = tb_cordColonne.getText();
 		String ligne = tb_cordLigne.getText();
 		String type = tb_cordType.getText();
-		if(Outils.verifPlacementPion(ligne,colonne,type)) {
+		if(Outils.placementPion(ligne,colonne,type)) {
+			rafraichirConf(Partie.configToString());
+		}	
+	}
+	
+	/** Cette fonction sera executé lorsque que l'utilisateur 
+	 * souhaite supprimer un des piosn qu'il a positionné sur le plateau
+	 * @param Click
+	 */
+	@FXML
+	void supprimerPionConfig(MouseEvent Click) {
+		String colonne = tb_cordColonne.getText();
+		String ligne = tb_cordLigne.getText();
+		if(Outils.suppressionPion(ligne,colonne)) {
 			rafraichirConf(Partie.configToString());
 		}	
 	}
@@ -740,52 +683,15 @@ public class InterfaceAppliController {
 	 * @param Click
 	 */
 	@FXML
-	//TODO verification
 	void deleteConfig(MouseEvent Click) {
-		/* Vérifie que le textfield n'est pas vide pour ne pas produire d'erreur
-		 * Si c'est le cas affiche un message d'erreur
-		 */
-		if (!tb_idConf.getText().isEmpty()) {
-			String idConfig = tb_idConf.getText();
-			/* Vérifie que tous les caractères de l'information rentrées par l'utilisateur
-			 * sont bien des chiffres
-			 */
-			if (Outils.verificationLettre(idConfig)) {
-				/* Converti en int le String correspondant au numéro de la config devant être supprimé */
-				int index = Integer.parseInt(tb_idConf.getText());
-				/*Vérifie que le numéro rentré par l'utilisateur correspond bien 
-				 * a une configuration existante
-				 */
-				if (index >= 0 &&
-						index < Configuration.listConfiguration.size()) {
-					Configuration.listConfiguration.remove(index);
-					/* Affichage de message d'erreur si l'une des conditions n'est pas respectée
-					 * Informant l'utilisateur de l'erreur qu'il a commise 
-					 */
-				} else {
-					showMsgbox(MSGBOX_TITRE, MESSAGE_ERREUR
-							+"Numéro ne correspond a aucune configuration",
-							false);
-				}
-			} else {
-				showMsgbox(MSGBOX_TITRE, 
-						MESSAGE_ERREUR + "Ne doit pas contenir de lettre",
-						false);
-			}
+		if(Outils.supprimerConf(tb_idConf.getText())) {
+			showMsgbox(MSGBOX_TITRE, MSGBOX_ENREGISTREE, true);
+			/* Retourne au menu*/
+			reinitialiser();
+			menu.setVisible(true);
 		} else {
-			showMsgbox(MSGBOX_TITRE,
-					MESSAGE_ERREUR + "Ne peut pas être vide", false);
-
+			showMsgbox(MSGBOX_TITRE, MSGBOX_NONVALIDE_CONF, false);
 		}
-	}
-
-	/** Cette fonction sera executé lorsque que l'utilisateur 
-	 * souhaite supprimer un des piosn qu'il a positionné sur le plateau
-	 * @param Click
-	 */
-	@FXML
-	void supprimerPionConfig(MouseEvent Click) {
-		//TODO corriger / trouver une solution de fusion / comment supprimer
 	}
 
 	/**
@@ -795,7 +701,6 @@ public class InterfaceAppliController {
 	 * Sur la page de placement des pions dans configuration
 	 * @param Click clic de l'utilisateur declanchant l'appel de la fonction
 	 */
-	//TODO commenter
 	@FXML
 	void enregistrerConfig(MouseEvent Click) {
 		/* Vérifie que bon nombre de pion crapaud = grenouille
@@ -905,6 +810,4 @@ public class InterfaceAppliController {
 		msgUti.setContentText(texteFenetre);
 		msgUti.showAndWait();
 	}
-
-
 }
