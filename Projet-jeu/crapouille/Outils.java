@@ -164,7 +164,7 @@ public class Outils {
 				Partie.currentPlateau.victoire(0) ||
 				Partie.currentPlateau.victoire(1)) {
 			return true;
-		} else if (Partie.getChoixModeDeJeu() == 1 &&
+		} else if (Partie.getChoixModeDeJeu() == 0 &&
 				Partie.currentPlateau.victoireCasseTete()) {
 			return true;
 		}
