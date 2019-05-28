@@ -56,17 +56,17 @@ public class Outils {
 
 	public static void attribuerNomJ1(String nomJ1) {
 		if (estNonVide(nomJ1)) {
-			Partie.setEquipe1(Partie.getNomEquipe1Defaut());
-		} else {
 			Partie.setEquipe1(nomJ1);
+		} else {
+			Partie.setEquipe1(Partie.getNomEquipe1Defaut());
 		}
 	}
 
 	public static void attribuerNomJ2(String nomJ2) {
 		if (estNonVide(nomJ2)) {
-			Partie.setEquipe2(Partie.getNomEquipe2Defaut());
-		} else {
 			Partie.setEquipe2(nomJ2);
+		} else {
+			Partie.setEquipe2(Partie.getNomEquipe2Defaut());
 		}
 	}
 
@@ -251,7 +251,7 @@ public class Outils {
 
 
 
-	public static boolean verifPlacementPion(String ligne,String colonne,String type) {
+	public static boolean placementPion(String ligne,String colonne,String type) {
 		if (estNonVide(ligne) && estNonVide(colonne) && estNonVide(type)) {
 			/* Verification qu'il n'y pas de lettre*/
 			if (verificationLettre(ligne) && verificationLettre(colonne)) {
@@ -303,13 +303,16 @@ public class Outils {
 					return true;
 					/** Affichage des differents message d'erreur selon le cas */
 				} else {
-					InterfaceAppliController.showMsgbox(MESSAGE_ERREUR, MSGBOX_NOMBRE, false);
+					InterfaceAppliController.showMsgbox(MESSAGE_ERREUR,
+							MSGBOX_NOMBRE, false);
 				}
 			} else {
-				InterfaceAppliController.showMsgbox(MESSAGE_ERREUR, MSGBOX_LETTRE, false);
+				InterfaceAppliController.showMsgbox(MESSAGE_ERREUR,
+						MSGBOX_LETTRE, false);
 			}
 		} else {
-			InterfaceAppliController.showMsgbox(MESSAGE_ERREUR, MSGBOX_VIDE, false);
+			InterfaceAppliController.showMsgbox(MESSAGE_ERREUR,
+					MSGBOX_VIDE, false);
 		}
 		return false;
 	}
@@ -341,8 +344,8 @@ public class Outils {
 					return true;
 					/* Affichage des messages d'erreurs a l'utilisateur pour lui siganler le probleme */
 				} else {
-					InterfaceAppliController.showMsgbox(MSGBOX_TITRE, MESSAGE_ERREUR
-							+ MSGBOX_NOMBRE,false);
+					InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
+							MESSAGE_ERREUR+ MSGBOX_NOMBRE,false);
 				}
 			} else {
 				InterfaceAppliController.showMsgbox(MSGBOX_TITRE,MESSAGE_ERREUR
@@ -382,7 +385,8 @@ public class Outils {
 	public static void sauvegarder() {
 		Plateau config = new Plateau(Partie.config);
 		/* Sauvegarde la configuration */
-		Configuration newConfig = new Configuration (config.getPlateau(), Outils.nomConfig);
+		Configuration newConfig = new Configuration (
+				config.getPlateau(), Outils.nomConfig);
 		Configuration.listConfiguration.add(newConfig);
 		Outils.enregistrerArray();
 	}
@@ -409,7 +413,8 @@ public class Outils {
 					 * Informant l'utilisateur de l'erreur qu'il a commise 
 					 */
 				} else {
-					InterfaceAppliController.showMsgbox(MSGBOX_TITRE, MESSAGE_ERREUR
+					InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
+							MESSAGE_ERREUR
 							+"Numéro ne correspond a aucune configuration",
 							false);
 				}
@@ -427,4 +432,31 @@ public class Outils {
 		
 	}
 
+	public static boolean suppressionPion(String ligne, String colonne) {
+		if (estNonVide(ligne) && estNonVide(colonne)) {
+			/* Verification qu'il n'y pas de lettre*/
+			if (verificationLettre(ligne) && verificationLettre(colonne)) {
+				int colonnePion = Integer.parseInt(colonne);
+				int lignePion = Integer.parseInt(ligne);
+				colonnePion--;
+				lignePion--;
+				/* Verification que les coordonnes corresponde bien a une coordonnes
+				 * dans le tableau de jeu
+				 */
+				if (Outils.cordOk(lignePion,colonnePion)) {
+					/* Verification le type entre par l'uti est valide */
+						Partie.config[lignePion][colonnePion] = null;
+						return true;
+						/* Affichage des differentes erreurs */
+				} else {
+					InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
+							MESSAGE_ERREUR + MSGBOX_NOMBRE, false);
+				}
+			} else {
+				InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
+						MESSAGE_ERREUR + MSGBOX_LETTRE, false);
+			}
+		}
+		return false;
+	}
 }

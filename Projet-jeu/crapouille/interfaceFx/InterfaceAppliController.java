@@ -484,7 +484,8 @@ public class InterfaceAppliController {
 			recupAdversaire(); //Recupere l'adversaire choisi par l'utilisateur
 			recupModeJeu(); //Recupere le mode de jeu choisi par l'utilisateur
 			recupNomEquipe(); //Recupere les/le nom dequipe choisi par l'utilisateur
-			Outils.recupConfigurationPartie(Integer.parseInt(choixConfig.getText())); //Recupere la configuration choisie par l'utilisateur
+			Outils.recupConfigurationPartie(Integer.parseInt(
+											choixConfig.getText())); //Recupere la configuration choisie par l'utilisateur
 			reinitialiser(); // Fait disparaitre toutes les autres pages
 			/*Fait apparaitre le plateau de jeu */
 			gameBoard.setVisible(true);
@@ -514,7 +515,8 @@ public class InterfaceAppliController {
 	@FXML
 	private void actualiserJeu(MouseEvent Click) {
 		/* Vérifie que les TextField ne sont pas vide pour ne pas produire d'erreur */
-		if (Outils.actualisationPlateau(entreeLigne.getText(), entreeColonne.getText())) {
+		if (Outils.actualisationPlateau(entreeLigne.getText(),
+				entreeColonne.getText())) {
 			afficherNomEquipe();
 			//TODO Partie.setNbCoups(Partie.getNbCoups()+1);
 			rafraichirJeu(Partie.getCurrentPlateau().toString());
@@ -530,9 +532,12 @@ public class InterfaceAppliController {
 		}
 	}
 
-	//TODO
+	/**
+	 * Affiche le nom de l'equipe qui doit jouer sur le plateau de jeu
+	 */
 	public void afficherNomEquipe() {
-		//tourDe.setText("Tour de l'équipe : " + Partie.getEquipe([Partie.getTourEquipe()]);
+		tourDe.setText("Tour de l'équipe : " 
+				+ Partie.getEquipe(Partie.getTourEquipe()));
 	}
 
 	/**
@@ -645,7 +650,20 @@ public class InterfaceAppliController {
 		String colonne = tb_cordColonne.getText();
 		String ligne = tb_cordLigne.getText();
 		String type = tb_cordType.getText();
-		if(Outils.verifPlacementPion(ligne,colonne,type)) {
+		if(Outils.placementPion(ligne,colonne,type)) {
+			rafraichirConf(Partie.configToString());
+		}	
+	}
+	
+	/** Cette fonction sera executé lorsque que l'utilisateur 
+	 * souhaite supprimer un des piosn qu'il a positionné sur le plateau
+	 * @param Click
+	 */
+	@FXML
+	void supprimerPionConfig(MouseEvent Click) {
+		String colonne = tb_cordColonne.getText();
+		String ligne = tb_cordLigne.getText();
+		if(Outils.suppressionPion(ligne,colonne)) {
 			rafraichirConf(Partie.configToString());
 		}	
 	}
@@ -656,7 +674,6 @@ public class InterfaceAppliController {
 	 * @param Click
 	 */
 	@FXML
-	//TODO verification
 	void deleteConfig(MouseEvent Click) {
 		if(Outils.supprimerConf(tb_idConf.getText())) {
 			showMsgbox(MSGBOX_TITRE, MSGBOX_ENREGISTREE, true);
@@ -668,14 +685,7 @@ public class InterfaceAppliController {
 		}
 	}
 
-	/** Cette fonction sera executé lorsque que l'utilisateur 
-	 * souhaite supprimer un des piosn qu'il a positionné sur le plateau
-	 * @param Click
-	 */
-	@FXML
-	void supprimerPionConfig(MouseEvent Click) {
-		//TODO corriger / trouver une solution de fusion / comment supprimer
-	}
+
 
 	/**
 	 * Fonction qui enregistre la configuration lorsque l'utilisateur souhaite
@@ -684,7 +694,6 @@ public class InterfaceAppliController {
 	 * Sur la page de placement des pions dans configuration
 	 * @param Click clic de l'utilisateur declanchant l'appel de la fonction
 	 */
-	//TODO commenter
 	@FXML
 	void enregistrerConfig(MouseEvent Click) {
 		/* Vérifie que bon nombre de pion crapaud = grenouille
