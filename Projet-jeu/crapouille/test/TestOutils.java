@@ -23,6 +23,6 @@ public class TestOutils {
 		System.out.println(nbTestOk + " sur " + aTesterChar.length + " tests");
 	}
 	public static void main(String[] args) {
-		
+		//TODO c'est quoi  ce bordel inchallah
 	}
 }
