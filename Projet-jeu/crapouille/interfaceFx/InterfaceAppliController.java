@@ -214,6 +214,9 @@ public class InterfaceAppliController {
 	private RadioButton lvl3;
 
 	@FXML
+	/**
+	 * TextBox 
+	 */
 	private TextField tb_nomJ2;
 
 	@FXML
