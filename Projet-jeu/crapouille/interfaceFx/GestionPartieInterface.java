@@ -39,7 +39,7 @@ public class GestionPartieInterface extends Application {
 	public void start(final Stage primaryStage) {
 		try {
 			primaryStage.initStyle(StageStyle.UNDECORATED);
-			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource(CHEMINFXML));
+			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource(CHEMINFXML));
 			Scene scene = new Scene(root, HAUTEUR, LARGEUR);
 			scene.getStylesheets().add(getClass().getResource(CHEMIN).toExternalForm());
 			primaryStage.setScene(scene);
