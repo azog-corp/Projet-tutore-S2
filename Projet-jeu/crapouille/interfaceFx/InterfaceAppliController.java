@@ -300,14 +300,20 @@ public class InterfaceAppliController {
 
 	@FXML
 	/**
-	 *
+	 * Button pour se rendre dans la categorie pour ajouter des configs
 	 */
 	private Button btn_ajouterConf;
 
 	@FXML
+	/**
+	 * Button pour se rendre dans la categorie pour Supprimer des configs
+	 */
 	private Button btn_supprimerConf;
 
 	@FXML
+	/**
+	 * page de palcement des pions dans la configuration en cours de creation 
+	 */
 	private AnchorPane placementConfig;
 
 	@FXML
