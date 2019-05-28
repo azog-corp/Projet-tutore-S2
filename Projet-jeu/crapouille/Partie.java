@@ -1,3 +1,4 @@
+
 package crapouille;
 
 import java.io.Serializable;
@@ -11,7 +12,8 @@ public class Partie implements Serializable {
 	private static final long serialVersionUID = 5319670181574630732L;
 
 	/**
-	 * Lorsque le joueur lance la partie recupere le temps afin de determiner
+	 * Lorsque le joueur lance la partie
+	 * recupere le temps afin de determiner
 	 * le temps mis par le joueur pour resoudre le casse tete
 	 * Le temps est uniquement mesuree sur la config par defaut
 	 */
