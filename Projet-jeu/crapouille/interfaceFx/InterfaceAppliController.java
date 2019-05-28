@@ -479,7 +479,7 @@ public class InterfaceAppliController {
 	@FXML
 	void showGameBoard(MouseEvent Click) {
 		/* Vérifie que le numéro de config saisie par l'utilisateur est correct */
-		if(configValide()) { //Verifie que tous se que a rentre l'utilisateur est correct
+		if(Outils.configValide(choixConfig.getText())) { //Verifie que tous se que a rentre l'utilisateur est correct
 			/*Si c'est le cas récupère toutes les informations nécessaires*/
 			recupAdversaire(); //Recupere l'adversaire choisi par l'utilisateur
 			recupModeJeu(); //Recupere le mode de jeu choisi par l'utilisateur
@@ -513,49 +513,19 @@ public class InterfaceAppliController {
 	@FXML
 	private void actualiserJeu(MouseEvent Click) {
 		/* Vérifie que les TextField ne sont pas vide pour ne pas produire d'erreur */
-		if (!entreeLigne.getText().isEmpty() &&
-				!entreeColonne.getText().isEmpty()) { 
-			/* Récupère dans des string la ligne et la colonne entrée par l'utilisateur */
-			String ligne = entreeLigne.getText();
-			String colonne = entreeColonne.getText();
-			/* Vérifie s'il n'y a pas de lettre avant de convertir en int les entrées
-			 * pour ne pas produire d'erreur
+		if (Outils.actualisationPlateau(entreeLigne.getText(), entreeColonne.getText())) {
+			afficherNomEquipe();
+			//TODO Partie.setNbCoups(Partie.getNbCoups()+1);
+			rafraichirJeu(Partie.getCurrentPlateau().toString());
+
+			/* Verifie que aucun des participants n'a gagne
+			 * Si cest le cas affiche le panneau de victoire
 			 */
-			if (Outils.verificationLettre(ligne) 
-					&& Outils.verificationLettre(colonne)) {
-				/*Conversion en int des entrées texte de l'utilisateur */
-				int colonnePion = Integer.parseInt(colonne);
-				int lignePion = Integer.parseInt(ligne);
-				if (Outils.colonneEstValide(colonnePion) 
-						&& Outils.ligneEstValide(lignePion)) {
-					colonnePion--;
-					lignePion--;
-					Partie.tourEntite(lignePion, colonnePion);
-					afficherNomEquipe();
-					//TODO Partie.setNbCoups(Partie.getNbCoups()+1);
-					rafraichirJeu(Partie.getCurrentPlateau().toString());
-					/* Affichage des messages d'erreurs a l'utilisateur pour lui siganler le probleme */
-				} else {
-					showMsgbox(MSGBOX_TITRE, MESSAGE_ERREUR
-							+ MSGBOX_NOMBRE,false);
-				}
-			} else {
-				showMsgbox(MSGBOX_TITRE,MESSAGE_ERREUR
-						+MSGBOX_LETTRE,
-						false);
+			//TODO mettre le nom de lequipe gagnante
+			if (Outils.verifVictoire()) {
+				jeuEnCours.setVisible(false);
+				victoire.setVisible(true);
 			}
-		} else {
-			showMsgbox(MSGBOX_TITRE,MESSAGE_ERREUR
-					+ MSGBOX_VIDE,
-					false);
-		}
-		/* Verifie que aucun des participants n'a gagne
-		 * Si cest le cas affiche le panneau de victoire
-		 */
-		//TODO mettre le nom de lequipe gagnante
-		if (Outils.verifVictoire()) {
-			jeuEnCours.setVisible(false);
-			victoire.setVisible(true);
 		}
 	}
 
@@ -585,36 +555,6 @@ public class InterfaceAppliController {
 	private void recupConfigurationPartie() {
 		int nConfig = Integer.parseInt(choixConfig.getText());
 		Partie.loadConfig(nConfig);
-	}
-
-	/**
-	 * Verifie si la configuration entree par lutilisateur dans la page de configurationde partie
-	 * Verifie que le textField contenant le numero n'est pas vide
-	 * Qu'il n'y a pas de lettres et que et le numero existe
-	 * @return true si tous les tests sont correctes'
-	 *         false si un seul test ne passe pas9
-	 */
-	private boolean configValide() {
-		/* On vérifie que la la string n'est pas vide pour ne pas produire d'erreur par la suite */
-		if (!choixConfig.getText().isEmpty()) { 
-			String configString = choixConfig.getText();
-			/* Verification qu'il n'y a pas de lettre dans lentree */
-			if(Outils.verificationLettre(configString)) {
-				int config = Integer.parseInt(choixConfig.getText());
-				/* Verification que le numero existe et correspond a uen configuration */
-				if (config >= 0 && config < Configuration.listConfiguration.size()) {
-					return true;
-					/** Affichage des differents message d'erreur selon le cas */
-				} else {
-					showMsgbox(MESSAGE_ERREUR, MSGBOX_LETTRE, false);
-				}
-			} else {
-				showMsgbox(MESSAGE_ERREUR, MSGBOX_NOMBRE, false);
-			}
-		} else {
-			showMsgbox(MESSAGE_ERREUR, MSGBOX_VIDE, false);
-		}
-		return false;
 	}
 
 	//TODO verfier validite MVC
@@ -742,41 +682,7 @@ public class InterfaceAppliController {
 	@FXML
 	//TODO verification
 	void deleteConfig(MouseEvent Click) {
-		/* Vérifie que le textfield n'est pas vide pour ne pas produire d'erreur
-		 * Si c'est le cas affiche un message d'erreur
-		 */
-		if (!tb_idConf.getText().isEmpty()) {
-			String idConfig = tb_idConf.getText();
-			/* Vérifie que tous les caractères de l'information rentrées par l'utilisateur
-			 * sont bien des chiffres
-			 */
-			if (Outils.verificationLettre(idConfig)) {
-				/* Converti en int le String correspondant au numéro de la config devant être supprimé */
-				int index = Integer.parseInt(tb_idConf.getText());
-				/*Vérifie que le numéro rentré par l'utilisateur correspond bien 
-				 * a une configuration existante
-				 */
-				if (index >= 0 &&
-						index < Configuration.listConfiguration.size()) {
-					Configuration.listConfiguration.remove(index);
-					/* Affichage de message d'erreur si l'une des conditions n'est pas respectée
-					 * Informant l'utilisateur de l'erreur qu'il a commise 
-					 */
-				} else {
-					showMsgbox(MSGBOX_TITRE, MESSAGE_ERREUR
-							+"Numéro ne correspond a aucune configuration",
-							false);
-				}
-			} else {
-				showMsgbox(MSGBOX_TITRE, 
-						MESSAGE_ERREUR + "Ne doit pas contenir de lettre",
-						false);
-			}
-		} else {
-			showMsgbox(MSGBOX_TITRE,
-					MESSAGE_ERREUR + "Ne peut pas être vide", false);
-
-		}
+		Outils.supprimerConf(tb_idConf.getText());
 	}
 
 	/** Cette fonction sera executé lorsque que l'utilisateur 
