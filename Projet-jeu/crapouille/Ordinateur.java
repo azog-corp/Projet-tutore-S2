@@ -11,19 +11,19 @@ import crapouille.Pion;
 
 /**
  * Class contenant des fonctions de recherche de pion
- * par l'ordianateur
+ * par l'ordianateur.
  * @author Arzcop
  */
 public class Ordinateur {
 
 	/**
-	 * ArrayList contenant tous les pions crapaud qui ne sont pas bloqués
+	 * ArrayList contenant tous les pions crapaud qui ne sont pas bloqués.
 	 */
 	private static ArrayList<Pion> pionLibre = new ArrayList<Pion>();
 
 	/**
 	 * Fonction principale qui recherche en fonction du niveau de l'IA,
-	 * le pion à déplacer
+	 * le pion à déplacer.
 	 * @param plateau l'état du plateau de jeu actuel
 	 * @param batracien tableau contenant tous les pions
 	 * @param niveauIA niveau de l'IA
@@ -55,7 +55,7 @@ public class Ordinateur {
 			}
 		}
 	}
-	
+
 	/**
 	 * Fonction qui recherche les déplacement qui
 	 * assure la victoire à l'ordinateur.
