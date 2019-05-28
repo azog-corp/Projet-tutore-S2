@@ -484,7 +484,7 @@ public class InterfaceAppliController {
 			recupAdversaire(); //Recupere l'adversaire choisi par l'utilisateur
 			recupModeJeu(); //Recupere le mode de jeu choisi par l'utilisateur
 			recupNomEquipe(); //Recupere les/le nom dequipe choisi par l'utilisateur
-			recupConfigurationPartie(); //Recupere la configuration choisie par l'utilisateur
+			Outils.recupConfigurationPartie(Integer.parseInt(choixConfig.getText())); //Recupere la configuration choisie par l'utilisateur
 			reinitialiser(); // Fait disparaitre toutes les autres pages
 			/*Fait apparaitre le plateau de jeu */
 			gameBoard.setVisible(true);
@@ -548,39 +548,15 @@ public class InterfaceAppliController {
 			Partie.setChoixModeDeJeu(1);
 		}
 	}
-	/**
-	 * Recupere le numero de la config 
-	 * Et charge la configuration correspondant au numero demande
-	 */
-	private void recupConfigurationPartie() {
-		int nConfig = Integer.parseInt(choixConfig.getText());
-		Partie.loadConfig(nConfig);
-	}
 
-	//TODO verfier validite MVC
+	//TODO verifier validite MVC
 	private void recupNomEquipe() {
 		if (Partie.getChoixModeDeJeu() == 0 || Partie.getChoixAdversaire() != 0
 				&& Partie.getChoixModeDeJeu() == 1) {
-			attribuerNomJ1();
+			Outils.attribuerNomJ1(tb_nomJ1.getText());
 		} else {
-			attribuerNomJ1();
-			attribuerNomJ2();
-		}
-	}
-
-	private void attribuerNomJ1() {
-		if (tb_nomJ1.getText().isEmpty()) {
-			Partie.setEquipe1(Partie.getNomEquipe1Defaut());
-		} else {
-			Partie.setEquipe1(tb_nomJ1.getText());
-		}
-	}
-
-	private void attribuerNomJ2() {
-		if (tb_nomJ2.getText().isEmpty()) {
-			Partie.setEquipe2(Partie.getNomEquipe2Defaut());
-		} else {
-			Partie.setEquipe2(tb_nomJ2.getText());
+			Outils.attribuerNomJ1(tb_nomJ1.getText());
+			Outils.attribuerNomJ2(tb_nomJ2.getText());
 		}
 	}
 
@@ -641,7 +617,7 @@ public class InterfaceAppliController {
 		/* Verification que non vide */
 		if (!tb_nbLigneConf.getText().isEmpty() 
 				&& !tb_nbColonneConf.getText().isEmpty()) { 
-			if (Outils.verifConfigIni(tb_nbLigneConf.getText(),
+			if (Outils.configIni(tb_nbLigneConf.getText(),
 					tb_nbColonneConf.getText())) {
 				recupNomConf(); //recupère le nom pour enregistrer
 				razConfig();
