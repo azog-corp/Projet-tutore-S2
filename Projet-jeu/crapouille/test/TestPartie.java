@@ -195,9 +195,9 @@ public class TestPartie {
 
 	public static void main(String[] args) {
 		System.out.println("----- Test visuel des différentes fonction -----");
-		// testMovePion();
-		// testPionValide();
-		// testVictoire();
+		//testMovePion();
+		//testPionValide();
+		//testVictoire();
 		testVictoireCasseTete();
 	}
 }
