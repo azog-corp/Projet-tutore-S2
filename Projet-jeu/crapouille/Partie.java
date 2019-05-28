@@ -43,12 +43,12 @@ public class Partie implements Serializable {
 	/**
 	 * Nom par défaut de l'équipe Crapaud
 	 */
-	private static String nomEquipe1Defaut = "Crapaud";
+	private static String nomEquipe1Defaut = "Grenouille";
 
 	/**
 	 * Nom par défaut de l'équipe Grenouille
 	 */
-	private static String nomEquipe2Defaut = "Grenouille";
+	private static String nomEquipe2Defaut = "Crapaud";
 
 	/**
 	 * Tableau contenant le nom des deux équipes
