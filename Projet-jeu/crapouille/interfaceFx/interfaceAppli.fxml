@@ -181,9 +181,9 @@
          <children>
             <AnchorPane fx:id="jeuEnCours" prefHeight="519.0" prefWidth="521.0" styleClass="AnchorPane" stylesheets="@application.css">
                <children>
-                  <Label fx:id="gameBoardString" layoutX="77.0" layoutY="115.0" prefHeight="288.0" prefWidth="399.0" textAlignment="CENTER" textFill="WHITE">
+                  <Label fx:id="gameBoardString" layoutX="60.0" layoutY="115.0" prefHeight="302.0" prefWidth="448.0" textAlignment="CENTER" textFill="WHITE">
                      <font>
-                        <Font name="Consolas" size="10.0" />
+                        <Font name="Consolas" size="8.0" />
                      </font></Label>
                   <Button fx:id="okGameBoard" layoutX="417.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#actualiserJeu" prefHeight="25.0" prefWidth="42.0" stylesheets="@application.css" text="Ok">
                      <styleClass>
@@ -342,7 +342,7 @@
                   </Label>
                   <Label fx:id="afficherConfig" layoutX="69.0" layoutY="202.0" text="affichage du jeu" textFill="WHITE">
                      <font>
-                        <Font name="Consolas" size="10.0" />
+                        <Font name="Consolas" size="8.0" />
                      </font></Label>
                   <TextField fx:id="tb_cordLigne" layoutX="200.0" layoutY="53.0" prefHeight="27.0" prefWidth="167.0" />
                   <Button fx:id="btn_validerConfig" layoutX="171.0" layoutY="447.0" mnemonicParsing="false" onMouseClicked="#enregistrerConfig" stylesheets="@application.css" text="Valider">

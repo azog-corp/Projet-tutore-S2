@@ -382,7 +382,13 @@ public class Outils {
 					colonnePion--;
 					lignePion--;
 					/* Si toutes les entrees sont correctes lance le tour du joueur */
-					Partie.tourEntite(lignePion, colonnePion);
+					
+					try {
+						Partie.tourEntite(lignePion, colonnePion);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					return true;
 					/* Affichage des messages d'erreurs a l'utilisateur pour lui siganler le probleme */
 				} else {
