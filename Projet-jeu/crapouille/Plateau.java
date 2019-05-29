@@ -14,20 +14,23 @@ import java.io.Serializable;
 public class Plateau implements Serializable {
 
 	/**
-	 * 
+	 * ID de la serialization.
 	 */
 	private static final long serialVersionUID = -106406785084186219L;
 
 	/**
-	 * Nombre de ligne de la configuration actuelle
+	 * Nombre de ligne de la configuration actuelle.
 	 */
 	private int ligneConf;
 
 	/**
-	 * Nombre de colonne de la configuration actuelle
+	 * Nombre de colonne de la configuration actuelle.
 	 */
 	private int colonneConf;
 
+	/**
+	 * Nombre de pion sur le plateau et est pair
+	 */
 	private int nbPion = 0;
 
 	/**
@@ -54,6 +57,7 @@ public class Plateau implements Serializable {
 		this.colonneConf = plateau[0].length;
 		this.plateau = new Pion[this.ligneConf][this.colonneConf];
 
+		/* On associe les pions du plateau argument dans le nouveau plateau */
 		for (int x = 0 ; x < this.ligneConf ; x++) {
 			for (int y = 0 ; y < this.colonneConf ; y++) {
 				this.plateau[x][y] = plateau[x][y];
@@ -67,16 +71,14 @@ public class Plateau implements Serializable {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * @return le plateau de jeu
 	 */
 	public Pion[][] getPlateau() {
 		return plateau;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * @return le tableau des pions.
 	 */
 	public Pion[][] getBatracien() {
 		return batracien;
@@ -84,7 +86,7 @@ public class Plateau implements Serializable {
 
 	/**
 	 * Fonction appelé lors de la création d'une configuration
-	 * et qui initialise l'attribut bloque de chaque pion
+	 * et qui initialise l'attribut bloque de chaque pion.
 	 */
 	public void initBloque() {
 		for (int x = 0 ; x < this.ligneConf ; x++) {
@@ -99,7 +101,8 @@ public class Plateau implements Serializable {
 	/**
 	 * Fonction appelé lors du chargement d'une configuration
 	 * et qui met dans le tableau batracien toutes les
-	 * instances des pions grenouilles et crapaud
+	 * instances des pions grenouilles et crapaud ligne
+	 * par ligne.
 	 */
 	public void setBatracien() {
 		this.batracien = new Pion[2][this.nbPion/2];
@@ -109,10 +112,12 @@ public class Plateau implements Serializable {
 			for (int y = 0 ; y < this.colonneConf ; y++) {
 				if (this.plateau[x][y] != null && this.plateau[x][y].isCrapaud()) {
 					this.batracien[1][crapaud] = new Pion (x, y, true);
+					/* évite les erreurs. */
 					this.plateau[x][y] = this.batracien[1][crapaud];
 					crapaud++;
 				} else if (this.plateau[x][y] != null && !this.plateau[x][y].isCrapaud()) {
 					this.batracien[0][grenouille] = new Pion (x, y, false);
+					/* évite les erreurs. */
 					this.plateau[x][y] = this.batracien[0][grenouille];
 					grenouille++;
 				}
@@ -135,8 +140,10 @@ public class Plateau implements Serializable {
 	 * @param pion le pion bougé
 	 */
 	public void movePion(Pion pion) {
+		/* On enlève le pion du plateau */
 		this.plateau[pion.getLigne()][pion.getColonne()] = null;
 		pion.setColonne(this.plateau, this.colonneConf);
+		/* On remet le pion une fois l'ordonnée modifié */
 		this.plateau[pion.getLigne()][pion.getColonne()] = pion;
 		for (int x = 0 ; x < this.ligneConf ; x++) {
 			if (this.plateau[pion.getLigne()][x] != null) {
@@ -194,12 +201,20 @@ public class Plateau implements Serializable {
 			return false;
 		}
 		int bonPion = 0;
+		/* On vérifie un pion grenouille */
 		for (int x = 0 ; x < this.batracien[0].length ; x++) {
+			/* Si une grenouille se trouve à l'extrémité droite du plateau
+			 * ou sur une colonne adjacente à une autre grenouille.
+			 */
+			/* On vérifie un pion crapaud */
 			if (this.batracien[0][x].getColonne() == this.colonneConf-1 || 
 					this.batracien[0][x].getColonne() == 
 					this.batracien[0][x-1].getColonne()-1) {
 				bonPion++;
 			}
+			/* Si un crapaud se trouve à l'extrémité gauche du plateau
+			 * ou sur une colonne adjacente à un autre crapaud.
+			 */
 			if (this.batracien[1][x].getColonne() == 0 || 
 					this.batracien[1][x].getColonne() == 
 					this.batracien[1][x-1].getColonne()+1) {
@@ -222,7 +237,8 @@ public class Plateau implements Serializable {
 		boolean noGrenouille = false;
 		int nbCrapaud = 0,
 				nbGrenouille = 0;
-		if (plateau.length > 20 || plateau[0].length > 20) {
+		if (plateau.length > 20 || plateau[0].length > 20 ||
+				plateau.length == 1 || plateau[0].length == 1) {
 			return false;
 		}
 		for (int ligne = 0 ; ligne < plateau.length ; ligne++) {
@@ -255,7 +271,12 @@ public class Plateau implements Serializable {
 			plateauString.append(z+1 + " | ");
 		}
 		for (int x = 0 ; x < this.ligneConf ; x++) {
-			plateauString.append("\n" + (x+1) + " |");
+			/* Permet d'harmonisé l'affichage */
+			if (x+1 < 0) {
+				plateauString.append("\n" + (x+1) + "  |");
+			} else {
+				plateauString.append("\n" + (x+1) + " |");
+			}
 			for (int y = 0 ; y < this.colonneConf ; y++) {
 				if (this.plateau[x][y] != null) {
 					if (this.plateau[x][y].isCrapaud()) {
