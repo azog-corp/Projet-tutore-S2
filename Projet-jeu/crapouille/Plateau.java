@@ -7,8 +7,8 @@ package crapouille;
 import java.io.Serializable;
 
 /**
- * A compléter.
- * @author Maël
+ * Class contenant les fonctions pour l'objet plateau
+ * @author Azog-corp
  *
  */
 public class Plateau implements Serializable {
