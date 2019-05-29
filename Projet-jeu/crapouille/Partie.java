@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ * Partie.java
+ * Azog-corp 2019, droit d'auteur
  */
 package crapouille;
 
@@ -10,9 +10,8 @@ import java.time.LocalDate;
 import crapouille.configuration.Configuration;
 
 /**
- * A compléter.
- * @author Maël
- *
+ * Classe contenant les fonctions de la partie
+ * @author Azog-corp
  */
 public class Partie implements Serializable {
 
