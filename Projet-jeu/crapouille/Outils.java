@@ -1,8 +1,17 @@
+/*
+ * Outils.java
+ * Azog-corp 2019, droit d'auteur
+ */
 package crapouille;
 
 import crapouille.configuration.Configuration;
 import crapouille.interfaceFx.InterfaceAppliController;
 
+/**
+ * Class contenant les fonctions permettant la gestion du
+ * jeu
+ * @author Azog-corp
+ */
 public class Outils {
 	/** initialisation des constantes min/max lignes et colonnes */
 	final static int MIN_LIGNE_PION = 1;

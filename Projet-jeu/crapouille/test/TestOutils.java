@@ -6,6 +6,11 @@ package crapouille.test;
 
 import crapouille.Outils;
 
+/**
+ * Class contenant les test des fonctions permettant 
+ * la gestion du jeu
+ * @author Azog-corp
+ */
 public class TestOutils {
 
 
