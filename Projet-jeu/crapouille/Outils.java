@@ -416,7 +416,6 @@ public class Outils {
 		Configuration.listConfiguration.add(newConfig);
 	}
 
-	/**
 	 public static void sauvegarder() {
 		Plateau config = new Plateau(Partie.config);
 		/* Sauvegarde la configuration */

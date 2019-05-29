@@ -266,7 +266,7 @@ public class Plateau implements Serializable {
 	 */
 	public String toString() {
 		StringBuilder plateauString = new StringBuilder();
-		plateauString.append("  | ");
+		plateauString.append("   | ");
 		for (int z = 0 ; z < this.colonneConf ; z++) {
 			plateauString.append(z+1 + " | ");
 		}
