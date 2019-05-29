@@ -7,6 +7,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JFX"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JAVAFX_INCHALLAH"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -219,6 +219,7 @@ public class Partie implements Serializable {
 		tourEquipe = 0;
 	}
 
+	
 	/**
 	 * Bouge un pion en fonction du tour de l'adversaire ou du mode
 	 * de jeu tout en vérifiant que le pion existe
@@ -236,8 +237,6 @@ public class Partie implements Serializable {
 				tourFait = true;
 			}
 			if (choixAdversaire != 0 && tourFait) {
-					// sleep
-					//TODO vérifier
 				Ordinateur.choixOrdi(currentPlateau, 
 						currentPlateau.getBatracien(), 
 						choixAdversaire);
