@@ -1,6 +1,6 @@
 /*
  * Ordinateur.java
- * Azcop 2019, droit d'auteur
+ * Azog-corp 2019, droit d'auteur
  */
 package crapouille;
 

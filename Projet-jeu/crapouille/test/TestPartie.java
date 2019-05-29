@@ -1,8 +1,16 @@
+/*
+ * TestPartie.java
+ * Azog-corp 2019, droit d'auteur
+ */
 package crapouille.test;
 
 import crapouille.*;
 import java.util.Scanner;
 
+/**
+ * classe
+ * @author Azog-corp
+ */
 public class TestPartie {
 
 
