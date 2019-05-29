@@ -1,0 +1,1 @@
+javaw.exe --module-path "C:\Users\maell\Desktop\GitHub\Projet-tutore-S2\javafx-sdk-11.0.2\lib" --add-modules javafx.controls,javafx.fxml,javafx.graphics,javafx.base -Dfile.encoding=Cp1252 -classpath "C:\Users\maell\Desktop\GitHub\Projet-tutore-S2\Projet-jeu\bin" crapouille.interfaceFx.GestionPartieInterface

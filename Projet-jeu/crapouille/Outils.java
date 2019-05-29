@@ -243,8 +243,7 @@ public class Outils {
 				/* Conversion en int */
 				int nbLigne = Integer.parseInt(ligne);
 				int nbColonne = Integer.parseInt(colonne);
-				if (Outils.ligneEstValide(nbLigne) 
-						&& Outils.colonneEstValide(nbColonne)) {
+				if (coordValide(nbLigne, nbColonne)) {
 					/* Initialise le tableau a la taille choisie par l'uti */
 					Partie.config = new Pion[nbLigne][nbColonne];
 					return true;
@@ -261,6 +260,16 @@ public class Outils {
 		} else {
 			InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
 					MESSAGE_ERREUR + MSGBOX_VIDE,false);
+		}
+		return false;
+	}
+	
+	private static boolean coordValide (int ligne, int colonne) {
+		if (ligne >= MIN_LIGNE_TABLEAU &&
+				ligne < MAX_COLONNE_TABLEAU &&
+				colonne >= MIN_COLONNE_TABLEAU &&
+				colonne < MAX_COLONNE_TABLEAU) {
+			return true;
 		}
 		return false;
 	}

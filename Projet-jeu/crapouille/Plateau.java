@@ -268,11 +268,15 @@ public class Plateau implements Serializable {
 		StringBuilder plateauString = new StringBuilder();
 		plateauString.append("   | ");
 		for (int z = 0 ; z < this.colonneConf ; z++) {
-			plateauString.append(z+1 + " | ");
+			if (z+1 < 10) {
+				plateauString.append(z+1 + " | ");
+			} else {
+				plateauString.append(z+1 + "| ");
+			}
 		}
 		for (int x = 0 ; x < this.ligneConf ; x++) {
 			/* Permet d'harmonisé l'affichage */
-			if (x+1 < 0) {
+			if (x+1 < 10) {
 				plateauString.append("\n" + (x+1) + "  |");
 			} else {
 				plateauString.append("\n" + (x+1) + " |");

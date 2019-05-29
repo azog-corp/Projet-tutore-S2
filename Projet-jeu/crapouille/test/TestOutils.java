@@ -20,7 +20,7 @@ public class TestOutils {
 	 * Car les differents des cas d'erreurs sont toujours geres
 	 * Avant l'appel de cette fonction
 	 */
-	private void testRecupType() {
+	private static void testRecupType() {
 		final char[] aTesterChar = {'C', 'G'};
 		final boolean[] recupTypeAttendu = {true, false};
 		int nbTestOk = 0;
@@ -143,6 +143,7 @@ public class TestOutils {
 
 	public static void main(String[] args) {
 		testEstValide();
+		testRecupType();
 		testVerificationLettre ();
 		testLigneEstValide ();
 		testColonneEstValide ();

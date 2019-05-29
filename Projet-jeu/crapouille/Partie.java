@@ -153,7 +153,7 @@ public class Partie implements Serializable {
 	public static void setEquipe2(String equipe) {
 		Partie.equipe[1] = equipe;
 	}
-	
+
 	public static String getEquipe(int tour) {
 		return equipe[tour];
 	}
@@ -188,12 +188,16 @@ public class Partie implements Serializable {
 
 	public static String configToString() {
 		StringBuilder configString = new StringBuilder();
-		configString.append("  | ");
+		configString.append("    | ");
 		for (int z = 0 ; z < config[0].length ; z++) {
-			configString.append(z+1 + "  | ");
+			if (z+1 < 10) {
+				configString.append(z+1 + " | ");
+			} else {
+				configString.append(z+1 + "| ");
+			}
 		}
 		for (int x = 0 ; x < config.length ; x++) {
-			if (x+1 < 0) {
+			if (x+1 < 10) {
 				configString.append("\n" + (x+1) + "  |");
 			} else {
 				configString.append("\n" + (x+1) + " |");
@@ -223,7 +227,7 @@ public class Partie implements Serializable {
 		tourEquipe = 0;
 	}
 
-	
+
 	/**
 	 * Bouge un pion en fonction du tour de l'adversaire ou du mode
 	 * de jeu tout en vérifiant que le pion existe

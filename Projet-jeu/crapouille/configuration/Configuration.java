@@ -93,26 +93,4 @@ public class Configuration implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
-	public boolean testNombreEgal() {
-	    Pion[][] aTester = Partie.getCurrentPlateau().getPlateau();
-	    int nbCrapaud = 0;
-	    int nbGrenouille = 0;
-	    for (int x = 0; x < aTester[0].length; x++) {
-	        for (int y = 0; y < aTester.length; y++) {
-	            if (aTester[x][y] != null) {
-	                if (aTester[x][y].isCrapaud()) {
-	                    nbCrapaud++;
-	                } else {
-	                    nbGrenouille++;
-	                }
-	            }
-	        }
-	    }
-	    if (nbCrapaud == nbGrenouille) {
-	        return true;
-	    } else {
-	        return false;
-	    }
-	}
 }
