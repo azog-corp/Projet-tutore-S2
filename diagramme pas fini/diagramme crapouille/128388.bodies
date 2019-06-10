@@ -1,0 +1,294 @@
+class Outils
+!!!128388.java!!!	recupType(in choix : char) : boolean
+		return choix == 'C' ? true : false;
+!!!128516.java!!!	recupConfigurationPartie(in choixConfig : int) : void
+		Partie.loadConfig(choixConfig);
+!!!128644.java!!!	attribuerNomJ1(in nomJ1 : String) : void
+		if (estNonVide(nomJ1)) {
+			Partie.setEquipe1(nomJ1);
+		} else {
+			Partie.setEquipe1(Partie.getNomEquipe1Defaut());
+		}
+!!!128772.java!!!	attribuerNomJ2(in nomJ2 : String) : void
+		if (estNonVide(nomJ2)) {
+			Partie.setEquipe2(nomJ2);
+		} else {
+			Partie.setEquipe2(Partie.getNomEquipe2Defaut());
+		}
+!!!128900.java!!!	afficherConfigDispo() : String
+		StringBuilder configs = new StringBuilder();
+		for (int compteur = 0; compteur < Configuration.listConfiguration.size(); compteur++) {
+			configs.append(compteur + " - ");
+			configs.append(Configuration.listConfiguration.get(compteur).getNom());
+			configs.append("\n");
+		}
+		return configs.toString();
+!!!129028.java!!!	recupereLignePion(in coordonneePion : String) : int
+		StringBuilder lignePion = new StringBuilder(); // lignePion est le coordonnée de la ligne du pion
+		lignePion.append(coordonneePion.charAt(0));
+		lignePion.append(coordonneePion.charAt(1));
+		return Integer.parseInt(lignePion.toString());
+!!!129156.java!!!	recupereColonnePion(in coordonneePion : String) : int
+		StringBuilder colonnePion = new StringBuilder(); // lignePion est le coordonnée de la ligne du pion
+		colonnePion.append(coordonneePion.charAt(0));
+		colonnePion.append(coordonneePion.charAt(1));
+		return Integer.parseInt(colonnePion.toString());
+!!!129284.java!!!	typeValide(in type : String) : boolean
+		if (type.length() != 1 || (type.charAt(0) != 'C' 
+				&& type.charAt(0) != 'G')) {
+			return false;
+		} else {
+			return true;
+		}
+!!!129412.java!!!	verificationLettre(in aVerifier : String) : boolean
+		for (int compteur = 0; compteur < aVerifier.length(); compteur ++) {
+			char tester = aVerifier.charAt(compteur);
+			if (tester < '0' || tester > '9') {
+				return false;
+			}
+		}
+		return true;	
+!!!129540.java!!!	ligneEstValide(in lignePion : int) : boolean
+		// La ligne du pion doit être supérieur à 0 et inférieure ou égal à 20  
+		return MIN_LIGNE_PION <= lignePion 
+				&& lignePion <= Partie.currentPlateau.getPlateau().length;
+!!!129668.java!!!	colonneEstValide(in colonnePion : int) : boolean
+		// La ligne du pion doit être supérieur à 0 et inférieure ou égal à 20  
+		return MIN_COLONNE_PION <= colonnePion 
+		&& colonnePion <= Partie.currentPlateau.getPlateau()[0].length;
+!!!129796.java!!!	cordOk(in ligne : int, in colonne : int) : boolean
+		return ligne < Partie.config.length && 
+				colonne < Partie.config[0].length &&
+				ligne >= 0 && colonne >= 0;
+!!!129924.java!!!	verifVictoire() : boolean
+		if (Partie.getChoixModeDeJeu() == 1 &&
+				Partie.currentPlateau.victoire(0) ||
+				Partie.currentPlateau.victoire(1)) {
+			return true;
+		} else if (Partie.getChoixModeDeJeu() == 0 &&
+				Partie.currentPlateau.victoireCasseTete()) {
+			return true;
+		}
+		return false;
+!!!130052.java!!!	estNonVide(in aVerifier : String) : boolean
+		if (aVerifier.equals("")) {
+			return false;
+		} else {
+			return true;
+		}
+!!!130180.java!!!	configIni(in ligne : String, in colonne : String) : boolean
+		if(estNonVide(ligne) && estNonVide(colonne)) {
+			if (Outils.verificationLettre(colonne) 
+					&& Outils.verificationLettre(ligne)) {
+				/* Conversion en int */
+				int nbLigne = Integer.parseInt(ligne);
+				int nbColonne = Integer.parseInt(colonne);
+				if (coordValide(nbLigne, nbColonne)) {
+					/* Initialise le tableau a la taille choisie par l'uti */
+					Partie.config = new Pion[nbLigne][nbColonne];
+					return true;
+				} else {
+					InterfaceAppliController.showMsgbox(MSGBOX_TITRE, MESSAGE_ERREUR 
+							+ MSGBOX_NOMBRE,
+							false);
+				}
+			} else {
+				InterfaceAppliController.showMsgbox(MSGBOX_TITRE,MESSAGE_ERREUR 
+						+ MSGBOX_LETTRE,
+						false);
+			}
+		} else {
+			InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
+					MESSAGE_ERREUR + MSGBOX_VIDE,false);
+		}
+		return false;
+!!!130308.java!!!	coordValide(in ligne : int, in colonne : int) : boolean
+		if (ligne >= MIN_LIGNE_TABLEAU &&
+				ligne < MAX_COLONNE_TABLEAU &&
+				colonne >= MIN_COLONNE_TABLEAU &&
+				colonne < MAX_COLONNE_TABLEAU) {
+			return true;
+		}
+		return false;
+!!!130436.java!!!	placementPion(in ligne : String, in colonne : String, in type : String) : boolean
+		if (estNonVide(ligne) && estNonVide(colonne) && estNonVide(type)) {
+			/* Verification qu'il n'y pas de lettre*/
+			if (verificationLettre(ligne) && verificationLettre(colonne)) {
+				int colonnePion = Integer.parseInt(colonne);
+				int lignePion = Integer.parseInt(ligne);
+				colonnePion--;
+				lignePion--;
+				/* Verification que les coordonnes corresponde bien a une coordonnes
+				 * dans le tableau de jeu
+				 */
+				if (cordOk(lignePion,colonnePion)) {
+					/* Verification le type entre par l'uti est valide */
+					if (typeValide(type)) {
+						placementPion(lignePion,colonnePion,
+								recupType(type.charAt(0)));
+						return true;
+						/* Affichage des differentes erreurs */
+					} else {
+						InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
+								MESSAGE_ERREUR + MSGBOX_TYPE, false);
+					}
+				} else {
+					InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
+							MESSAGE_ERREUR + MSGBOX_NOMBRE, false);
+				}
+			} else {
+				InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
+						MESSAGE_ERREUR + MSGBOX_LETTRE, false);
+			}
+		} else {
+			InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
+					MESSAGE_ERREUR + MSGBOX_VIDE, false);
+		}
+		return false;
+!!!130564.java!!!	configValide(in choixConf : String) : boolean
+		/* On vérifie que la la string n'est pas vide pour ne pas produire d'erreur par la suite */
+		if (estNonVide(choixConf)) { 
+			/* Verification qu'il n'y a pas de lettre dans lentree */
+			if(verificationLettre(choixConf)) {
+				int config = Integer.parseInt(choixConf);
+				/* Verification que le numero existe et correspond a uen configuration */
+				if (configExiste(config)) {
+					return true;
+					/** Affichage des differents message d'erreur selon le cas */
+				} else {
+					InterfaceAppliController.showMsgbox(MESSAGE_ERREUR,
+							MSGBOX_NOMBRE, false);
+				}
+			} else {
+				InterfaceAppliController.showMsgbox(MESSAGE_ERREUR,
+						MSGBOX_LETTRE, false);
+			}
+		} else {
+			InterfaceAppliController.showMsgbox(MESSAGE_ERREUR,
+					MSGBOX_VIDE, false);
+		}
+		return false;
+!!!130692.java!!!	configExiste(in config : int) : boolean
+		return config >= 0 && config < Configuration.listConfiguration.size();
+!!!130820.java!!!	actualisationPlateau(in ligne : String, in colonne : String) : boolean
+		if (estNonVide(ligne) && estNonVide(colonne)) { 
+			/* Vérifie s'il n'y a pas de lettre avant de convertir en int les entrées
+			 * pour ne pas produire d'erreur
+			 */
+			if (verificationLettre(ligne) 
+					&& verificationLettre(colonne)) {
+				/*Conversion en int des entrées texte de l'utilisateur */
+				int colonnePion = Integer.parseInt(colonne);
+				int lignePion = Integer.parseInt(ligne);
+				if (ligneEstValide(lignePion) && colonneEstValide(colonnePion)) {
+					/* Decremente de 1 car les numeros rentres et afficher sur le plateau 
+					 * sont augmenter de 1 pour correspondre a une bonne notation de 
+					 * (de 1 a 20 et non de 0 a 19) plus confortable pour l'utilisateur
+					 */
+					colonnePion--;
+					lignePion--;
+					/* Si toutes les entrees sont correctes lance le tour du joueur */
+					
+					try {
+						Partie.tourEntite(lignePion, colonnePion);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					return true;
+					/* Affichage des messages d'erreurs a l'utilisateur pour lui siganler le probleme */
+				} else {
+					InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
+							MESSAGE_ERREUR+ MSGBOX_NOMBRE,false);
+				}
+			} else {
+				InterfaceAppliController.showMsgbox(MSGBOX_TITRE,MESSAGE_ERREUR
+						+MSGBOX_LETTRE,
+						false);
+			}
+		} else {
+			InterfaceAppliController.showMsgbox(MSGBOX_TITRE,MESSAGE_ERREUR
+					+ MSGBOX_VIDE,
+					false);
+		}
+		return false;
+!!!130948.java!!!	placementPion(in lignePion : int, in colonnePion : int, inout type : boolean) : void
+		Pion placementUti = new Pion(lignePion,colonnePion,type);
+		Partie.config[lignePion][colonnePion] = placementUti;
+!!!131076.java!!!	enregistrerArray() : void
+		Plateau config = new Plateau(Partie.config);
+		Configuration newConfig = new Configuration (
+				config.getPlateau(),nomConfig);
+		Configuration.listConfiguration.add(newConfig);
+!!!131204.java!!!	sauvegarder() : void
+		Plateau config = new Plateau(Partie.config);
+		/* Sauvegarde la configuration */
+		Configuration newConfig = new Configuration (
+				config.getPlateau(), Outils.nomConfig);
+		Configuration.listConfiguration.add(newConfig);
+		enregistrerArray();
+!!!131332.java!!!	supprimerConf(in idConfig : String) : boolean
+		/* Vérifie que le textfield n'est pas vide pour ne pas produire d'erreur
+		 * Si c'est le cas affiche un message d'erreur
+		 */
+		if (estNonVide(idConfig)) {
+			/* Vérifie que tous les caractères de l'information rentrées par l'utilisateur
+			 * sont bien des chiffres
+			 */
+			if (Outils.verificationLettre(idConfig)) {
+				/* Converti en int le String correspondant au numéro de la config devant être supprimé */
+				int index = Integer.parseInt(idConfig);
+				/*Vérifie que le numéro rentré par l'utilisateur correspond bien 
+				 * a une configuration existante
+				 */
+				if (index >= 0 &&
+						index < Configuration.listConfiguration.size()) {
+					Configuration.listConfiguration.remove(index);
+					return true;
+					/* Affichage de message d'erreur si l'une des conditions n'est pas respectée
+					 * Informant l'utilisateur de l'erreur qu'il a commise 
+					 */
+				} else {
+					InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
+							MESSAGE_ERREUR
+							+ MSGBOX_NONVALIDE_CONF,
+							false);
+				}
+			} else {
+				InterfaceAppliController.showMsgbox(MSGBOX_TITRE, 
+						MESSAGE_ERREUR + MSGBOX_LETTRE,
+						false);
+			}
+		} else {
+			InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
+					MESSAGE_ERREUR + MSGBOX_VIDE, false);
+
+		}
+		return false;
+		
+!!!131460.java!!!	suppressionPion(in ligne : String, in colonne : String) : boolean
+		if (estNonVide(ligne) && estNonVide(colonne)) {
+			/* Verification qu'il n'y pas de lettre*/
+			if (verificationLettre(ligne) && verificationLettre(colonne)) {
+				int colonnePion = Integer.parseInt(colonne);
+				int lignePion = Integer.parseInt(ligne);
+				colonnePion--;
+				lignePion--;
+				/* Verification que les coordonnes corresponde bien a une coordonnes
+				 * dans le tableau de jeu
+				 */
+				if (cordOk(lignePion,colonnePion)) {
+					/* Verification le type entre par l'uti est valide */
+						Partie.config[lignePion][colonnePion] = null;
+						return true;
+						/* Affichage des differentes erreurs */
+				} else {
+					InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
+							MESSAGE_ERREUR + MSGBOX_NOMBRE, false);
+				}
+			} else {
+				InterfaceAppliController.showMsgbox(MSGBOX_TITRE,
+						MESSAGE_ERREUR + MSGBOX_LETTRE, false);
+			}
+		}
+		return false;

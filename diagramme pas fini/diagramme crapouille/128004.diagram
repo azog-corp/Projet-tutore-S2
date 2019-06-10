@@ -1,0 +1,60 @@
+format 221
+
+classcanvas 128132 class_ref 128004 // Ordinateur
+  classdiagramsettings member_max_width 0 end
+  xyz 19.9 16 2000
+end
+classcanvas 128260 class_ref 128132 // Pion
+  classdiagramsettings member_max_width 0 end
+  xyz 183 179.3 3005
+end
+classcanvas 128516 class_ref 128260 // Plateau
+  classdiagramsettings member_max_width 0 end
+  xyz 78.5 493.5 3011
+end
+classcanvas 129028 class_ref 128516 // Partie
+  classdiagramsettings member_max_width 0 end
+  xyz 501.3 11 3017
+end
+classcanvas 129412 class_ref 128772 // Configuration
+  classdiagramsettings member_max_width 0 end
+  xyz 492.8 553.5 3011
+end
+relationcanvas 131076 relation_ref 136452 // <unidirectional association>
+  decenter_begin 101
+  from ref 129028 z 3018 to ref 128132
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131460 relation_ref 136836 // <unidirectional association>
+  decenter_begin 639
+  from ref 129028 z 3018 to ref 128260
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131588 relation_ref 136964 // <unidirectional association>
+  from ref 129028 z 3018 to ref 129412
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132228 relation_ref 137348 // <directional composition>
+  decenter_begin 933
+  decenter_end 509
+  from ref 128516 z 3012 to ref 128260
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132612 relation_ref 137476 // <directional composition>
+  decenter_begin 432
+  from ref 129412 z 3012 to ref 128516
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132740 relation_ref 137604 // <directional composition>
+  decenter_begin 239
+  decenter_end 128
+  from ref 128132 z 3012 to ref 128516
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

@@ -1,0 +1,160 @@
+class Plateau
+!!!135044.java!!!	Plateau(inout plateau : Pion [[][]])
+		this.ligneConf = plateau.length;
+		this.colonneConf = plateau[0].length;
+		this.plateau = new Pion[this.ligneConf][this.colonneConf];
+
+		/* On associe les pions du plateau argument dans le nouveau plateau */
+		for (int x = 0 ; x < this.ligneConf ; x++) {
+			for (int y = 0 ; y < this.colonneConf ; y++) {
+				this.plateau[x][y] = plateau[x][y];
+				if (this.plateau[x][y] != null) {
+					this.nbPion++;
+				}
+			}
+		}
+		setBatracien();
+		initBloque();
+!!!135172.java!!!	getPlateau() : Pion
+		return plateau;
+!!!135300.java!!!	getBatracien() : Pion
+		return batracien;
+!!!135428.java!!!	initBloque() : void
+		for (int x = 0 ; x < this.ligneConf ; x++) {
+			for (int y = 0 ; y < this.colonneConf ; y++) {
+				if (this.plateau[x][y] != null) {
+					this.plateau[x][y].setBloque(plateau, this.colonneConf);
+				}
+			}
+		}
+!!!135556.java!!!	setBatracien() : void
+		this.batracien = new Pion[2][this.nbPion/2];
+		int crapaud = 0,
+				grenouille = 0;
+		for (int x = 0 ; x < this.ligneConf ; x++) {
+			for (int y = 0 ; y < this.colonneConf ; y++) {
+				if (this.plateau[x][y] != null && this.plateau[x][y].isCrapaud()) {
+					this.batracien[1][crapaud] = new Pion (x, y, true);
+					/* évite les erreurs. */
+					this.plateau[x][y] = this.batracien[1][crapaud];
+					crapaud++;
+				} else if (this.plateau[x][y] != null && !this.plateau[x][y].isCrapaud()) {
+					this.batracien[0][grenouille] = new Pion (x, y, false);
+					/* évite les erreurs. */
+					this.plateau[x][y] = this.batracien[0][grenouille];
+					grenouille++;
+				}
+			}
+		}
+!!!135684.java!!!	setCase(inout pion : Pion) : void
+		this.plateau[pion.getLigne()][pion.getColonne()] = pion;
+!!!135812.java!!!	movePion(inout pion : Pion) : void
+		/* On enlève le pion du plateau */
+		this.plateau[pion.getLigne()][pion.getColonne()] = null;
+		pion.setColonne(this.plateau, this.colonneConf);
+		/* On remet le pion une fois l'ordonnée modifié */
+		this.plateau[pion.getLigne()][pion.getColonne()] = pion;
+		for (int x = 0 ; x < this.ligneConf ; x++) {
+			if (this.plateau[pion.getLigne()][x] != null) {
+				this.plateau[pion.getLigne()][x].setBloque(this.plateau, this.colonneConf);
+			}
+		}
+!!!135940.java!!!	pionValide(in equipe : int, in ligne : int, in colonne : int) : Pion
+		for (int x = 0 ; x < this.batracien[0].length ; x++) {
+			if (this.batracien[equipe][x].getLigne() == ligne && 
+					this.batracien[equipe][x].getColonne() == colonne &&
+					!this.plateau[ligne][colonne].isBloque()) {
+				return this.batracien[equipe][x];
+			}
+		}
+		return null;
+!!!136068.java!!!	victoire(in equipe : int) : boolean
+		for (int x = 0 ; x < this.batracien[equipe].length ; x++) {
+			// Si un pion n'est pas bloquÃ©, alors c'est faux
+			if (!this.batracien[equipe][x].isBloque()) {
+				return false;
+			}
+		}
+		return true;
+!!!136196.java!!!	victoireCasseTete() : boolean
+		if (!victoire(0) || !victoire(1)) {
+			return false;
+		}
+		int bonPion = 0;
+		/* On vérifie un pion grenouille */
+		for (int x = 0 ; x < this.batracien[0].length ; x++) {
+			/* Si une grenouille se trouve à l'extrémité droite du plateau
+			 * ou sur une colonne adjacente à une autre grenouille.
+			 */
+			/* On vérifie un pion crapaud */
+			if (this.batracien[0][x].getColonne() == this.colonneConf-1 || 
+					this.batracien[0][x].getColonne() == 
+					this.batracien[0][x-1].getColonne()-1) {
+				bonPion++;
+			}
+			/* Si un crapaud se trouve à l'extrémité gauche du plateau
+			 * ou sur une colonne adjacente à un autre crapaud.
+			 */
+			if (this.batracien[1][x].getColonne() == 0 || 
+					this.batracien[1][x].getColonne() == 
+					this.batracien[1][x-1].getColonne()+1) {
+				bonPion++;
+			}
+		}
+		return bonPion == this.nbPion;
+!!!136324.java!!!	plateauEstValide(inout plateau : Pion [[][]]) : boolean
+		boolean noCrapaud = false;
+		boolean noGrenouille = false;
+		int nbCrapaud = 0,
+				nbGrenouille = 0;
+		if (plateau.length > 20 || plateau[0].length > 20 ||
+				plateau.length == 1 || plateau[0].length == 1) {
+			return false;
+		}
+		for (int ligne = 0 ; ligne < plateau.length ; ligne++) {
+			if (noCrapaud || noGrenouille) {
+				return false;
+			}
+			noCrapaud = noGrenouille = true;
+			for (int colonne = 0 ; colonne < plateau[0].length ; colonne++) {
+				if (plateau[ligne][colonne] != null && plateau[ligne][colonne].isCrapaud()) {
+					nbCrapaud++;
+					noCrapaud = false;
+				}
+				if (plateau[ligne][colonne] != null && !plateau[ligne][colonne].isCrapaud()) {
+					nbGrenouille++;
+					noGrenouille = false;
+				}
+			}
+		}
+		return nbCrapaud == nbGrenouille && nbCrapaud > 0;
+!!!136452.java!!!	toString() : String
+		StringBuilder plateauString = new StringBuilder();
+		plateauString.append("   | ");
+		for (int z = 0 ; z < this.colonneConf ; z++) {
+			if (z+1 < 10) {
+				plateauString.append(z+1 + " | ");
+			} else {
+				plateauString.append(z+1 + "| ");
+			}
+		}
+		for (int x = 0 ; x < this.ligneConf ; x++) {
+			/* Permet d'harmonisé l'affichage */
+			if (x+1 < 10) {
+				plateauString.append("\n" + (x+1) + "  |");
+			} else {
+				plateauString.append("\n" + (x+1) + " |");
+			}
+			for (int y = 0 ; y < this.colonneConf ; y++) {
+				if (this.plateau[x][y] != null) {
+					if (this.plateau[x][y].isCrapaud()) {
+						plateauString.append(" C |");
+					} else if (!this.plateau[x][y].isCrapaud()) {
+						plateauString.append(" G |");
+					}
+				} else {
+					plateauString.append("   |");
+				}
+			}
+		}
+		return plateauString.toString();

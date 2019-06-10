@@ -1,7 +1,7 @@
 format 221
 "diagramme crapouille"
-  revision 1
-  modified_by 4 "maell"
+  revision 2
+  modified_by 4 "Maël"
 
 
   
@@ -44,4 +44,5 @@ format 221
 
   mark_for_import
   
+  package_ref 128004 // diag.png
 end
