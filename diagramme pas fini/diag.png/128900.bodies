@@ -1,0 +1,17 @@
+class GestionPartieInterface
+!!!137476.java!!!	start(in primaryStage : Stage) : void
+		try {
+			primaryStage.initStyle(StageStyle.UNDECORATED);
+			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource(CHEMINFXML));
+			Scene scene = new Scene(root, HAUTEUR, LARGEUR);
+			scene.getStylesheets().add(getClass().getResource(CHEMIN).toExternalForm());
+			primaryStage.setScene(scene);
+			primaryStage.setResizable(false);
+			primaryStage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+!!!137604.java!!!	main(in args : String [[]]) : void
+		Configuration.initConfig();
+		launch(args);
+		Configuration.saveConfig();

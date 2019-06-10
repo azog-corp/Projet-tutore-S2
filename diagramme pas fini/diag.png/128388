@@ -1,0 +1,2455 @@
+format 221
+"interfaceFx" // crapouille::interfaceFx
+  revision 1
+  modified_by 4 "maell"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "C:\\Users\\maell\\Desktop\\crapouille/interfaceFx/"
+  java_package "crapouille.interfaceFx"
+  classview 128388 "interfaceFx"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 128900 "GestionPartieInterface"
+      visibility public stereotype "Interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "A compléter.
+@author Azog
+
+"
+      classrelation 129412 // <generalisation>
+	relation 129412 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 129412 // <generalisation>
+	  b parent class_ref 129028 // Application
+      end
+
+      attribute 133764 "CHEMIN"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"/crapouille/\"
+			+ \"interfaceFx/application.css\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Chemin des ressources.
+
+"
+      end
+
+      attribute 133892 "CHEMINFXML"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"/crapouille/\"
+			+ \"interfaceFx/interfaceAppli.fxml\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 134020 "HAUTEUR"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 519"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Dimension de l'interface.
+
+"
+      end
+
+      attribute 134148 "LARGEUR"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 606"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Dimension de l'interface.
+
+"
+      end
+
+      operation 137476 "start"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "primaryStage" explicit_type "Stage"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment "test.
+"
+      end
+
+      operation 137604 "main"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param in name "args" explicit_type "String"
+	multiplicity "[]"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0}[] ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Main principal.
+@param args non utilisés
+"
+      end
+
+      classrelation 129668 // <unidirectional association>
+	relation 129668 --->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 129668 // <unidirectional association>
+	  b parent class_ref 129156 // InterfaceAppliController
+      end
+    end
+
+    class 129156 "InterfaceAppliController"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      associated_diagram classdiagram_ref 128004 // bllj
+      attribute 134276 "MSGBOX_TITRE"
+	class_attribute const_attribute package explicit_type "String"
+	init_value " \"Crapauds & Grenouilles\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 134404 "MSGBOX_TYPE"
+	class_attribute const_attribute package explicit_type "String"
+	init_value " \"Type non valide\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 134532 "MSGBOX_LETTRE"
+	class_attribute const_attribute package explicit_type "String"
+	init_value " \"Les lettres ne sont pas acceptées\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 134660 "MSGBOX_NOMBRE"
+	class_attribute const_attribute package explicit_type "String"
+	init_value " \"Nombre trop grand ou trop petit vérifier votre saisieMSG\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 134788 "MSGBOX_VIDE"
+	class_attribute const_attribute package explicit_type "String"
+	init_value " \"Ne doit pas être vide\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 134916 "MSBOX_CONFIG"
+	class_attribute const_attribute package explicit_type "String"
+	init_value " \"La configuration ne peut pas être vide\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135044 "MSGBOX_ENREGISTREE"
+	class_attribute const_attribute package explicit_type "String"
+	init_value " \"Votre modification a bien été enregistrée\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135172 "MSGBOX_NONVALIDE_CONF"
+	class_attribute const_attribute package explicit_type "String"
+	init_value " \"La configuration que vous avez entree n'est pas valide\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135300 "MESSAGE_ERREUR"
+	class_attribute const_attribute package explicit_type "String"
+	init_value " \"Les informations rentrés sont invalides : \""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135428 "REGLE_DU_JEU"
+	class_attribute const_attribute package explicit_type "String"
+	init_value " \"LES RÈGLES DU JEU : COMMENT JOUER \"
+			+ \"AU JEU DES GRENOUILLES ET DES CRAPAUDS ?\\n\"
+			+ \"Comment se déroule une partie ?\\n\"
+			+ \"L'objectif de notre jeu est de bloquer les pions de son adversaire, \" 
+			+ \"sur toutes les lignes présentent sur le plateaux de jeu.\\n\"
+			+ \"Le plateau :\\n\"
+			+ \"Un plateau est composé de n-lignes et de n-colonnes, \" 
+			+ \"dans notre application, \"
+			+ \"le nombres de lignes et de colonnes seront limitées à 20.\"
+			+ \"Il sera possible pour le joueur de créer, sauvegarder, modifier\" 
+			+ \"ou supprimer une configuration.\"
+			+ \"La configuration permet au joueur de choisir le placement des \"
+			+ \"différents pions sur le plateau.\"
+			+ \"Il faut savoir, la configuration qui la choisit sera possible \" 
+			+ \"d'être joué en mode :\\n\"
+			+ \"    - Joueur Vs Joueur\\n\"
+			+ \"    - Casse-tête\\n\"
+			+ \"    - Joueur Vs Ordinateur\\n\"
+			+ \"Les pions qui peuvent être choisi pour ce jeu sont :\\n\"
+			+ \"    - Grenouille\\n\"
+			+ \"    - Crapaud\\n\"
+			+ \"Déroulement d'une partie de grenouilles et crapauds :\\n\"
+			+ \" - Pour une partie de Joueur Vs Joueur.\" 
+			+ \"Le nombre de joueur pour ce mode de jeu est limité à 2, \"
+			+ \"chaque joueur joue à tour de rôle et a la possibilité \"
+			+ \"de créer le nom de son équipe.\"
+			+ \"Il faut savoir que ce sera toujours les grenouilles qui commenceront et \"
+			+ \"ensuite c'est au tour des crapauds de jouer.\"
+			+ \"Chaque tour, le joueur concerné doit choisir un pion à déplacer.\"
+			+ \"La partie s'arrête quand un joueur de l'équipe des grenouilles et des \"
+			+ \"crapauds ne peut plus effectuer le déplacement d'un pion sur au moins une \"
+			+ \"ligne du plateau.\"
+			+ \"Lors de la fin de la partie une fenêtre VICTOIRE s'affiche \"
+			+ \"avec le nom de l'équipe gagnante.\\n\"
+			+ \" - Pour une partie de Casse-tête\\n\"
+			+ \"Le nombre de joueur pour ce mode de jeu est limité à 1, \"
+			+ \"le joueur peut déplacer les deux équipes, \"
+			+ \"c'est-à-dire les grenouilles et crapauds.\\n\"
+			+ \"Il a la possibilité de déplacer une grenouille ou un crapaud \"
+			+ \"selon la situation souhaitée et peut créer le nom de son équipe.\\n\"
+			+ \"On gagne quand le joueur arrive à amener toutes les grenouilles à droite \" 
+			+ \"et tous les crapauds à gauche du plateau.\\n\"
+			+ \"A la fin de la partie la fenêtre VICTOIRE s'affiche.\\n\"
+			+ \" - Pour une partie de Joueur Vs Ordinateur\\n\"
+			+ \"Le nombre de joueur pour ce mode de jeu est limité à 1, \"
+			+ \"le joueur joue à tour de rôle avec l'ordinateur.\\n\"
+			+ \"La possibilité de créer un nom de d'équipe est toujours possible.\\n\"
+			+ \"Le déroulement de la partie de Joueur Vs Ordinateur se déroule dans le \"
+			+ \"même sens que le mode Joueur Vs Joueur, \"
+			+ \"c'est-à-dire que le joueur commence, \"
+			+ \"puis c'est au tour de l'ordinateur et ainsi de suite.\\n\"
+			+ \"Enfin, pour gagner la partie, il suffit de bloquer les pions de l'ordinateur \"  
+			+ \"sur chaque lignes du plateau.\\n\"
+			+ \"Bien sûr, à la fin de la partie la fenêtre VICTOIRE s'affichera.\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135556 "backpanel"
+	private explicit_type "AnchorPane"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Fond de l'appli qui ontient toutes 
+les autres pages de l'application
+
+ Fond de l'appli qui ontient toutes 
+les autres pages de l'application
+"
+      end
+
+      attribute 135684 "score"
+	private explicit_type "AnchorPane"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Page d'affichage des scores
+ Page d'affichage des scores"
+      end
+
+      attribute 135812 "nomMVP"
+	private explicit_type "Label"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Affiche le nom du meilleur joueur 
+Page MVP
+
+ Affiche le nom du meilleur joueur 
+Page MVP
+"
+      end
+
+      attribute 135940 "scoreMVP"
+	private explicit_type "Text"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Meilleur score obtenu
+Page MVP
+
+ Meilleur score obtenu
+Page MVP
+"
+      end
+
+      attribute 136068 "settingsBar"
+	private explicit_type "AnchorPane"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Contient les boutons pour naviguer entre les pages
+(Barre contenant les icones)
+
+
+Contient les boutons pour naviguer entre les pages
+(Barre contenant les icones)
+"
+      end
+
+      attribute 136196 "btn_createur"
+	private explicit_type "ImageView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Image pour naviguer vers la page createur
+Page Settings Bar icone Utilisateur
+
+
+Image pour naviguer vers la page createur
+Page Settings Bar icone Utilisateur
+"
+      end
+
+      attribute 136324 "btn_acceuil"
+	private explicit_type "ImageView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Image pour naviguer vers le menu principal
+Page Settings Bar icone Play
+
+
+Image pour naviguer vers le menu principal
+Page Settings Bar icone Play
+"
+      end
+
+      attribute 136452 "btn_quitter"
+	private explicit_type "ImageView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Image pour quitter l'application
+Page Settings Bar icone Croix
+
+
+Image pour quitter l'application
+Page Settings Bar icone Croix
+"
+      end
+
+      attribute 136580 "btn_mvp"
+	private explicit_type "ImageView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Image pour naviguer vers la page MVP
+Page Settings Bar icone personne
+
+
+Image pour naviguer vers la page MVP
+Page Settings Bar icone personne
+"
+      end
+
+      attribute 136708 "btn_configuration"
+	private explicit_type "ImageView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Image pour naviguer vers la page de choix pour les configurations
+Page Settings Bar de roue dentee
+
+
+Image pour naviguer vers la page de choix pour les configurations
+Page Settings Bar de roue dentee
+"
+      end
+
+      attribute 136836 "createur"
+	private explicit_type "AnchorPane"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Page contenant les informations sur les createurs
+
+
+Page contenant les informations sur les createurs
+"
+      end
+
+      attribute 136964 "menu"
+	private explicit_type "AnchorPane"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Menu principal et premiere page du jeu
+
+
+Menu principal et premiere page du jeu
+"
+      end
+
+      attribute 137092 "btn_jouermenu"
+	private explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Bouton sur le menu Principal
+Permettant a l'utilisateur de naviguer vers 
+la page configurationPartie
+
+
+Bouton sur le menu Principal
+Permettant a l'utilisateur de naviguer vers 
+la page configurationPartie
+"
+      end
+
+      attribute 137220 "btn_aidemenu"
+	private explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Bouton sur le menu Principal
+Permettant d'afficher des aides
+
+
+Bouton sur le menu Principal
+Permettant d'afficher des aides
+"
+      end
+
+      attribute 137348 "btn_quittermenu"
+	private explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Bouton sur le menu Principal
+Pour quitter l'application
+
+
+Bouton sur le menu Principal
+Pour quitter l'application
+"
+      end
+
+      attribute 137476 "configurationPartie"
+	private explicit_type "AnchorPane"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Page permettant a l'utilisateur de parametrer sa partie
+
+
+Page permettant a l'utilisateur de parametrer sa partie
+"
+      end
+
+      attribute 137604 "confirmationJouer"
+	private explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Page Configuration Partie
+Lorsque l'utilisateur clique sur ce bouton verifie toutes ses entrees
+et appel la fonction affichant le plateau de jeu
+
+
+Page Configuration Partie
+Lorsque l'utilisateur clique sur ce bouton verifie toutes ses entrees
+et appel la fonction affichant le plateau de jeu
+"
+      end
+
+      attribute 137732 "lb_lvlIa"
+	private explicit_type "Label"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Label affichant le choix a l'utilisateur
+\"Chosir difficultee IA\"
+
+
+Label affichant le choix a l'utilisateur
+\"Chosir difficultee IA\"
+"
+      end
+
+      attribute 137860 "labelIA"
+	private explicit_type "Label"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Titre de section page configurationPartie
+
+
+Titre de section page configurationPartie
+"
+      end
+
+      attribute 137988 "lb_nomJ1"
+	private explicit_type "Label"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Indication page configurationPartie
+Invitant l'utilisateur a rentrer un nom d'equipe
+
+
+Indication page configurationPartie
+Invitant l'utilisateur a rentrer un nom d'equipe
+"
+      end
+
+      attribute 138116 "lb_nomJ2"
+	private explicit_type "Label"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Indication page configurationPartie
+Invitant l'utilisateur a rentrer un nom d'equipe
+
+
+Indication page configurationPartie
+Invitant l'utilisateur a rentrer un nom d'equipe
+"
+      end
+
+      attribute 138244 "chk_vsIA"
+	private explicit_type "CheckBox"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Check Box definissant si le joueur veut jouer contre l'IA
+Si elle est cochee fait apparaitre les elements de l'IA
+
+
+Check Box definissant si le joueur veut jouer contre l'IA
+Si elle est cochee fait apparaitre les elements de l'IA
+"
+      end
+
+      attribute 138372 "lvl1"
+	private explicit_type "RadioButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "RadioButton Si coche l'utilisateur souhaite jouer contre IA lvl1
+
+
+RadioButton Si coche l'utilisateur souhaite jouer contre IA lvl1
+"
+      end
+
+      attribute 138500 "lvlIA"
+	private explicit_type "ToggleGroup"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Group contenant tous les radio buttons des IA
+pour permettre de n'avoir qu'un seul bouton coche
+
+
+Group contenant tous les radio buttons des IA
+pour permettre de n'avoir qu'un seul bouton coche
+"
+      end
+
+      attribute 138628 "lvl2"
+	private explicit_type "RadioButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "RadioButton Si coche l'utilisateur souhaite jouer contre IA lvl2
+
+
+RadioButton Si coche l'utilisateur souhaite jouer contre IA lvl2
+"
+      end
+
+      attribute 138756 "lvl3"
+	private explicit_type "RadioButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "RadioButton Si coche l'utilisateur souhaite jouer contre IA lvl3
+
+
+RadioButton Si coche l'utilisateur souhaite jouer contre IA lvl3
+"
+      end
+
+      attribute 138884 "tb_nomJ2"
+	private explicit_type "TextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "TextField dans lequel l'utilisateur rentre le nom J2
+
+
+TextField dans lequel l'utilisateur rentre le nom J2
+"
+      end
+
+      attribute 139012 "tb_nomJ1"
+	private explicit_type "TextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "TextField dans lequel l'utilisateur rentre le nom J1
+
+
+TextField dans lequel l'utilisateur rentre le nom J1
+"
+      end
+
+      attribute 139140 "retourMenu"
+	private explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Bouton pour revenir au menu
+
+
+Bouton pour revenir au menu
+"
+      end
+
+      attribute 139268 "chk_casseT"
+	private explicit_type "CheckBox"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "CheckBox si coche le joueur souhaite faire un casse tete
+Sinon souhaite faire un versus
+
+
+CheckBox si coche le joueur souhaite faire un casse tete
+Sinon souhaite faire un versus
+"
+      end
+
+      attribute 139396 "choixConfig"
+	private explicit_type "TextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Text Field contient la configuration choisie par l'utilisateur
+
+
+Text Field contient la configuration choisie par l'utilisateur
+"
+      end
+
+      attribute 139524 "listeConfigDispo"
+	private explicit_type "Label"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Label affichant les configs disponible a l'utilisateur
+
+
+Label affichant les configs disponible a l'utilisateur
+"
+      end
+
+      attribute 139652 "configuration"
+	private explicit_type "AnchorPane"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Anchor pane conteanntr tous les autres anchor pane
+Permettant d'ajouter / supprimer une config
+
+
+Anchor pane conteanntr tous les autres anchor pane
+Permettant d'ajouter / supprimer une config
+"
+      end
+
+      attribute 139780 "initialisationConfig"
+	private explicit_type "AnchorPane"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Page permettant l'initialisation de la creation d'une nouvelle config
+
+
+Page permettant l'initialisation de la creation d'une nouvelle config
+"
+      end
+
+      attribute 139908 "tb_nomConf"
+	private explicit_type "TextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "TextField recuperant le nom de la configuration que veut creer l'utilisateur
+
+
+TextField recuperant le nom de la configuration que veut creer l'utilisateur
+"
+      end
+
+      attribute 140036 "tb_nbLigneConf"
+	private explicit_type "TextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "TextField recuperant le nombre de ligne de 
+la configuration que veut creer l'utilisateur
+
+
+TextField recuperant le nombre de ligne de 
+la configuration que veut creer l'utilisateur
+"
+      end
+
+      attribute 140164 "btn_validerTaille"
+	private explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Bouton permettant d'appeller toutes les fonctions de verification
+ainsi que de les fonctiosn pour passer a la page de palcement des 
+pions
+
+
+Bouton permettant d'appeller toutes les fonctions de verification
+ainsi que de les fonctiosn pour passer a la page de palcement des 
+pions
+"
+      end
+
+      attribute 140292 "tb_nbColonneConf"
+	private explicit_type "TextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "TextField recuperant le nombre de colonne de 
+la configuration que veut creer l'utilisateur
+
+
+TextField recuperant le nombre de colonne de 
+la configuration que veut creer l'utilisateur
+"
+      end
+
+      attribute 140420 "choixConf"
+	private explicit_type "AnchorPane"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Page d'acceuil de configuration permettant de choisir
+Entre supprimer et ajouteyr config
+
+
+Page d'acceuil de configuration permettant de choisir
+Entre supprimer et ajouteyr config
+"
+      end
+
+      attribute 140548 "btn_ajouterConf"
+	private explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Button pour se rendre dans la categorie pour ajouter des configs
+
+
+Button pour se rendre dans la categorie pour ajouter des configs
+"
+      end
+
+      attribute 140676 "btn_supprimerConf"
+	private explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Button pour se rendre dans la categorie pour Supprimer des configs
+
+
+Button pour se rendre dans la categorie pour Supprimer des configs
+"
+      end
+
+      attribute 140804 "placementConfig"
+	private explicit_type "AnchorPane"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "page de palcement des pions dans la configuration en cours de creation 
+
+
+page de palcement des pions dans la configuration en cours de creation 
+"
+      end
+
+      attribute 140932 "afficherConfig"
+	private explicit_type "Label"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Affiche la config en cours de creation a l'utilisateur 
+
+
+Affiche la config en cours de creation a l'utilisateur 
+"
+      end
+
+      attribute 141060 "tb_cordLigne"
+	private explicit_type "TextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Textfield contenant la ligne sur laquelle le joueur
+Entre le numero de la ligne sur laquelle il souhaite
+Ajouter un pion
+
+
+Textfield contenant la ligne sur laquelle le joueur
+Entre le numero de la ligne sur laquelle il souhaite
+Ajouter un pion
+"
+      end
+
+      attribute 141188 "btn_validerConfig"
+	private explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Bouton page placement des pions
+Lorsque l'utilisateur clique dessu verifie que tous est valide
+et enregsitre la configuration
+
+
+Bouton page placement des pions
+Lorsque l'utilisateur clique dessu verifie que tous est valide
+et enregsitre la configuration
+"
+      end
+
+      attribute 141316 "btn_AjouterPion"
+	private explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Button page placement pion
+Appel les fonctions pour verifier que les entrees de l'utilisateur sont correctes
+Si correctes ajoute le pion au plateau sinon en informe lutilisateur
+
+
+Button page placement pion
+Appel les fonctions pour verifier que les entrees de l'utilisateur sont correctes
+Si correctes ajoute le pion au plateau sinon en informe lutilisateur
+"
+      end
+
+      attribute 141444 "tb_cordColonne"
+	private explicit_type "TextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Textfield contenant la ligne sur laquelle le joueur
+Entre le numero de la ligne sur laquelle il souhaite
+Ajouter un pion
+
+
+Textfield contenant la ligne sur laquelle le joueur
+Entre le numero de la ligne sur laquelle il souhaite
+Ajouter un pion
+"
+      end
+
+      attribute 141572 "btn_SupprimerPion"
+	private explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Button page placement pion
+Appel les fonctions pour verifier que les entrees de l'utilisateur sont correctes
+Si correctes supprime le pion du plateau sinon en informe lutilisateur
+
+
+Button page placement pion
+Appel les fonctions pour verifier que les entrees de l'utilisateur sont correctes
+Si correctes supprime le pion du plateau sinon en informe lutilisateur
+"
+      end
+
+      attribute 141700 "tb_cordType"
+	private explicit_type "TextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Textfield contenant le type du pion que 
+ le joueur souhaite ajouter
+
+
+Textfield contenant le type du pion que 
+ le joueur souhaite ajouter
+"
+      end
+
+      attribute 141828 "supprimerConf"
+	private explicit_type "AnchorPane"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Page pour supprimer une config
+
+
+Page pour supprimer une config
+"
+      end
+
+      attribute 141956 "btn_supprimerConfig"
+	private explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Button declanchant la suppression d'une config 
+si les entrees de l'utilisateur sont correctes
+
+
+Button declanchant la suppression d'une config 
+si les entrees de l'utilisateur sont correctes
+"
+      end
+
+      attribute 142084 "tb_idConf"
+	private explicit_type "TextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Id de la config a supprimer
+Que l'uti rentre dans le textfield
+
+
+Id de la config a supprimer
+Que l'uti rentre dans le textfield
+"
+      end
+
+      attribute 142212 "configAdel"
+	private explicit_type "Label"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Liste des configurations possibles a la suppressions
+
+
+Liste des configurations possibles a la suppressions
+"
+      end
+
+      attribute 142340 "gameBoard"
+	private explicit_type "AnchorPane"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "AnchorPane contenant toutes les pages correspodant
+A une partie en cours 
+
+
+AnchorPane contenant toutes les pages correspodant
+A une partie en cours 
+"
+      end
+
+      attribute 142468 "defaite"
+	private explicit_type "AnchorPane"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "NON  UTILISE
+Page affiche lorsque l'utilisateur perd
+
+
+NON  UTILISE
+Page affiche lorsque l'utilisateur perd
+"
+      end
+
+      attribute 142596 "victoire"
+	private explicit_type "AnchorPane"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Page pour afficher lequipe remportant la partie
+
+
+Page pour afficher lequipe remportant la partie
+"
+      end
+
+      attribute 142724 "lb_nomEquipeGagnante"
+	private explicit_type "Label"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Label contenant le nom de lequipe remportant la partie
+
+
+Label contenant le nom de lequipe remportant la partie
+"
+      end
+
+      attribute 142852 "jeuEnCours"
+	private explicit_type "AnchorPane"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Page d'affichage du jeu lorsque l'utilisateur joue
+
+
+Page d'affichage du jeu lorsque l'utilisateur joue
+"
+      end
+
+      attribute 142980 "gameBoardString"
+	private explicit_type "Label"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Label contenant le plateau de jeu en cours 
+
+
+Label contenant le plateau de jeu en cours 
+"
+      end
+
+      attribute 143108 "okGameBoard"
+	private explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Bouton sur la page de jeu
+lorsque l'utilisateur clic dessus verifie les donnees
+Etmet a jour le tableau si correct
+
+
+Bouton sur la page de jeu
+lorsque l'utilisateur clic dessus verifie les donnees
+Etmet a jour le tableau si correct
+"
+      end
+
+      attribute 143236 "entreeLigne"
+	private explicit_type "TextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "TextField qui contient la ligne
+du pion que l'utilisateur veut deplacer
+
+
+TextField qui contient la ligne
+du pion que l'utilisateur veut deplacer
+"
+      end
+
+      attribute 143364 "entreeColonne"
+	private explicit_type "TextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "TextField qui contient la colonne
+du pion que l'utilisateur veut deplacer
+
+
+TextField qui contient la colonne
+du pion que l'utilisateur veut deplacer
+"
+      end
+
+      attribute 143492 "tourDe"
+	private explicit_type "Label"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@FXML
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Label affichant le nom de lequipe 
+qui doit jouer
+
+
+Label affichant le nom de lequipe 
+qui doit jouer
+"
+      end
+
+      operation 137732 "leave"
+	package explicit_return_type "void"
+	nparams 1
+	  param inout name "click" explicit_type "MouseEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment " --------------------------------------------------------
+--------------- FONCTION NAVIGATION MENU --------------- 
+--------------------------------------------------------
+
+
+Si l'utilisateur clique sur l'un des boutons pour quitter l'application
+Appel cette fonction qui ferme l'application
+@param click
+"
+      end
+
+      operation 137860 "reinitialiser"
+	package explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment "Avant de changer de page lorsque l'utilisateur navigue on fait 
+disparaitre toutes les autres pages avant de faire apparaitre celle 
+demandee par l'utilisateur
+"
+      end
+
+      operation 137988 "showMVP"
+	package explicit_return_type "void"
+	nparams 1
+	  param inout name "Click" explicit_type "MouseEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment "Appel la fonction pour faire disparaitre toutes les autres pages
+affiche la page qui affiche a l'utilisateur la personne qui
+possede le record sur le casse tete
+@param Click
+"
+      end
+
+      operation 138116 "showRegle"
+	package explicit_return_type "void"
+	nparams 1
+	  param inout name "Click" explicit_type "MouseEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment "Affiche les regles
+@param Click 
+"
+      end
+
+      operation 138244 "showCreateur"
+	package explicit_return_type "void"
+	nparams 1
+	  param inout name "Click" explicit_type "MouseEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment "Affiche la page des createurs apres avoir fait disparaitre 
+toutes les autres
+@param Click
+"
+      end
+
+      operation 138372 "showMenu"
+	package explicit_return_type "void"
+	nparams 1
+	  param inout name "Click" explicit_type "MouseEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment "Affiche le menu principal de l'application
+Et cache toutes les autres pages
+@param Click
+"
+      end
+
+      operation 138500 "showConfigurationPartie"
+	package explicit_return_type "void"
+	nparams 1
+	  param inout name "Click" explicit_type "MouseEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment "Affiche la page de la configuration de la partie 
+Reinitialise les elements de la page pour eviter de memoriser
+Si l'utilisateur a deja fait uen partie
+@param Click
+"
+      end
+
+      operation 138628 "showConfiguration"
+	package explicit_return_type "void"
+	nparams 1
+	  param inout name "Click" explicit_type "MouseEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment "Affiche la premiere page de la section de configuration
+ presentant le menu qui permet a l'utilisateur
+de choisir entre supprimer et ajouter des configurations
+lorsque celui ci clic sur la section configuration
+@param Click clic de l'utilisateur declanchant l'appel de la fonction
+"
+      end
+
+      operation 138756 "verificationCheck"
+	package explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment "Fonction qui verifie si la case IA est check
+Si cest le cas appel la fonction appel la fonction caseIaCheck
+Qui fait disparaitre tous les élements liés a l'IA et affiche 
+la case pour entrer le nom du deuxieme joueur
+Sinon fait linverse fait apparaitre les elements de l'IA 
+et fait disparaitre la case du nom pour le J2
+"
+      end
+
+      operation 138884 "verificationModeJeu"
+	package explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment "Fonction qui verifie le mode de jeu selectionnee par l'utilisateur
+Si celui si est casse tete appel les fonctions pour faire disparaitre
+les elements correspondant a l'IA et la possibilitee d'entrer un nom de J2
+sinon fait l'inverse
+"
+      end
+
+      operation 139012 "versusConf"
+	package explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment "Dans le cas ou l'utilisateur souhaite faire une partie en versus
+fait apparaitre l'IA et le J2
+"
+      end
+
+      operation 139140 "razIa"
+	package explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Fonction qui décoche toutes les radio button correspondant a l'IA
+"
+      end
+
+      operation 139268 "casseTeteConf"
+	package explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment "Lorsque l'utilisateur decide de faire un casse tete
+cache les elements de l'IA qui sont donc plus necessaire
+cache les elements du J2 qui sont eux aussi devenu non necessaire
+remet a zero les elements de l'Ia pour que si l'utilisateur
+change d'avis celle si soit remise a defaut
+"
+      end
+
+      operation 139396 "cacherJ2"
+	package explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment "Cache les elements du J2.
+(Label / text Field)
+"
+      end
+
+      operation 139524 "razPartie"
+	package explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment "Remet tous les éléments de la page configurationPartie par defaut
+deselectionne les checkbox et lance une fonction qui permet
+de remettre la configuration par defaut
+(comme les checkbox ne sont pas coche considere que l'utilisateur 
+souhaite faire un versus contre un deuxieme joueur
+"
+      end
+
+      operation 139652 "cacherIa"
+	package explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment "Fonction qui cache les éléments de l'IA
+Label et TextField
+"
+      end
+
+      operation 139780 "caseIaPasCheck"
+	package explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment "Fonction qui cache tous les elements lies a l'IA et affiche
+tous les elements de J2
+"
+      end
+
+      operation 139908 "caseIaCheck"
+	package explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment "Si la case IA est coché
+affiche les différents radio button qui définissent le niveau de l'ordinateur
+et coche par défaut le niveau 1
+Cache aussi les éléments du J2 car ceux ci ne sont plus nécessaires
+dans le cas d'une partie contre un ordi
+"
+      end
+
+      operation 140036 "showGameBoard"
+	package explicit_return_type "void"
+	nparams 1
+	  param inout name "Click" explicit_type "MouseEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment "Si la config rentré par l'utilisateur est correct
+Si c'est le cas appel des fonction qui récupère :
+L'adversaire voulut, le mode de jeu, les noms des équipes s'il n'y en 
+a pas affecte un nom par défaut, la configuration
+Puis affiche le plateau de jeu
+@param Click
+"
+      end
+
+      operation 140164 "actualiserJeu"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "Click" explicit_type "MouseEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment "Lorsque le joueur est entrain de jouer une partie
+vérifie que toutes les entrées de l'utilisateur sont correctes
+Si c'est le cas appel la fonction pour deplacer le pion
+et met a jour l'affichage
+@param Click
+"
+      end
+
+      operation 140292 "afficherNomEquipe"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Affiche le nom de l'equipe qui doit jouer sur le plateau de jeu
+"
+      end
+
+      operation 140420 "afficherGagnant"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Affiche le nom du gagnant lorsque le jeu se termine
+"
+      end
+
+      operation 140548 "recupModeJeu"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Recupere le mode de jeu celon se que l'utilisateur a selectionnee
+Et le defini dans le fichier Partie
+"
+      end
+
+      operation 140676 "recupNomEquipe"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Recupere le nom des equipes et appel les fonctions 
+definissent les attributs dans Partie
+"
+      end
+
+      operation 140804 "recupAdversaire"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Recupere l'adversaire choisi par l'utilisateur
+Et modifie la variable definissant l'adversaire dans la classe Partie
+(Verifie si l'utilisateur souhaite jouer contre une ia et son niveau
+sinon defini l'adversaire comme etant humain)
+"
+      end
+
+      operation 140932 "rafraichirJeu"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "plateauJeu" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Met a jour le label affichant le plateau de jeu
+Apres action de l'utilisateur
+@param plateauJeu contient le nouveau tableau de jeu sous la forme
+dun String
+"
+      end
+
+      operation 141060 "razConfig"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " ------------------------------------------------------
+--------------- FONCTION CONFIGURATION --------------- 
+------------------------------------------------------
+
+--------------- FONCTION CONFIGURATION: TRAITEMENT DONNEES / AVANCEMENT  ---------------
+ Remet a zero tous les elements de la page de creation
+de configuration a 0
+"
+      end
+
+      operation 141188 "configInitialisation"
+	package explicit_return_type "void"
+	nparams 1
+	  param inout name "Click" explicit_type "MouseEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment "Fonction qui est declenche lorsque l'utilisateur souhaite acceder 
+au plateau pour le placement des pions lors de la creation d'une config
+Celle ci verifie que toutes les donnees rentre par l'utilisateur 
+sont correct si se n'est pas le cas reste sur la page actuelle
+@param Click clic de l'utilisateur declanchant l'appel de la fonction
+"
+      end
+
+      operation 141316 "ajoutPionConfig"
+	package explicit_return_type "void"
+	nparams 1
+	  param inout name "Click" explicit_type "MouseEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment "Recupere les coordonnees rentre par l'utilisateur lors de la creation 
+de la config. Puis verifie leur validite (Type,taille,position...)
+Si toutes les donnees sont valides ajoute au plateau le pion demander
+par l'utilisateur. Puis actualise le plateau sur l'interface
+Pour afficher le changement
+@param Click clic de l'utilisateur declanchant l'appel de la fonction
+"
+      end
+
+      operation 141444 "supprimerPionConfig"
+	package explicit_return_type "void"
+	nparams 1
+	  param inout name "Click" explicit_type "MouseEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment " Cette fonction sera executé lorsque que l'utilisateur 
+souhaite supprimer un des piosn qu'il a positionné sur le plateau
+@param Click
+"
+      end
+
+      operation 141572 "deleteConfig"
+	package explicit_return_type "void"
+	nparams 1
+	  param inout name "Click" explicit_type "MouseEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment "Fonction qui supprime une des configurations enregistrées
+-> Si toutes les entrées de l'utilisateur sont correctes
+@param Click
+"
+      end
+
+      operation 141700 "enregistrerConfig"
+	package explicit_return_type "void"
+	nparams 1
+	  param inout name "Click" explicit_type "MouseEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment "Fonction qui enregistre la configuration lorsque l'utilisateur souhaite
+l'enregistrer. (La sauvegarde dans la liste des configuration)
+Se declanche lorsque l'utilisateur clic sur le bouton valider
+Sur la page de placement des pions dans configuration
+@param Click clic de l'utilisateur declanchant l'appel de la fonction
+"
+      end
+
+      operation 141828 "recupNomConf"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Recupere le nom que l'utilisateur a entre dans la textBox de creation de 
+configuration si il est vide prend la valeur defaut
+(remplacera donc la configuration par defaut)
+@return nom Le nom de la configuration qui sera cree
+"
+      end
+
+      operation 141956 "rafraichirConf"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "plateauJeu" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "--------------- FONCTION CONFIGURATION: TRAITEMENT INTERFACE  ---------------
+
+Actualise le label affichant le plateau sur l'interface
+@param plateauJeu Plateau de la configuration converti en String
+"
+      end
+
+      operation 142084 "showInitialisationConfig"
+	package explicit_return_type "void"
+	nparams 1
+	  param inout name "Click" explicit_type "MouseEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment "Lorsque l'utilisateur arrivera sur la page configuration
+Il aura le choix entre Supprimer ou ajouter des configs
+S'il choisi d'ajouter des configs cette fonction
+s'executera et fera disparaitre le menu,et les autres pages indesirables
+"
+      end
+
+      operation 142212 "showSupprimerConfig"
+	package explicit_return_type "void"
+	nparams 1
+	  param inout name "Click" explicit_type "MouseEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment "Fonction qui affiche la page supprimer config
+et qui affiche toutes les configurations actuellement crées
+@param Click
+"
+      end
+
+      operation 142340 "showCreationConfig"
+	package explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@FXML
+"
+	
+	
+	
+	comment "Lorsque l'utilisateur clic sur valider apres avoir
+entree le nom de la configuration ainsi que le nombre de ligne/colonne
+et que les informations est toutes etaient valides precedemment
+affiche la page de placement des pions sur la config en creation
+"
+      end
+
+      operation 142468 "showMsgbox"
+	class_operation public explicit_return_type "void"
+	nparams 3
+	  param in name "titreFenetre" explicit_type "String"
+	  param in name "texteFenetre" explicit_type "String"
+	  param inout name "typeFenetre" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " ------------------------------------------------------
+--------------- FONCTION DE CONTRÔLE D'ERREUR / FORMAT / VALIDITE--------------- 
+------------------------------------------------------
+
+--------------- FONCTION AFFICHAGE ERREUR  ---------------
+
+Affiche les messages voulu dans des message box a l'utilisateur
+@param titreFenetre Le titre de la messagebox
+@param texteFenetre Le meesage a afficher a l'utilisateur
+@param typeFenetre Le type de la fenetre false pour erreur 
+											true pour information
+"
+      end
+
+      classrelation 129540 // <unidirectional association>
+	relation 129540 --->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 129540 // <unidirectional association>
+	  b parent class_ref 128388 // Outils
+      end
+    end
+  end
+
+  deploymentview 128260 "interfaceFx"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 128772 "GestionPartieInterface"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import crapouille.configuration.Configuration;
+import javafx.application.Application;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.fxml.FXMLLoader;
+${definition}"
+      associated_elems
+	class_ref 128900 // GestionPartieInterface
+      end
+      comment "GestionPartieInterface.java
+Azcop 2019, droit d'auteur
+"
+    end
+
+    artifact 128900 "InterfaceAppliController"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.time.LocalDate;
+import crapouille.Outils;
+import crapouille.Partie;
+import crapouille.Plateau;
+import crapouille.configuration.Configuration;
+import javafx.application.Platform;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
+${definition}"
+      associated_elems
+	class_ref 129156 // InterfaceAppliController
+      end
+      comment "interfaceAppliController.java
+Azog-corp 2019, droit d'auteur
+"
+    end
+  end
+end

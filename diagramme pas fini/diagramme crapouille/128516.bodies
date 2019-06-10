@@ -1,0 +1,87 @@
+class Partie
+!!!131588.java!!!	getNbCoups() : int
+		return nbCoups;
+!!!131716.java!!!	setNbCoups(in nbCoupsPartie : int) : void
+		nbCoups = nbCoupsPartie;
+!!!131844.java!!!	getNomEquipe1Defaut() : String
+		return nomEquipe1Defaut;
+!!!131972.java!!!	getNomEquipe2Defaut() : String
+		return nomEquipe2Defaut;
+!!!132100.java!!!	setChoixAdversaire(in choixAdversaire : int) : void
+		Partie.choixAdversaire = choixAdversaire;
+!!!132228.java!!!	getChoixAdversaire() : int
+		return choixAdversaire;
+!!!132356.java!!!	setChoixModeDeJeu(in choixModeDeJeu : int) : void
+		Partie.choixModeDeJeu = choixModeDeJeu;
+!!!132484.java!!!	getChoixModeDeJeu() : int
+		return choixModeDeJeu;
+!!!132612.java!!!	setEquipe1(in equipe : String) : void
+		Partie.equipe[0] = equipe;
+!!!132740.java!!!	setEquipe2(in equipe : String) : void
+		Partie.equipe[1] = equipe;
+!!!132868.java!!!	getEquipe(in tour : int) : String
+		return equipe[tour];
+!!!132996.java!!!	getCurrentPlateau() : Plateau
+		return currentPlateau;
+!!!133124.java!!!	getDepartPartie() : LocalDate
+		return departPartie;
+!!!133252.java!!!	setDepartPartie(inout debut : LocalDate) : void
+		departPartie = debut;
+!!!133380.java!!!	getTourEquipe() : int
+		return tourEquipe;
+!!!133508.java!!!	configToString() : String
+		StringBuilder configString = new StringBuilder();
+		configString.append("    | ");
+		for (int z = 0 ; z < config[0].length ; z++) {
+			if (z+1 < 10) {
+				configString.append(z+1 + " | ");
+			} else {
+				configString.append(z+1 + "| ");
+			}
+		}
+		for (int x = 0 ; x < config.length ; x++) {
+			if (x+1 < 10) {
+				configString.append("\n" + (x+1) + "  |");
+			} else {
+				configString.append("\n" + (x+1) + " |");
+			}
+			for (int y = 0 ; y < config[0].length ; y++) {
+				if (config[x][y] != null) {
+					if (config[x][y].isCrapaud()) {
+						configString.append(" C |");
+					} else if (!config[x][y].isCrapaud()) {
+						configString.append(" G |");
+					}
+				} else {
+					configString.append("   |");
+				}
+			}
+		}
+		return configString.toString();
+!!!133636.java!!!	loadConfig(in choixConfig : int) : void
+		currentPlateau = new Plateau(Configuration.listConfiguration.get(choixConfig).getConfigPlateau());
+		tourEquipe = 0;
+!!!133764.java!!!	tourEntite(in ligne : int, in colonne : int) : Boolean
+		boolean tourFait = false;
+		if (choixModeDeJeu == 1) {
+			if (currentPlateau.pionValide(tourEquipe, ligne, colonne) != null) {
+				currentPlateau.movePion(currentPlateau.pionValide(tourEquipe, ligne, colonne));
+				tourEquipe = tourEquipe == 0 ? 1 : 0;
+				tourFait = true;
+			}
+			Thread.sleep(5500);
+			if (choixAdversaire != 0 && tourFait) {
+				Ordinateur.choixOrdi(currentPlateau, 
+						currentPlateau.getBatracien(), 
+						choixAdversaire);
+				tourEquipe = 0;
+			}
+		} else { 
+			if ((choixModeDeJeu == 0 && currentPlateau.pionValide(0, ligne, colonne) != null)) {
+				currentPlateau.movePion(currentPlateau.pionValide(0, ligne, colonne));
+			}
+			if ((choixModeDeJeu == 0 && currentPlateau.pionValide(0, ligne, colonne) != null)) {
+				currentPlateau.movePion(currentPlateau.pionValide(1, ligne, colonne));
+			}
+		}
+		return tourFait;

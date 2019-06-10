@@ -1,0 +1,265 @@
+class InterfaceAppliController
+!!!137732.java!!!	leave(inout click : MouseEvent) : void
+		Platform.exit(); 
+!!!137860.java!!!	reinitialiser() : void
+		menu.setVisible(false);
+		configurationPartie.setVisible(false);
+		score.setVisible(false);
+		gameBoard.setVisible(false);
+		createur.setVisible(false);
+		configuration.setVisible(false);
+!!!137988.java!!!	showMVP(inout Click : MouseEvent) : void
+		reinitialiser();
+		score.setVisible(true);
+!!!138116.java!!!	showRegle(inout Click : MouseEvent) : void
+		System.out.println("Click");
+		showMsgbox(MSGBOX_TITRE, REGLE_DU_JEU, true);
+!!!138244.java!!!	showCreateur(inout Click : MouseEvent) : void
+		reinitialiser();
+		createur.setVisible(true);
+!!!138372.java!!!	showMenu(inout Click : MouseEvent) : void
+		reinitialiser();
+		menu.setVisible(true);
+!!!138500.java!!!	showConfigurationPartie(inout Click : MouseEvent) : void
+		reinitialiser();
+		razPartie();
+		configurationPartie.setVisible(true);
+		listeConfigDispo.setText(Outils.afficherConfigDispo());
+!!!138628.java!!!	showConfiguration(inout Click : MouseEvent) : void
+		reinitialiser();
+		configuration.setVisible(true);
+		initialisationConfig.setVisible(false);
+		placementConfig.setVisible(false);
+		supprimerConf.setVisible(false);
+		choixConf.setVisible(true);
+!!!138756.java!!!	verificationCheck() : void
+		if (chk_vsIA.isSelected()) {
+			caseIaCheck();
+		} else {
+			caseIaPasCheck();
+		}
+!!!138884.java!!!	verificationModeJeu() : void
+		if (chk_casseT.isSelected()) {
+			casseTeteConf();
+		} else {
+			versusConf();
+		}
+!!!139012.java!!!	versusConf() : void
+		chk_vsIA.setVisible(true);
+		labelIA.setVisible(true);
+		lb_nomJ2.setVisible(true);
+		tb_nomJ2.setVisible(true);
+!!!139140.java!!!	razIa() : void
+		chk_vsIA.setSelected(false);
+		lvl1.setSelected(false);
+		lvl2.setSelected(false);
+		lvl3.setSelected(false);
+!!!139268.java!!!	casseTeteConf() : void
+		cacherIa();
+		cacherJ2();
+		razIa();
+		labelIA.setVisible(false);
+		chk_vsIA.setVisible(false);
+!!!139396.java!!!	cacherJ2() : void
+		lb_nomJ2.setVisible(false);
+		tb_nomJ2.setVisible(false);
+		tb_nomJ2.setText("");
+!!!139524.java!!!	razPartie() : void
+		tb_nomJ1.setText("");
+		tb_nomJ2.setText("");
+		choixConfig.setText("");
+		chk_vsIA.setSelected(false);
+		chk_casseT.setSelected(false);
+		verificationCheck();
+		verificationModeJeu();
+!!!139652.java!!!	cacherIa() : void
+		lvl1.setVisible(false);
+		lvl2.setVisible(false);
+		lvl3.setVisible(false);
+		lb_lvlIa.setVisible(false);
+!!!139780.java!!!	caseIaPasCheck() : void
+		cacherIa();
+		razIa();
+		lb_nomJ2.setVisible(true);
+		tb_nomJ2.setVisible(true);
+!!!139908.java!!!	caseIaCheck() : void
+		lvl1.setVisible(true);
+		lvl2.setVisible(true);
+		lvl3.setVisible(true);
+		lb_lvlIa.setVisible(true);
+		lvl1.setSelected(true);
+		cacherJ2();
+!!!140036.java!!!	showGameBoard(inout Click : MouseEvent) : void
+		/* Vérifie que le numéro de config saisie par l'utilisateur est correct */
+		if(Outils.configValide(choixConfig.getText())) { //Verifie que tous se que a rentre l'utilisateur est correct
+			/*Si c'est le cas récupère toutes les informations nécessaires*/
+			recupAdversaire(); //Recupere l'adversaire choisi par l'utilisateur
+			recupModeJeu(); //Recupere le mode de jeu choisi par l'utilisateur
+			recupNomEquipe(); //Recupere les/le nom dequipe choisi par l'utilisateur
+			Outils.recupConfigurationPartie(Integer.parseInt(
+											choixConfig.getText())); //Recupere la configuration choisie par l'utilisateur
+			reinitialiser(); // Fait disparaitre toutes les autres pages
+			/*Fait apparaitre le plateau de jeu */
+			gameBoard.setVisible(true);
+			jeuEnCours.setVisible(true);
+			/* Fait disparaitre les pages defaite et victoire par précaution
+			 * (ex: si une partie précédente c'est terminé l'interface
+			 * sera sur la page de victoire pour empecher cela on force l'application 
+			 * a revenir a son fonctionnement par défaut soit le plateau de jeu
+			 */
+			defaite.setVisible(false);
+			victoire.setVisible(false);
+			/* Met a jour l'affichage */
+			rafraichirJeu(Partie.getCurrentPlateau().toString());
+			afficherNomEquipe();
+			//TODO si mode de jeu = casse tete et recuperer le temps a la fin quand victoire
+			Partie.setDepartPartie(LocalDate.now());
+		}
+!!!140164.java!!!	actualiserJeu(inout Click : MouseEvent) : void
+		/* Vérifie que les TextField ne sont pas vide pour ne pas produire d'erreur */
+		if (Outils.actualisationPlateau(entreeLigne.getText(),
+				entreeColonne.getText())) {
+			afficherNomEquipe();
+			//TODO Partie.setNbCoups(Partie.getNbCoups()+1);
+			rafraichirJeu(Partie.getCurrentPlateau().toString());
+
+			/* Verifie que aucun des participants n'a gagne
+			 * Si cest le cas affiche le panneau de victoire
+			 */
+			if (Outils.verifVictoire()) {
+				afficherGagnant();
+				jeuEnCours.setVisible(false);
+				victoire.setVisible(true);
+			}
+		}
+!!!140292.java!!!	afficherNomEquipe() : void
+		tourDe.setText("Tour de l'équipe : " 
+				+ Partie.getEquipe(Partie.getTourEquipe()));
+!!!140420.java!!!	afficherGagnant() : void
+		if (Partie.currentPlateau.victoire(0)) {
+			lb_nomEquipeGagnante.setText(Partie.getEquipe(0));
+		} else {
+			lb_nomEquipeGagnante.setText(Partie.getEquipe(1));
+		}
+!!!140548.java!!!	recupModeJeu() : void
+		if (chk_casseT.isSelected()) {
+			Partie.setChoixModeDeJeu(0);
+		} else { 
+			/* Si le mode casse tete n'est pas selectionne cala signifie 
+    	   que l'utilisateur souhaitre jouer un versus */
+			Partie.setChoixModeDeJeu(1);
+		}
+!!!140676.java!!!	recupNomEquipe() : void
+		if (Partie.getChoixModeDeJeu() == 0 || Partie.getChoixAdversaire() != 0
+				&& Partie.getChoixModeDeJeu() == 1) {
+			Outils.attribuerNomJ1(tb_nomJ1.getText());
+		} else {
+			Outils.attribuerNomJ1(tb_nomJ1.getText());
+			Outils.attribuerNomJ2(tb_nomJ2.getText());
+		}
+!!!140804.java!!!	recupAdversaire() : void
+		if (chk_vsIA.isSelected()) {
+			if (lvl1.isSelected()) {
+				Partie.setChoixAdversaire(1);
+			} else if (lvl2.isSelected()) {
+				Partie.setChoixAdversaire(2);
+			} else {
+				Partie.setChoixAdversaire(3);
+			}
+		} else {
+			Partie.setChoixAdversaire(0);
+		}
+!!!140932.java!!!	rafraichirJeu(in plateauJeu : String) : void
+		gameBoardString.setText(plateauJeu);
+!!!141060.java!!!	razConfig() : void
+		tb_nbColonneConf.setText("");
+		tb_nbLigneConf.setText("");
+		tb_nomConf.setText("");
+!!!141188.java!!!	configInitialisation(inout Click : MouseEvent) : void
+		/* Verification que non vide */
+		if (!tb_nbLigneConf.getText().isEmpty() 
+				&& !tb_nbColonneConf.getText().isEmpty()) { 
+			if (Outils.configIni(tb_nbLigneConf.getText(),
+					tb_nbColonneConf.getText())) {
+				recupNomConf(); //recupère le nom pour enregistrer
+				razConfig();
+				/* Affiche la page de creation de config */
+				showCreationConfig();  
+			}
+		} else {
+			/* Affichage erreur a l'uti */	
+			showMsgbox(MSGBOX_TITRE,
+					MESSAGE_ERREUR + MSGBOX_VIDE,
+					false);
+		}
+!!!141316.java!!!	ajoutPionConfig(inout Click : MouseEvent) : void
+		String colonne = tb_cordColonne.getText();
+		String ligne = tb_cordLigne.getText();
+		String type = tb_cordType.getText();
+		if(Outils.placementPion(ligne,colonne,type)) {
+			rafraichirConf(Partie.configToString());
+		}	
+!!!141444.java!!!	supprimerPionConfig(inout Click : MouseEvent) : void
+		String colonne = tb_cordColonne.getText();
+		String ligne = tb_cordLigne.getText();
+		if(Outils.suppressionPion(ligne,colonne)) {
+			rafraichirConf(Partie.configToString());
+		}	
+!!!141572.java!!!	deleteConfig(inout Click : MouseEvent) : void
+		if(Outils.supprimerConf(tb_idConf.getText())) {
+			showMsgbox(MSGBOX_TITRE, MSGBOX_ENREGISTREE, true);
+			/* Retourne au menu*/
+			reinitialiser();
+			menu.setVisible(true);
+		} else {
+			showMsgbox(MSGBOX_TITRE, MSGBOX_NONVALIDE_CONF, false);
+		}
+!!!141700.java!!!	enregistrerConfig(inout Click : MouseEvent) : void
+		/* Vérifie que bon nombre de pion crapaud = grenouille
+		 * au moin 1 pion de chaque  sur ligne
+		 */
+		if (Plateau.plateauEstValide(Partie.config)) {
+			Outils.sauvegarder();
+			/* Indique a l'utilisateur que sa config a bien ete enregistree */
+			showMsgbox(MSGBOX_TITRE, MSGBOX_ENREGISTREE, true);
+			reinitialiser();
+			/* Retourne au menu*/
+			menu.setVisible(true);
+		} else {
+			showMsgbox(MSGBOX_TITRE, MSGBOX_NONVALIDE_CONF, false);
+		}
+!!!141828.java!!!	recupNomConf() : void
+		if (tb_nomConf.getText().isEmpty()) {
+			/* Si lutilisateur na rien rentre definit un format par defaut soit
+			 * Configuration + le numero que prendra la configuration dans letat actuel du systeme
+			 */
+			Outils.nomConfig = "Configuration n°" + Configuration.listConfiguration.size();
+		} else {
+			Outils.nomConfig = tb_nomConf.getText();
+		}
+!!!141956.java!!!	rafraichirConf(in plateauJeu : String) : void
+		afficherConfig.setText(plateauJeu);
+!!!142084.java!!!	showInitialisationConfig(inout Click : MouseEvent) : void
+		choixConf.setVisible(false);
+		initialisationConfig.setVisible(true);
+!!!142212.java!!!	showSupprimerConfig(inout Click : MouseEvent) : void
+		/*Affiche toutes les configurations disponibles*/
+		configAdel.setText(Outils.afficherConfigDispo());
+		/* Cache la page de sélection ajouter / supprimer config et affiche supprimer config */
+		choixConf.setVisible(false);
+		supprimerConf.setVisible(true);
+!!!142340.java!!!	showCreationConfig() : void
+ 
+		initialisationConfig.setVisible(false);
+		placementConfig.setVisible(true);
+		rafraichirConf(Partie.configToString());
+!!!142468.java!!!	showMsgbox(in titreFenetre : String, in texteFenetre : String, inout typeFenetre : boolean) : void
+		Alert msgUti;
+		if (typeFenetre) {
+			msgUti = new Alert(AlertType.INFORMATION);
+		} else {
+			msgUti = new Alert(AlertType.ERROR);
+		}
+		msgUti.setTitle(titreFenetre);
+		msgUti.setContentText(texteFenetre);
+		msgUti.showAndWait();

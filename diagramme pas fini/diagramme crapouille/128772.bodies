@@ -1,0 +1,30 @@
+class Configuration
+!!!136580.java!!!	Configuration(inout configPlateau : Pion [[][]], in nom : String)
+		this.configPlateau = configPlateau;
+		this.nom = nom;
+!!!136708.java!!!	getConfigPlateau() : Pion
+		return configPlateau;
+!!!136836.java!!!	setConfigPlateau(inout configPlateau : Pion [[][]]) : void
+		this.configPlateau = configPlateau;
+!!!136964.java!!!	getNom() : String
+		return nom;
+!!!137092.java!!!	setNom(in nom : String) : void
+		this.nom = nom;
+!!!137220.java!!!	initConfig() : void
+		try(ObjectInputStream fichier = new ObjectInputStream(new FileInputStream(CHEMIN_FICHIER))) {           
+			// lecture de l'objet contenu dans le fichier
+			listConfiguration = (ArrayList<Configuration>) fichier.readObject();
+			Partie.currentPlateau = new Plateau (listConfiguration.get(0).getConfigPlateau());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+!!!137348.java!!!	saveConfig() : void
+		try(ObjectOutputStream fichier = new ObjectOutputStream(new FileOutputStream(CHEMIN_FICHIER))) {
+			fichier.writeObject(listConfiguration);
+		}  catch (IOException e) {
+			e.printStackTrace();
+		}

@@ -1,0 +1,2190 @@
+format 221
+"crapouille" // diag.png::crapouille
+  revision 2
+  modified_by 4 "Maël"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "C:\\Users\\maell\\Desktop\\crapouille/"
+  java_package "crapouille"
+  classview 128004 "crapouille"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 128004 "Ordinateur"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "Class contenant des fonctions de recherche de pion
+par l'ordianateur.
+@author Arzcop
+"
+      classrelation 128004 // pionLibre (<unidirectional association>)
+	relation 128004 --->
+	  stereotype "ArrayList"
+	  a role_name "pionLibre" init_value " new ArrayList<Pion>()" class_relation private
+	    comment "ArrayList contenant tous les pions crapaud qui ne sont pas bloqués.
+
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 128004 // pionLibre (<unidirectional association>)
+	  b parent class_ref 128132 // Pion
+      end
+
+      operation 128004 "choixOrdi"
+	class_operation public return_type class_ref 128132 // Pion
+	nparams 3
+	  param in name "plateau" type class_ref 128260 // Plateau
+	  param in name "batracien" type class_ref 128132 // Pion
+	multiplicity "[][]"
+	  param in name "niveauIA" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}, final ${t1}[][] ${p1}, final ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Fonction principale qui recherche en fonction du niveau de l'IA,
+le pion à déplacer.
+@param plateau l'état du plateau de jeu actuel
+@param batracien tableau contenant tous les pions
+@param niveauIA niveau de l'IA
+@return le pion à déplacer
+"
+      end
+
+      operation 128132 "initPionNonBloque"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param in name "crapaud" type class_ref 128132 // Pion
+	multiplicity "[][]"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0}[][] ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Renpli pionLibre avec les pions crapaud non bloqué.
+@param crapaud le tableau contenant les pions
+"
+      end
+
+      operation 128260 "choixPionIA"
+	class_operation public return_type class_ref 128132 // Pion
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Fonction qui recherche les déplacement qui
+assure la victoire à l'ordinateur.
+@return le pion à déplacer
+"
+      end
+
+      classrelation 136836 // <composition>
+	relation_ref 136580 // <composition>
+      end
+
+      classrelation 136964 // <composition>
+	relation 136708 *---
+	  a role_name "" private
+	    classrelation_ref 136964 // <composition>
+	  b role_name "" private
+	    classrelation_ref 137092 // <composition>
+      end
+
+      classrelation 137604 // <directional composition>
+	relation 137220 *-->
+	  a role_name "" private
+	    classrelation_ref 137604 // <directional composition>
+	  b parent class_ref 128132 // Pion
+      end
+
+      classrelation 137988 // <directional composition>
+	relation 137604 *-->
+	  a role_name "" private
+	    classrelation_ref 137988 // <directional composition>
+	  b parent class_ref 128260 // Plateau
+      end
+    end
+
+    class 128132 "Pion"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "Class de l'objet Pion contenant deux fonctions principales
+La première modifie la colonne d'un pion
+La deuxième vérifie si le pion est bloqué
+@author Azog-corp
+"
+      classrelation 128516 // <realization>
+	relation 128516 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 128516 // <realization>
+	  b parent class_ref 128644 // Serializable
+      end
+
+      attribute 132228 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " -2711928380072215024L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " ID de la serialisation 
+"
+      end
+
+      attribute 132356 "ligne"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " indique sur qu'elle ligne ce situe le pion"
+      end
+
+      attribute 132484 "colonne"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " indique sur qu'elle colonne ce situe le pion"
+      end
+
+      attribute 132612 "crapaud"
+	private explicit_type "boolean"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " indique si le pîon est un crapaud ou non"
+      end
+
+      attribute 132740 "bloque"
+	private explicit_type "boolean"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " indique si le pion est bloqué"
+      end
+
+      operation 133892 "Pion"
+	public explicit_return_type ""
+	nparams 3
+	  param in name "ligne" explicit_type "int"
+	  param in name "colonne" explicit_type "int"
+	  param inout name "crapaud" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Constructeur d'un pion qui lui associe trois caractèrisques
+@param ligne, représente la ligne où sera situé notre pion
+@param colonne, représente la colonne où sera situé notre pion
+@param crapaud, Indique si le pion est un crapoaud ou non
+@param plateau, permet de vérifier que les coordonnées du pion
+sont incluses dans le plateau
+"
+      end
+
+      operation 134020 "getLigne"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Renvoie la valeur de la ligne de l'objet Pion demandé
+@return ligne du pion demandé
+"
+      end
+
+      operation 134148 "getColonne"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Renvoie la valeur de la colonne de l'objet Pion demandé
+@return colonne du pion demandé
+"
+      end
+
+      operation 134276 "setColonne"
+	public explicit_return_type "void"
+	nparams 2
+	  param inout name "plateau" type class_ref 128132 // Pion
+	multiplicity "[][]"
+	  param in name "colonneConf" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0}[][] ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Vérifie premièrement que le pion n'est pas bloqué.
+Ajoute/enlève un à colonne si la case adjacente au pion est libre
+Ajoute/enlève deux à colonne si la case adjacente au pion est du
+même type que le pion à déplacé et que la case suivante est libre
+@param plateau, plateau contenant des pions
+@param ligneConf
+"
+      end
+
+      operation 134404 "setBloque"
+	public explicit_return_type "void"
+	nparams 2
+	  param inout name "plateau" type class_ref 128132 // Pion
+	multiplicity "[][]"
+	  param in name "colonneConf" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0}[][] ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Vérifie si un pion est bloqué :
+<ol><li>- Si un pion n'est pas bloqué, il ajoute la valeur false à 
+        la propriéte bloque de l'objet Pion.</li>
+    <li>- Si un pion est bloqué, il ajoute la valeur true à 
+        la propriéter bloque de l'objet Pion.</li></ol>
+@param bloque, boolean indiquant si un pion est bloqué ou non
+@param plateau, tableau contenant des Pions
+"
+      end
+
+      operation 134532 "isCrapaud"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Fonction qui permet d'indiquer si un pion est un crapaud ou non
+@return true, si le pion est un crapaud
+"
+      end
+
+      operation 134660 "isBloque"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Fonction qui permet d'indiquer si un pion est bloqué ou non
+@return bloque, un boolean indiquant si le pion est bloqué ou non
+"
+      end
+
+      operation 134788 "equals"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "pion" type class_ref 128132 // Pion
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Fonction qui vérifie si deux pions sont égaux
+@param pion le pion a vérifier
+@return true s'ils sont égaux
+"
+      end
+
+      operation 134916 "toString"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Renvoie une représentation sous forme de chaîne de l'objet d'un Pion
+@return un string représentant un Pion avec c'est coordonée
+"
+      end
+
+      classrelation 136452 // <composition>
+	relation_ref 136324 // <composition>
+      end
+
+      classrelation 136708 // <composition>
+	relation 136580 *---
+	  a role_name "" private
+	    classrelation_ref 136708 // <composition>
+	  b role_name "" private
+	    classrelation_ref 136836 // <composition>
+      end
+
+      classrelation 137092 // <composition>
+	relation_ref 136708 // <composition>
+      end
+    end
+
+    class 128260 "Plateau"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "Class contenant les fonctions pour l'objet plateau
+@author Azog-corp
+
+"
+      classrelation 128644 // <realization>
+	relation 128644 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 128644 // <realization>
+	  b parent class_ref 128644 // Serializable
+      end
+
+      attribute 132868 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " -106406785084186219L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "ID de la serialization.
+
+"
+      end
+
+      attribute 132996 "ligneConf"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Nombre de ligne de la configuration actuelle.
+
+"
+      end
+
+      attribute 133124 "colonneConf"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Nombre de colonne de la configuration actuelle.
+
+"
+      end
+
+      attribute 133252 "nbPion"
+	private explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Nombre de pion sur le plateau et est pair
+
+"
+      end
+
+      classrelation 128772 // batracien (<unidirectional association>)
+	relation 128772 --->
+	  a role_name "batracien" multiplicity "[][]" init_value " new Pion[2][]" private
+	    comment "
+Tableau contenant toutes les instances de pions
+présentent sur le plateau.
+La première ligne contient tous les pion grenouilles
+et la seconde tous les crapaud
+
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type}${multiplicity} ${name}${value};
+"
+	    classrelation_ref 128772 // batracien (<unidirectional association>)
+	  b parent class_ref 128132 // Pion
+      end
+
+      classrelation 128900 // plateau (<unidirectional association>)
+	relation 128900 --->
+	  a role_name "plateau" multiplicity "[][]" private
+	    comment "
+Plateau de taille maximale
+
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type}${multiplicity} ${name}${value};
+"
+	    classrelation_ref 128900 // plateau (<unidirectional association>)
+	  b parent class_ref 128132 // Pion
+      end
+
+      operation 135044 "Plateau"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "plateau" type class_ref 128132 // Pion
+	multiplicity "[][]"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0}[][] ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Plateau sur lequel sont placés et déplacés
+chaque pion des deux équipes.
+Les dimensions de celui-ci ne sont
+pas necessairement celles de la configuaration
+"
+      end
+
+      operation 135172 "getPlateau"
+	public return_type class_ref 128132 // Pion
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type}[][] ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@return le plateau de jeu
+"
+      end
+
+      operation 135300 "getBatracien"
+	public return_type class_ref 128132 // Pion
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type}[][] ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@return le tableau des pions.
+"
+      end
+
+      operation 135428 "initBloque"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Fonction appelé lors de la création d'une configuration
+et qui initialise l'attribut bloque de chaque pion.
+"
+      end
+
+      operation 135556 "setBatracien"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Fonction appelé lors du chargement d'une configuration
+et qui met dans le tableau batracien toutes les
+instances des pions grenouilles et crapaud ligne
+par ligne.
+"
+      end
+
+      operation 135684 "setCase"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "pion" type class_ref 128132 // Pion
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Associe un pion à une case du plateau
+@param pion, Le pion qui doit être associé
+"
+      end
+
+      operation 135812 "movePion"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "pion" type class_ref 128132 // Pion
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Cette fonction déplace un pion sur le plateau, puis change
+la colonne de celui-ci et enfin, réinitialise l'attribut
+bloque de chaque pion présent sur la ligne du pion déplacé
+@param pion le pion bougé
+"
+      end
+
+      operation 135940 "pionValide"
+	public return_type class_ref 128132 // Pion
+	nparams 3
+	  param in name "equipe" explicit_type "int"
+	  param in name "ligne" explicit_type "int"
+	  param in name "colonne" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Vérifie si un pion dont les coordonnées sont placées en argument
+existe et s'il appartient à l'équipe dont c'est le tour
+@param equipe 0 sigifie l'équipe grnouille, 1 l'équipe crapaud
+@param ligne du potentiel pion
+@param colonne du potentiel pio
+@return true si le pion existe et appartient à la vonne équipe
+"
+      end
+
+      operation 136068 "victoire"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param in name "equipe" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "VÃ©rifie si tous les pions d'une Ã©quipe sont bloquÃ©s
+@param equipe 0 pour les grenouille et 1 pour les crapauds
+@return true si les pions sont ploquÃ©
+"
+      end
+
+      operation 136196 "victoireCasseTete"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "VÃ©rifie si toutes les grenouilles sont Ã  droite
+et si tous les crapaud sont Ã  gauche
+
+La vérification ce fait dans le tableau batracien
+car les pions y sont ajouté ligne par ligne et par
+conséquent, le pion suivant un autre et soit sur la
+même ligne soit sur la ligne suivante
+@return true si c'est vrai
+"
+      end
+
+      operation 136324 "plateauEstValide"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "plateau" type class_ref 128132 // Pion
+	multiplicity "[][]"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0}[][] ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Fonction qui vérifie la validité d'un plateau de pion qui est déterminé par :
+- Le nombre de ligne et de colonne doit être inférieur à 20
+- Il doit il y avoir au moins un pion de chaque type sur chaque ligne
+- Il doit y avoir autant de crapaud que de grenouille
+@param plateau à vérifier
+@return true si toute les conditions sont valides
+"
+      end
+
+      operation 136452 "toString"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Crée un String qui représente le plateau de jeu
+avec les pions et leur type
+"
+      end
+
+      classrelation 136324 // <composition>
+	relation 136324 *---
+	  a role_name "" private
+	    classrelation_ref 136324 // <composition>
+	  b role_name "" private
+	    classrelation_ref 136452 // <composition>
+      end
+
+      classrelation 137732 // <directional composition>
+	relation 137348 *-->
+	  a role_name "" private
+	    classrelation_ref 137732 // <directional composition>
+	  b parent class_ref 128132 // Pion
+      end
+    end
+
+    class 128388 "Outils"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "Class contenant les fonctions permettant la gestion du
+jeu
+@author Azog-corp
+"
+      attribute 128004 "MIN_LIGNE_PION"
+	class_attribute const_attribute package explicit_type "int"
+	init_value " 1"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " initialisation des constantes min/max lignes et colonnes 
+"
+      end
+
+      attribute 128132 "MAX_LIGNE_PION"
+	class_attribute const_attribute package explicit_type "int"
+	init_value " 20"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128260 "MIN_COLONNE_PION"
+	class_attribute const_attribute package explicit_type "int"
+	init_value " 1"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128388 "MAX_COLONNE_PION"
+	class_attribute const_attribute package explicit_type "int"
+	init_value " 20"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128516 "MIN_LIGNE_TABLEAU"
+	class_attribute const_attribute package explicit_type "int"
+	init_value " 1"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " initialisation des constantes min/max lignes et colonnes 
+"
+      end
+
+      attribute 128644 "MAX_LIGNE_TABLEAU"
+	class_attribute const_attribute package explicit_type "int"
+	init_value " 20"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128772 "MIN_COLONNE_TABLEAU"
+	class_attribute const_attribute package explicit_type "int"
+	init_value " 3"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128900 "MAX_COLONNE_TABLEAU"
+	class_attribute const_attribute package explicit_type "int"
+	init_value " 20"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 129028 "NOM_PION"
+	class_attribute const_attribute package explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " initialisation des constantes du format : XXX;XX 
+ position du 1er chiffre de l'entier"
+      end
+
+      attribute 129156 "PREMIER_CHIFFRE_LIGNE"
+	class_attribute const_attribute package explicit_type "int"
+	init_value " 1"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " position du 1er chiffre de l'entier"
+      end
+
+      attribute 129284 "DEUXIEME_CHIFFRE_LIGNE"
+	class_attribute const_attribute package explicit_type "int"
+	init_value " 2"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " position du 2e chiffre de l'entier"
+      end
+
+      attribute 129412 "DISTINCTION_1"
+	class_attribute const_attribute package explicit_type "int"
+	init_value " 3"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " position du 1er caractère ';' dans le format parcourut"
+      end
+
+      attribute 129540 "PREMIER_CHIFFRE_COLONNE"
+	class_attribute const_attribute package explicit_type "int"
+	init_value " 4"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " position du 1er chiffre de l'entier"
+      end
+
+      attribute 129668 "DEUXIEME_CHIFFRE_COLONNE"
+	class_attribute const_attribute package explicit_type "int"
+	init_value " 5"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " position du 2e chiffre de l'entier"
+      end
+
+      attribute 129796 "nomConfig"
+	class_attribute public explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 129924 "MSGBOX_TITRE"
+	class_attribute const_attribute package explicit_type "String"
+	init_value " \"Crapauds & Grenouilles\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 130052 "MSGBOX_TYPE"
+	class_attribute const_attribute package explicit_type "String"
+	init_value " \"Type non valide\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 130180 "MSGBOX_LETTRE"
+	class_attribute const_attribute package explicit_type "String"
+	init_value " \"Les lettres / Symboles ne sont pas acceptées\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 130308 "MSGBOX_NOMBRE"
+	class_attribute const_attribute package explicit_type "String"
+	init_value " \"Nombre trop grand ou trop petit vérifier votre saisie\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 130436 "MSGBOX_VIDE"
+	class_attribute const_attribute package explicit_type "String"
+	init_value " \"Ne doit pas être vide\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 130564 "MSBOX_CONFIG"
+	class_attribute const_attribute package explicit_type "String"
+	init_value " \"La configuration ne peut pas être vide\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 130692 "MSGBOX_ENREGISTREE"
+	class_attribute const_attribute package explicit_type "String"
+	init_value " \"Votre confirmation a bien été enregistrée\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 130820 "MSGBOX_NONVALIDE_CONF"
+	class_attribute const_attribute package explicit_type "String"
+	init_value " \"La configuration que vous avez crée n'est pas valide\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 130948 "MESSAGE_ERREUR"
+	class_attribute const_attribute package explicit_type "String"
+	init_value " \"Les informations rentrés sont invalides : \""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 128388 "recupType"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param in name "choix" explicit_type "char"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Verifie si le char correspond correspond a un crapaud
+Si se n'est pas le cas renvoit false se qui signifie que
+le pion est une grenouille. Cette fonction intervient lors
+de la creation du pion dans le tableau afin de definir son type
+Ainsi que apres toutes les verifications sur l'entree de l'utilisateur
+Se qui signifie que le pion a se moment ne pourra etre que C ou G
+@param choix char rentre par l'utilisateur qui definie le type du pion
+"
+      end
+
+      operation 128516 "recupConfigurationPartie"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param in name "choixConfig" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Recupere le numero de la config 
+et charge la configuration correspondant au numero demande
+"
+      end
+
+      operation 128644 "attribuerNomJ1"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param in name "nomJ1" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Attribut le nom du joueur 1
+@param nomJ1 Nom du joueur entre par l'utilisateur
+"
+      end
+
+      operation 128772 "attribuerNomJ2"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param in name "nomJ2" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Attribut le nom du joueur 2
+@param nomJ2 Nom du joueur entre par l'utilisateur
+"
+      end
+
+      operation 128900 "afficherConfigDispo"
+	class_operation public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Recupere toutes les configs disponible et les renvoi sous forme
+de String pour etre afficher dans un label sur linterface
+@return La liste des configs et leur numero en String
+"
+      end
+
+      operation 129028 "recupereLignePion"
+	class_operation public explicit_return_type "int"
+	nparams 1
+	  param in name "coordonneePion" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Récupère le coordonnée de la ligne du pion
+@param coordonneePion est le coordonné du poin sur le plateau 
+@return le coordonné de la ligne du pion
+"
+      end
+
+      operation 129156 "recupereColonnePion"
+	class_operation public explicit_return_type "int"
+	nparams 1
+	  param in name "coordonneePion" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Récupère le coordonnée de la colonne du pion
+@param coordonneePion est le coordonné du poin sur le plateau 
+@return la coordonné de la colonne du pion
+"
+      end
+
+      operation 129284 "typeValide"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param in name "type" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "--------------- FONCTION ESTVALIDE  ---------------
+
+Verifie si le type entree par l'utilisateur est valide
+@param type Type entree par l'utilisateur
+@return un boolean definissant si le type est valide
+true = Type valide
+False = Erreur dans les tests le type n'est pas valide
+"
+      end
+
+      operation 129412 "verificationLettre"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param in name "aVerifier" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Fonction qui vérifie si uen chaine de caractère ne contient que des chiffres
+@param aVerifier String a verifier la validité ( pas de nombre)
+@return false si la string aVerifier contient une lettre
+		   true si la String ne contient aucune lettre
+"
+      end
+
+      operation 129540 "ligneEstValide"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param in name "lignePion" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Détermine si le coordonée de la ligne du pion est correct  
+avec le contrôle de la gestion d'erreur
+@param coordonneePion est le coordonné du poin sur le plateau 
+@return un booleen égal a vrai si la ligne du pion est correct
+"
+      end
+
+      operation 129668 "colonneEstValide"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param in name "colonnePion" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Détermine si la coordonée de la colonne du pion est correct  
+avec le contrôle de la gestion d'erreur
+@param coordonneePion est le coordonné du poin sur le plateau 
+@return un booleen égal a vrai si la colonne du pion est correct
+"
+      end
+
+      operation 129796 "cordOk"
+	class_operation public explicit_return_type "boolean"
+	nparams 2
+	  param in name "ligne" explicit_type "int"
+	  param in name "colonne" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Verifie que le nombre rentree par l'uti 
+est une nombre correspondant a un pion valide
+"
+      end
+
+      operation 129924 "verifVictoire"
+	class_operation public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Verifie si l'une des equipes a gagne
+@return true si l'une des equipes a gagne
+		   false si aucun equipe a gagne et que le jeu peut continuer
+"
+      end
+
+      operation 130052 "estNonVide"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param in name "aVerifier" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Fonction qui verifie qu'un String
+n'est as vide
+@param aVerifier chaine de char a verfier
+@return
+"
+      end
+
+      operation 130180 "configIni"
+	class_operation public explicit_return_type "boolean"
+	nparams 2
+	  param in name "ligne" explicit_type "String"
+	  param in name "colonne" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Fonction permettant de configurer un tableau
+@param ligne, ligne du tableau
+@param colonne, colonne du tableau
+@return un boolean indiquant si la configuration à été crée
+"
+      end
+
+      operation 130308 "coordValide"
+	class_operation private explicit_return_type "boolean"
+	nparams 2
+	  param in name "ligne" explicit_type "int"
+	  param in name "colonne" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 130436 "placementPion"
+	class_operation public explicit_return_type "boolean"
+	nparams 3
+	  param in name "ligne" explicit_type "String"
+	  param in name "colonne" explicit_type "String"
+	  param in name "type" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Fonction permettant de configurer un tableau
+@param ligne, ligne du tableau
+@param colonne, colonne du tableau
+@param type, type du pion (crapaud et grenouille)
+@return un boolean indiquant si le pion à été bien placé
+"
+      end
+
+      operation 130564 "configValide"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param in name "choixConf" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Verifie si la configuration entree par lutilisateur dans la page de configuration de partie
+Verifie que le textField contenant le numero n'est pas vide
+Qu'il n'y a pas de lettres et que et le numero existe
+@return true si tous les tests sont correctes'
+        false si un seul test ne passe pas9
+"
+      end
+
+      operation 130692 "configExiste"
+	class_operation private explicit_return_type "boolean"
+	nparams 1
+	  param in name "config" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Vérifie si la configuration existe 
+@return un boolean qui indique si cette configuration existe
+"
+      end
+
+      operation 130820 "actualisationPlateau"
+	class_operation public explicit_return_type "boolean"
+	nparams 2
+	  param in name "ligne" explicit_type "String"
+	  param in name "colonne" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Fonction permettant d'actualiser un plateau
+@param ligne, ligne du tableau
+@param colonne, colonne du tableau
+@return un boolean indiquant si le plateau à bien été actualisé
+"
+      end
+
+      operation 130948 "placementPion"
+	class_operation public explicit_return_type "void"
+	nparams 3
+	  param in name "lignePion" explicit_type "int"
+	  param in name "colonnePion" explicit_type "int"
+	  param inout name "type" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "TODO Je vois pas ce que fait cette fonction
+@param lignePion int: ligne ou se trouve le pion a ajouter/ placer
+@param colonnePion int: colonne ou se trouve le pion a ajouter/ placer
+@param recupType boolean: type du pion a placer (Crapaud ou grenouille)
+"
+      end
+
+      operation 131076 "enregistrerArray"
+	class_operation public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Enregistre la configuration cree par l'utilisateur dans l'arrays 
+qui contient toutes les configurations
+"
+      end
+
+      operation 131204 "sauvegarder"
+	class_operation public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 131332 "supprimerConf"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param in name "idConfig" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Fonction permettant de supprimer une configuration
+@param idConfig, IdConfig
+@return un boolean qui indique si la configuratuon à été supprimé ou non
+"
+      end
+
+      operation 131460 "suppressionPion"
+	class_operation public explicit_return_type "boolean"
+	nparams 2
+	  param in name "ligne" explicit_type "String"
+	  param in name "colonne" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Fonction permettant de supprimer un pion
+@param ligne, ligne du pion
+@param colonne, colonne du pion
+@return un boolean qui indique si le pion à été supprimé ou non
+"
+      end
+    end
+
+    class 128516 "Partie"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "Classe contenant les fonctions de la partie
+@author Azog-corp
+"
+      classrelation 128132 // <realization>
+	relation 128132 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 128132 // <realization>
+	  b parent class_ref 128644 // Serializable
+      end
+
+      attribute 131076 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " 5319670181574630732L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " ID de la serialisation 
+"
+      end
+
+      attribute 131204 "departPartie"
+	class_attribute private explicit_type "LocalDate"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Lorsque le joueur lance la partie
+recupere le temps afin de determiner
+le temps mis par le joueur pour resoudre le casse tete
+Le temps est uniquement mesuree sur la config par defaut
+
+"
+      end
+
+      attribute 131332 "choixAdversaire"
+	class_attribute private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Adversaire choisi par l'utilisateur
+0 = humain
+1 = ia niveau 1
+
+"
+      end
+
+      attribute 131460 "choixModeDeJeu"
+	class_attribute private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Mode de jeu choisi par l'adversaire
+0 = casse tete
+1 = versus
+
+"
+      end
+
+      attribute 131588 "nomEquipe1Defaut"
+	class_attribute private explicit_type "String"
+	init_value " \"Grenouille\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Nom par dÃ©faut de l'Ã©quipe Crapaud
+
+"
+      end
+
+      attribute 131716 "nomEquipe2Defaut"
+	class_attribute private explicit_type "String"
+	init_value " \"Crapaud\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Nom par dÃ©faut de l'Ã©quipe Grenouille
+
+"
+      end
+
+      attribute 131844 "equipe"
+	class_attribute private explicit_type "String"
+	multiplicity "[]"
+	init_value " new String[2]"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type}${multiplicity} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Tableau contenant le nom des deux Ã©quipes
+saisies par le ou les joueurs
+
+"
+      end
+
+      classrelation 128260 // currentPlateau (<unidirectional association>)
+	relation 128260 --->
+	  a role_name "currentPlateau" class_relation public
+	    comment "
+Copie d'un plateau de listConfiguration
+et sur lequel se joue une partie.
+Sert égalemen à la création de configuration.
+
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 128260 // currentPlateau (<unidirectional association>)
+	  b parent class_ref 128260 // Plateau
+      end
+
+      classrelation 128388 // config (<unidirectional association>)
+	relation 128388 --->
+	  a role_name "config" multiplicity "[][]" class_relation public
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type}${multiplicity} ${name}${value};
+"
+	    classrelation_ref 128388 // config (<unidirectional association>)
+	  b parent class_ref 128132 // Pion
+      end
+
+      attribute 131972 "tourEquipe"
+	class_attribute private explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Indique l'équipe de laquelle c'est le tour:
+0 : grenouille
+1 : Crapaud
+
+"
+      end
+
+      attribute 132100 "nbCoups"
+	class_attribute private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Indique le nombre de coup réalisé
+pour terminer un casse tête
+
+"
+      end
+
+      operation 131588 "getNbCoups"
+	class_operation public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@return Le nombre de coup effectué
+"
+      end
+
+      operation 131716 "setNbCoups"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param in name "nbCoupsPartie" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Modifie nbCoup
+@param nbCoupsPartie la nouvelle valeur de nbCoups
+"
+      end
+
+      operation 131844 "getNomEquipe1Defaut"
+	class_operation public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@return le nom de l'Ã©quipe grenouille
+"
+      end
+
+      operation 131972 "getNomEquipe2Defaut"
+	class_operation public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@return le nom de l'Ã©quipe crapaud
+"
+      end
+
+      operation 132100 "setChoixAdversaire"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param in name "choixAdversaire" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Modifie la nature de l'adversaire
+@param choixAdversaire l'entitÃ© contre laquelle
+le joueur veut faire une partie :
+- 0 pour un humain
+- 1 ou plus pour une IA
+"
+      end
+
+      operation 132228 "getChoixAdversaire"
+	class_operation public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@return l'entitÃ© contre laquelle le joueur veut faire une partie
+"
+      end
+
+      operation 132356 "setChoixModeDeJeu"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param in name "choixModeDeJeu" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Change le mode de jeu
+@param choixModeDeJeu 0 pour joueur versus et 1 pour casse tÃªte
+"
+      end
+
+      operation 132484 "getChoixModeDeJeu"
+	class_operation public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@return le mode de jeu en cours
+"
+      end
+
+      operation 132612 "setEquipe1"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param in name "equipe" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@param equipe le nom de l'Ã©quipe grenouille
+"
+      end
+
+      operation 132740 "setEquipe2"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param in name "equipe" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@param equipe le nom de l'Ã©quipe crapaud
+"
+      end
+
+      operation 132868 "getEquipe"
+	class_operation public explicit_return_type "String"
+	nparams 1
+	  param in name "tour" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 132996 "getCurrentPlateau"
+	class_operation public return_type class_ref 128260 // Plateau
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@return le plateau en cours
+"
+      end
+
+      operation 133124 "getDepartPartie"
+	public explicit_return_type "LocalDate"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@return le temps
+"
+      end
+
+      operation 133252 "setDepartPartie"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param inout name "debut" explicit_type "LocalDate"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@param debut la nouvelle valeur de departPartie
+"
+      end
+
+      operation 133380 "getTourEquipe"
+	class_operation public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@return le numéro de l'équipe qui joue
+"
+      end
+
+      operation 133508 "configToString"
+	class_operation public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 133636 "loadConfig"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param in name "choixConfig" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Initialise le plateau avec une des configuration existatantes
+et met tourEquipe à 0
+@param choixConfig l'indice de la config à initialiser
+"
+      end
+
+      operation 133764 "tourEntite"
+	class_operation public explicit_return_type "Boolean"
+	nparams 2
+	  param in name "ligne" explicit_type "int"
+	  param in name "colonne" explicit_type "int"
+	nexceptions 1
+	  explicit_exception "InterruptedException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Bouge un pion en fonction du tour de l'adversaire ou du mode
+de jeu tout en vérifiant que le pion existe
+@param ligne du pion à vérifié et déplacé
+@param colonne du pion à vérifié et déplacé
+@return true si un pion à été déplacé
+@throws InterruptedException 
+"
+      end
+
+      classrelation 129796 // <realization>
+	relation 129796 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 129796 // <realization>
+	  b parent class_ref 128900 // GestionPartieInterface
+      end
+
+      classrelation 136580 // <unidirectional association>
+	relation 136452 --->
+	  a role_name "" private
+	    classrelation_ref 136580 // <unidirectional association>
+	  b parent class_ref 128004 // Ordinateur
+      end
+
+      classrelation 137220 // <unidirectional association>
+	relation 136836 --->
+	  a role_name "" private
+	    classrelation_ref 137220 // <unidirectional association>
+	  b parent class_ref 128132 // Pion
+      end
+
+      classrelation 137348 // <unidirectional association>
+	relation 136964 --->
+	  a role_name "" private
+	    classrelation_ref 137348 // <unidirectional association>
+	  b parent class_ref 128772 // Configuration
+      end
+    end
+  end
+
+  deploymentview 128004 "crapouille"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 128004 "Ordinateur"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.ArrayList;
+${definition}"
+      associated_elems
+	class_ref 128004 // Ordinateur
+      end
+      comment "Ordinateur.java
+Azog-corp 2019, droit d'auteur
+"
+    end
+
+    artifact 128132 "Outils"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import crapouille.configuration.Configuration;
+import crapouille.interfaceFx.InterfaceAppliController;
+${definition}"
+      associated_elems
+	class_ref 128388 // Outils
+      end
+      comment "Outils.java
+Azog-corp 2019, droit d'auteur
+"
+    end
+
+    artifact 128260 "Partie"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.io.Serializable;
+import java.time.LocalDate;
+import crapouille.configuration.Configuration;
+${definition}"
+      associated_elems
+	class_ref 128516 // Partie
+      end
+      comment "Partie.java
+Azog-corp 2019, droit d'auteur
+"
+    end
+
+    artifact 128388 "Pion"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.io.Serializable;
+${definition}"
+      associated_elems
+	class_ref 128132 // Pion
+      end
+      comment "Pion.java
+Azog-corp 2019, droit d'auteur
+"
+    end
+
+    artifact 128516 "Plateau"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.io.Serializable;
+${definition}"
+      associated_elems
+	class_ref 128260 // Plateau
+      end
+      comment "Plateau.java
+Azog-corp 2019, droit d'auteur
+"
+    end
+  end
+
+  package_ref 128260 // configuration
+
+  package_ref 128388 // interfaceFx
+
+  classview 128516 "Crapaud et grenouille"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    classdiagram 128004 "bllj"
+      classdiagramsettings draw_all_relations no show_members_full_definition yes show_members_visibility yes show_members_stereotype yes member_max_width 0 show_parameter_dir yes show_parameter_name yes package_name_in_tab yes drawing_language java auto_label_position yes show_relation_modifiers yes show_relation_visibility yes show_infonote no end
+      size A3
+    end
+  end
+
+  classview 128644 "interface"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    classdiagram 128132 "interface"
+      classdiagramsettings draw_all_relations no show_members_full_definition yes show_members_visibility yes show_members_stereotype yes show_members_multiplicity yes show_members_initialization yes show_attribute_modifiers yes member_max_width 30 show_parameter_dir yes show_parameter_name yes package_name_in_tab yes auto_label_position yes show_relation_modifiers yes show_relation_visibility yes show_infonote no shadow no show_stereotype_properties no end
+      size A0
+    end
+  end
+end

@@ -1,0 +1,27 @@
+class Ordinateur
+!!!128004.java!!!	choixOrdi(in plateau : Plateau, in batracien : Pion [[][]], in niveauIA : int) : Pion
+		initPionNonBloque(batracien);
+		Pion choixPion = null;
+
+		if (niveauIA == 2) {
+			choixPion = choixPionIA();
+		}
+		if (choixPion == null) {
+			/* choixPion devient un pion
+			 * random parmis les pion déplaçable */
+			choixPion = pionLibre.get((int)
+					(1 + (Math.random()
+							* (pionLibre.size(
+									) - 1)
+							)));
+		}
+		Partie.currentPlateau.movePion(choixPion);
+		return choixPion;
+!!!128132.java!!!	initPionNonBloque(in crapaud : Pion [[][]]) : void
+		for (int x = 0; x < crapaud[1].length; x++) {
+			if (!crapaud[1][x].isBloque()) {
+				pionLibre.add(crapaud[1][x]);
+			}
+		}
+!!!128260.java!!!	choixPionIA() : Pion
+		return null;
