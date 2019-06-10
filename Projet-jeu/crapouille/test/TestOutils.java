@@ -13,7 +13,37 @@ import crapouille.Partie;
  * @author Azog-corp
  */
 public class TestOutils {
+	
+	/** initialisation des constantes min/max lignes et colonnes */
+	final static int MIN_LIGNE_PION = 1;
+	final static int MAX_LIGNE_PION = 20;
+	final static int MIN_COLONNE_PION = 1;
+	final static int MAX_COLONNE_PION = 20;
+	
+	
+	/**
+	 * Détermine si le coordonée de la ligne du pion est correct  
+	 * avec le contrôle de la gestion d'erreur
+	 * @param coordonneePion est le coordonné du poin sur le plateau 
+	 * @return un booleen égal a vrai si la ligne du pion est correct
+	 */
+	public static boolean ligneEstValide(int lignePion) {
+		// La ligne du pion doit être supérieur à 0 et inférieure ou égal à 20  
+		return MIN_LIGNE_PION <= lignePion 
+				&& lignePion < MAX_LIGNE_PION;
+	}
 
+	/**
+	 * Détermine si la coordonée de la colonne du pion est correct  
+	 * avec le contrôle de la gestion d'erreur
+	 * @param coordonneePion est le coordonné du poin sur le plateau 
+	 * @return un booleen égal a vrai si la colonne du pion est correct
+	 */
+	public static boolean colonneEstValide(int colonnePion) {
+		// La ligne du pion doit être supérieur à 0 et inférieure ou égal à 20  
+		return MIN_COLONNE_PION <= colonnePion 
+		&& colonnePion < MIN_COLONNE_PION ;
+	}	
 
 	/** 
 	 * Fonction test de recupType
@@ -89,13 +119,15 @@ public class TestOutils {
 
 		for(int i = 0; i < aTesterLigne.length; i++) {
 			/* Vérifie si la ligne est valide et compare avec le tableau résultat */
-			if (Outils.ligneEstValide(aTesterLigne[i]) == recupAttendu[i] ) {
+			if (ligneEstValide(aTesterLigne[i]) == recupAttendu[i] ) {
 				nbTestOk++;
 			}
 		}
 
 		System.out.println("il y a " + nbTestOk + " test réussie sur 8");
 	}
+	
+
 
 	/**
 	 * Fonction test de colonneEstValide
@@ -110,7 +142,7 @@ public class TestOutils {
 
 		for(int i = 0; i < aTesterColonne.length; i++) {
 			/* Vérifie si la ligne est valide et compare avec le tableau résultat */
-			if (Outils.colonneEstValide(aTesterColonne[i]) == recupAttendu[i] ) {
+			if (colonneEstValide(aTesterColonne[i]) == recupAttendu[i] ) {
 				nbTestOk++;
 
 			}
@@ -143,13 +175,22 @@ public class TestOutils {
 	}
 
 	public static void main(String[] args) {
-		//Partie.loadConfig(0);
-		
+		System.out.println("Test de la fonction estValide : ");
 		testEstValide();
+		System.out.println("\n\n");
+		System.out.println("Test de la fonction recupType : ");
 		testRecupType();
+		System.out.println("\n\n");
+		System.out.println("Test de la fonction verificationLettre : ");
 		testVerificationLettre ();
+		System.out.println("\n\n");
+		System.out.println("Test de la fonction ligneEstValide : ");
 		testLigneEstValide ();
+		System.out.println("\n\n");
+		System.out.println("Test de la fonction colonneEstValide : ");
 		testColonneEstValide ();
+		System.out.println("\n\n");
+		System.out.println("Test de la fonction estNonValide : ");
 		testEstNonVide ();
 	}
 }
