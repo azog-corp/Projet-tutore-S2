@@ -1,0 +1,20 @@
+window_sizes 1366 705 320 1041 553 104
+
+diagrams
+  classdiagram_ref 128004 // bllj
+    764 388 90 A3 2 0
+  active  classdiagram_ref 128132 // interface
+    1041 553 100 A0 0 0
+end
+show_stereotypes
+selected class_ref 128516 // Partie
+open
+  classview_ref 128004 // crapouille
+  classview_ref 128260 // configuration
+  classview_ref 128388 // interfaceFx
+  classview_ref 128516 // Crapaud et grenouille
+  classview_ref 128644 // interface
+  
+  package_ref 128132 // unknown
+end
+end

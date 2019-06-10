@@ -1,0 +1,57 @@
+class Pion
+!!!133892.java!!!	Pion(in ligne : int, in colonne : int, inout crapaud : boolean)
+		this.ligne = ligne;
+		this.colonne = colonne;
+		this.crapaud = crapaud;
+!!!134020.java!!!	getLigne() : int
+		return ligne;
+!!!134148.java!!!	getColonne() : int
+		return colonne;
+!!!134276.java!!!	setColonne(inout plateau : Pion [[][]], in colonneConf : int) : void
+		if (this.bloque) {
+			System.out.println("Le pion est bloqué");
+			return;
+		}
+		/* Si le pion est une grenouille est que la première case de droite est vide */
+		if (!crapaud && this.colonne < colonneConf-1 && plateau[this.ligne][this.colonne+1] == null) {
+			this.colonne = colonne+1;
+			/* Si le pion est une grenouille est que la deuxième case de droite est vide */
+		} else if (!crapaud && this.colonne < colonneConf-2 && plateau[this.ligne][this.colonne+1].crapaud &&
+				plateau[this.ligne][this.colonne+2] == null) {
+			this.colonne = colonne+2;
+			/* Si le pion est un crapaud est que la première case de gauche est vide */
+		} else if (crapaud && this.colonne > 0 && plateau[this.ligne][this.colonne-1] == null) {
+			this.colonne = colonne-1;
+			/* Si le pion est un crapaud est que la deuxième case de gauche est vide */
+		} else if (crapaud && this.colonne > 1 && !plateau[this.ligne][this.colonne-1].crapaud &&
+				plateau[this.ligne][this.colonne-2] == null) {
+			this.colonne = colonne-2;
+		}
+!!!134404.java!!!	setBloque(inout plateau : Pion [[][]], in colonneConf : int) : void
+		/* Si le pion est une grenouille, qu'il à une case du bord et que sa case adjacente est vide */
+		if ((!crapaud && this.colonne < colonneConf-1 && plateau[this.ligne][this.colonne+1] == null) 
+				/* Si le pion est une grenouille, qu'il à deux cases du bord,
+				 * que sa case adjacente est un crapaud et que la case suivante est vide */
+			||(!crapaud && this.colonne < colonneConf-2 && plateau[this.ligne][this.colonne+1].crapaud && 
+						plateau[this.ligne][this.colonne+2] == null) 
+			/* Si le pion est un crapaud, qu'il à une case du bord et que sa case adjacente est vide */
+			||((crapaud && this.colonne > 0 && plateau[this.ligne][this.colonne-1] == null) 
+					/* Si le pion est un crapaud, qu'il à deux cases du bord,
+					 * que sa case adjacente est une grenouille et que la case suivante est vide */
+			||(crapaud && this.colonne > 1 && !plateau[this.ligne][this.colonne-1].crapaud && 
+						plateau[this.ligne][this.colonne-2] == null))) {
+			this.bloque = false;
+		} else {
+			this.bloque = true;
+		}
+!!!134532.java!!!	isCrapaud() : boolean
+		return crapaud;
+!!!134660.java!!!	isBloque() : boolean
+		return bloque;
+!!!134788.java!!!	equals(inout pion : Pion) : boolean
+		return this.ligne == pion.getLigne() &&
+				this.colonne == pion.getColonne() &&
+				this.crapaud == pion.isCrapaud() &&
+				this.bloque == pion.isBloque();
+!!!134916.java!!!	toString() : String
+		return "Pion(" + ligne + "," + colonne + ")";

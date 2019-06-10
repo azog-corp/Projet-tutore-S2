@@ -1,0 +1,273 @@
+format 221
+"configuration" // crapouille::configuration
+  revision 1
+  modified_by 4 "maell"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "C:\\Users\\maell\\Desktop\\crapouille/configuration/"
+  java_package "crapouille.configuration"
+  deploymentview 128132 "configuration"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 128644 "Configuration"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+import crapouille.Partie;
+import crapouille.Pion;
+import crapouille.Plateau;
+${definition}"
+      associated_elems
+	class_ref 128772 // Configuration
+      end
+    end
+  end
+
+  classview 128260 "configuration"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 128772 "Configuration"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@author Azog
+
+"
+      classrelation 129028 // <realization>
+	relation 129028 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 129028 // <realization>
+	  b parent class_ref 128644 // Serializable
+      end
+
+      attribute 133380 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " 3678759492095676152L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "
+
+"
+      end
+
+      classrelation 129156 // configPlateau (<unidirectional association>)
+	relation 129156 --->
+	  a role_name "configPlateau" multiplicity "[][]" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type}${multiplicity} ${name}${value};
+"
+	    classrelation_ref 129156 // configPlateau (<unidirectional association>)
+	  b parent class_ref 128132 // Pion
+      end
+
+      attribute 133508 "nom"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 129284 // listConfiguration (<unidirectional association>)
+	relation 129284 --->
+	  stereotype "ArrayList"
+	  a role_name "listConfiguration" init_value " new ArrayList<Configuration>()" class_relation public
+	    comment "ArrayList contenant toutes les configurations créé
+ainsi que la configuration par défaut.
+Cette variable est enregistré lorsque le joueur
+quitte l'application
+
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 129284 // listConfiguration (<unidirectional association>)
+	  b parent class_ref 128772 // Configuration
+      end
+
+      attribute 133636 "CHEMIN_FICHIER"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"crapouille/configuration/listConfiguration.bin\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Chemin du fichier bin dans lequel est enregistré
+la ArryList listConfiguration
+
+"
+      end
+
+      operation 136580 "Configuration"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "configPlateau" type class_ref 128132 // Pion
+	multiplicity "[][]"
+	  param in name "nom" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0}[][] ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 136708 "getConfigPlateau"
+	public return_type class_ref 128132 // Pion
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type}[][] ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 136836 "setConfigPlateau"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "configPlateau" type class_ref 128132 // Pion
+	multiplicity "[][]"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0}[][] ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 136964 "getNom"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 137092 "setNom"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "nom" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 137220 "initConfig"
+	class_operation public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+	comment "Récupère la ArrayList contenant toutes les configurations
+qui ont été crées et celle par défaut
+"
+      end
+
+      operation 137348 "saveConfig"
+	class_operation public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Sauvegarde en mémoire la ArrayList contenant toutes les configurations
+"
+      end
+    end
+  end
+end
