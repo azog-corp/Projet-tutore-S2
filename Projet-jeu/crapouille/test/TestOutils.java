@@ -5,6 +5,7 @@
 package crapouille.test;
 
 import crapouille.Outils;
+import crapouille.Partie;
 
 /**
  * Class contenant les test des fonctions permettant 
@@ -142,6 +143,8 @@ public class TestOutils {
 	}
 
 	public static void main(String[] args) {
+		//Partie.loadConfig(0);
+		
 		testEstValide();
 		testRecupType();
 		testVerificationLettre ();
